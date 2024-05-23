@@ -3,22 +3,15 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CursosController;
+
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-Route::get('/cursos', function () {
-    return 'Lista de cursos';
-});
-Route::get('/cursos/{id}', function () {
-    return 'Lista de 1 curso';
-});
-Route::post('/cursos', function () {
-    return 'Creando cursos';
-});
-Route::put('/cursos/{id}', function () {
-    return 'Actualizando cursos';
-});
-Route::delete('/cursos/{id}', function () {
-    return 'Borrando cursos';
-});
+Route::get('/cursos', [CursosController::class, 'index']);
+
+Route::get('/cursos/{id}', [CursosController::class, 'mostrarCurso']);
+Route::post('/cursos', [CursosController::class, 'guardar']);
+Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
+Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
