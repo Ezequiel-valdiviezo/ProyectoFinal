@@ -1,0 +1,40 @@
+.fondoPrincipal{
+    background-color: #08a2de;
+}
+.caja{
+    max-width: 1400px;
+    margin: auto;
+    background-color: white;
+}
+
+header, .navbar{
+    background-color: #CDE5F7;
+}
+.natuser{
+    font-family: Tahoma, sans-serif;
+    font-size: 40px;
+    color: #08a2de;
+    /* font-size: 40px; */
+
+}
+.botonIniciarSesion{
+    border-color: #08a2de;
+    color: #08a2de;
+    border-width: 2px;
+    font-weight: 600;
+}
+
+.navbar ul li a{
+    font-size: 16px;
+}
+
+/* --------------------------------------------------------------------------- */
+.home .seccion1{
+    background-image: url('../img/bebesPadres.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 700px;
+    color: white;
+}
