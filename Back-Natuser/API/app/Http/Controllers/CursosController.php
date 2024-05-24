@@ -62,7 +62,7 @@ class CursosController extends Controller
                 'message' => 'Error al crear el curso',
                 'status' => 500
             ];
-            return response()->json($data, 500);
+            return response()->json($data, 500, );
         }
 
         $data = [

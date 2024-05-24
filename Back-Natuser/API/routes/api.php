@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,10 @@ Route::get('/cursos/{id}', [CursosController::class, 'mostrarCurso']);
 Route::post('/cursos', [CursosController::class, 'guardar']);
 Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
 Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
+
+Route::post('/registro', [AuthController::class, 'registro']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware(['auth:sanctum'])->group(function (){
+    Route::get('/logout', [AuthController::class, 'logout']);
+});
