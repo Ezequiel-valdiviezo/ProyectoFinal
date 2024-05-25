@@ -51,14 +51,15 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth-token')->plainTextToken;
 
-        return response()
-            ->json([
-                'message' => 'Bienvenido', $user->name,
-                'accessToken' => $token,
-                'token_type' => 'Bearer',
-                'user' => $user,
-            ]);
+        $cookie = cookie('token', $token, 60*24, null, null, true, true); // Configuración de la cookie
+        $response = response()->json([
+            'message' => 'Bienvenido ' . $user->name,
+            // 'accessToken' => $token,
+            // 'token_type' => 'Bearer',
+            'user' => $user,
+        ]);
 
+        return $response->cookie($cookie);
     }
 
     public function logout(Request $request)
