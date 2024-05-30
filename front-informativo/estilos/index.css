@@ -5,6 +5,7 @@
     max-width: 1400px;
     margin: auto;
     background-color: white;
+    text-align: center;
 }
 
 header, .navbar{
@@ -29,7 +30,23 @@ header, .navbar{
 }
 
 /* --------------------------------------------------------------------------- */
-.home .seccion1{
-    color: #08a2de;
+.carruselEstilos h2{
+    color: #ffffff;
+    /* background-color: rgba(0, 0, 0, 0.361); */
+    /* background-color: rgba(3, 39, 55, 0.459); */
+    /* border-radius: 10px; */
+    /* margin-bdottom: 15px; */
+}
 
+.seccion1f{
+    background-color: rgb(206, 225, 233);
+}
+.seccion1{
+    text-align: left;
+    max-width: 1200px;
+    margin: auto;
+}
+.seccion1 #natuser{
+    color: #0a88b9;
+    font-size: 75px;
 }
