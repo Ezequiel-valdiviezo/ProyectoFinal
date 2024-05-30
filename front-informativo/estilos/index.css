@@ -8,8 +8,8 @@
     text-align: center;
 }
 
-header, .navbar{
-    background-color: #CDE5F7;
+.anchoNav{
+    max-width: 1200px;
 }
 .natuser{
     font-family: Tahoma, sans-serif;
@@ -30,13 +30,6 @@ header, .navbar{
 }
 
 /* --------------------------------------------------------------------------- */
-.carruselEstilos h2{
-    color: #ffffff;
-    /* background-color: rgba(0, 0, 0, 0.361); */
-    /* background-color: rgba(3, 39, 55, 0.459); */
-    /* border-radius: 10px; */
-    /* margin-bdottom: 15px; */
-}
 
 .seccion1f{
     background-color: rgb(206, 225, 233);
