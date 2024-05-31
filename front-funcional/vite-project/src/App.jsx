@@ -5,16 +5,16 @@ import Register from './pages/Register'
 function App() {
   const [showLogin, setShowLogin] = useState(true);
 
-  const handleToggle = () => {
+  const handleCambio = () => {
     setShowLogin(!showLogin);
   };
 
   return (
     <>
       {showLogin ? (
-        <Login onToggle={handleToggle} />
+        <Login onToggle={handleCambio} />
       ) : (
-        <Register onToggle={handleToggle} />
+        <Register onToggle={handleCambio} />
       )}
     </>
   )

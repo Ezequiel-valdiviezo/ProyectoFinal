@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import '../styles/login.css'
 
 function Login({ onToggle }){
 
@@ -22,34 +23,38 @@ function Login({ onToggle }){
   };
 
   return(
-    <>
-      <h1>¡Bienvenido a NatUser!</h1>
+    <div className="login d-flex flex-column justify-content-center align-items-center text-center vh-100">
+      <div className="cardContenido">
+        <h1>¡Bienvenido a NatUser!</h1>
 
-      <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+        <div>
+          <form onSubmit={handleSubmit}>
+          <div className="d-flex flex-column m-3">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="d-flex flex-column m-3">
+            <label htmlFor="password">Contraseña:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+          <button className="btn btn-outline-primary" type="submit">Iniciar sesión</button>
+          </form>
+        <button onClick={onToggle} className="btn btn-outline-primary mt-3">Registro</button>
+        </div>   
       </div>
-      <div>
-        <label htmlFor="password">Contraseña:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="submit">Iniciar sesión</button>
-    </form>
-    <button onClick={onToggle}>Go to Register</button>
-    </>
+    </div>
   )
 }
 
