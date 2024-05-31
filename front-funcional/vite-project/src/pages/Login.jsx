@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import '../styles/login.css'
+import imgg from '../assets/logo.png'
 
 function Login({ onToggle }){
 
@@ -24,10 +25,12 @@ function Login({ onToggle }){
 
   return(
     <div className="login d-flex flex-column justify-content-center align-items-center text-center vh-100">
-      <div className="cardContenido">
-        <h1>¡Bienvenido a NatUser!</h1>
-
-        <div>
+      <div className="cardContenido p-5">
+          <h1>¡Bienvenido a NatUser!</h1>
+          {/* <img src={imgg} alt="" width="100px"/> */}
+          {/* <p>¡Nos alegra tener aqui!</p> */}
+          <p>Inicia sesión para acceder a contenido exclusivo, participar en foros y conectarte con otros padres que están viviendo la misma experiencia que tú.</p>
+          <h2>Iniciar Sesión</h2>
           <form onSubmit={handleSubmit}>
           <div className="d-flex flex-column m-3">
             <label htmlFor="email">Email:</label>
@@ -52,7 +55,6 @@ function Login({ onToggle }){
           <button className="btn btn-outline-primary" type="submit">Iniciar sesión</button>
           </form>
         <button onClick={onToggle} className="btn btn-outline-primary mt-3">Registro</button>
-        </div>   
       </div>
     </div>
   )
