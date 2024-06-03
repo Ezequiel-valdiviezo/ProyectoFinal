@@ -3,14 +3,15 @@ import '../styles/register.css'
 import imgg from '../assets/be.png'
 
 
-function Register({ onToggle }){
+function Register({ onToggle, onRegister }){
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   });
-
+  const [error, setError] = useState('');
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -19,10 +20,35 @@ function Register({ onToggle }){
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     console.log('Form data submitted:', formData);
     // Aquí puedes añadir la lógica para enviar los datos a un servidor o procesarlos de otra manera
+    
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/registro', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Error en el registro');
+      }
+
+      const data = await response.json();
+      console.log('Respuesta del servidor:', data);
+
+      // Asume que el registro fue exitoso y llama a onRegister para redirigir a Home
+      onRegister();
+    } catch (error) {
+      console.error('Error:', error);
+      setError('Hubo un problema con el registro. Intenta de nuevo.');
+    }
+
   };
 
   return(

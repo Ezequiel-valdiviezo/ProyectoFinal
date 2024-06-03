@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import '../styles/login.css'
 import imgg from '../assets/logo.png'
 
-function Login({ onToggle }){
+function Login({ onToggle, onLogin }){
 
   const [formData, setFormData] = useState({
     email: '',
@@ -17,10 +17,33 @@ function Login({ onToggle }){
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form data submitted:', formData);
+    console.log('Form data enviado:', formData);
     // Aquí puedes añadir la lógica para enviar los datos a un servidor o procesarlos de otra manera
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Error en el logeo');
+      }
+
+      const data = await response.json();
+      console.log('Respuesta del servidor:', data);
+
+      // Asume que el logeo fue exitoso y llama a onLogin para redirigir a Home
+      // onLogin();
+      console.log("Proceso terminado");
+    } catch (error) {
+      console.error('Error:', error);
+      setError('Hubo un problema con el logeo. Intenta de nuevo.');
+    }
   };
 
   return(
