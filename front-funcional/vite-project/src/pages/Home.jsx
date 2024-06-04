@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
+import CalculadoraDias from "../components/CalculadorDias";
 
 function Home(){
 
@@ -21,6 +22,8 @@ function Home(){
         </ul>
         <p>Gracias por ser parte de nuestra comunidad. ¡Estamos aquí para apoyarte en cada paso del camino!</p>
     
+        <CalculadoraDias />
+
         </>
     )
 }

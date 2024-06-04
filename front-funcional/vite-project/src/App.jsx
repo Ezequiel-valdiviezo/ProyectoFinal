@@ -25,11 +25,11 @@ function App() {
 
   return (
     <>
-      {/* {showLogin ? (
+      {showLogin ? (
         <Login onToggle={handleCambio} onLogin={handleAuthSuccess}/>
       ) : (
         <Register onToggle={handleCambio} onRegister={handleAuthSuccess}/>
-      )} */}
+      )}
 
       <Home />
     </>

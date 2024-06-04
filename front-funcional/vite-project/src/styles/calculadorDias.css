@@ -1,0 +1,18 @@
+.contadorDias{
+    background-color: rgb(67, 194, 226);
+    padding: 25px;
+}
+
+.contadorDias h1{
+    /* background-color: aquamarine; */
+    text-align: center;
+}
+
+.contadorDias .contenedor{
+    /* background-color: blueviolet; */
+    /* padding: 25px; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}

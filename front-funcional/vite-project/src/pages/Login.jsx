@@ -38,7 +38,7 @@ function Login({ onToggle, onLogin }){
       console.log('Respuesta del servidor:', data);
 
       // Asume que el logeo fue exitoso y llama a onLogin para redirigir a Home
-      // onLogin();
+      onLogin();
       console.log("Proceso terminado");
     } catch (error) {
       console.error('Error:', error);
