@@ -9,6 +9,8 @@ function Login({ onToggle, onLogin }){
     password: ''
   });
 
+  const [error, setError] = useState('')
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -30,16 +32,26 @@ function Login({ onToggle, onLogin }){
         body: JSON.stringify(formData)
       });
 
+      // if (!response.ok) {
+      //   throw new Error('Error en el logeo');
+      // }
       if (!response.ok) {
-        throw new Error('Error en el logeo');
+        const errorData = await response.json();
+        console.log('Error data:', errorData); // Debugging
+        if (response.status === 401) {
+          setError('Credenciales incorrectas. Por favor, verifica tu email y contraseña.');
+        } else {
+          setError('Hubo un problema con el logeo. Intenta de nuevo.');
+        }
+        return;
       }
-
+      
       const data = await response.json();
       console.log('Respuesta del servidor:', data);
 
       // Asume que el logeo fue exitoso y llama a onLogin para redirigir a Home
-      onLogin();
       console.log("Proceso terminado");
+      onLogin();
     } catch (error) {
       console.error('Error:', error);
       setError('Hubo un problema con el logeo. Intenta de nuevo.');
@@ -75,6 +87,7 @@ function Login({ onToggle, onLogin }){
               onChange={handleChange}
             />
           </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <button className="btn btn-outline-primary" type="submit">Iniciar sesión</button>
           </form>
         <button onClick={onToggle} className="btn btn-outline-primary mt-3">Registro</button>

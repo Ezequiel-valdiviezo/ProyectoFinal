@@ -10,6 +10,7 @@ function Register({ onToggle, onRegister }){
     email: '',
     password: ''
   });
+
   const [error, setError] = useState('');
  
   const handleChange = (e) => {
@@ -35,8 +36,14 @@ function Register({ onToggle, onRegister }){
         body: JSON.stringify(formData)
       });
 
+      // if (!response.ok) {
+      //   throw new Error('Error en el registro');
+      // }
       if (!response.ok) {
-        throw new Error('Error en el registro');
+        const errorData = await response.json();
+        console.log('Error data:', errorData);
+        setError(errorData);
+        return;
       }
 
       const data = await response.json();
@@ -44,6 +51,7 @@ function Register({ onToggle, onRegister }){
 
       // Asume que el registro fue exitoso y llama a onRegister para redirigir a Home
       onRegister();
+      console.log("Proceso terminado");
     } catch (error) {
       console.error('Error:', error);
       setError('Hubo un problema con el registro. Intenta de nuevo.');
@@ -68,6 +76,7 @@ function Register({ onToggle, onRegister }){
                 value={formData.name}
                 onChange={handleChange}
               />
+              {error.name && <p style={{ color: 'red' }}>{error.name[0]}</p>}
             </div>
             <div className="d-flex flex-column m-3">
               <label htmlFor="email">Email:</label>
@@ -78,6 +87,7 @@ function Register({ onToggle, onRegister }){
                 value={formData.email}
                 onChange={handleChange}
               />
+              {error.email && <p style={{ color: 'red' }}>{error.email[0]}</p>}
             </div>
             <div className="d-flex flex-column m-3">
               <label htmlFor="password">Contraseña:</label>
@@ -88,7 +98,9 @@ function Register({ onToggle, onRegister }){
                 value={formData.password}
                 onChange={handleChange}
               />
+               {error.password && <p style={{ color: 'red' }}>{error.password[0]}</p>}
             </div>
+            {error.general && <p style={{ color: 'red' }}>{error.general}</p>}
             <button className="btn btn-outline-primary" type="submit">Registrarme</button>
             </form>
           <button onClick={onToggle} className="btn btn-outline-primary mt-3">Iniciar sesión</button>

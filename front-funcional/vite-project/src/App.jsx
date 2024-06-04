@@ -31,7 +31,7 @@ function App() {
         <Register onToggle={handleCambio} onRegister={handleAuthSuccess}/>
       )}
 
-      <Home />
+      {/* <Home /> */}
     </>
   )
 }

@@ -13,8 +13,10 @@
 }
 .natuser{
     font-family: Tahoma, sans-serif;
-    font-size: 65px;
+    /* font-size: 65px;
+    color: #08a2de; */
     color: #08a2de;
+    font-size: 70px;
     /* font-size: 40px; */
 
 }
