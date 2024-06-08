@@ -1,8 +1,30 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../components/Header";
 import CalculadoraDias from "../components/CalculadorDias";
 
 function Home(){
+
+    const [cursos, setCursos] = useState([]);
+    const [mostrarCursos, setMostrarCursos] = useState(false);
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/cursos', {
+            method: 'GET',
+            credentials: 'include'
+        }
+        )
+            .then(response => response.json())
+            .then(data => setCursos(data))
+            .catch(error => console.error('Error fetching cursos:', error));
+    }, []);
+
+    const handleMostrarCursos = () => {
+        setMostrarCursos(true);
+    };
+
+    const handleOcultarCursos = () => {
+        setMostrarCursos(false);
+    };
 
     return(
         <>
@@ -22,6 +44,16 @@ function Home(){
         </ul>
         <p>Gracias por ser parte de nuestra comunidad. ¡Estamos aquí para apoyarte en cada paso del camino!</p>
     
+        <button onClick={handleMostrarCursos}>Mostrar</button>
+            <button onClick={handleOcultarCursos}>Ocultar</button>
+            {mostrarCursos && (
+                <ul>
+                    {cursos.map(curso => (
+                        <li key={curso.id}>{curso.titulo}</li>
+                    ))}
+                </ul>
+            )}
+
         <CalculadoraDias />
 
         </>

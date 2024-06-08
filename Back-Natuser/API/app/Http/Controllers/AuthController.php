@@ -71,9 +71,11 @@ class AuthController extends Controller
 
         $user = User::where('email', $request['email'])->firstOrFail();
 
+        //Genera el token
         $token = $user->createToken('auth-token')->plainTextToken;
 
-        $cookie = cookie('token', $token, 60*24, null, null, true, true); // Configuración de la cookie
+        //Configura la cookie con HttpOnly y Secure
+        $cookie = cookie('token', $token, 60*24, null, null, true, true);
         $response = response()->json([
             'message' => 'Bienvenido ' . $user->name,
             // 'accessToken' => $token,
