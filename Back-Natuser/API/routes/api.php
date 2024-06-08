@@ -31,7 +31,8 @@ Route::post('/login', [AuthController::class, 'login']);
 //Peticiones "Privadas" solo acceso con token
 Route::middleware(['auth:sanctum'])->group(function (){
     //Logout usuario
-    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
     // Route::get('/cursos', [CursosController::class, 'index']);
 
-});
+    });
+// Route::get('/logout', [AuthController::class, 'logout']);
