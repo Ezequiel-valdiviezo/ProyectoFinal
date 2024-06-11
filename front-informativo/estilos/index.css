@@ -9,15 +9,11 @@
 }
 
 .anchoNav{
-    /* max-width: 1200px; */
 }
 .natuser{
     font-family: Tahoma, sans-serif;
-    /* font-size: 65px;
-    color: #08a2de; */
     color: #08a2de;
     font-size: 70px;
-    /* font-size: 40px; */
 
 }
 .botonIniciarSesion{
@@ -38,7 +34,6 @@
 }
 .seccion1{
     text-align: left;
-    /* max-width: 1200px; */
     margin: auto;
 }
 .seccion1 #natuser{
@@ -51,19 +46,17 @@
 }
 
 .seccion4 {
-    /* width: 1200px; */
-    /* margin: auto; */
 }
 .seccion4Prueba div div{
-    /* background-color: #08a2de; */
 }
 
 
 .seccion5{
     background-color: rgb(206, 225, 233);
-    /* background-image: url(../img/fondo.jpg); */
 }
 .seccion5 div{
     max-width: 700px;
     margin: auto;
 }
+
+/* QUIENES SOMOS */
