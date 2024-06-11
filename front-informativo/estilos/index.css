@@ -9,7 +9,7 @@
 }
 
 .anchoNav{
-    max-width: 1200px;
+    /* max-width: 1200px; */
 }
 .natuser{
     font-family: Tahoma, sans-serif;
@@ -38,7 +38,7 @@
 }
 .seccion1{
     text-align: left;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: auto;
 }
 .seccion1 #natuser{
@@ -48,6 +48,11 @@
 
 .seccion3 div div img{
     border-radius: 100%;
+}
+
+.seccion4 {
+    /* width: 1200px; */
+    /* margin: auto; */
 }
 
 .seccion5{
