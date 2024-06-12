@@ -29,6 +29,14 @@
 
 /* --------------------------------------------------------------------------- */
 
+.home h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
+.home .seccion3 h3{
+    color: #08a2de;
+}
 .seccion1f{
     background-color: rgb(206, 225, 233);
 }
@@ -43,6 +51,10 @@
 
 .seccion3 div div img{
     border-radius: 100%;
+}
+
+.imgHomeBebe{
+    filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.5));
 }
 
 .seccion4 {
@@ -62,4 +74,18 @@
 /* QUIENES SOMOS */
 .nosotros .quienesSomos{
     background-color: rgb(206, 225, 233);
+}
+
+.nosotros .valores h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
+.nosotros .bodyNosotros .valores h2, p{
+    /* text-align: left; */
+}
+
+.nosotros .bodyNosotros{
+    max-width: 1000px;
+    margin: auto;
 }
