@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import '../styles/register.css'
 import imgg from '../assets/be.png'
+import { useNavigate } from "react-router-dom";
 
 
-function Register({ onToggle, onRegister }){
+
+function Register({ onRegister }){
 
   const [formData, setFormData] = useState({
     name: '',
@@ -12,6 +14,7 @@ function Register({ onToggle, onRegister }){
   });
 
   const [error, setError] = useState('');
+  const navigate = useNavigate()
  
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,6 +23,10 @@ function Register({ onToggle, onRegister }){
       [name]: value
     });
   };
+
+  const onToggle = (e) => {
+    navigate('/login')
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

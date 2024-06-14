@@ -1,9 +1,6 @@
-import React, {useEffect, useState} from "react";
-import Header from "../components/Header";
-import CalculadoraDias from "../components/CalculadorDias";
-import Dashboard from "./Dashboard";
+import React, {useState, useEffect} from "react";
 
-function Home(){
+function Cursos(){
 
     const [cursos, setCursos] = useState([]);
     const [mostrarCursos, setMostrarCursos] = useState(false);
@@ -29,11 +26,19 @@ function Home(){
 
     return(
         <>
-        <Header />
-        <Dashboard />
+        <h2>Cursos</h2>
+        <button onClick={handleMostrarCursos}>Mostrar Cursos</button>
+        <button onClick={handleOcultarCursos}>Ocultar Cursos</button>
 
+        {mostrarCursos && (
+            <ul>
+            {cursos.map((curso, index) => (
+                <li key={index}>{curso.nombre}</li>
+            ))}
+            </ul>
+        )}
         </>
     )
 }
 
-export default Home;
+export default Cursos;

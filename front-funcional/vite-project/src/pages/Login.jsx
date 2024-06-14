@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import '../styles/login.css'
 import imgg from '../assets/logo.png'
+import { useNavigate } from "react-router-dom";
 
-function Login({ onToggle, onLogin }){
+function Login({ onLogin }){
 
   const [formData, setFormData] = useState({
     email: '',
@@ -10,6 +11,7 @@ function Login({ onToggle, onLogin }){
   });
 
   const [error, setError] = useState('')
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,6 +20,10 @@ function Login({ onToggle, onLogin }){
       [name]: value
     });
   };
+
+  const onToggle = (e) => {
+    navigate('/register')
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,6 +58,8 @@ function Login({ onToggle, onLogin }){
       // Asume que el logeo fue exitoso y llama a onLogin para redirigir a Home
       console.log("Proceso terminado");
       onLogin();
+      // Redirige a la ruta /home
+      navigate('/home');
     } catch (error) {
       console.error('Error:', error);
       setError('Hubo un problema con el logeo. Intenta de nuevo.');
