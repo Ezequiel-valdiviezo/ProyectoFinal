@@ -21,4 +21,25 @@ class AlbumRecuerdosController extends Controller
 
         return response()->json($album, 200);
     }
+
+    public function eliminar($id)
+    {
+        $album = AlbumRecuerdos::find($id);
+
+        if(!$album){
+            $data = [
+                'message' => 'Recuerdo no encontrado',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $album->delete();
+
+        $data = [
+            'message' => 'Recuerdo eliminado',
+            'status' => 200
+        ];
+        return response()->json($data, 200);
+    }
 }

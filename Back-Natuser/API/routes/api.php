@@ -25,6 +25,9 @@ Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
 
 //Album Recuerdos
 Route::get('/album', [AlbumRecuerdosController:: class, 'index']);
+//Borrar recuerdo
+Route::delete('/album/{id}', [AlbumRecuerdosController::class, 'eliminar']);
+
 
 //Registro usuario
 Route::post('/registro', [AuthController::class, 'registro']);
