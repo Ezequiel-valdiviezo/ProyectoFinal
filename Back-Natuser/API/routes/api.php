@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumRecuerdosController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,8 @@ Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
 //Borrar curso
 Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
 
+//Album Recuerdos
+Route::get('/album', [AlbumRecuerdosController:: class, 'index']);
 
 //Registro usuario
 Route::post('/registro', [AuthController::class, 'registro']);
