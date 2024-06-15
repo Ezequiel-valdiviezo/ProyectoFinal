@@ -52,6 +52,8 @@ function Header() {
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><Link className="dropdown-item" to="/cursos">Cursos</Link></li>
                   <li><hr className="dropdown-divider" /></li>
+                  <li><Link className="dropdown-item" to="/albumRecuerdos">Álbum de recuerdos</Link></li>
+                  <li><hr className="dropdown-divider" /></li>
                   <li><Link className="dropdown-item" to="/feature3">Something else here</Link></li>
                 </ul>
               </li>
