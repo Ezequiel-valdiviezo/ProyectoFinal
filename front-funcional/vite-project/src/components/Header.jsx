@@ -16,9 +16,9 @@ function Header() {
         credentials: 'include',
       });
 
-      if (!response.ok) {
-        throw new Error('Error al cerrar sesión');
-      }
+      // if (!response.ok) {
+      //   throw new Error('Error al cerrar sesión');
+      // }
 
       const data = await response.json();
       console.log('Respuesta del servidor:', data);

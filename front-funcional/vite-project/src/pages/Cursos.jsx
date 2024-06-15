@@ -33,7 +33,7 @@ function Cursos(){
         {mostrarCursos && (
             <ul>
             {cursos.map((curso, index) => (
-                <li key={index}>{curso.nombre}</li>
+                <li key={index}>{curso.titulo}</li>
             ))}
             </ul>
         )}

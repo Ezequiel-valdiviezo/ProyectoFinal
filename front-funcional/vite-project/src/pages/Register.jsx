@@ -59,6 +59,8 @@ function Register({ onRegister }){
       // Asume que el registro fue exitoso y llama a onRegister para redirigir a Home
       onRegister();
       console.log("Proceso terminado");
+      // Redirige a la ruta /home
+      navigate('/home');
     } catch (error) {
       console.error('Error:', error);
       setError('Hubo un problema con el registro. Intenta de nuevo.');

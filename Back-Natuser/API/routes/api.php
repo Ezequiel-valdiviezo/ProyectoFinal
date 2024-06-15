@@ -33,12 +33,11 @@ Route::delete('/album/{id}', [AlbumRecuerdosController::class, 'eliminar']);
 Route::post('/registro', [AuthController::class, 'registro']);
 //Login usuario
 Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/logout', [AuthController::class, 'logout']);
 
 //Peticiones "Privadas" solo acceso con token
 Route::middleware(['auth:sanctum'])->group(function (){
     //Logout usuario
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/cursos', [CursosController::class, 'index']);
-
     });
-// Route::get('/logout', [AuthController::class, 'logout']);

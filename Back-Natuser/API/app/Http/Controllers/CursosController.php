@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class CursosController extends Controller
 {
+    /**
+   * Trae todos los cursos
+   */
     public function index()
     {
         $cursos = Cursos::all();
@@ -73,6 +76,10 @@ class CursosController extends Controller
         return response()->json($data, 201);
     }
 
+    /**
+   * Muestra un curso
+   * @param int $id
+   */
     public function mostrarCurso($id)
     {
         $cursos = Cursos::find($id);
@@ -92,6 +99,10 @@ class CursosController extends Controller
         return response()->json($data, 200);
     }
 
+    /**
+   * Elimina un curso
+   * @param int $id
+   */
     public function eliminarCurso($id)
     {
         $cursos = Cursos::find($id);
@@ -113,6 +124,11 @@ class CursosController extends Controller
         return response()->json($data, 200);
     }
 
+    /**
+   * Edita un curso
+   * @param Request $request
+   * @param int $id
+   */
     public function editarCurso(Request $request, $id)
     {
         $cursos = Cursos::find($id);

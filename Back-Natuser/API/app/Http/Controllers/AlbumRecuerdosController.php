@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class AlbumRecuerdosController extends Controller
 {
+    /**
+   * Trae todos los recuerdos
+   */
     public function Index(){
         $album = AlbumRecuerdos::all();
 
@@ -22,6 +25,10 @@ class AlbumRecuerdosController extends Controller
         return response()->json($album, 200);
     }
 
+    /**
+   * Elimina un recuerdo
+   * @param int $id
+   */
     public function eliminar($id)
     {
         $album = AlbumRecuerdos::find($id);
