@@ -13,7 +13,7 @@ use App\Http\Controllers\CursosController;
 
 
 //Mostrar cursos
-// Route::get('/cursos', [CursosController::class, 'index']);
+Route::get('/cursos', [CursosController::class, 'index']);
 //Mostrar curso por id
 Route::get('/cursos/{id}', [CursosController::class, 'mostrarCurso']);
 //Guardar curso
@@ -39,5 +39,5 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['auth:sanctum'])->group(function (){
     //Logout usuario
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/cursos', [CursosController::class, 'index']);
+    // Route::get('/cursos', [CursosController::class, 'index']);
     });
