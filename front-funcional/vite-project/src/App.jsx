@@ -76,6 +76,7 @@ import Foro from './pages/Foro'
 import Cursos from './pages/Cursos'
 import { createBrowserRouter, RouterProvider, Navigate  } from 'react-router-dom'
 import Recuerdos from './pages/Recuerdos'
+import Anotador from './pages/Anotador'
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -124,6 +125,10 @@ function App() {
          {
            path: '/albumRecuerdos',
            element: <Recuerdos />
+         },
+         {
+           path: '/anotador',
+           element: <Anotador />
          },
          {
           path: '*', // Coincide con cualquier URL no definida anteriormente

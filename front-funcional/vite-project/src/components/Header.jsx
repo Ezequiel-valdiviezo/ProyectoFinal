@@ -54,7 +54,7 @@ function Header() {
                   <li><hr className="dropdown-divider" /></li>
                   <li><Link className="dropdown-item" to="/albumRecuerdos">Álbum de recuerdos</Link></li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" to="/feature3">Something else here</Link></li>
+                  <li><Link className="dropdown-item" to="/anotador">Anotador</Link></li>
                 </ul>
               </li>
               <li className="nav-item">

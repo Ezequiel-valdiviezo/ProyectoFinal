@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
+import '../styles/dashboard.css'
 
 function Dashboard(){
 
 
     return(
-        <>
+        <div className="dashboard">
         <h1>Bienvenido a la sección para usuarios de NatUser</h1>
         <p>Hola [Jaimito]</p>
         <p>Nos alegra tenerte por aquí. Esperamos que encuentres útil las herramientas que ofrecemos.</p>
@@ -19,16 +20,8 @@ function Dashboard(){
         </ul>
         <p>Gracias por ser parte de nuestra comunidad. ¡Estamos aquí para apoyarte en cada paso del camino!</p>
     
-        {/* <button onClick={handleMostrarCursos}>Mostrar</button>
-            <button onClick={handleOcultarCursos}>Ocultar</button>
-            {mostrarCursos && (
-                <ul>
-                    {cursos.map(curso => (
-                        <li key={curso.id}>{curso.titulo}</li>
-                    ))}
-                </ul>
-            )} */}
-        </>
+
+        </div>
     )
 }
 
