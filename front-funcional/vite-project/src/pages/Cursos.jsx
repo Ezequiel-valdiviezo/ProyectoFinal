@@ -18,14 +18,6 @@ function Cursos(){
             .catch(error => console.error('Error fetching cursos:', error));
     }, []);
 
-    const handleMostrarCursos = () => {
-        setMostrarCursos(true);
-    };
-
-    const handleOcultarCursos = () => {
-        setMostrarCursos(false);
-    };
-
     const handleMostrarDetalles = (index) => {
         setCursoSeleccionado(cursos[index]);
     };
@@ -36,11 +28,8 @@ function Cursos(){
 
     return(
         <div className="cursos text-center">
-        <h2>Cursos</h2>
-        <button onClick={handleMostrarCursos}>Mostrar Cursos</button>
-        <button onClick={handleOcultarCursos}>Ocultar Cursos</button>
-
-        {mostrarCursos && (
+        <h2 className="mt-5">Cursos</h2>
+        
                 <div className="d-flex flex-wrap justify-content-center">
                     {cursos.map((curso, index) => (
                         // <div className="CardCurso" key={index}>
@@ -48,7 +37,7 @@ function Cursos(){
                                 <img src="" className="card-img-top" alt="" />
                                 <div className="card-body">
                                     <h3 className="card-title">{curso.titulo}</h3>
-                                    <p className="card-text">{curso.descripcion_breve}</p>
+                                    {/* <p className="card-text">{curso.descripcion_breve}</p> */}
                                 </div>
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">{curso.categoria}</li>
@@ -61,8 +50,7 @@ function Cursos(){
                             </div>
                         // </div>
                     ))}
-            </div>
-        )}
+                </div>
 
             {cursoSeleccionado && (
                 <div className="detalles-curso">
