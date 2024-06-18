@@ -23,10 +23,12 @@ Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
 //Borrar curso
 Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
 
-//Album Recuerdos
+//Album recuerdos
 Route::get('/album', [AlbumRecuerdosController:: class, 'index']);
 //Borrar recuerdo
 Route::delete('/album/{id}', [AlbumRecuerdosController::class, 'eliminar']);
+//Guardar recuerdo
+Route::post('/album', [AlbumRecuerdosController::class, 'guardar']);
 
 
 //Registro usuario

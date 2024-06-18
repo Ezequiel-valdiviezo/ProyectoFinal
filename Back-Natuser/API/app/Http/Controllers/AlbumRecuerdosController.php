@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\AlbumRecuerdos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class AlbumRecuerdosController extends Controller
 {
@@ -48,5 +50,45 @@ class AlbumRecuerdosController extends Controller
             'status' => 200
         ];
         return response()->json($data, 200);
+    }
+
+    /**
+    * Guarda recuerdo
+    * @param Request $request
+    */
+    public function guardar(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+           'descripcion' => 'required|max:256',
+        ]);
+
+    if($validator->fails()){
+        $data = [
+            'message' => 'Error en la validación de datos',
+            'errors' => $validator->errors(),
+            'status' => '404',
+        ];
+        return response()->json($data, 400);
+    }
+
+    $recuerdos = AlbumRecuerdos::create([
+        'imagen' => $request->imagen,
+        'descripcion' => $request->descripcion,
+    ]);
+
+    if(!$recuerdos){
+        $data = [
+            'message' => 'Error al crear el curso',
+            'status' => 500
+            ];
+        return response()->json($data, 500, );
+    }
+
+    $data = [
+        'cursos' => $recuerdos,
+        'status' => 201
+    ];
+
+    return response()->json($data, 201);
     }
 }
