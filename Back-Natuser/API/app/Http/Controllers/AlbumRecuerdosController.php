@@ -24,6 +24,11 @@ class AlbumRecuerdosController extends Controller
             return response()->json($data);
         }
 
+        // Añadir la URL completa de la imagen a cada recuerdo
+        foreach ($album as $recuerdo) {
+        $recuerdo->imagen_url = url('storage/' . $recuerdo->imagen);
+        }
+
         return response()->json($album, 200);
     }
 
@@ -71,8 +76,16 @@ class AlbumRecuerdosController extends Controller
         return response()->json($data, 400);
     }
 
+    // Maneja la subida de la imagen
+    if ($request->hasFile('imagen')) {
+        $image = $request->file('imagen');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+        $imagePath = 'images/' . $imageName;
+    }
+
     $recuerdos = AlbumRecuerdos::create([
-        'imagen' => $request->imagen,
+        'imagen' => $imagePath,
         'descripcion' => $request->descripcion,
     ]);
 
@@ -84,8 +97,11 @@ class AlbumRecuerdosController extends Controller
         return response()->json($data, 500, );
     }
 
+    // Añadir la URL completa de la imagen
+    $recuerdos->imagen_url = url($recuerdos->imagen);
+
     $data = [
-        'cursos' => $recuerdos,
+        'recuerdos' => $recuerdos,
         'status' => 201
     ];
 
