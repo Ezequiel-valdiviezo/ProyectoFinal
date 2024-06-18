@@ -82,11 +82,11 @@ function Recuerdos() {
   };
 
   return (
-    <>
-      <h2>Álbum de recuerdos</h2>
+    <div className="recuerdos text-center">
+      <h2 className="mt-5">Álbum de recuerdos</h2>
       <p>Desde aquí vas poder cargar, eliminar y ver los recuerdos más significativos para vos.</p>
 
-      <form onSubmit={handleForm}>
+      <form className="w-25 m-auto" onSubmit={handleForm}>
         <div className="form-group">
           <label htmlFor="imagen">Imagen</label>
           <input
@@ -141,7 +141,7 @@ function Recuerdos() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
