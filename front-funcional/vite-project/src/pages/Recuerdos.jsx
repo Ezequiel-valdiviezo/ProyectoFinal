@@ -28,7 +28,13 @@ function Recuerdos() {
       credentials: 'include'
     })
     .then(response => response.json())
-    .then(data => setRecuerdos(data))
+    .then(data => {
+      if (Array.isArray(data)) {
+        setRecuerdos(data);
+      } else {
+        console.error('Unexpected API response:', data);
+      }
+    })
     .catch(error => console.error('Error fetching recuerdos:', error));
   }, []);
 
@@ -106,15 +112,6 @@ function Recuerdos() {
         <button type="submit" className="btn btn-primary mt-3">Enviar</button>
       </form>
 
-      <ul>
-        {recuerdos.map((recuerdo) => (
-          <li key={recuerdo.id}>
-            {recuerdo.descripcion}
-            <button onClick={() => handleDelete(recuerdo.id)}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
-
       <div className="album py-5 bg-light">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -133,7 +130,7 @@ function Recuerdos() {
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="btn-group">
                         <button type="button" className="btn btn-primary">Ver</button>
-                        <button type="button" className="btn btn-danger">Eliminar</button>
+                        <button onClick={() => handleDelete(recuerdo.id)} type="button" className="btn btn-danger">Eliminar</button>
                       </div>
                       <small className="text-muted">9 mins</small>
                     </div>
