@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../styles/anotador.css'
+import CalculadorDias from '../components/CalculadorDias'
 
 function Anotador(){
 
@@ -62,7 +63,9 @@ function Anotador(){
               </li>
             ))}
           </ul>
-          <button onClick={agregarNota} className="btn btn-success">Agregar Nota</button>
+          <div className="text-center">
+            <button onClick={agregarNota} className="btn btn-primary">Agregar Nota</button>
+          </div>
         </div>
 
         <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
@@ -78,6 +81,8 @@ function Anotador(){
             ))}
           </ul>
         </div>
+
+        <CalculadorDias />
       </div>
     );
 }

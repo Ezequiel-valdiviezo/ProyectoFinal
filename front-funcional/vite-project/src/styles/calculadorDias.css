@@ -1,6 +1,9 @@
 .contadorDias{
-    background-color: rgb(67, 194, 226);
+    background-color: rgb(204, 233, 240);
+    border-radius: 50px;
     padding: 25px;
+    max-width: 500px;
+    margin: auto;
 }
 
 .contadorDias h1{
@@ -9,10 +12,7 @@
 }
 
 .contadorDias .contenedor{
-    /* background-color: blueviolet; */
-    /* padding: 25px; */
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 }

@@ -83,7 +83,7 @@ function PrivateRoute({ element, isAuthenticated }) {
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   
   const handleAuthSuccess = () => {
     setIsAuthenticated(true);

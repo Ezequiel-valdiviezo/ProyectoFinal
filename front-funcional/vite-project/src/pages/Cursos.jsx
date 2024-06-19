@@ -42,7 +42,7 @@ function Cursos(){
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">{curso.categoria}</li>
                                     <li className="list-group-item">{curso.telefono}</li>
-                                    <li className="list-group-item">{curso.precio}</li>
+                                    <li className="list-group-item">${curso.precio}</li>
                                 </ul>
                                 <div className="card-body">
                                     <button onClick={() => handleMostrarDetalles(index)}>Ver Detalles</button>

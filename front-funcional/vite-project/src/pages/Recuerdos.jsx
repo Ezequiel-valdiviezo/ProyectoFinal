@@ -132,7 +132,7 @@ function Recuerdos() {
                         <button type="button" className="btn btn-primary">Ver</button>
                         <button onClick={() => handleDelete(recuerdo.id)} type="button" className="btn btn-danger">Eliminar</button>
                       </div>
-                      <small className="text-muted">9 mins</small>
+                      {/* <small className="text-muted">9 mins</small> */}
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,27 @@
 .dashboard{
+    max-width: 900px;
+    margin: auto;
     /* background-color: aqua; */
+}
+
+.dashboard .saludo{
+    background-color: rgb(20, 144, 226);
+    color: white;
+    border-radius: 40px;
+}
+
+.dashboard .funcionalidades{
+    background-color: rgb(20, 144, 226);
+    border-radius: 40px;
+    color: white;
+}
+
+.dashboard .funcionalidades .funcMini{
+    border-radius: 10px;
     text-align: center;
+}
+.dashboard .funcionalidades .funcMini:hover{
+    background-color: rgb(16, 117, 200);
+    box-shadow: 0 0 10px 1px rgb(0, 27, 77);
+    cursor: pointer;
 }
