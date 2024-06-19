@@ -43,10 +43,10 @@ function Header() {
           <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/home" activeClassName="active" aria-current="page">Inicio</NavLink>
+                <NavLink className="nav-link text-white fw-bold" to="/home" activeClassName="active" aria-current="page">Inicio</NavLink>
               </li>
               <li className="nav-item dropdown">
-                <NavLink className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <NavLink className="nav-link dropdown-toggle text-white fw-bold" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Funcionalidades
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -58,10 +58,10 @@ function Header() {
                 </ul>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/foro" activeClassName="active" aria-current="page">Foro</NavLink>
+                <NavLink className="nav-link text-white fw-bold" to="/foro" activeClassName="active" aria-current="page">Foro</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/perfil" activeClassName="active" aria-current="page">Mi perfil</NavLink>
+                <NavLink className="nav-link text-white fw-bold" to="/perfil" activeClassName="active" aria-current="page">Mi perfil</NavLink>
               </li>
               <li>
                 <form onSubmit={handleLogout} className="d-flex">

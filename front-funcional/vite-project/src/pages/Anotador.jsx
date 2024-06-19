@@ -46,12 +46,15 @@ function Anotador(){
     };
 
     return (
-      <div className="anotador">
-        <h2 className="text-center mt-5">Bienvenido al anotador</h2>
-        <p className="text-center">Desde acá vas a poder tener notas para lo que necesites, podés utilizarlo como lista de compras, de comidas, o lo que necesites.</p>
+      <div className="anotador mb-5">
+        <div className="presentacion mt-5 p-4">
+          <h2 className="text-center">Bienvenido al anotador y contador de días</h2>
+          <p className="text-center">Desde acá vas a poder tener notas para lo que necesites, podés utilizarlo como lista de compras, de comidas, o lo que necesites.</p>
+        </div>
 
+      <div className="contenedorLista py-4 px-5 my-4">
         <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
-          <h3 className="text-center mt-5">Lista</h3>
+          <h3 className="text-center">Lista</h3>
           <ul className="list-group mb-3">
             {lista.map((item, index) => (
               <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
@@ -64,7 +67,7 @@ function Anotador(){
             ))}
           </ul>
           <div className="text-center">
-            <button onClick={agregarNota} className="btn btn-primary">Agregar Nota</button>
+            <button onClick={agregarNota} className="btn btn btn-outline-light">Agregar Nota</button>
           </div>
         </div>
 
@@ -81,6 +84,7 @@ function Anotador(){
             ))}
           </ul>
         </div>
+      </div>
 
         <CalculadorDias />
       </div>

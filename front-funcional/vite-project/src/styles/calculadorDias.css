@@ -1,13 +1,13 @@
 .contadorDias{
-    background-color: rgb(204, 233, 240);
-    border-radius: 50px;
+    max-width: 900px;
+    background-color: #530ccd;
+    color: white;
+    border-radius: 40px;
     padding: 25px;
-    max-width: 500px;
     margin: auto;
 }
 
 .contadorDias h1{
-    /* background-color: aquamarine; */
     text-align: center;
 }
 

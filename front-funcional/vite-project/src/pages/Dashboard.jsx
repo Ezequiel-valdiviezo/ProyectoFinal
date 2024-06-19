@@ -4,17 +4,23 @@ import icono1 from '../assets/icono1.png'
 import icono2 from '../assets/icono2.png'
 import icono3 from '../assets/icono3.png'
 import icono4 from '../assets/icono4.png'
+import saludo from '../assets/ez.png'
 
 function Dashboard(){
 
 
     return(
         <div className="dashboard pt-3">
-        <h2>Dashboard</h2>
+        {/* <h2 className="mb-5">Dashboard</h2> */}
 
-        <div className="saludo p-4">
-            <h3>Bienvenido/a Ezequiel</h3>
-            <p>¡Nos alegra tenerte por aquí!</p>
+        <div className="saludo p-4 mt-5 d-flex align-items-center">
+            <div>
+                <img src={saludo} width="" alt="" />
+            </div>
+            <div>
+                <h3>Bienvenido/a Ezequiel</h3>
+                <p>¡Nos alegra tenerte por aquí!</p>
+            </div>
         </div>
 
         <div className="funcionalidades p-4 mt-2">

@@ -1,3 +1,16 @@
 .anotador{
-    /* background-color: rgb(20, 150, 150); */
+    max-width: 900px;
+    margin: auto;
+}
+
+.anotador .presentacion{
+    background-color: #530ccd;
+    color: white;
+    border-radius: 40px;
+}
+
+.anotador .contenedorLista{
+    background-color: #530ccd;
+    color: white;
+    border-radius: 40px;
 }

@@ -5,13 +5,15 @@
 }
 
 .dashboard .saludo{
-    background-color: rgb(20, 144, 226);
+    /* background-color: rgb(20, 144, 226); */
+    background-color: #530ccd;
     color: white;
     border-radius: 40px;
 }
 
 .dashboard .funcionalidades{
-    background-color: rgb(20, 144, 226);
+    /* background-color: rgb(20, 144, 226); */
+    background-color: #530ccd;
     border-radius: 40px;
     color: white;
 }
@@ -21,7 +23,37 @@
     text-align: center;
 }
 .dashboard .funcionalidades .funcMini:hover{
-    background-color: rgb(16, 117, 200);
-    box-shadow: 0 0 10px 1px rgb(0, 27, 77);
+    background-color: #4911ab;
+    box-shadow: 0 0 10px 1px rgb(137, 51, 224);
     cursor: pointer;
+}
+.saludo{
+    height: 125px;
+}
+.saludo div img{
+    width: 150px;
+    margin-bottom: 40px;
+}
+.saludo div h3{
+    margin-left: 25px;
+}
+.saludo div p{
+    margin-left: 25px;
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 600px) {
+    .saludo {
+        height: auto;
+        flex-direction: column; 
+    }
+    .saludo div img {
+        width: 125px;
+    }
+    .saludo div h3{
+        margin-left: 0px;
+    }
+    .saludo div p{
+        margin-left: 0px;
+    }
 }
