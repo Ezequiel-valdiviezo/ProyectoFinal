@@ -67,7 +67,7 @@ function Anotador(){
             ))}
           </ul>
           <div className="text-center">
-            <button onClick={agregarNota} className="btn btn btn-outline-light">Agregar Nota</button>
+            <button onClick={agregarNota} className="btn btn btn-outline-primary">Agregar Nota</button>
           </div>
         </div>
 

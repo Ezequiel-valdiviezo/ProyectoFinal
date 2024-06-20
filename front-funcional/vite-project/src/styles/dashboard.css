@@ -41,6 +41,12 @@
     margin-left: 25px;
 }
 
+.dashboard .agradecimiento{
+    background-color: #530ccd;
+    border-radius: 40px;
+    color: white;
+}
+
 /* Media queries para diseño responsivo */
 @media (max-width: 600px) {
     .saludo {

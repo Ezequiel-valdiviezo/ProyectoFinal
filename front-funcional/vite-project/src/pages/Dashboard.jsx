@@ -47,7 +47,9 @@ function Dashboard(){
             </div>
         </div>
         
-        <p>Gracias por ser parte de nuestra comunidad. ¡Estamos aquí para apoyarte en cada paso del camino!</p>
+        <div className="agradecimiento mt-2">
+            <p className="p-3">Gracias por ser parte de nuestra comunidad. ¡Estamos aquí para apoyarte en cada paso del camino!</p>
+        </div>
         
 
         </div>

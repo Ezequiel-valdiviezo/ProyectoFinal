@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import '../styles/cursos.css';
+import img from '../assets/1.png'
 
 function Cursos(){
 
@@ -33,20 +34,22 @@ function Cursos(){
                 <div className="d-flex flex-wrap justify-content-center">
                     {cursos.map((curso, index) => (
                         // <div className="CardCurso" key={index}>
-                            <div className="card m-2" style={{ width: '18rem' }}>
-                                <img src="" className="card-img-top" alt="" />
-                                <div className="card-body">
-                                    <h3 className="card-title">{curso.titulo}</h3>
-                                    {/* <p className="card-text">{curso.descripcion_breve}</p> */}
-                                </div>
+                            <div className="card curso m-2" style={{ width: '18rem' }}>
+                                <img src={img} width="100%" className="card-img-top" alt="" />
+                                {/* <img src={curso.imagen} width="100%" className="card-img-top" alt="" /> */}
+                                
                                 <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">{curso.categoria}</li>
-                                    <li className="list-group-item">{curso.telefono}</li>
-                                    <li className="list-group-item">${curso.precio}</li>
+                                    <li className="list-group-item">
+                                        <h3 className="card-title">{curso.titulo}</h3>
+                                    </li>
+                                    <li className="list-group-item">Categoria: {curso.categoria}</li>
+                                    <li className="list-group-item">Teléfono: {curso.telefono}</li>
+                                    <li className="list-group-item">Precio: ${curso.precio}</li>
+                                    <li className="list-group-item">
+                                        <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Ver Detalles</button>
+                                        <button className="btn btn-outline-primary m-1">Continuar</button>
+                                    </li>
                                 </ul>
-                                <div className="card-body">
-                                    <button onClick={() => handleMostrarDetalles(index)}>Ver Detalles</button>
-                                </div>
                             </div>
                         // </div>
                     ))}
@@ -56,7 +59,7 @@ function Cursos(){
                 <div className="detalles-curso">
                     <h3>Detalles del Curso</h3>
                     <p>Título: {cursoSeleccionado.titulo}</p>
-                    <p>Descripción: {cursoSeleccionado.descripcion_larga}</p>
+                    <p>Descripción: {cursoSeleccionado.descripcion_completa}</p>
                     <p>Categoría: {cursoSeleccionado.categoria}</p>
                     <p>Teléfono: {cursoSeleccionado.telefono}</p>
                     <p>Precio: {cursoSeleccionado.precio}</p>

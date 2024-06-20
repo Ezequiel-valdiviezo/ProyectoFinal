@@ -1,2 +1,9 @@
-.cursos{
+.cursos .curso{
+    border: solid 2px #250759;
+    border-radius: 10px;
+    /* background-color: aqua; */
+}
+
+.cursos .curso:hover{
+    box-shadow: 0 0 10px 2px #8c8c8c;
 }

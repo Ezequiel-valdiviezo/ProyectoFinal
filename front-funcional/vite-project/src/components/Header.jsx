@@ -65,7 +65,7 @@ function Header() {
               </li>
               <li>
                 <form onSubmit={handleLogout} className="d-flex">
-                  <button className="btn btn-outline-primary botonIniciarSesion" type="submit">Cerrar sesión</button>
+                  <button className="btn btn-outline-light mx-3 botonIniciarSesion" type="submit">Cerrar sesión</button>
                 </form>
               </li>
             </ul>
