@@ -94,7 +94,7 @@ function Recuerdos() {
     <div className="recuerdos text-center">
       <h2 className="mt-5">Álbum de recuerdos</h2>
       <p>Desde aquí vas poder cargar, eliminar y ver los recuerdos más significativos para vos.</p>
-      <button onClick={handleAbrirForm}>Cargar recuerdo</button>
+      <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar recuerdo</button>
 
     {estadoForm && 
       <form className="w-25 m-auto" onSubmit={handleForm}>
@@ -120,8 +120,10 @@ function Recuerdos() {
             onChange={handleChange}
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary mt-3">Enviar</button>
-        <button className="btn btn-primary mt-3" onClick={handleCerrarForm}>Cancelar</button>
+        <div className="d-flex justify-content-center flex-column">
+          <button type="submit" className="btn btn-primary m-2">Enviar</button>
+          <button className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
+        </div>
       </form>
     }
 
