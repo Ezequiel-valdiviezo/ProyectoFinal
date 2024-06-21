@@ -3,6 +3,7 @@ import img from '../assets/1.png'
 
 function Recuerdos() {
   const [recuerdos, setRecuerdos] = useState([]);
+  const [estadoForm, setEstadoForm] = useState(false)
   const [formData, setFormData] = useState({
     imagen: null,
     descripcion: ''
@@ -82,11 +83,20 @@ function Recuerdos() {
     }
   };
 
+  const handleAbrirForm = () => {
+    setEstadoForm(true);
+  }
+  const handleCerrarForm = () => {
+    setEstadoForm(false);
+  }
+
   return (
     <div className="recuerdos text-center">
       <h2 className="mt-5">Álbum de recuerdos</h2>
       <p>Desde aquí vas poder cargar, eliminar y ver los recuerdos más significativos para vos.</p>
+      <button onClick={handleAbrirForm}>Cargar recuerdo</button>
 
+    {estadoForm && 
       <form className="w-25 m-auto" onSubmit={handleForm}>
         <div className="form-group">
           <label htmlFor="imagen">Imagen</label>
@@ -111,7 +121,9 @@ function Recuerdos() {
           ></textarea>
         </div>
         <button type="submit" className="btn btn-primary mt-3">Enviar</button>
+        <button className="btn btn-primary mt-3" onClick={handleCerrarForm}>Cancelar</button>
       </form>
+    }
 
       <div className="album py-5 bg-light">
         <div className="container">
