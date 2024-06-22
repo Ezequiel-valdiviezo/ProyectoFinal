@@ -13,7 +13,7 @@ use App\Http\Controllers\CursosController;
 
 
 //Mostrar cursos
-Route::get('/cursos', [CursosController::class, 'index']);
+// Route::get('/cursos', [CursosController::class, 'index']);
 //Mostrar curso por id
 Route::get('/cursos/{id}', [CursosController::class, 'mostrarCurso']);
 //Guardar curso
@@ -32,14 +32,26 @@ Route::post('/album', [AlbumRecuerdosController::class, 'guardar']);
 
 
 //Registro usuario
-Route::post('/registro', [AuthController::class, 'registro']);
+// Route::post('/registro', [AuthController::class, 'registro']);
 //Login usuario
-Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/login', [AuthController::class, 'login']);
 // Route::post('/logout', [AuthController::class, 'logout']);
 
 //Peticiones "Privadas" solo acceso con token
 Route::middleware(['auth:sanctum'])->group(function (){
     //Logout usuario
-    Route::post('/logout', [AuthController::class, 'logout']);
+    // Route::post('/logout', [AuthController::class, 'logout']);
     // Route::get('/cursos', [CursosController::class, 'index']);
+    });
+
+    Route::group([
+        'middleware' => 'api',
+        'prefix' => 'auth'
+    ], function ($router) {
+        Route::post('/register', [AuthController::class, 'register'])->name('register');
+        Route::post('/login', [AuthController::class, 'login'])->name('login');
+        Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
+        Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api')->name('refresh');
+        Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
+        Route::get('/cursos', [CursosController::class, 'index']);
     });

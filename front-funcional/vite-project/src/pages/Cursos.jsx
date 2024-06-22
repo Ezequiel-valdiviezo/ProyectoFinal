@@ -9,9 +9,12 @@ function Cursos(){
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/cursos', {
+        fetch('http://127.0.0.1:8000/api/auth/cursos', {
             method: 'GET',
-            credentials: 'include'
+            // credentials: 'include'
+            // headers: {
+            //     'Autorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJod…jcifQ.faCJf0uVoDAbrKA5F1Z3TejIVue3-JRqh72SLvOgIDA"
+            // }
         }
         )
             .then(response => response.json())
