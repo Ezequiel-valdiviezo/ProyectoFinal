@@ -10,7 +10,8 @@ function Register({ onRegister }){
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    password_confirmation: ''
   });
 
   const [error, setError] = useState('');
@@ -35,7 +36,7 @@ function Register({ onRegister }){
     // Aquí puedes añadir la lógica para enviar los datos a un servidor o procesarlos de otra manera
     
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/registro', {
+      const response = await fetch('http://127.0.0.1:8000/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -60,7 +61,7 @@ function Register({ onRegister }){
       onRegister();
       console.log("Proceso terminado");
       // Redirige a la ruta /home
-      navigate('/home');
+      navigate('/login');
     } catch (error) {
       console.error('Error:', error);
       setError('Hubo un problema con el registro. Intenta de nuevo.');
@@ -106,6 +107,16 @@ function Register({ onRegister }){
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
+              />
+            </div>
+            <div className="d-flex flex-column m-3">
+              <label htmlFor="password">Confirmar contraseña:</label>
+              <input
+                type="password"
+                name="password_confirmation"
+                value={formData.password_confirmation}
+                onChange={handleChange}
+                // placeholder="Confirm Password"
               />
                {error.password && <p style={{ color: 'red' }}>{error.password[0]}</p>}
             </div>
