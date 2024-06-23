@@ -133,14 +133,14 @@ function Recuerdos() {
             {recuerdos.map((recuerdo) => (
               <div className="col" key={recuerdo.id}>
                 <div className="card shadow-sm">
-                  {/* <img
+                  <img
                     className="bd-placeholder-img card-img-top"
                     width="100%"
-                    height="225"
-                    src={recuerdo.imagen_url} // Asumiendo que el URL de la imagen se llama imagen_url
+                    // height="225"
+                    src={'http://127.0.0.1:8000/' + recuerdo.imagen} // Asumiendo que el URL de la imagen se llama imagen_url
                     alt="Recuerdo"
-                  /> */}
-                  <img src={img} alt="" />
+                  />
+                  {/* <img src={img} alt="" /> */}
                   <div className="card-body">
                     <p className="card-text">{recuerdo.descripcion}</p>
                     <div className="d-flex justify-content-between align-items-center">
