@@ -92,13 +92,14 @@
 
 /* CONTACTO */
 
-.contacto1Fondo{
-    background-color: rgb(206, 225, 233);
-    /* background-image: url(../img/bebesPadres.jpg); */
-    background-position: center;
-    height: 250px;
+.contacto1Fondo h2{
+    /* background-color: rgb(206, 225, 233); */
+    /* height: 250px; */
     color: #08a2de;
-    /* background-size: cover; */
+}
+.contacto1Fondo{
+    max-width: 1000px;
+    margin: auto;
 }
 .seccion1c div h2{
     /* background-color: #adcfdc; */
@@ -110,6 +111,8 @@
     box-shadow: 0 0 20px 1px rgb(169, 169, 169);
     background-color: rgb(207, 228, 242);
     border-radius: 15px;
+    max-width: 1000px;
+    margin: auto;
 }
 
 .contactoInfo{
@@ -119,9 +122,9 @@
 }
 
 .cardContacto div{
-    background-color: #ffffff;
+    /* background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 0 8px 1px rgb(105, 105, 105);
+    box-shadow: 0 0 8px 1px rgb(105, 105, 105); */
 }
 
 /* FORMULARIO */
