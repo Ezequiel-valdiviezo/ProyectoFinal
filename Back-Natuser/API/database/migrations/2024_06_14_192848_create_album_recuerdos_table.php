@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('album_recuerdos', function (Blueprint $table) {
             $table->id();
-            $table->string('imagen', 256)->nullable();
+            $table->string('imagen', 256);
             $table->string('descripcion', 256);
             $table->timestamps();
         });

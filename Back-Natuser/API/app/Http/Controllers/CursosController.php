@@ -24,6 +24,11 @@ class CursosController extends Controller
             return response()->json($data);
         }
 
+        // Añadir la URL completa de la imagen a cada curso
+        foreach ($cursos as $curso) {
+            $curso->imagen_url = url('storage/' . $curso->imagen);
+            }
+
         return response()->json($cursos, 200);
     }
 
@@ -51,8 +56,17 @@ class CursosController extends Controller
             return response()->json($data, 400);
         }
 
+        // Maneja la subida de la imagen
+        if ($request->hasFile('imagen')) {
+            $image = $request->file('imagen');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $imagePath = 'images/' . $imageName;
+        }
+
         $cursos = Cursos::create([
             'titulo' => $request->titulo,
+            'imagen' => $imagePath,
             'descripcion_breve' => $request->descripcion_breve,
             'categoria' => $request->categoria,
             'descripcion_completa' => $request->descripcion_completa,
@@ -67,6 +81,9 @@ class CursosController extends Controller
             ];
             return response()->json($data, 500, );
         }
+
+        // Añadir la URL completa de la imagen
+        $cursos->imagen_url = url($cursos->imagen);
 
         $data = [
             'cursos' => $cursos,

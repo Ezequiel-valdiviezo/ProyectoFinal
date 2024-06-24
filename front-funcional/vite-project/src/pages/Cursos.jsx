@@ -9,12 +9,9 @@ function Cursos(){
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/auth/cursos', {
+        fetch('http://127.0.0.1:8000/api/cursos', {
             method: 'GET',
-            // credentials: 'include'
-            // headers: {
-            //     'Autorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJod…jcifQ.faCJf0uVoDAbrKA5F1Z3TejIVue3-JRqh72SLvOgIDA"
-            // }
+            credentials: 'include'
         }
         )
             .then(response => response.json())
@@ -38,8 +35,8 @@ function Cursos(){
                     {cursos.map((curso, index) => (
                         // <div className="CardCurso" key={index}>
                             <div className="card curso m-2" style={{ width: '18rem' }}>
-                                <img src={img} width="100%" className="card-img-top" alt="" />
-                                {/* <img src={curso.imagen} width="100%" className="card-img-top" alt="" /> */}
+                                {/* <img src={img} width="100%" className="card-img-top" alt="" /> */}
+                                <img src={'http://127.0.0.1:8000' + curso.imagen} width="100%" className="card-img-top" alt="" />
                                 
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">
