@@ -3,10 +3,10 @@
     margin: auto;
 }
 
-.anotador .presentacion{
-    /* background-color: #530ccd;
-    color: white; */
-    border-radius: 40px;
+.anotador .presentacion h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
 }
 
 .anotador .contenedorLista{

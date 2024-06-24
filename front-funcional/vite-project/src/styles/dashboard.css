@@ -1,14 +1,13 @@
 .dashboard{
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
     /* background-color: aqua; */
 }
 
-.dashboard .saludo{
-    /* background-color: rgb(20, 144, 226); */
-    background-color: #0b83af;
-    color: white;
-    border-radius: 40px;
+.dashboard .saludo h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
 }
 
 .dashboard .funcionalidades{

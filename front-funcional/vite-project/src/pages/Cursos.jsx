@@ -65,7 +65,7 @@ function Cursos(){
                     <p>Precio: {cursoSeleccionado.precio}</p>
                     <button onClick={handleCerrarDetalles}>Cerrar</button>
                 </div>
-            )}
+            )} 
         </div>
     )
 }

@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
-import img from '../assets/1.png'
+import React, { useEffect, useState, useRef } from "react";
+import '../styles/recuerdo.css';
+import img from '../assets/1.png';
 
 function Recuerdos() {
   const [recuerdos, setRecuerdos] = useState([]);
-  const [estadoForm, setEstadoForm] = useState(false)
+  const [estadoForm, setEstadoForm] = useState(false);
   const [formData, setFormData] = useState({
     imagen: null,
     descripcion: ''
   });
+  const [deleteId, setDeleteId] = useState(null);
+  const modalRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -40,20 +43,31 @@ function Recuerdos() {
     .catch(error => console.error('Error fetching recuerdos:', error));
   }, []);
 
-  const handleDelete = async (id) => {
+  const handleDelete = (id) => {
+    setDeleteId(id);
+    const modal = new window.bootstrap.Modal(modalRef.current);
+    modal.show();
+  };
+
+  const handleConfirmDelete = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/album/${id}`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/album/${deleteId}`, {
         method: 'DELETE',
         credentials: 'include'
       });
 
       if (response.ok) {
-        setRecuerdos(recuerdos.filter(recuerdo => recuerdo.id !== id));
+        setRecuerdos(recuerdos.filter(recuerdo => recuerdo.id !== deleteId));
+        console.log('Recuerdo eliminado correctamente');
       } else {
         console.error('Error al eliminar el recuerdo');
       }
     } catch (error) {
       console.error('Error en la solicitud de eliminación:', error);
+    } finally {
+      const modal = new window.bootstrap.Modal(modalRef.current);
+      modal.hide();
+      setDeleteId(null);
     }
   };
 
@@ -85,10 +99,11 @@ function Recuerdos() {
 
   const handleAbrirForm = () => {
     setEstadoForm(true);
-  }
+  };
+
   const handleCerrarForm = () => {
     setEstadoForm(false);
-  }
+  };
 
   return (
     <div className="recuerdos text-center">
@@ -96,36 +111,36 @@ function Recuerdos() {
       <p>Desde aquí vas poder cargar, eliminar y ver los recuerdos más significativos para vos.</p>
       <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar recuerdo</button>
 
-    {estadoForm && 
-      <form className="w-25 m-auto" onSubmit={handleForm}>
-        <div className="form-group">
-          <label htmlFor="imagen">Imagen</label>
-          <input
-            type="file"
-            className="form-control"
-            id="imagen"
-            name="imagen"
-            accept="image/*"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group mt-3">
-          <label htmlFor="descripcion">Descripción</label>
-          <textarea
-            className="form-control"
-            id="descripcion"
-            name="descripcion"
-            rows="3"
-            value={formData.descripcion}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-        <div className="d-flex justify-content-center flex-column">
-          <button type="submit" className="btn btn-primary m-2">Enviar</button>
-          <button className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
-        </div>
-      </form>
-    }
+      {estadoForm && 
+        <form className="w-25 m-auto" onSubmit={handleForm}>
+          <div className="form-group">
+            <label htmlFor="imagen">Imagen</label>
+            <input
+              type="file"
+              className="form-control"
+              id="imagen"
+              name="imagen"
+              accept="image/*"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label htmlFor="descripcion">Descripción</label>
+            <textarea
+              className="form-control"
+              id="descripcion"
+              name="descripcion"
+              rows="3"
+              value={formData.descripcion}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+          <div className="d-flex justify-content-center flex-column">
+            <button type="submit" className="btn btn-primary m-2">Enviar</button>
+            <button className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
+          </div>
+        </form>
+      }
 
       <div className="album py-5 bg-light">
         <div className="container">
@@ -136,11 +151,9 @@ function Recuerdos() {
                   <img
                     className="bd-placeholder-img card-img-top"
                     width="100%"
-                    // height="225"
-                    src={'http://127.0.0.1:8000/' + recuerdo.imagen} // Asumiendo que el URL de la imagen se llama imagen_url
+                    src={'http://127.0.0.1:8000/' + recuerdo.imagen}
                     alt="Recuerdo"
                   />
-                  {/* <img src={img} alt="" /> */}
                   <div className="card-body">
                     <p className="card-text">{recuerdo.descripcion}</p>
                     <div className="d-flex justify-content-between align-items-center">
@@ -148,12 +161,30 @@ function Recuerdos() {
                         <button type="button" className="btn btn-primary">Ver</button>
                         <button onClick={() => handleDelete(recuerdo.id)} type="button" className="btn btn-danger">Eliminar</button>
                       </div>
-                      {/* <small className="text-muted">9 mins</small> */}
                     </div>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Modal */}
+      <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" ref={modalRef}>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">Confirmar eliminación</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              ¿Estás seguro que deseas eliminar este recuerdo?
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" className="btn btn-danger" onClick={handleConfirmDelete}>Eliminar</button>
+            </div>
           </div>
         </div>
       </div>

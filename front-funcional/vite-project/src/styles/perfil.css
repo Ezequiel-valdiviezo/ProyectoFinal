@@ -1,0 +1,10 @@
+.perfil h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.perfil .tarjetaPerfil{
+    border: solid 2px #0a6a90;
+    box-shadow: 0 0 10px 1px #98c7da;
+}

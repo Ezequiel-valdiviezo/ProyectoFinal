@@ -10,20 +10,13 @@ function Dashboard(){
 
 
     return(
-        <div className="dashboard pt-3">
-        {/* <h2 className="mb-5">Dashboard</h2> */}
-
-        <div className="saludo p-4 mt-5 d-flex align-items-center">
-            <div>
-                <img src={saludo} width="" alt="" />
+        <div className="dashboard pt-5 text-center">
+            <div className="saludo">
+            <h2>¡Bienvenido a NatUser!</h2>
+            <p>¡Nos alegra tenerte por aqui!</p>
             </div>
-            <div>
-                <h3>Bienvenido/a Ezequiel</h3>
-                <p>¡Nos alegra tenerte por aquí!</p>
-            </div>
-        </div>
 
-        <div className="funcionalidades p-4 mt-2">
+            <div className="funcionalidades p-4 mt-2">
             <h2>Funcionalidades para Usuarios</h2>
             <p>Además, como usuario registrado, tienes acceso a una variedad de herramientas diseñadas para facilitarte la vida como padre primerizo:</p>
         
@@ -45,13 +38,11 @@ function Dashboard(){
                     <p>Acceso a expertos en pediatría y psicología infantil</p>
                 </div>
             </div>
-        </div>
-        
-        <div className="agradecimiento mt-2">
-            <p className="p-3">Gracias por ser parte de nuestra comunidad. ¡Estamos aquí para apoyarte en cada paso del camino!</p>
-        </div>
-        
+            </div>
 
+            <div className="agradecimiento mt-2">
+                 <p className="p-3">Gracias por ser parte de nuestra comunidad. ¡Estamos aquí para apoyarte en cada paso del camino!</p>
+             </div>
         </div>
     )
 }

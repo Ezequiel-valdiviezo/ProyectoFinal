@@ -29,7 +29,7 @@ const CalculadoraDias = () => {
   return (
     <>
     <div className="contadorDias">
-      <h1>Contador de Días</h1>
+      <h2>Contador de Días</h2>
       <div className='contenedor'>
         <label>Ingresa una fecha:</label>
         <input

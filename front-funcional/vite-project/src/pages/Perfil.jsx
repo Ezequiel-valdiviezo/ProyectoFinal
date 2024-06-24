@@ -6,11 +6,14 @@ import img from '../assets/2.png'
 function Perfil(){
 
     return(
-        <section className="">
+        <div className="perfil">
+
+        <h2 className="text-center mt-5">Mi perfil</h2>
+
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-lg-8 mb-4 mb-lg-0">
-              <div className="card mb-3" style={{ borderRadius: ".5rem" }}>
+              <div className="card tarjetaPerfil mb-3" style={{ borderRadius: ".5rem" }}>
                 <div className="row g-0">
                   <div
                     className="col-md-4 gradient-custom text-center"
@@ -26,8 +29,7 @@ function Perfil(){
                       style={{ width: "80px" }}
                     />
                     <h5>Ezequiel</h5>
-                    <p>Padre</p>
-                    <button className="btn btn-outline-primary">Editar</button>
+                    <button className="btn btn-outline-primary">Editar perfil</button>
                     {/* <i className="far fa-edit mb-5"></i> */}
                   </div>
                   <div className="col-md-8">
@@ -63,7 +65,7 @@ function Perfil(){
             </div>
           </div>
         </div>
-      </section>
+      </div>
     )
 }
 
