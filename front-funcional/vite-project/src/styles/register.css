@@ -1,18 +1,13 @@
 .register{
     /* background-color: rgb(234, 170, 229); */
     /* background-image: url(../assets/1.png); */
-    background-image: url(../assets/fondo5.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    /* background-image: url(../assets/fondo5.png); */
+    background-image: url(../assets/fondo1.jpg);
 }
 .register .cardContenido{
-    background-color: rgba(211, 238, 246, 0.539);
+    background-color: rgb(183, 227, 241);    
     border-radius: 20px;
     max-width: 600px;
-    border: solid 3px rgb(6, 69, 87);
-    margin: 15px;
-}
-.register .cardContenido:hover{
-    background-color: rgb(211, 238, 246);
+    border: solid 4px rgb(6, 69, 87);
+    box-shadow: 0 0 10px 2px rgb(21, 43, 49);
 }

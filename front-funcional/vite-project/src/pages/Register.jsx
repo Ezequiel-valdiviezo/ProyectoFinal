@@ -72,8 +72,8 @@ function Register({ onRegister }){
   return(
     <>
     <div className="register d-flex flex-column justify-content-center align-items-center text-center vh-100">
-      <div className="cardContenido p-5">
-        <h1>¡Bienvenido a NatUser!</h1>
+      <div className="cardContenido px-5 py-4">
+        <h2>¡Bienvenido a NatUser!</h2>
             <p>Registrate y accede a todas las funcionalidad para nuestros usuarios.<br /> ¡Te deseamos lo mejor en esta increíble aventura!</p>
             <h2>Registrarme</h2>
             <form onSubmit={handleSubmit}>
