@@ -72,7 +72,7 @@ function Login({ onLogin }){
           <h1>¡Bienvenido a NatUser!</h1>
           {/* <img src={imgg} alt="" width="100px"/> */}
           {/* <p>¡Nos alegra tener aqui!</p> */}
-          <p>Inicia sesión para acceder a contenido exclusivo, participar en foros y conectarte con otros padres que están viviendo la misma experiencia que tú.</p>
+          <p>Inicia sesión para acceder a contenido exclusivo, participar en foros y conectarte con otros padres que están viviendo la misma experiencia.</p>
           <h2>Iniciar Sesión</h2>
           <form onSubmit={handleSubmit}>
           <div className="d-flex flex-column m-3">

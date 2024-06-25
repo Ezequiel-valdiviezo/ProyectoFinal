@@ -150,7 +150,8 @@ function Recuerdos() {
                 <div className="card shadow-sm">
                   <img
                     className="bd-placeholder-img card-img-top"
-                    width="100%"
+                    // width="100%"
+                    style={{ objectFit: 'cover', height: '300px' }}
                     src={'http://127.0.0.1:8000/' + recuerdo.imagen}
                     alt="Recuerdo"
                   />
