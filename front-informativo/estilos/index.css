@@ -58,7 +58,6 @@
 }
 
 .seccion4 {
-    background-color: rgb(206, 225, 233)
 }
 .seccion4Prueba div div{
 }
@@ -82,12 +81,20 @@
     font-size: 50px;
     font-weight: bold;
 }
+.nosotrosSeccion3 h2{
+    color: #08a2de;
+    font-size: 40px;
+    font-weight: bold;
+}
+.nosotrosSeccion3{
+    background-color: rgb(206, 225, 233);
+}
 .nosotros .bodyNosotros .valores h2, p{
     /* text-align: left; */
 }
 
 .nosotros .bodyNosotros{
-    max-width: 1000px;
+    /* max-width: 1000px; */
     margin: auto;
 }
 
