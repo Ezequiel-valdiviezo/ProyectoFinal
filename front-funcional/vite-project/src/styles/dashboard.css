@@ -1,7 +1,11 @@
+.fondoDashboard{
+    background-color: rgba(224, 232, 234, 0.234);
+    /* background-image: url(../assets/fondo3.jpg); */
+
+}
 .dashboard{
     max-width: 1000px;
     margin: auto;
-    /* background-color: aqua; */
 }
 
 .dashboard .saludo h2{
@@ -20,11 +24,16 @@
 .dashboard .funcionalidades .funcMini{
     border-radius: 10px;
     text-align: center;
+    height: 120px;
+    margin: auto;
+    transition: transform 0.4s;
 }
 .dashboard .funcionalidades .funcMini:hover{
     background-color: #0b83af;
-    box-shadow: 0 0 10px 2px rgb(0, 69, 171);
+    box-shadow: 0 0 10px 2px rgb(4, 37, 88);
     cursor: pointer;
+    transform: scale(1.1);
+    padding: 3px;    
 }
 .saludo{
     height: 125px;

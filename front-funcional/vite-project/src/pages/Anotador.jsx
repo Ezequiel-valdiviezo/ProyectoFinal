@@ -46,8 +46,9 @@ function Anotador(){
     };
 
     return (
+      <div className="fondoAnotador">
       <div className="anotador mb-5">
-        <div className="presentacion mt-5 p-4">
+        <div className="presentacion pt-5 p-4">
           <h2 className="text-center">Anotador</h2>
           <p className="text-center">Desde acá vas a poder tener notas para lo que necesites, podés utilizarlo como lista de compras, de comidas, o lo que necesites.</p>
         </div>
@@ -87,6 +88,7 @@ function Anotador(){
       </div>
 
         <CalculadorDias />
+      </div>
       </div>
     );
 }

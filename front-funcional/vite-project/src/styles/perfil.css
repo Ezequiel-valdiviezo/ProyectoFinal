@@ -1,3 +1,8 @@
+.fondoPerfil{
+    background-color: rgba(224, 232, 234, 0.234);
+    /* background-image: url(../assets/fondo3.jpg); */
+}
+
 .perfil h2{
     color: #08a2de;
     font-size: 50px;

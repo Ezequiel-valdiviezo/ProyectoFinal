@@ -106,8 +106,9 @@ function Recuerdos() {
   };
 
   return (
+    <div className="fondoRecuerdos">
     <div className="recuerdos text-center">
-      <h2 className="mt-5">Álbum de recuerdos</h2>
+      <h2 className="pt-5">Álbum de recuerdos</h2>
       <p>Desde aquí vas poder cargar, eliminar y ver los recuerdos más significativos para vos.</p>
       <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar recuerdo</button>
 
@@ -162,6 +163,7 @@ function Recuerdos() {
                         <button type="button" className="btn btn-primary">Ver</button>
                         <button onClick={() => handleDelete(recuerdo.id)} type="button" className="btn btn-danger">Eliminar</button>
                       </div>
+                      {/* <p>{recuerdo.created_at}</p> */}
                     </div>
                   </div>
                 </div>
@@ -189,6 +191,7 @@ function Recuerdos() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

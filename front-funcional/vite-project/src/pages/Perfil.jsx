@@ -6,9 +6,10 @@ import img from '../assets/2.png'
 function Perfil(){
 
     return(
+      <div className="fondoPerfil vh-100">
         <div className="perfil">
 
-        <h2 className="text-center mt-5">Mi perfil</h2>
+        <h2 className="text-center pt-5">Mi perfil</h2>
 
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -65,6 +66,7 @@ function Perfil(){
             </div>
           </div>
         </div>
+      </div>
       </div>
     )
 }

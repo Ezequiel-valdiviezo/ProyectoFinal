@@ -28,8 +28,9 @@ function Cursos(){
     }
 
     return(
+        <div className="fondoCursos">
         <div className="cursos text-center">
-        <h2 className="mt-5">Cursos</h2>
+        <h2 className="pt-5">Cursos</h2>
         
                 <div className="d-flex flex-wrap justify-content-center">
                     {cursos.map((curso, index) => (
@@ -66,6 +67,7 @@ function Cursos(){
                     <button onClick={handleCerrarDetalles}>Cerrar</button>
                 </div>
             )} 
+        </div>
         </div>
     )
 }
