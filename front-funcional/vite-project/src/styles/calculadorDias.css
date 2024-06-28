@@ -3,7 +3,7 @@
     /* background-color: #afd9ec; */
     /* color: white; */
     border-radius: 40px;
-    padding: 25px;
+    /* padding: 25px; */
     margin: auto;
 }
 
@@ -18,4 +18,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.contadorDias .contenedor label{
+    color: #08a2de;
+    font-size: 30px;
+    font-weight: bold;
 }

@@ -47,13 +47,15 @@ function Anotador(){
 
     return (
       <div className="fondoAnotador">
-      <div className="anotador mb-5">
+      <div className="anotador pb-5">
         <div className="presentacion pt-5 p-4">
-          <h2 className="text-center">Anotador</h2>
+          <h2 className="text-center">Anotador y contador de días</h2>
           <p className="text-center">Desde acá vas a poder tener notas para lo que necesites, podés utilizarlo como lista de compras, de comidas, o lo que necesites.</p>
         </div>
 
-      <div className="contenedorLista py-4 px-5 my-2">
+
+      {/* <div className="anchoAnotador">
+        <div className="">
         <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
           <h3 className="text-center">Lista</h3>
           <ul className="list-group mb-3">
@@ -89,11 +91,69 @@ function Anotador(){
               <p className="text-center">No hay notas terminadas.</p>
             )}
         </div>
-      </div>
+        </div>
+        <div>
+          <CalculadorDias />
+        </div>
+      </div> */}
 
+  <div className="row anchoTodo">
+    <div className="col-md-6">
+      <div className="anchoAnotador">
+          <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
+            <h3 className="text-center">Lista</h3>
+            <ul className="list-group mb-3">
+              {lista.map((item, index) => (
+                <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                  {item}
+                  <div>
+                    <button onClick={() => marcarComoHecha(index)} className="me-2 btn btn-primary">Terminado</button>
+                    {/* <button onClick={() => eliminarNota(index, false)} className="btn btn-danger">Eliminar</button> */}
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="text-center">
+              <button onClick={agregarNota} className="btn btn-outline-primary">Agregar Nota</button>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div className="col-md-6">
+      <div className="anchoAnotador">
+          <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
+            <h3 className="text-center">Hechas</h3>
+            {hechas.length > 0 ? (
+              <ul className="list-group mb-3">
+                {hechas.map((item, index) => (
+                  <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                    {item}
+                    <div>
+                      <button onClick={() => eliminarNota(index, true)} className="btn btn-danger">Eliminar</button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-center">No hay notas terminadas.</p>
+            )}
+          </div>
+      </div>
+    </div>
+  </div>
+  <div className="row mt-4">
+    <div className="col-md-12">
+      <div>
         <CalculadorDias />
       </div>
+    </div>
+  </div>
+</div>
+
+
       </div>
+
+
     );
 }
 

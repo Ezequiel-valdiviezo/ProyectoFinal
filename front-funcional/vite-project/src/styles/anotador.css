@@ -1,11 +1,11 @@
 .fondoAnotador{
     background-color: rgba(224, 232, 234, 0.234);
 }
-.anotador{
-    max-width: 900px;
-    margin: auto;
-}
 
+.anchoAnotador{
+    /* max-width: 900px; */
+    /* margin: auto; */
+}
 .anotador .presentacion h2{
     color: #08a2de;
     font-size: 50px;
@@ -13,12 +13,16 @@
 }
 
 .anotador .contenedorLista{
-    background-color: #e1eef5;
-    border-radius: 40px;
+    /* background-color: #e1eef5; */
+    /* border-radius: 40px; */
 }
 
 .anotador h3{
     color: #08a2de;
     font-size: 30px;
     font-weight: bold;
+}
+.anchoTodo{
+    max-width: 900px;
+    margin: auto;
 }
