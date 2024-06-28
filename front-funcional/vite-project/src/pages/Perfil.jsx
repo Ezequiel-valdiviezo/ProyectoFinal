@@ -6,6 +6,13 @@ import img from '../assets/2.png'
 function Perfil(){
 
   const [cursoSeleccionado, setCursoSeleccionado] = useState(false);
+  const [formData, setFormData] = useState({
+    fotoPerfil: null,
+    email: "ezequiel@gmail.com",
+    nombre: "Ezequiel",
+    rol: "Padre",
+    password: ""
+  });
 
   const handleMostrarDetalles = () => {
     setCursoSeleccionado(true);
@@ -13,6 +20,28 @@ function Perfil(){
 
   const handleCerrarDetalles = () => {
     setCursoSeleccionado(false);
+};
+
+const handleChange = (e) => {
+  const { name, value, files } = e.target;
+  if (name === 'fotoPerfil') {
+    setFormData({
+      ...formData,
+      fotoPerfil: files[0]
+    });
+  } else {
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  }
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  // Aquí puedes manejar el envío de los datos del formulario
+  console.log(formData);
+  handleCerrarDetalles();
 };
 
     return(
@@ -80,8 +109,66 @@ function Perfil(){
                     <div className="modal">
                         <div className="modal-content">
                             <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
-                            <h3>Detalles del Curso</h3>
-                            <button onClick={handleCerrarDetalles}>Cerrar</button>
+                            <h3>Editar Perfil</h3>
+                            <form onSubmit={handleSubmit}>
+                              <div className="form-group my-3">
+                                <label htmlFor="fotoPerfil">Foto de Perfil</label>
+                                <input
+                                  type="file"
+                                  className="form-control"
+                                  id="fotoPerfil"
+                                  name="fotoPerfil"
+                                  accept="image/*"
+                                  onChange={handleChange}
+                                />
+                              </div>
+                              <div className="form-group my-3">
+                                <label htmlFor="email">Email</label>
+                                <input
+                                  type="email"
+                                  className="form-control"
+                                  id="email"
+                                  name="email"
+                                  value={formData.email}
+                                  onChange={handleChange}
+                                />
+                              </div>
+                              <div className="form-group my-3">
+                                <label htmlFor="nombre">Nombre</label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="nombre"
+                                  name="nombre"
+                                  value={formData.nombre}
+                                  onChange={handleChange}
+                                />
+                              </div>
+                              <div className="form-group my-3">
+                                <label htmlFor="rol">Rol</label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="rol"
+                                  name="rol"
+                                  value={formData.rol}
+                                  onChange={handleChange}
+                                />
+                              </div>
+                              <div className="form-group my-3">
+                                <label htmlFor="contraseña">Contraseña</label>
+                                <input
+                                  type="password"
+                                  className="form-control"
+                                  id="contraseña"
+                                  name="contraseña"
+                                  value={formData.contraseña}
+                                  onChange={handleChange}
+                                />
+                              </div>
+                              <button type="submit" className="btn btn-primary mt-3">Guardar</button>
+                              <button onClick={handleCerrarDetalles} className="btn btn-secondary mt-3">Cerrar</button>
+                            </form>
                         </div>
                     </div>
                 )}          
