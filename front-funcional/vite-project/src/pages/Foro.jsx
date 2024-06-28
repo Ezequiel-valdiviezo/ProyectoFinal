@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import '../styles/foro.css'
+import img from '../assets/fond1.jpeg'
+import img2 from '../assets/2.png'
 
 function Foro(){
 
@@ -43,9 +46,12 @@ function Foro(){
   };
 
   return (
-    <div className="container my-4">
-      <h1>Foro para Padres Primerizos</h1>
-      <form onSubmit={handlePostSubmit}>
+    <div className="container foro pt-5">
+      <h2 className="text-center">Foro</h2>
+      <p>Hola Ezequiel</p>
+      <p>Conectá con otros padres que están en la misma situación, o ya la pasaron.</p>
+      <form onSubmit={handlePostSubmit} className="p-4">
+        <p>Crear publicación</p>
         <div className="mb-3">
           <textarea 
             className="form-control" 
@@ -55,38 +61,61 @@ function Foro(){
             placeholder="Escribe tu pregunta o comentario aquí..."
           ></textarea>
         </div>
-        <button className="btn btn-primary mb-4" type="submit">Publicar</button>
-      </form>
-      <ul className="list-group">
-        {posts.map(post => (
-          <li className="list-group-item" key={post.id}>
-            <div className="d-flex justify-content-between">
-              <strong>Ezequiel:</strong>
-              <span>{post.content}</span>
-            </div>
-            <div className="mt-3">
-              <input 
-                type="text" 
-                className="form-control" 
-                placeholder="Añadir un comentario..." 
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && e.target.value.trim()) {
-                    handleCommentSubmit(post.id, e.target.value.trim());
-                    e.target.value = '';
-                  }
-                }}
+        <div className="form-container">    
+          <div className="form-group">
+            {/* <label htmlFor="imagen">Imagen</label> */}
+            <input
+              type="file"
+              className="form-control cargaImg"
+              id="imagen"
+              name="imagen"
+              accept="image/*"
+              // onChange={handleChange}
               />
-            </div>
-            <ul className="list-group list-group-flush mt-2">
-              {post.comments.map((comment, index) => (
-                <li className="list-group-item" key={index}>
-                  Ezequiel: {comment}
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
+          </div>
+          <button className="btn btn-primary" type="submit">Publicar</button>
+        </div>
+      </form>
+
+      <div className="comentario mt-5">
+
+        <ul className="list-group">
+          {posts.map(post => (
+            <li className="list-group-item custom-background mb-5" key={post.id}>
+              <div className="">
+                <img src={img} className="imgPerfilForo" alt="" />
+                <strong>Ezequiel:</strong>
+                <p className="m-2 p-2">{post.content}</p>
+              </div>
+
+              <div className="mt-3">
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="Añadir un comentario..." 
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && e.target.value.trim()) {
+                      handleCommentSubmit(post.id, e.target.value.trim());
+                      e.target.value = '';
+                    }
+                  }}
+                  />
+              </div>
+
+              <ul className="list-group list-group-flush mt-2">
+                {/* <p className="">Comentarios</p> */}
+                {post.comments.map((comment, index) => (
+                  <li className="list-group-item custom-background" key={index}>
+                    <img src={img2} className="imgPerfilForo" alt="" />
+                    Ezequiel: {comment}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+        
+      </div>
     </div>
   );
 };

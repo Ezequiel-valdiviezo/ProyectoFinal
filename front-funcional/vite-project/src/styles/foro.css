@@ -1,0 +1,51 @@
+.foro{
+    background-color: white;
+}
+.foro h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
+.foro .cargaImg{
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    margin-left: auto;
+}
+.foro form{
+    background-color: #eaf4f7;
+    border-radius: px;
+}
+
+.foro .comentario{
+    /* background-color: #eaf4f7; */
+    /* border-radius: 25px; */
+}
+.custom-background{
+    background-color: #eaf4f7;
+    /* border-radius: ; */
+}
+
+.imgPerfilForo{
+    /* width: 60px;
+    border-radius: 100%; */
+    width: 50px; /* Ajusta según el tamaño deseado */
+    height: 50px; /*  Ajusta según el tamaño deseado */
+    border-radius: 50%;
+    object-fit: cover; 
+    margin-right: 10px;
+}
