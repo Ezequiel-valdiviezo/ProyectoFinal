@@ -7,6 +7,12 @@ function Cursos() {
     const [cursos, setCursos] = useState([]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
 
+
+    const phoneNumber = "3410000000"; // Reemplaza con el número de teléfono en formato internacional
+    const message = "Hola, me gustaría saber más sobre sus servicios.";
+
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/cursos', {
             method: 'GET',
@@ -44,6 +50,7 @@ function Cursos() {
                                 <li className="list-group-item">
                                     <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Ver Detalles</button>
                                     <button className="btn btn-outline-primary m-1">Continuar</button>
+                                    <button className="btn btn-primary" onClick={() => window.open(url, "_blank")}>Contactar por WhatsApp</button>
                                 </li>
                             </ul>
                         </div>
