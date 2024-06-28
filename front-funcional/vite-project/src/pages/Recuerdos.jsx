@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import '../styles/recuerdo.css';
-import img from '../assets/1.png';
 
 function Recuerdos() {
   const [recuerdos, setRecuerdos] = useState([]);
@@ -10,6 +9,7 @@ function Recuerdos() {
     descripcion: ''
   });
   const [deleteId, setDeleteId] = useState(null);
+  const [recuerdoSeleccionado, setRecuerdoSeleccionado] = useState(null);
   const modalRef = useRef(null);
   const [modalInstance, setModalInstance] = useState(null);
 
@@ -115,11 +115,19 @@ function Recuerdos() {
     setEstadoForm(false);
   };
 
+  const handleVerRecuerdo = (recuerdo) => {
+    setRecuerdoSeleccionado(recuerdo);
+  };
+
+  const handleCerrarRecuerdo = () => {
+    setRecuerdoSeleccionado(null);
+  };
+
   return (
     <div className="fondoRecuerdos">
       <div className="recuerdos text-center">
         <h2 className="pt-5">Álbum de recuerdos</h2>
-        <p>Desde aquí vas poder cargar, eliminar y ver los recuerdos más significativos para vos.</p>
+        <p>Desde aquí podrás cargar, eliminar y ver los recuerdos más significativos para ti.</p>
         <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar recuerdo</button>
 
         {estadoForm && 
@@ -169,7 +177,7 @@ function Recuerdos() {
                       <p className="card-text">{recuerdo.descripcion}</p>
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
-                          <button type="button" className="btn btn-primary">Ver</button>
+                          <button type="button" className="btn btn-primary" onClick={() => handleVerRecuerdo(recuerdo)}>Ver</button>
                           <button onClick={() => handleDelete(recuerdo.id)} type="button" className="btn btn-danger">Eliminar</button>
                         </div>
                       </div>
@@ -181,7 +189,31 @@ function Recuerdos() {
           </div>
         </div>
 
-        {/* Modal */}
+        {/* Modal para ver el recuerdo */}
+        {recuerdoSeleccionado && (
+          <div className="modal show" style={{ display: "block" }} tabIndex="-1" role="dialog">
+            <div className="modal-dialog modal-lg">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">{recuerdoSeleccionado.descripcion}</h5>
+                  <button type="button" className="btn-close" onClick={handleCerrarRecuerdo}></button>
+                </div>
+                <div className="modal-body">
+                  <img
+                    className="img-fluid"
+                    src={'http://127.0.0.1:8000/' + recuerdoSeleccionado.imagen}
+                    alt="Recuerdo"
+                  />
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" onClick={handleCerrarRecuerdo}>Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modal para confirmar eliminación */}
         <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" ref={modalRef}>
           <div className="modal-dialog">
             <div className="modal-content">
