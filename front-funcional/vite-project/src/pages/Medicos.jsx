@@ -1,11 +1,14 @@
 import React from "react";
+import '../styles/medicos.css'
 
 function Medicos(){
 
     return(
-        <>
-        <h3>Medicps</h3>
-        </>
+        <div className="fondoMedicos">
+            <div className="medicos text-center">
+                <h2 className="pt-5">Médicos</h2>
+            </div>
+        </div>
     )
 }
 
