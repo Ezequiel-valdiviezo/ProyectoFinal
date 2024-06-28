@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../styles/header.css";
+import img from '../assets/logo.png'
 
 function Header() {
   const [error, setError] = useState('');
@@ -35,6 +36,9 @@ function Header() {
 
   return (
     <>
+        {/* <div className="headerLogo text-center py-1">
+          <img src={img} width="65px" alt="" />
+        </div> */}
       <nav className="navbar navbar-expand-sm navbar-light ">
         <div className="container-fluid d-flex justify-content-between align-items-center anchoNav">
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,10 +47,10 @@ function Header() {
           <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link text-white fw-bold" to="/home" activeClassName="active" aria-current="page">Inicio</NavLink>
+                <NavLink className="nav-link text-white colorNav fw-bold" to="/home" activeClassName="active" aria-current="page">Inicio</NavLink>
               </li>
               <li className="nav-item dropdown">
-                <NavLink className="nav-link dropdown-toggle text-white fw-bold" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <NavLink className="nav-link dropdown-toggle text-white colorNav fw-bold" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Funcionalidades
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -58,10 +62,10 @@ function Header() {
                 </ul>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-white fw-bold" to="/foro" activeClassName="active" aria-current="page">Foro</NavLink>
+                <NavLink className="nav-link text-white colorNav fw-bold" to="/foro" activeClassName="active" aria-current="page">Foro</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-white fw-bold" to="/perfil" activeClassName="active" aria-current="page">Mi perfil</NavLink>
+                <NavLink className="nav-link text-white colorNav fw-bold" to="/perfil" activeClassName="active" aria-current="page">Mi perfil</NavLink>
               </li>
               <li>
                 <form onSubmit={handleLogout} className="d-flex">

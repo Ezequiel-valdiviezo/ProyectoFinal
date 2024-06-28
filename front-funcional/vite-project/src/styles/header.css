@@ -2,7 +2,13 @@
   background-color: #dfebfe;
   } */
 .navbar{
-  background-color: #448fbe;
+  background-color: #4aa3db;
+  /* background-color: #cfebfc; */
   color: white;
-  }
-  
+}
+.headerLogo{
+  background-color: #abd7f3;
+}
+.colorNav{
+  color: rgb(218, 126, 6);
+}
