@@ -13,7 +13,12 @@
 }
 
 .anotador .contenedorLista{
-    /* background-color: #530ccd;
-    color: white; */
+    background-color: #e1eef5;
     border-radius: 40px;
+}
+
+.anotador h3{
+    color: #08a2de;
+    font-size: 30px;
+    font-weight: bold;
 }

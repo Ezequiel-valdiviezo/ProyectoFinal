@@ -77,6 +77,7 @@ import Cursos from './pages/Cursos'
 import { createBrowserRouter, RouterProvider, Navigate  } from 'react-router-dom'
 import Recuerdos from './pages/Recuerdos'
 import Anotador from './pages/Anotador'
+import Medicos from './pages/Medicos'
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -129,6 +130,10 @@ function App() {
          {
            path: '/anotador',
            element: <Anotador />
+         },
+         {
+           path: '/medicos',
+           element: <Medicos />
          },
          {
           path: '*', // Coincide con cualquier URL no definida anteriormente

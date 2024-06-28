@@ -53,7 +53,7 @@ function Anotador(){
           <p className="text-center">Desde acá vas a poder tener notas para lo que necesites, podés utilizarlo como lista de compras, de comidas, o lo que necesites.</p>
         </div>
 
-      <div className="contenedorLista py-4 px-5 my-4">
+      <div className="contenedorLista py-4 px-5 my-2">
         <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
           <h3 className="text-center">Lista</h3>
           <ul className="list-group mb-3">
@@ -74,6 +74,7 @@ function Anotador(){
 
         <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
           <h3 className="text-center mt-5">Hechas</h3>
+          {hechas.length > 0 ? (
           <ul className="list-group mb-3">
             {hechas.map((item, index) => (
               <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
@@ -84,6 +85,9 @@ function Anotador(){
               </li>
             ))}
           </ul>
+           ) : (
+              <p className="text-center">No hay notas terminadas.</p>
+            )}
         </div>
       </div>
 

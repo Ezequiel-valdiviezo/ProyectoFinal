@@ -59,6 +59,8 @@ function Header() {
                   <li><Link className="dropdown-item" to="/albumRecuerdos">Álbum de recuerdos</Link></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><Link className="dropdown-item" to="/anotador">Anotador</Link></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><Link className="dropdown-item" to="/medicos">Medicos</Link></li>
                 </ul>
               </li>
               <li className="nav-item">
