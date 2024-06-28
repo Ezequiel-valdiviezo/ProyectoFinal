@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import '../styles/perfil.css'
 import img from '../assets/2.png'
 
 
 function Perfil(){
+
+  const [cursoSeleccionado, setCursoSeleccionado] = useState(false);
+
+  const handleMostrarDetalles = () => {
+    setCursoSeleccionado(true);
+};
+
+  const handleCerrarDetalles = () => {
+    setCursoSeleccionado(false);
+};
 
     return(
       <div className="fondoPerfil vh-100">
@@ -13,6 +23,7 @@ function Perfil(){
 
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
+            
             <div className="col col-lg-8 mb-4 mb-lg-0">
               <div className="card tarjetaPerfil mb-3" style={{ borderRadius: ".5rem" }}>
                 <div className="row g-0">
@@ -30,7 +41,7 @@ function Perfil(){
                       style={{ width: "80px" }}
                     />
                     <h5>Ezequiel</h5>
-                    <button className="btn btn-outline-primary">Editar perfil</button>
+                    <button className="btn btn-outline-primary" onClick={() => handleMostrarDetalles()}>Editar perfil</button>
                     {/* <i className="far fa-edit mb-5"></i> */}
                   </div>
                   <div className="col-md-8">
@@ -64,6 +75,17 @@ function Perfil(){
                 </div>
               </div>
             </div>
+
+            {cursoSeleccionado && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <h3>Detalles del Curso</h3>
+                            <button onClick={handleCerrarDetalles}>Cerrar</button>
+                        </div>
+                    </div>
+                )}          
+
           </div>
         </div>
       </div>
