@@ -1,11 +1,8 @@
 .login{
     /* background-color: rgb(234, 170, 229); */
-    /* background-image: url(../assets/1.png); */
-    /* background-image: url(../assets/fondo1.png); */
-    /* background-image: url(../assets/fondo2.png); */
-    /* background-image: url(../assets/fondo5.png); */
-    background-image: url(../assets/fondo1.jpg);
-    /* background-image: url(../assets/fondo6.png); */
+    background-image: url(../assets/fondo3.jpg);
+    /* Probar fondo 1,2,3 */
+    background-color: rgb(207, 231, 238);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
