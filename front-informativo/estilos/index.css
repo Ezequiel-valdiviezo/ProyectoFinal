@@ -98,7 +98,7 @@
     margin: auto;
 }
 
-/* CONTACTO */
+/* CONTACTO --------------------------------------------------------------------------- */
 
 
 .contacto1Fondo h2{
@@ -147,3 +147,43 @@
     /* background-color: rgb(207, 228, 242); */
 }
 
+/* Guia Padres ---------------------------------------------------------------------------  */
+
+.seccionGuiaPadres{
+    max-width: 1000px;
+    margin: auto;
+    text-align: start;
+}
+.seccionGuiaPadres h2{
+    color: #08a2de;
+    font-size: 45px;
+    font-weight: bold;
+}
+.seccionGuiaPadres h3{
+    color: #08a2de;
+    /* font-size: 45px; */
+    font-weight: bold;
+}
+.seccionGuiaPadres .separador1{
+    /* color: #0642a2; */
+    border: solid 2px #69c0ff;
+}
+.seccionGuiaPadres .guiaInicial{
+    color: #08a2de;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.seccionGuiaPadres .masInfoPadres{
+    background-color: #ecf3f9;
+    border-radius: 10px;
+}
+.seccionGuiaPadres .masInfoPadres2{
+    background-color: #ffffff;
+}
+.seccionGuiaPadres .masInfoPadres2 p{
+    border-bottom: solid 1px rgb(207, 207, 207);
+}
+.seccionGuiaPadres .masInfoPadres2{
+    border-top: solid 2px rgb(59, 112, 181);
+}
