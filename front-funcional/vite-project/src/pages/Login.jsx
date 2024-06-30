@@ -28,13 +28,14 @@ function Login({ onLogin }){
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form data enviado:', formData);
-    // Aquí puedes añadir la lógica para enviar los datos a un servidor o procesarlos de otra manera
+
     try {
       const response = await fetch('http://127.0.0.1:8000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: "include",
         body: JSON.stringify(formData)
       });
 
@@ -72,7 +73,7 @@ function Login({ onLogin }){
           <h1>¡Bienvenido a NatUser!</h1>
           {/* <img src={imgg} alt="" width="100px"/> */}
           {/* <p>¡Nos alegra tener aqui!</p> */}
-          <p>Inicia sesión para acceder a contenido exclusivo, participar en foros y conectarte con otros padres que están viviendo la misma experiencia.</p>
+          <p>Iniciá sesión para acceder a contenido exclusivo, participar en foros y conectarte con otros padres que están viviendo la misma experiencia.</p>
           <h2>Iniciar Sesión</h2>
           <form onSubmit={handleSubmit}>
           <div className="d-flex flex-column m-3">

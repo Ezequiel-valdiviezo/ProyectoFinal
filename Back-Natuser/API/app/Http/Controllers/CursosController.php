@@ -14,6 +14,11 @@ class CursosController extends Controller
    */
     public function index()
     {
+
+        // if (!auth()->check()) {
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
+
         $cursos = Cursos::all();
 
         if($cursos->isEmpty()){
