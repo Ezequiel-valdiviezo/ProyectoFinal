@@ -26,7 +26,15 @@
 .navbar ul li a{
     font-size: 16px;
 }
-
+.navbar-nav .nav-link:active {
+    font-weight: bold;
+}
+.navbar-nav .nav-link:hover {
+    font-weight: bold;
+}
+.navbar-nav .nav-link:focus {
+    font-weight: bold;
+}
 /* --------------------------------------------------------------------------- */
 
 .home h2{
