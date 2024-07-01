@@ -56,7 +56,7 @@ function Cursos() {
                     ))} */}
                      {Array.isArray(cursos) && cursos.length > 0 ? (
                         cursos.map((curso, index) => (
-                            <div className="card curso m-2" style={{ width: '18rem' }} key={index}>
+                            <div className="card curso m-2 text-start" style={{ width: '18rem' }} key={index}>
                                 <img src={'http://127.0.0.1:8000' + curso.imagen} width="100%" className="card-img-top" alt="" />
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">
