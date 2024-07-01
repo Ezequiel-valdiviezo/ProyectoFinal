@@ -94,7 +94,7 @@ function Cursos() {
                             <p className="text-start"><span className="fw-bold">Categoría:</span> {cursoSeleccionado.categoria}</p>
                             <p className="text-start"><span className="fw-bold">Teléfono:</span> {cursoSeleccionado.telefono}</p>
                             <p className="text-start"><span className="fw-bold">Precio</span>: ${cursoSeleccionado.precio}</p>
-                            <button onClick={handleCerrarDetalles}>Cerrar</button>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
                         </div>
                     </div>
                 )}

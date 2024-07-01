@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../styles/dashboard.css'
 import icono1 from '../assets/icono1.png'
-import icono2 from '../assets/icono2.png'
+import album from '../assets/album.png'
 import icono3 from '../assets/icono3.png'
 import icono4 from '../assets/icono4.png'
 import saludo from '../assets/ez.png'
@@ -25,19 +25,19 @@ function Dashboard(){
             <p>Como usuario registrado, tenes acceso a una variedad de herramientas diseñadas para facilitarte la vida como padre primerizo:</p>
         
             <div className="d-flex flex-wrap justify-content-center align-items-center mt-4">
-                <div className="col-md-3 funcMini pt-2">
+                <div className="col-md-3 col-sm-6 col-12 funcMini pt-2">
                     <img src={icono1} width="50px" alt="" />
                     <p>Acceso a expertos en pediatría</p>
                 </div>
-                <div className="col-md-3 funcMini pt-2">
-                    <img src={icono2} width="50px" alt="" />
+                <div className="col-md-3 col-sm-6 col-12 funcMini pt-2">
+                    <img src={album} width="50px" alt="" />
                     <p>Anotador y cursos</p>
                 </div>
-                <div className="col-md-3 funcMini pt-2">
+                <div className="col-md-3 col-sm-6 col-12 funcMini pt-2">
                     <img src={icono3} width="50px" alt="" />
                     <p>Albúm de recuerdos</p>
                 </div>
-                <div className="col-md-3 funcMini pt-2">
+                <div className="col-md-3 col-sm-6 col-12 funcMini pt-2">
                     <img src={icono4} width="50px" alt="" />
                     <p>Foros de padres</p>
                 </div>

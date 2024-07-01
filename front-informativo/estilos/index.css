@@ -193,3 +193,8 @@
 .seccionGuiaPadres .masInfoPadres2{
     border-top: solid 2px rgb(59, 112, 181);
 }
+.guiaPadres .redes{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
