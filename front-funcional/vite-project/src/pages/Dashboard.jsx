@@ -35,7 +35,7 @@ function Dashboard(){
                 </div>
                 <div className="col-md-3 col-sm-6 col-12 funcMini pt-2">
                     <img src={icono3} width="50px" alt="" />
-                    <p>Albúm de recuerdos</p>
+                    <p>Álbum de recuerdos</p>
                 </div>
                 <div className="col-md-3 col-sm-6 col-12 funcMini pt-2">
                     <img src={icono4} width="50px" alt="" />
