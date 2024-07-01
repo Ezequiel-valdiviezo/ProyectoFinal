@@ -57,6 +57,16 @@
     font-size: 75px;
 }
 
+.limite-lineas{
+    /* Ancho máximo de 80 caracteres */
+    max-width: 80ch;
+    /* Evitar que se expanda más allá del ancho especificado */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    /* Cortar palabras largas */
+    word-break: break-word;
+}
+
 .seccion3 div div img{
     border-radius: 100%;
 }
