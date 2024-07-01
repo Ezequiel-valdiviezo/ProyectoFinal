@@ -22,7 +22,7 @@ function Dashboard(){
 
             <div className="funcionalidades p-4 mt-2">
             <h2>Funcionalidades para Usuarios</h2>
-            <p>Como usuario registrado, tenes acceso a una variedad de herramientas diseñadas para facilitarte la vida como padre primerizo:</p>
+            <p>Como usuario registrado, tenés acceso a una variedad de herramientas diseñadas para facilitarte la vida como padre primerizo:</p>
         
             <div className="d-flex flex-wrap justify-content-center align-items-center mt-4">
                 <div className="col-md-3 col-sm-6 col-12 funcMini pt-2">
