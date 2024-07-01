@@ -94,10 +94,6 @@ const handleSubmit = (e) => {
                           <h6>Rol</h6>
                           <p className="text-muted">Padre</p>
                         </div>
-                        <div className="col-6 mb-3">
-                          <h6>Most Viewed</h6>
-                          <p className="text-muted">Dolor sit amet</p>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -111,8 +107,8 @@ const handleSubmit = (e) => {
                             <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
                             <h3>Editar Perfil</h3>
                             <form onSubmit={handleSubmit}>
-                              <div className="form-group my-3">
-                                <label htmlFor="fotoPerfil">Foto de Perfil</label>
+                              <div className="form-group my-4">
+                                <label className="mb-2" htmlFor="fotoPerfil">Foto de Perfil</label>
                                 <input
                                   type="file"
                                   className="form-control"
@@ -122,8 +118,8 @@ const handleSubmit = (e) => {
                                   onChange={handleChange}
                                 />
                               </div>
-                              <div className="form-group my-3">
-                                <label htmlFor="email">Email</label>
+                              <div className="form-group my-4">
+                                <label className="mb-2" htmlFor="email">Email</label>
                                 <input
                                   type="email"
                                   className="form-control"
@@ -133,8 +129,8 @@ const handleSubmit = (e) => {
                                   onChange={handleChange}
                                 />
                               </div>
-                              <div className="form-group my-3">
-                                <label htmlFor="nombre">Nombre</label>
+                              <div className="form-group my-4">
+                                <label className="mb-2" htmlFor="nombre">Nombre</label>
                                 <input
                                   type="text"
                                   className="form-control"
@@ -144,8 +140,8 @@ const handleSubmit = (e) => {
                                   onChange={handleChange}
                                 />
                               </div>
-                              <div className="form-group my-3">
-                                <label htmlFor="rol">Rol</label>
+                              <div className="form-group my-4">
+                                <label className="mb-2" htmlFor="rol">Rol</label>
                                 <input
                                   type="text"
                                   className="form-control"
@@ -155,8 +151,8 @@ const handleSubmit = (e) => {
                                   onChange={handleChange}
                                 />
                               </div>
-                              <div className="form-group my-3">
-                                <label htmlFor="contraseña">Contraseña</label>
+                              <div className="form-group mt-4">
+                                <label className="mb-2" htmlFor="contraseña">Contraseña</label>
                                 <input
                                   type="password"
                                   className="form-control"
@@ -167,7 +163,7 @@ const handleSubmit = (e) => {
                                 />
                               </div>
                               <button type="submit" className="btn btn-primary mt-3">Guardar</button>
-                              <button onClick={handleCerrarDetalles} className="btn btn-secondary mt-3">Cerrar</button>
+                              <button onClick={handleCerrarDetalles} className="btn btn-secondary mt-3 mx-1">Cerrar</button>
                             </form>
                         </div>
                     </div>

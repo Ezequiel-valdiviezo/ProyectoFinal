@@ -80,6 +80,7 @@ function Register({ onRegister }){
             <div className="d-flex flex-column m-3">
               <label htmlFor="name">Nombre de usuario:</label>
               <input
+                className="p-1"
                 type="name"
                 id="name"
                 name="name"
@@ -91,6 +92,7 @@ function Register({ onRegister }){
             <div className="d-flex flex-column m-3">
               <label htmlFor="email">Email:</label>
               <input
+                className="p-1"
                 type="email"
                 id="email"
                 name="email"
@@ -102,6 +104,7 @@ function Register({ onRegister }){
             <div className="d-flex flex-column m-3">
               <label htmlFor="password">Contraseña:</label>
               <input
+                className="p-1"
                 type="password"
                 id="password"
                 name="password"
@@ -112,6 +115,7 @@ function Register({ onRegister }){
             <div className="d-flex flex-column m-3">
               <label htmlFor="password">Confirmar contraseña:</label>
               <input
+                className="p-1"
                 type="password"
                 name="password_confirmation"
                 value={formData.password_confirmation}

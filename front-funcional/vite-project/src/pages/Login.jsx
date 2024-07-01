@@ -79,6 +79,7 @@ function Login({ onLogin }){
           <div className="d-flex flex-column m-3">
             <label htmlFor="email">Email:</label>
             <input
+              className="p-1"
               type="email"
               id="email"
               name="email"
@@ -89,6 +90,7 @@ function Login({ onLogin }){
           <div className="d-flex flex-column m-3">
             <label htmlFor="password">Contraseña:</label>
             <input
+              className="p-1"
               type="password"
               id="password"
               name="password"

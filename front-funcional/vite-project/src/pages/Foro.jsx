@@ -48,7 +48,7 @@ function Foro(){
   return (
     <div className="container foro pt-5">
       <h2 className="text-center">Foro</h2>
-      <p>Hola Ezequiel</p>
+      <p className="fs-3 fw-bold">¡Hola Ezequiel!</p>
       <p>Conectá con otros padres que están en la misma situación, o ya la pasaron.</p>
       <form onSubmit={handlePostSubmit} className="p-4">
         <p>Crear publicación</p>
