@@ -32,6 +32,7 @@ const CalculadoraDias = () => {
       <div className='contenedor'>
         <label className='my-2'>Ingresa una fecha:</label>
         <input
+            className='p-1'
             type="date"
             id="fechaObjetiva"
             value={fechaObjetiva}

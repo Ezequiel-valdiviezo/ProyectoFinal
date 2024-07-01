@@ -100,7 +100,7 @@ function Anotador(){
       </div> */}
 
   <div className="row anchoTodo">
-    <div className="col-md-6">
+    <div className="col-md-6 mt-4">
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
             <h3 className="text-center">Lista</h3>
@@ -121,7 +121,7 @@ function Anotador(){
           </div>
       </div>
     </div>
-    <div className="col-md-6">
+    <div className="col-md-6 mt-4 notasHechas">
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
             <h3 className="text-center">Hechas</h3>
