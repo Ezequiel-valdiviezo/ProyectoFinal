@@ -25,6 +25,12 @@
     justify-content: center;
     align-items: center;
   }
+
+.perfil .modal h3{
+  color: #08a2de;
+  font-size: 35px;
+  font-weight: bold;
+}
   
   .perfil  .modal-content {
     background-color: white;
@@ -33,6 +39,8 @@
     max-width: 800px;
     max-height: 800px;
     overflow-y: auto;
+    border: solid 3px rgb(47, 114, 172);
+    box-shadow: 0 0 10px 1px #6db7d7;
   }
   
   .perfil .modal-close {

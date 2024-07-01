@@ -8,17 +8,23 @@
     font-weight: bold;
 }
 
-/* .recuerdos .modal {
-    position: fixed;
+.recuerdos form{
+  background-color: rgb(225, 239, 248);
+  border-radius: 15px;
+  box-shadow: 0 0 10px 1px rgb(78, 77, 77);
+}
+
+.recuerdos .modal {
+    /* position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%; */
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
-  } */
+    align-items: center; */
+  }
   
   /* .recuerdos  .modal-content {
     background-color: white;

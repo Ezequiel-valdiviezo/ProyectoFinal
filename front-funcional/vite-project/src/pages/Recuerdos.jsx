@@ -131,12 +131,12 @@ function Recuerdos() {
         <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar recuerdo</button>
 
         {estadoForm && 
-          <form className="w-25 m-auto" onSubmit={handleForm}>
+          <form className="w-25 m-auto my-4 p-3" onSubmit={handleForm}>
             <div className="form-group">
               <label htmlFor="imagen">Imagen</label>
               <input
                 type="file"
-                className="form-control"
+                className="form-control mt-2"
                 id="imagen"
                 name="imagen"
                 accept="image/*"
@@ -146,7 +146,7 @@ function Recuerdos() {
             <div className="form-group mt-3">
               <label htmlFor="descripcion">Descripción</label>
               <textarea
-                className="form-control"
+                className="form-control mt-2"
                 id="descripcion"
                 name="descripcion"
                 rows="3"
@@ -154,9 +154,9 @@ function Recuerdos() {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <div className="d-flex justify-content-center flex-column">
-              <button type="submit" className="btn btn-primary m-2">Enviar</button>
-              <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
+            <div className="d-flex ">
+              <button type="submit" className="btn btn-primary w-100 m-2">Enviar</button>
+              <button type="button" className="btn btn-primary w-100 m-2" onClick={handleCerrarForm}>Cancelar</button>
             </div>
           </form>
         }

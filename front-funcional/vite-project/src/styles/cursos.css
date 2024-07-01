@@ -15,7 +15,7 @@
 }
 
 .cursos .curso:hover{
-    box-shadow: 0 0 10px 2px #8c8c8c;
+    box-shadow: 0 0 10px 2px #b5dbf2;
 }
 
 .cursos .modal {
@@ -34,9 +34,11 @@
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 400px;
+    max-height: 600px;
     overflow-y: auto;
+    border: solid 3px rgb(47, 114, 172);
+    box-shadow: 0 0 10px 1px #6db7d7;
   }
   
   .cursos .modal-close {

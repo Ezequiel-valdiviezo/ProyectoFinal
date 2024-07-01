@@ -49,7 +49,7 @@ function Foro(){
     <div className="container foro pt-5">
       <h2 className="text-center">Foro</h2>
       <p className="fs-3 fw-bold">¡Hola Ezequiel!</p>
-      <p>Conectá con otros padres que están en la misma situación, o ya la pasaron.</p>
+      <p>Conectá con otros padres que están o estuvieron en la misma situación.</p>
       <form onSubmit={handlePostSubmit} className="p-4">
         <p>Crear publicación</p>
         <div className="mb-3">
@@ -86,6 +86,7 @@ function Foro(){
                 <img src={img} className="imgPerfilForo" alt="" />
                 <strong>Ezequiel:</strong>
                 <p className="m-2 p-2">{post.content}</p>
+                <p className="text-end">30/06/2024</p>
               </div>
 
               <div className="mt-3">
@@ -102,12 +103,14 @@ function Foro(){
                   />
               </div>
 
-              <ul className="list-group list-group-flush mt-2">
+              <ul className="list-group list-group-flush mt-3">
                 {/* <p className="">Comentarios</p> */}
                 {post.comments.map((comment, index) => (
                   <li className="list-group-item custom-background" key={index}>
                     <img src={img2} className="imgPerfilForo" alt="" />
                     Ezequiel: {comment}
+                    <br />
+                    <div className="mt-2 text-end">30/06/2024</div> 
                   </li>
                 ))}
               </ul>

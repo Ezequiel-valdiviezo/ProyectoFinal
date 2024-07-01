@@ -17,7 +17,7 @@ function Dashboard(){
             <div className="saludo">
             {/* <img src={img} width="100px" alt="" /> */}
             <h2>¡Bienvenido a NatUser!</h2>
-            <p>¡Nos alegra tenerte por aqui!</p>
+            <p>¡Nos alegra tenerte por aquí!</p>
             </div>
 
             <div className="funcionalidades p-4 mt-2">
