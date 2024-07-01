@@ -127,7 +127,7 @@ function Recuerdos() {
     <div className="fondoRecuerdos">
       <div className="recuerdos text-center">
         <h2 className="pt-5">Álbum de recuerdos</h2>
-        <p>Desde aquí podrás cargar, eliminar y ver los recuerdos más significativos para ti.</p>
+        <p>Desde acá vas a poder cargar, eliminar y ver los recuerdos más significativos para vos.</p>
         <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar recuerdo</button>
 
         {estadoForm && 

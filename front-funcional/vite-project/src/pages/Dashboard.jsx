@@ -17,35 +17,35 @@ function Dashboard(){
             <div className="saludo">
             {/* <img src={img} width="100px" alt="" /> */}
             <h2>¡Bienvenido a NatUser!</h2>
-            <p>¡Nos alegra tenerte por aquí!</p>
+            <p>¡Nos alegra tenerte por acá!</p>
             </div>
 
             <div className="funcionalidades p-4 mt-2">
             <h2>Funcionalidades para Usuarios</h2>
-            <p>Además, como usuario registrado, tienes acceso a una variedad de herramientas diseñadas para facilitarte la vida como padre primerizo:</p>
+            <p>Como usuario registrado, tenes acceso a una variedad de herramientas diseñadas para facilitarte la vida como padre primerizo:</p>
         
             <div className="d-flex flex-wrap justify-content-center align-items-center">
                 <div className="col-md-3 funcMini">
                     <img src={icono1} width="50px" alt="" />
-                    <p>Seguimiento del crecimiento y desarrollo de tu bebé</p>
+                    <p>Acceso a expertos en pediatría</p>
                 </div>
                 <div className="col-md-3 funcMini">
                     <img src={icono2} width="50px" alt="" />
-                    <p>Recordatorios de vacunación</p>
+                    <p>Anotador y cursos</p>
                 </div>
                 <div className="col-md-3 funcMini">
                     <img src={icono3} width="50px" alt="" />
-                    <p>Foros de discusión y comunidades de padres</p>
+                    <p>Albúm de recuerdos</p>
                 </div>
                 <div className="col-md-3 funcMini">
                     <img src={icono4} width="50px" alt="" />
-                    <p>Acceso a expertos en pediatría y psicología infantil</p>
+                    <p>Foros de padres</p>
                 </div>
             </div>
             </div>
 
             <div className="agradecimiento mt-2">
-                 <p className="p-3">Gracias por ser parte de nuestra comunidad. ¡Estamos aquí para apoyarte en cada paso del camino!</p>
+                 <p className="p-3">Gracias por ser parte de nuestra comunidad. ¡Estamos acá para apoyarte en cada paso del camino!</p>
              </div>
         </div>
         </div>
