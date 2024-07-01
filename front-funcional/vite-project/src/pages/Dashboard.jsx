@@ -16,7 +16,7 @@ function Dashboard(){
         <div className="dashboard pt-5 text-center">
             <div className="saludo">
             {/* <img src={img} width="100px" alt="" /> */}
-            <h2>¡Bienvenido a NatUser!</h2>
+            <h2>¡Bienvenido a <span id="nat">Nat</span><span id="user">User</span>!</h2>
             <p>¡Nos alegra tenerte por acá!</p>
             </div>
 

@@ -6,6 +6,7 @@
     margin: auto;
     background-color: white;
     text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .anchoNav{
@@ -54,7 +55,16 @@
 }
 .seccion1 #natuser{
     color: #08a2de;
-    font-size: 75px;
+    font-size: 100px;
+}
+
+#nat{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+}
+#user{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
 }
 
 .limite-lineas{

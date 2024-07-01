@@ -70,7 +70,7 @@ function Login({ onLogin }){
   return(
     <div className="login d-flex flex-column justify-content-center align-items-center text-center vh-100">
       <div className="cardContenido p-5">
-          <h1>¡Bienvenido a NatUser!</h1>
+          <h1>¡Bienvenido a <span id="nat">Nat</span><span id="user">User</span>!</h1>
           {/* <img src={imgg} alt="" width="100px"/> */}
           {/* <p>¡Nos alegra tener aqui!</p> */}
           <p>Iniciá sesión para acceder a contenido exclusivo, participar en foros y conectarte con otros padres que están viviendo la misma experiencia.</p>

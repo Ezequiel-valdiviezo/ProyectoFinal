@@ -78,6 +78,7 @@ import { createBrowserRouter, RouterProvider, Navigate  } from 'react-router-dom
 import Recuerdos from './pages/Recuerdos'
 import Anotador from './pages/Anotador'
 import Medicos from './pages/Medicos'
+import './App.css';
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -89,6 +90,12 @@ function App() {
   const handleAuthSuccess = () => {
     setIsAuthenticated(true);
   };
+
+  // Importar las fuentes desde Google Fonts
+  const link = document.createElement('link');
+  link.href = 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@500;600;700&display=swap';
+  link.rel = 'stylesheet';
+  document.head.appendChild(link);
 
   const route = createBrowserRouter([
     // {
