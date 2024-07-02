@@ -5,7 +5,7 @@ function Recuerdos() {
   const [recuerdos, setRecuerdos] = useState([]);
   const [estadoForm, setEstadoForm] = useState(false);
   const [formData, setFormData] = useState({
-    user_id: 2,
+    user_id: '',
     imagen: null,
     descripcion: ''
   });
@@ -85,8 +85,10 @@ function Recuerdos() {
   const handleForm = async (e) => {
     e.preventDefault();
 
+    const user = JSON.parse(localStorage.getItem('user'));
+
     const formDataToSend = new FormData();
-    formDataToSend.append('user_id', formData.user_id);
+    formDataToSend.append('user_id', user.user.id);
     formDataToSend.append('imagen', formData.imagen);
     formDataToSend.append('descripcion', formData.descripcion);
 

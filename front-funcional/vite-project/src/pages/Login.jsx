@@ -55,6 +55,7 @@ function Login({ onLogin }){
       
       const data = await response.json();
       console.log('Respuesta del servidor:', data);
+      localStorage.setItem('user', JSON.stringify(data));
 
       // Asume que el logeo fue exitoso y llama a onLogin para redirigir a Home
       console.log("Proceso terminado");

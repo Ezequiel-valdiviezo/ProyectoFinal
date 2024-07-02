@@ -155,8 +155,13 @@ class AuthController extends Controller
         // Crear la cookie con el token
         $cookie = cookie('token', $token, 60*24, null, null, true, true, false, 'strict'); // 60*24 es 1 día
 
+        // return $this->respondWithToken($token)->cookie($cookie);
+        $user = auth()->user();
 
-        return $this->respondWithToken($token)->cookie($cookie);
+        return response()->json([
+            'token' => $token,
+            'user' => $user
+        ])->cookie($cookie);
     }
 
     /**
