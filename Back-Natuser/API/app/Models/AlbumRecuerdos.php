@@ -12,7 +12,13 @@ class AlbumRecuerdos extends Model
     protected $table = 'album_recuerdos';
 
     protected $fillable = [
+        'user_id',
         'imagen',
-        'descripcion',
+        'descripcion'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

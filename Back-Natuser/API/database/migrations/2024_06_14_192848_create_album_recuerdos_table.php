@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('album_recuerdos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users'); // Añadir clave foránea a la tabla de usuarios
             $table->string('imagen', 256);
             $table->string('descripcion', 256);
             $table->timestamps();

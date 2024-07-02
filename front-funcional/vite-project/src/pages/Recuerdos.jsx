@@ -5,6 +5,7 @@ function Recuerdos() {
   const [recuerdos, setRecuerdos] = useState([]);
   const [estadoForm, setEstadoForm] = useState(false);
   const [formData, setFormData] = useState({
+    user_id: 2,
     imagen: null,
     descripcion: ''
   });
@@ -85,6 +86,7 @@ function Recuerdos() {
     e.preventDefault();
 
     const formDataToSend = new FormData();
+    formDataToSend.append('user_id', formData.user_id);
     formDataToSend.append('imagen', formData.imagen);
     formDataToSend.append('descripcion', formData.descripcion);
 

@@ -85,6 +85,7 @@ class AlbumRecuerdosController extends Controller
     }
 
     $recuerdos = AlbumRecuerdos::create([
+        'user_id' => $request->user_id,
         'imagen' => $imagePath,
         'descripcion' => $request->descripcion,
     ]);
