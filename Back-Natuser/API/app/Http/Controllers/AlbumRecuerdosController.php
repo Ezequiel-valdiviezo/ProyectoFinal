@@ -33,6 +33,28 @@ class AlbumRecuerdosController extends Controller
     }
 
     /**
+   * Trae todos los recuerdos
+   */
+    public function mostrarRecuerdo($user_id){
+        $album = AlbumRecuerdos::where('user_id', $user_id)->get();
+
+        if($album->isEmpty()){
+            $data = [
+                'message' => 'No se encontraro el album',
+                'status' => 200
+            ];
+            return response()->json($data);
+        }
+
+        // Añadir la URL completa de la imagen a cada recuerdo
+        foreach ($album as $recuerdo) {
+        $recuerdo->imagen_url = url('storage/' . $recuerdo->imagen);
+        }
+
+        return response()->json($album, 200);
+    }
+
+    /**
    * Elimina un recuerdo
    * @param int $id
    */

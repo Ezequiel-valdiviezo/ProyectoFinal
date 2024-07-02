@@ -13,7 +13,7 @@ use App\Http\Controllers\CursosController;
 
 
 //Mostrar cursos
-// Route::get('/cursos', [CursosController::class, 'index']);
+Route::get('/cursos', [CursosController::class, 'index']);
 //Mostrar curso por id
 Route::get('/cursos/{id}', [CursosController::class, 'mostrarCurso']);
 //Guardar curso
@@ -25,6 +25,8 @@ Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
 
 //Album recuerdos
 Route::get('/album', [AlbumRecuerdosController:: class, 'index']);
+//Mostrar recuerdo por id
+Route::get('/album/{id}', [AlbumRecuerdosController:: class, 'mostrarRecuerdo']);
 //Borrar recuerdo
 Route::delete('/album/{id}', [AlbumRecuerdosController::class, 'eliminar']);
 //Guardar recuerdo
@@ -38,8 +40,8 @@ Route::post('/album', [AlbumRecuerdosController::class, 'guardar']);
         Route::post('/login', [AuthController::class, 'login'])->name('login');
         Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
         Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api')->name('refresh');
-        Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
-        Route::get('/cursos', [CursosController::class, 'index']);
+        // Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
+        Route::get('/me', [AuthController::class, 'me']);
     });
 
 

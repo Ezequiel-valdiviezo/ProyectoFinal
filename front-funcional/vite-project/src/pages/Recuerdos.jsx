@@ -15,7 +15,10 @@ function Recuerdos() {
   const [modalInstance, setModalInstance] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/album', {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user.user.id;
+
+    fetch(`http://127.0.0.1:8000/api/album/${userId}`, {
       method: 'GET',
       credentials: 'include'
     })
