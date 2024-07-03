@@ -59,12 +59,19 @@ function Login({ onLogin }){
       const data = await response.json();
       console.log('Respuesta del servidor:', data);
       localStorage.setItem('user', JSON.stringify(data));
+      const usuario = localStorage.getItem('user');
 
       // Asume que el logeo fue exitoso y llama a onLogin para redirigir a Home
       console.log("Proceso terminado");
       onLogin();
       // Redirige a la ruta /home
       navigate('/home');
+      // if(usuario.role == "admin"){
+      //   navigate('/admin')
+      // }else{
+      //   navigate('/home');
+      // }
+      
     } catch (error) {
       console.error('Error:', error);
       setError('Hubo un problema con el logeo. Intenta de nuevo.');
