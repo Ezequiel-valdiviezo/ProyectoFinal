@@ -10,6 +10,7 @@ function Register({ onRegister }){
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    role: 'user',
     password: '',
     password_confirmation: ''
   });
