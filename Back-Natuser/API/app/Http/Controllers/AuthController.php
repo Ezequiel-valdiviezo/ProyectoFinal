@@ -119,14 +119,35 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function register() {
+
+        $messages = [
+                         'name.required' => 'El nombre es obligatorio.',
+                         'name.string' => 'El nombre debe ser una cadena de caracteres.',
+                         'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+                         'email.required' => 'El correo electrónico es obligatorio.',
+                         'email.string' => 'El correo electrónico debe ser una cadena de caracteres.',
+                         'email.max' => 'El correo electrónico no puede tener más de 255 caracteres.',
+                         'email.unique' => 'El correo electrónico ya está en uso.',
+                         'password.required' => 'La contraseña es obligatoria.',
+                         'password.string' => 'La contraseña debe ser una cadena de caracteres.',
+                         'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+                     ];
+
+
+
+
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8',
-        ]);
+        ] , $messages);
 
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+        // if($validator->fails()){
+        //     return response()->json($validator->errors()->toJson(), 400);
+        // }
+        // Si la validación falla, devolver errores
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
         }
 
         $user = new User;

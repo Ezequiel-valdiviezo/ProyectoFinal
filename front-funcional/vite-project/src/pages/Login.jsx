@@ -10,6 +10,7 @@ function Login({ onLogin }){
     password: ''
   });
 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('')
   const navigate = useNavigate();
 
@@ -27,6 +28,7 @@ function Login({ onLogin }){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log('Form data enviado:', formData);
 
     try {
@@ -50,6 +52,7 @@ function Login({ onLogin }){
         } else {
           setError('Hubo un problema con el logeo. Intenta de nuevo.');
         }
+        setLoading(false);
         return;
       }
       
@@ -65,6 +68,8 @@ function Login({ onLogin }){
     } catch (error) {
       console.error('Error:', error);
       setError('Hubo un problema con el logeo. Intenta de nuevo.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -99,6 +104,9 @@ function Login({ onLogin }){
               onChange={handleChange}
             />
           </div>
+          {loading && <div className="loader">
+        <p>Cargando...</p>
+      </div>}
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <button className="btn btn-outline-primary" type="submit">Iniciar sesión</button>
           </form>
