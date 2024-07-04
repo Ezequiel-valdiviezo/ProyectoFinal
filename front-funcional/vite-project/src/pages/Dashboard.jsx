@@ -9,17 +9,25 @@ import img from '../assets/logo.png'
 
 
 function Dashboard(){
+    const [userRole, setUserRole] = useState(null);
 
+    useEffect(() => { 
+    const usuario = JSON.parse(localStorage.getItem('user'));
+    if(usuario.user.role){
+        setUserRole(usuario.user.role)
+        }
+    }, []);
 
     return(
         <div className="fondoDashboard vh-100">
         <div className="dashboard pt-5 text-center">
+
             <div className="saludo">
             {/* <img src={img} width="100px" alt="" /> */}
             <h2>¡Bienvenido a <span id="nat">Nat</span><span id="user">User</span>!</h2>
             <p>¡Nos alegra tenerte por acá!</p>
             </div>
-
+            
             <div className="funcionalidades p-4 mt-2">
             <h2>Funcionalidades para Usuarios</h2>
             <p>Como usuario registrado, tenés acceso a una variedad de herramientas diseñadas para facilitarte la vida como padre primerizo:</p>
@@ -49,7 +57,7 @@ function Dashboard(){
              </div>
         </div>
         </div>
-    )
+    );
 }
 
 export default Dashboard;

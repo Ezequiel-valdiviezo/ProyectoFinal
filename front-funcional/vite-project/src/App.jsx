@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider, Navigate  } from 'react-router-dom
 import Recuerdos from './pages/Recuerdos'
 import Anotador from './pages/Anotador'
 import Medicos from './pages/Medicos'
+import Admin from './pages/Admin'
 import './App.css';
 
 function PrivateRoute({ element, isAuthenticated }) {
@@ -17,7 +18,7 @@ function PrivateRoute({ element, isAuthenticated }) {
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   
   const handleAuthSuccess = () => {
     setIsAuthenticated(true);
@@ -73,6 +74,10 @@ function App() {
          {
            path: '/medicos',
            element: <Medicos />
+         },
+         {
+           path: '/admin',
+           element: <Admin />
          },
          {
           path: '*', // Coincide con cualquier URL no definida anteriormente

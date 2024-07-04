@@ -1,10 +1,21 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, useNavigate  } from "react-router-dom";
 import "../styles/header.css";
 import img from '../assets/logo.png'
 
 function Header() {
+  const [userRole, setUserRole] = useState(null);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const usuario = JSON.parse(localStorage.getItem('user'));
+    if (usuario && usuario.user.role) {
+      setUserRole(usuario.user.role);
+    } else {
+      navigate('/home'); // Redirigir a la página de inicio si no hay usuario o rol
+    }
+  }, [navigate]);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -46,6 +57,8 @@ function Header() {
           </button>
           <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul className="navbar-nav">
+            {userRole === 'user' && (
+                <>
               <li className="nav-item">
                 <NavLink className="nav-link text-white colorNav fw-bold" to="/home" activeClassName="active" aria-current="page">Inicio</NavLink>
               </li>
@@ -69,6 +82,21 @@ function Header() {
               <li className="nav-item">
                 <NavLink className="nav-link text-white colorNav fw-bold" to="/perfil" activeClassName="active" aria-current="page">Mi perfil</NavLink>
               </li>
+              </>
+              )}
+              {userRole === 'admin' && (
+                <>
+                <li className="nav-item">
+                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin" activeClassName="active" aria-current="page">Panel Admin</NavLink>
+                </li>
+                  {/* <li className="nav-item">
+                    <NavLink className="nav-link text-white colorNav fw-bold" to="/home" activeClassName="active" aria-current="page">aaa</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link text-white colorNav fw-bold" to="/home" activeClassName="active" aria-current="page">bbb</NavLink>
+                  </li> */}
+                </>
+              )}
               <li>
                 <form onSubmit={handleLogout} className="d-flex">
                   <button className="btn btn-outline-light mx-3 botonIniciarSesion" type="submit">Cerrar sesión</button>
