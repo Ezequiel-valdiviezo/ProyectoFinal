@@ -65,7 +65,7 @@ function Login({ onLogin }){
       console.log("Proceso terminado");
       onLogin();
       // Redirige a la ruta /home
-      navigate('/admin');
+      navigate('/admin/panelAdmin');
       // if(usuario.role == "admin"){
       //   navigate('/admin')
       // }else{

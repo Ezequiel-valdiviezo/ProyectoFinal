@@ -10,7 +10,9 @@ import { createBrowserRouter, RouterProvider, Navigate  } from 'react-router-dom
 import Recuerdos from './pages/Recuerdos'
 import Anotador from './pages/Anotador'
 import Medicos from './pages/Medicos'
-import Admin from './pages/Admin'
+import Admin from './pages/admin/Admin'
+import AdminMedicos from './pages/admin/Medicos'
+import AdminCursos from './pages/admin/Cursos'
 import './App.css';
 
 function PrivateRoute({ element, isAuthenticated }) {
@@ -76,8 +78,16 @@ function App() {
            element: <Medicos />
          },
          {
-           path: '/admin',
+           path: '/admin/panelAdmin',
            element: <Admin />
+         },
+         {
+           path: '/admin/medicos',
+           element: <AdminMedicos />
+         },
+         {
+           path: '/admin/cursos',
+           element: <AdminCursos />
          },
          {
           path: '*', // Coincide con cualquier URL no definida anteriormente

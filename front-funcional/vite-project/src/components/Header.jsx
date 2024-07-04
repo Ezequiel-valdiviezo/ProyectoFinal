@@ -87,14 +87,14 @@ function Header() {
               {userRole === 'admin' && (
                 <>
                 <li className="nav-item">
-                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin" activeClassName="active" aria-current="page">Panel Admin</NavLink>
+                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/panelAdmin" activeClassName="active" aria-current="page">Panel Admin</NavLink>
                 </li>
-                  {/* <li className="nav-item">
-                    <NavLink className="nav-link text-white colorNav fw-bold" to="/home" activeClassName="active" aria-current="page">aaa</NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link text-white colorNav fw-bold" to="/home" activeClassName="active" aria-current="page">bbb</NavLink>
-                  </li> */}
+                <li className="nav-item">
+                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/cursos" activeClassName="active" aria-current="page">Cursos</NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/medicos" activeClassName="active" aria-current="page">Médicos</NavLink>
+                </li>
                 </>
               )}
               <li>
