@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlbumRecuerdosController;
+use App\Http\Controllers\AnotadorController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,9 @@ Route::post('/cursos', [CursosController::class, 'guardar']);
 Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
 //Borrar curso
 Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
+
+//Anotador
+Route::post('/anotador', [AnotadorController::class, 'guardar']);
 
 //Album recuerdos
 Route::get('/album', [AlbumRecuerdosController:: class, 'index']);

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('album_recuerdos', function (Blueprint $table) {
+        Schema::create('anotadors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users'); // clave foránea a la tabla de usuarios
-            $table->string('imagen', 256);
-            $table->string('descripcion', 256);
+            $table->string('nota', 256);
+            $table->string('estado', 256);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('album_recuerdos');
+        Schema::dropIfExists('anotadors');
     }
 };
