@@ -93,10 +93,28 @@ class AnotadorController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar nota
+     * @param int $id
      */
-    public function destroy(Anotador $anotador)
+    public function eliminar($id)
     {
-        //
+        $notas = Anotador::find($id);
+
+        if(!$notas){
+            $data = [
+                'message' => 'Nota no encontrada',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $notas->delete();
+
+        $data = [
+            'message' => 'nota eliminada',
+            'status' => 200
+        ];
+        return response()->json($data, 200);
+
     }
 }
