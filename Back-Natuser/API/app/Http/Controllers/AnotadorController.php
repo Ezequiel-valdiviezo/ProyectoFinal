@@ -13,9 +13,19 @@ class AnotadorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function notasUsuario($id)
     {
-        //
+        $notas = Anotador::where('user_id', $id)->get();
+
+        if($notas->isEmpty()){
+            $data = [
+                'message' => 'No se encontraron las notas',
+                'status' => 200
+            ];
+            return response()->json($data);
+        }
+
+        return response()->json($notas, 200);
     }
 
     /**

@@ -26,6 +26,8 @@ Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
 
 //Anotador
 Route::post('/anotador', [AnotadorController::class, 'guardar']);
+//Anotador
+Route::get('/anotador/{id}', [AnotadorController::class, 'notasUsuario']);
 //eliminar nota
 Route::delete('/anotador/{id}', [AnotadorController::class, 'eliminar']);
 

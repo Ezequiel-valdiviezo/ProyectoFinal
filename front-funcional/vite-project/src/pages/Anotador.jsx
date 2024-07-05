@@ -7,43 +7,84 @@ function Anotador(){
     const [lista, setLista] = useState([]);
     const [hechas, setHechas] = useState([]);
 
+    const [showForm, setShowForm] = useState(false);
+
+    const [formData, setFormData] = useState({
+      user_id: '',
+      nota: '',
+      estado: 'activo',
+    });
+
     useEffect(() => {
-        // Cargar datos desde localStorage al iniciar
-        const localLista = JSON.parse(localStorage.getItem('lista')) || [];
-        const localHechas = JSON.parse(localStorage.getItem('hechas')) || [];
-        setLista(localLista);
-        setHechas(localHechas);
+      const user = JSON.parse(localStorage.getItem('user'));
+      const id = user.user.id;
+  
+      fetch(`http://127.0.0.1:8000/api/anotador/${id}`, {
+        method: 'GET',
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setLista(data);
+        } else {
+          console.error('Unexpected API response:', data);
+        }
+      })
+      .catch(error => console.error('Error fetching recuerdos:', error));
     }, []);
 
-    useEffect(() => {
-        // Guardar datos en localStorage cada vez que lista o hechas cambien
-        localStorage.setItem('lista', JSON.stringify(lista));
-        localStorage.setItem('hechas', JSON.stringify(hechas));
-    }, [lista, hechas]);
-
-    const agregarNota = () => {
-        const nota = prompt("Ingrese la nota:");
-        if (nota) {
-            setLista([...lista, nota]);
-        }
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({
+          ...formData,
+          [name]: value,
+      });
     };
 
-    const marcarComoHecha = (index) => {
-        const nota = lista[index];
-        const nuevaLista = lista.filter((_, i) => i !== index);
-        setLista(nuevaLista);
-        setHechas([...hechas, nota]);
+    const abrirFormNotas = () => {
+      setShowForm(true);
+    };
+    const cerrarFormNotas = () => {
+      setShowForm(false);
     };
 
-    const eliminarNota = (index, esHecha) => {
-        if (esHecha) {
-            const nuevaHechas = hechas.filter((_, i) => i !== index);
-            setHechas(nuevaHechas);
-        } else {
-            const nuevaLista = lista.filter((_, i) => i !== index);
-            setLista(nuevaLista);
-        }
-    };
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('user_id', user.user.id);
+    formDataToSend.append('nota', formData.nota);
+    formDataToSend.append('estado', formData.estado);
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/anotador', {
+        method: 'POST',
+        credentials: 'include',
+        body: formDataToSend
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setLista([...lista, data.nota]);
+        setShowForm(false);
+        setFormData({
+          user_id: '',
+          nota: '',
+          estado: 'activo',
+        });
+        console.log('Nota guardado exitosamente');
+      } else {
+        console.error('Error al guardar la Nota');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud de guardado:', error);
+    }
+    }
+
+
 
     return (
       <div className="fondoAnotador">
@@ -55,68 +96,38 @@ function Anotador(){
             Además, con el contador de días, podés calcular cuantos días faltan para una fecha específica, ya sea para algún turno médico, entrega, etc.</p>
         </div>
 
-
-      {/* <div className="anchoAnotador">
-        <div className="">
-        <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
-          <h3 className="text-center">Lista</h3>
-          <ul className="list-group mb-3">
-            {lista.map((item, index) => (
-              <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                {item}
-                <div>
-                  <button onClick={() => marcarComoHecha(index)} className="me-2 btn btn-primary">Terminado</button>
-                  <button onClick={() => eliminarNota(index, false)} className="btn btn-danger">Eliminar</button>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="text-center">
-            <button onClick={agregarNota} className="btn btn btn-outline-primary">Agregar Nota</button>
-          </div>
-        </div>
-
-        <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
-          <h3 className="text-center mt-5">Hechas</h3>
-          {hechas.length > 0 ? (
-          <ul className="list-group mb-3">
-            {hechas.map((item, index) => (
-              <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                {item}
-                <div>
-                  <button onClick={() => eliminarNota(index, true)} className="btn btn-danger">Eliminar</button>
-                </div>
-              </li>
-            ))}
-          </ul>
-           ) : (
-              <p className="text-center">No hay notas terminadas.</p>
-            )}
-        </div>
-        </div>
-        <div>
-          <CalculadorDias />
-        </div>
-      </div> */}
-
   <div className="row anchoTodo">
     <div className="col-md-6 mt-4">
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
             <h3 className="text-center">Lista</h3>
             <ul className="list-group mb-3">
-              {lista.map((item, index) => (
+              {lista.map((notas, index) => (
                 <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                  {item}
+                  {notas.nota}
                   <div>
-                    <button onClick={() => marcarComoHecha(index)} className="me-2 btn btn-primary">Terminado</button>
-                    {/* <button onClick={() => eliminarNota(index, false)} className="btn btn-danger">Eliminar</button> */}
+                    <button className="me-2 btn btn-primary">Terminado</button>
                   </div>
                 </li>
               ))}
             </ul>
             <div className="text-center">
-              <button onClick={agregarNota} className="btn btn-outline-primary">Agregar Nota</button>
+              <button onClick={abrirFormNotas} className="btn btn-outline-primary">Agregar Nota</button>
+
+              {showForm && (
+                
+                <div className="">
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                      <label htmlFor="nota" className="form-label">Nota</label>
+                      <input type="text" className="form-control" id="nota" name="nota" value={formData.nota} onChange={handleInputChange} required />
+                    </div>
+                    <button type="submit" className="btn btn-primary">Enviar</button>
+                  </form>
+                </div>
+
+              )}
+
             </div>
           </div>
       </div>
@@ -125,7 +136,7 @@ function Anotador(){
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
             <h3 className="text-center">Hechas</h3>
-            {hechas.length > 0 ? (
+            {/* {hechas.length > 0 ? (
               <ul className="list-group mb-3">
                 {hechas.map((item, index) => (
                   <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
@@ -138,7 +149,7 @@ function Anotador(){
               </ul>
             ) : (
               <p className="text-center">No hay notas terminadas.</p>
-            )}
+            )} */}
           </div>
       </div>
     </div>
