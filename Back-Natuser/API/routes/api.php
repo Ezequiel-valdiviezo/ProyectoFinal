@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumRecuerdosController;
 use App\Http\Controllers\AnotadorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactoConsultaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +13,9 @@ use App\Http\Controllers\CursosController;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
+//Enviar consulta en seccion contacto de la seccion informativa
+Route::post('/consulta', [ContactoConsultaController::class, 'guardar']);
+Route::get('/consulta', [ContactoConsultaController::class, 'index']);
 
 //Mostrar cursos
 Route::get('/cursos', [CursosController::class, 'index']);
