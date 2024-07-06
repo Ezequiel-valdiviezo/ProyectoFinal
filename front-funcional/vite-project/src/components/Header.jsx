@@ -95,6 +95,9 @@ function Header() {
                 <li className="nav-item">
                   <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/medicos" activeClassName="active" aria-current="page">Médicos</NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/consultas" activeClassName="active" aria-current="page">Consultas</NavLink>
+                </li>
                 </>
               )}
               <li>

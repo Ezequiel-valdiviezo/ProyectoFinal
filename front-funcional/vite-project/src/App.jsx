@@ -14,6 +14,7 @@ import Admin from './pages/admin/Admin'
 import AdminMedicos from './pages/admin/Medicos'
 import AdminCursos from './pages/admin/Cursos'
 import './App.css';
+import Consultas from './pages/admin/Consultas'
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -88,6 +89,10 @@ function App() {
          {
            path: '/admin/cursos',
            element: <AdminCursos />
+         },
+         {
+           path: '/admin/consultas',
+           element: <Consultas />
          },
          {
           path: '*', // Coincide con cualquier URL no definida anteriormente

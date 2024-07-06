@@ -23,6 +23,8 @@ class ContactoConsultaController extends Controller
             ];
             return response()->json($data);
         }
+
+        return response()->json($mensajes, 200);
     }
 
     public function guardar(Request $request)
