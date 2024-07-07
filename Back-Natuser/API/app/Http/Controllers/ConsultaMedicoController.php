@@ -9,6 +9,26 @@ use Illuminate\Support\Facades\Validator;
 
 class ConsultaMedicoController extends Controller
 {
+    public function index(){
+        $consultas = ConsultaMedico::all();
+
+        if($consultas->isEmpty()){
+            $data = [
+                'message' => 'No se encontraron cursos',
+                'status' => 200
+            ];
+            return response()->json($data);
+        }
+
+        // Añadir la URL completa de la imagen a cada curso
+        foreach ($consultas as $consulta) {
+            $consulta->imagen_url = url('storage/' . $consulta->imagen);
+            }
+
+        return response()->json($consultas, 200);
+    }
+
+
      /**
    * Crea una consulta de médicos
    * @param Request $request

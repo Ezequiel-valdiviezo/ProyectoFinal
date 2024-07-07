@@ -18,6 +18,8 @@ use App\Http\Controllers\CursosController;
 Route::post('/consulta', [ContactoConsultaController::class, 'guardar']);
 Route::get('/consulta', [ContactoConsultaController::class, 'index']);
 
+//Muestra todas postulaciones médicos
+Route::get('/consulta/medicos', [ConsultaMedicoController::class, 'index']);
 //Enviar postulacion médicos
 Route::post('/consulta/medicos', [ConsultaMedicoController::class, 'guardar']);
 
