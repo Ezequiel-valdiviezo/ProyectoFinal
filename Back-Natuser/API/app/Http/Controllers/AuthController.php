@@ -164,4 +164,57 @@ class AuthController extends Controller
 
         return response()->json($users, 200);
     }
+
+    /**
+   * Edita un usuario
+   * @param Request $request
+   * @param int $id
+   */
+    public function editarPerfil(Request $request, $id)
+    {
+        $usuario = User::find($id);
+
+        if(!$usuario){
+            $data = [
+                'message' => 'Usuario no encontrado',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+        'name' => 'sometimes|string|max:255',
+        'email' => 'sometimes|email|max:255|unique:users,email,' . $usuario->id,
+        'password' => 'sometimes|string|min:8|confirmed',
+        'role' => 'sometimes|string|in:user,admin',
+        ]);
+
+        if($validator->fails()){
+            $data = [
+                'message' => 'Error en la validación de datos',
+                'errors' => $validator->errors(),
+                'status' => '404',
+            ];
+            return response()->json($data, 400);
+        }
+
+        // Actualizar los campos del usuario
+    if ($request->has('name')) {
+        $usuario->name = $request->name;
+    }
+    if ($request->has('email')) {
+        $usuario->email = $request->email;
+    }
+
+    // Guardar los cambios en la base de datos
+    $usuario->save();
+
+    // Devolver la respuesta
+    return response()->json([
+        'message' => 'Usuario actualizado exitosamente',
+        'usuario' => $usuario,
+        'status' => 200
+    ], 200);
+
+    }
 }

@@ -58,6 +58,7 @@ Route::post('/album', [AlbumRecuerdosController::class, 'guardar']);
     //Trae todos los usuarios
     Route::get('/users', [AuthController::class, 'users']);
     Route::get('/user/{id}', [AuthController::class, 'userId']);
+    Route::put('/user/{id}', [AuthController::class, 'editarPerfil']);
 
 
 
