@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./estilos/index.css">
+    <link rel="stylesheet" href="./../estilos/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;700&display=swap">
 </head>
@@ -15,7 +15,7 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
         <div class="container-fluid d-flex justify-content-between align-items-center anchoNav">
           <div class="d-flex align-items-center">
-            <img src="img/logoNombre.png" class="navbar-brand" alt="Logo Natuser" width="380px" />
+            <img src="../img/logoNombre.png" class="navbar-brand" alt="Logo Natuser" width="380px" />
             <h1 class="navbar-brand pt-2 d-none" href="#"><span class="natuser"><strong>NatUser</strong></span></h1>
           </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,17 +24,17 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="./index.html">Inicio</a>
+                <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="./nosotros.html">Quienes somos</a>
+                <a class="nav-link active" href="../nosotros.html">Quienes somos</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Padres
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="./padres/guia.html">Guía padres primerizos</a></li>
+                  <li><a class="dropdown-item" href="../padres/guia.html">Guía padres primerizos</a></li>
                   <li><a class="dropdown-item" href="#">Another action</a></li>
                   <li><hr class="dropdown-divider" /></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -52,7 +52,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="./contacto.html">Contacto</a>
+                <a class="nav-link active" href="../contacto.html">Contacto</a>
               </li>
               <li>
                 <form class="d-flex">
@@ -64,65 +64,29 @@
         </div>
       </nav>
 
-    <div class="contacto1Fondo my-5 d-flex justify-content-center">
+    <!-- <div class="contacto1Fondo my-5 d-flex justify-content-center">
       <div class="seccion1c">
         <div class="">
           <h2 class="">Contacto</h2>
           <p class="limite-lineas">¡Nos encantaría saber de vos! Si tenés alguna pregunta, comentario o necesitas más información sobre nuestros servicios, no dudes en ponerte en contacto con nosotros. </p>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="d-flex flex-wrap align-items-center contenedorFormInfo">
-      <div class="col-lg-6 p-4 contactoInfo ">
-        <h3 class="text-start">¿En qué podemos ayudarte?</h3>
-        <p class="text-start">Nuestro equipo está acá para ayudarte con cualquier consulta que puedas tener. Ya sea que necesites asistencia técnica, información sobre nuestros productos, o simplemente querés compartir tu experiencia, estamos a tu disposición.</p>
-        <hr />
-
-        <div class="cardContacto d-flex flex-wrap justify-content-center align-items-center">
-          <div class="m-2 p-3">
-            <img src="./img/email.png" width="50px" alt="">
-            <p>Info@natuser.com.ar</p>
-          </div>
-          <div class="m-2 p-3">
-            <img src="./img/telefono.png" width="50px" alt="">
-            <p>+54 11 5648-9876</p>
-          </div>
+    <div class="seccion1f p-5">
+        <div class="seccion1 d-flex flex-wrap align-items-center justify-content-center">
+        <div class="col-md-6">
+          <h2 class="fs-1 fw-bold text-black">Bienvenido a <br /> <span id="natuser"><span id="nat">Nat</span><span id="user">User</span></span></h2>
+          <p>Estamos encantados de que quieras compartir tus servicios con nuestra comunidad.</p>
+        <button class="btn btn-outline-primary">Soy médico</button>
+        <button class="btn btn-outline-primary">Ofrezco un curso</button>
         </div>
-
-        <hr />
-        <h3 class="text-start fs-5">¿Sos médico o tenés un curso para nuestros padres?</h3>
-        <p class="text-start">¡Uníte a nuestra comunidad! Completa el formulario haciendo <a href="./forms/index.html">Click acá</a> y te ayudamos a compartir tus servicios con nuestros usuarios. Juntos podemos hacer una diferencia.</p>
-  
-      </div>
-      <div class="col-lg-6 p-4 formulario m-auto">
-        <h3>Envianos tu mensaje</h3>
-        <!-- <p>Completá este formulario para cualquier consulta que tengas.</p> -->
-        <form id="formContacto">
-          <div class="row mb-3">
-            <label for="email" class="col-form-label text-start">Email</label>
-            <div class="col-lg-12">
-              <input type="email" name="email" class="form-control" id="email" required>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="nombre" class="col-form-label text-start">Nombre</label>
-            <div class="col-lg-12">
-              <input type="nombre" name="nombre" class="form-control" id="nombre" required>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="mensaje" class="col-form-label text-start">Mensaje</label>
-            <div class="col-lg-12">
-                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
-            </div>
+        <div class="col-md-6 text-center">
+          <!-- <img src="../img/pngwinga.png" alt="" width="65%"> -->
+          <img src="../img/docBebe.png" alt="" width="90%">
         </div>
-        <p class="text-start">Si tenes alguna pregunta, no dudes en contactarnos. Estamos acá para ayudarte</p>
-          <button type="submit" class="btn btn-primary w-100">Enviar</button>
-        </form>
       </div>
-    </div>
-
+      </div>
 
 
 
@@ -130,7 +94,7 @@
       <div class='ancho'>
         <p class="text-center">Inicio | Quienes Somos | Padres | Bebés | Contacto</p>
         <div class='text-center'>
-          <img src="img/logo.png" alt="Logo Natuser" width="70px"/>
+          <img src="../img/logo.png" alt="Logo Natuser" width="70px"/>
         </div>
           <p class="text-center">Nota: Toda la información incluida en <strong><span id="nat">Nat</span><span id="user">User</span></strong> es únicamente para uso educativo. Para obtener consejos médicos, diagnósticos y tratamientos específicos, consulte a su médico.</p>
           <p class="text-center">©2024 <span id="nat">Nat</span><span id="user">User</span>® marca registrada. Todos los derechos reservados.</p>
@@ -140,7 +104,6 @@
     </div>
     </div>
 
-    <script src="./js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   
 </body>
