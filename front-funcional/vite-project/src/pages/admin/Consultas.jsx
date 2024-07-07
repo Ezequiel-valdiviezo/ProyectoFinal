@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import '../../styles/adminConsultas.css'
+import '../../styles/adminConsultas.css';
 import { useNavigate } from "react-router-dom";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-function Consultas(){
+function Consultas() {
     const [consultas, setConsultas] = useState([]);
+    //Guarda la pagina actual
+    const [currentPage, setCurrentPage] = useState(1);
+    //elementos a mostrar por pagina
+    const [itemsPerPage] = useState(5);
     const navigate = useNavigate();
 
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
-        if(usuario.user.role == "admin"){
+        if (usuario.user.role === "admin") {
             console.log("Todo bien");
-        }else{
+        } else {
             navigate('/home');
         }
     }, [navigate]);
@@ -24,62 +28,65 @@ function Consultas(){
         .then(response => response.json())
         .then(data => setConsultas(data))
         .catch(error => console.error('Error fetch cursos:', error));
-        }, []);
+    }, []);
 
-    return(
+    // Calculan los indices de los elementos a mostrar en la página actual
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // Contiene los elementos de la página actual
+    const currentItems = consultas.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Cambia la pagina al numero seleccionado
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    return (
         <>
             <div className="vh-100">
-            <div className="consultas pt-5 text-center">
-
-                <div className="saludo">
-                {/* <img src={img} width="100px" alt="" /> */}
-                <h2>Consultas</h2>
-                </div>
-                
-                <table class="table table-striped table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            {/* <th scope="col">#</th> */}
-                            <th scope="col">Email</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Mensaje</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {consultas.map((consulta) => (
+                <div className="consultas pt-5 text-center">
+                    <div className="saludo">
+                        <h2>Consultas</h2>
+                    </div>
+                    
+                    <table className="table table-striped table-hover">
+                        <thead className="table-dark">
                             <tr>
-                                <td>{consulta.nombre}</td>
-                                <td>{consulta.email}</td>
-                                <td>{consulta.mensaje}</td>
+                                <th scope="col">Email</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Mensaje</th>
                             </tr>
-                        ))}
-                        <tr>
-                            {/* <th scope="row">1</th> */}
-                            <td>ejemplo1@correo.com</td>
-                            <td>Juan Pérez</td>
-                            <td>Hola, me gustaría saber más sobre sus servicios. </td>
-                        </tr>
-                        <tr>
-                            {/* <th scope="row">2</th> */}
-                            <td>ejemplo2@correo.com</td>
-                            <td>María López</td>
-                            <td>¿Pueden enviarme un catálogo de productos?</td>
-                        </tr>
-                        <tr>
-                            {/* <th scope="row">3</th> */}
-                            <td>ejemplo3@correo.com</td>
-                            <td>Carlos García</td>
-                            <td>Tengo un problema con mi cuenta, ¿me pueden ayudar?</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {currentItems.map((consulta, index) => (
+                                <tr key={index}>
+                                    <td>{consulta.email}</td>
+                                    <td>{consulta.nombre}</td>
+                                    <td>{consulta.mensaje}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
 
-
-                
-            </div>
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination justify-content-center">
+                            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                <a className="page-link" href="#" onClick={() => paginate(currentPage - 1)}>Anterior</a>
+                            </li>
+                            {[...Array(Math.ceil(consultas.length / itemsPerPage)).keys()].map(number => (
+                                <li key={number + 1} className={`page-item ${currentPage === number + 1 ? 'active' : ''}`}>
+                                    <a className="page-link" href="#" onClick={() => paginate(number + 1)}>
+                                        {number + 1}
+                                    </a>
+                                </li>
+                            ))}
+                            <li className={`page-item ${currentPage === Math.ceil(consultas.length / itemsPerPage) ? 'disabled' : ''}`}>
+                                <a className="page-link" href="#" onClick={() => paginate(currentPage + 1)}>Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </>
-    )
+    );
 }
 
 export default Consultas;
