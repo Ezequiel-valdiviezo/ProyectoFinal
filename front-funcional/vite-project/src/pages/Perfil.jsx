@@ -10,7 +10,7 @@ function Perfil(){
   const [formData, setFormData] = useState({
     fotoPerfil: null,
     email: "",
-    nombre: "",
+    name: "",
   });
 
   useEffect(() => {
@@ -24,7 +24,12 @@ function Perfil(){
     .then(response => response.json())
     .then(data => {
       console.log('Datos del usuario:', data);
-      setUsuario(data[0])
+      setUsuario(data[0]);
+      setFormData({
+        fotoPerfil: null,
+        email: data[0].email,
+        name: data[0].name
+      });
     })
     .catch(error => console.error('Error fetching recuerdos:', error));
   }, []);
@@ -56,7 +61,25 @@ const handleSubmit = (e) => {
   e.preventDefault();
   // Aquí puedes manejar el envío de los datos del formulario
   console.log(formData);
-  handleCerrarDetalles();
+  const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user.user.id;
+
+    fetch(`http://127.0.0.1:8000/api/user/${userId}`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Datos del usuario:', data);
+      alert("Actualizado correctamente");
+      window.location.reload();
+    })
+    .catch(error => console.error('Error fetching recuerdos:', error));
+  // handleCerrarDetalles();
 };
 
     return(
@@ -114,7 +137,7 @@ const handleSubmit = (e) => {
                             <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
                             <h3>Editar Perfil</h3>
                             <form onSubmit={handleSubmit}>
-                              <div className="form-group my-4">
+                              {/* <div className="form-group my-4">
                                 <label className="mb-2" htmlFor="fotoPerfil">Foto de Perfil</label>
                                 <input
                                   type="file"
@@ -124,7 +147,7 @@ const handleSubmit = (e) => {
                                   accept="image/*"
                                   onChange={handleChange}
                                 />
-                              </div>
+                              </div> */}
                               <div className="form-group my-4">
                                 <label className="mb-2" htmlFor="email">Email</label>
                                 <input
@@ -132,18 +155,18 @@ const handleSubmit = (e) => {
                                   className="form-control"
                                   id="email"
                                   name="email"
-                                  value={usuario.email}
+                                  value={formData.email}
                                   onChange={handleChange}
                                 />
                               </div>
                               <div className="form-group my-4">
-                                <label className="mb-2" htmlFor="nombre">Nombre</label>
+                                <label className="mb-2" htmlFor="name">Nombre</label>
                                 <input
                                   type="text"
                                   className="form-control"
-                                  id="nombre"
-                                  name="nombre"
-                                  value={usuario.name}
+                                  id="name"
+                                  name="name"
+                                  value={formData.name}
                                   onChange={handleChange}
                                 />
                               </div>
