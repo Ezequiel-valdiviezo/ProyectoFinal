@@ -204,3 +204,36 @@
 }
 
 /* HOME FORM ---------------------------------------------------------------------------  */
+/* MEDICOS FORM ---------------------------------------------------------------------------  */
+.medicosf{
+    max-width: 1000px;
+    margin: auto;
+    text-align: start;
+}
+.medicosf h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
+.medicosf #formMedicos{
+    max-width: 600px;
+    margin: auto;
+    background-color: #c4e7f573;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 1px #9fa2a3;
+}
+.contactoMC .indexServ{
+    max-width: 1000px;
+    margin: auto;
+}
+.contactoMC .indexServ h3{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
+.contactoMC .seccion1f .seccion1 div button a {
+    text-decoration: none;
+}
+.contactoMC .seccion1f .seccion1 div button a:hover {
+    color: white;
+}
