@@ -148,4 +148,20 @@ class AuthController extends Controller
 
         return response()->json($users, 200);
     }
+
+    public function userId($id)
+    {
+
+        $users = User::where('id', $id)->get();
+
+        if($users->isEmpty()){
+            $data = [
+                'message' => 'No se encontraron cursos',
+                'status' => 200
+            ];
+            return response()->json($data);
+        }
+
+        return response()->json($users, 200);
+    }
 }

@@ -6,13 +6,28 @@ import img from '../assets/2.png'
 function Perfil(){
 
   const [cursoSeleccionado, setCursoSeleccionado] = useState(false);
+  const [usuario, setUsuario] = useState({})
   const [formData, setFormData] = useState({
     fotoPerfil: null,
-    email: "ezequiel@gmail.com",
-    nombre: "Ezequiel",
-    rol: "Padre",
-    password: ""
+    email: "",
+    nombre: "",
   });
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user.user.id;
+
+    fetch(`http://127.0.0.1:8000/api/user/${userId}`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Datos del usuario:', data);
+      setUsuario(data[0])
+    })
+    .catch(error => console.error('Error fetching recuerdos:', error));
+  }, []);
 
   const handleMostrarDetalles = () => {
     setCursoSeleccionado(true);
@@ -69,8 +84,8 @@ const handleSubmit = (e) => {
                       className="img-fluid my-5"
                       style={{ width: "80px" }}
                     />
-                    <h5>Ezequiel</h5>
-                    <button className="btn btn-outline-primary" onClick={() => handleMostrarDetalles()}>Editar perfil</button>
+                    <h5>{usuario.name}</h5>
+                    <button className="btn btn-outline-primary mb-4" onClick={() => handleMostrarDetalles()}>Editar perfil</button>
                     {/* <i className="far fa-edit mb-5"></i> */}
                   </div>
                   <div className="col-md-8">
@@ -80,19 +95,11 @@ const handleSubmit = (e) => {
                       <div className="row pt-1">
                         <div className="col-6 mb-3">
                           <h6>Email</h6>
-                          <p className="text-muted">ezequiel@gmail.com</p>
+                          <p className="text-muted">{usuario.email}</p>
                         </div>
                         <div className="col-6 mb-3">
                           <h6>Nombre</h6>
-                          <p className="text-muted">Ezequiel</p>
-                        </div>
-                      </div>
-                      {/* <h6>Projects</h6> */}
-                      <hr className="mt-0 mb-4" />
-                      <div className="row pt-1">
-                        <div className="col-6 mb-3">
-                          <h6>Rol</h6>
-                          <p className="text-muted">Padre</p>
+                          <p className="text-muted">{usuario.name}</p>
                         </div>
                       </div>
                     </div>
@@ -125,7 +132,7 @@ const handleSubmit = (e) => {
                                   className="form-control"
                                   id="email"
                                   name="email"
-                                  value={formData.email}
+                                  value={usuario.email}
                                   onChange={handleChange}
                                 />
                               </div>
@@ -136,29 +143,7 @@ const handleSubmit = (e) => {
                                   className="form-control"
                                   id="nombre"
                                   name="nombre"
-                                  value={formData.nombre}
-                                  onChange={handleChange}
-                                />
-                              </div>
-                              <div className="form-group my-4">
-                                <label className="mb-2" htmlFor="rol">Rol</label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  id="rol"
-                                  name="rol"
-                                  value={formData.rol}
-                                  onChange={handleChange}
-                                />
-                              </div>
-                              <div className="form-group mt-4">
-                                <label className="mb-2" htmlFor="contraseña">Contraseña</label>
-                                <input
-                                  type="password"
-                                  className="form-control"
-                                  id="contraseña"
-                                  name="contraseña"
-                                  value={formData.contraseña}
+                                  value={usuario.name}
                                   onChange={handleChange}
                                 />
                               </div>
