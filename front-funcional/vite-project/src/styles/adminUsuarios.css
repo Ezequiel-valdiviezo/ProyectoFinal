@@ -1,0 +1,23 @@
+.fondoPanelAdmin{
+    /* background-color: rgba(224, 232, 234, 0.234); */
+    /* background-image: url(../assets/fondo3.jpg); */
+    
+}
+
+.usuarios{
+    max-width: 1000px;
+    margin: auto;
+}
+.usuarios .saludo h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
+.usuarios table{
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.59);
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 600px) {
+
+}

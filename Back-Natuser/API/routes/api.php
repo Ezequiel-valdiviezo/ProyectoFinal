@@ -55,6 +55,9 @@ Route::post('/album', [AlbumRecuerdosController::class, 'guardar']);
         // Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
         Route::get('/me', [AuthController::class, 'me']);
     });
+    //Trae todos los usuarios
+    Route::get('/users', [AuthController::class, 'users']);
+
 
 
 
