@@ -6,9 +6,7 @@ function Anotador(){
 
     const [lista, setLista] = useState([]);
     const [hechas, setHechas] = useState([]);
-
     const [showForm, setShowForm] = useState(false);
-
     const [formData, setFormData] = useState({
       user_id: '',
       nota: '',
@@ -103,6 +101,57 @@ function Anotador(){
     }
     }
 
+    const handleSubmitTerminado = async (id) => {
+      // e.preventDefault;
+
+      const formDataToSend = new FormData();
+      // formDataToSend.append('user_id', user.user.id);
+      // formDataToSend.append('nota', nota);
+      formDataToSend.append('estado', 'terminado');
+
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/anotador/listo/${id}`, {
+          method: 'PUT',
+          credentials: 'include',
+          // body: formDataToSend
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ estado: 'terminado' })
+        });
+        if (response.ok) {
+          const data = await response.json();
+          // console.log(data);
+              // setLista(lista.filter(nota => nota.id !== id));
+              // setHechas([...hechas, data.nota]);
+              window.location.reload(); // Recargar la página
+              console.log('Nota marcada como terminada exitosamentee');
+        } else {
+          console.error('Error al guardar la nota como terminada');
+        }
+      } catch (error) {
+        console.error('Error en la solicitud de guardado:', error);
+      }
+
+    }
+
+    const eliminarNota = async(id) => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/anotador/${id}`, {
+          method: 'DELETE',
+          credentials: 'include',
+        });
+        if (response.ok) {
+          window.location.reload(); // Recargar la página
+          console.log('Nota eliminada exitosamentee');
+        } else {
+          console.error('Error al eliminar la nota');
+        }
+      } catch (error) {
+        console.error('Error en la solicitud de eliminar:', error);
+      }
+    }
+
 
 
     return (
@@ -125,7 +174,7 @@ function Anotador(){
                 <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                   {notas.nota}
                   <div>
-                    <button className="me-2 btn btn-primary">Terminado</button>
+                      <button onClick={() => handleSubmitTerminado(notas.id)}  className="me-2 btn btn-primary">Terminado</button>
                   </div>
                 </li>
               ))}
@@ -143,6 +192,7 @@ function Anotador(){
                     </div>
                     <button type="submit" className="btn btn-primary">Enviar</button>
                   </form>
+                    <button type="submit" onClick={cerrarFormNotas} className="btn btn-primary">Cancelar</button>
                 </div>
 
               )}
@@ -161,7 +211,7 @@ function Anotador(){
                   <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                     {nota.nota}
                     <div>
-                      <button onClick={() => eliminarNota(index, true)} className="btn btn-danger">Eliminar</button>
+                      <button onClick={() => eliminarNota(nota.id)}  className="me-2 btn btn-danger">Eliminar</button>
                     </div>
                   </li>
                 ))}

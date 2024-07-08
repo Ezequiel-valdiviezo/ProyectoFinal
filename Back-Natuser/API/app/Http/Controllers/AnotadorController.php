@@ -92,8 +92,46 @@ class AnotadorController extends Controller
         return response()->json($data, 201);
     }
 
-    public function notaTerminada(){
+    public function notaTerminada(Request $request, $id){
+        $nota = Anotador::find($id);
 
+        if(!$nota){
+            $data = [
+                'message' => 'Nota no encontrada',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        // $validator = Validator::make($request->all(), [
+        //     'nota' => 'required|max:256',
+        // ]);
+
+        // if($validator->fails()){
+        //     $data = [
+        //         'message' => 'Error en el envio de datos',
+        //         'errors' => $validator->errors(),
+        //         'status' => '404',
+        //     ];
+        //     return response()->json($data, 400);
+        // }
+
+        // if($request->has('nota')){
+        //     $nota->nota = $request->nota;
+        // }
+        if ($request->has('estado')) {
+            $nota->estado = $request->estado;
+        }
+
+        // Guardar los cambios en la base de datos
+        $nota->save();
+
+        // Devolver la respuesta
+        return response()->json([
+            'message' => 'Nota marcado como terminada exitosamente',
+            'usuario' => $nota,
+            'status' => 200
+        ], 200);
     }
 
     /**
