@@ -34,6 +34,25 @@ function Anotador(){
       .catch(error => console.error('Error fetching recuerdos:', error));
     }, []);
 
+    useEffect(() => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const id = user.user.id;
+  
+      fetch(`http://127.0.0.1:8000/api/anotador/listo/${id}`, {
+        method: 'GET',
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setHechas(data);
+        } else {
+          console.error('Unexpected API response:', data);
+        }
+      })
+      .catch(error => console.error('Error fetching recuerdos:', error));
+    }, []);
+
     const handleInputChange = (e) => {
       const { name, value } = e.target;
       setFormData({
@@ -136,11 +155,11 @@ function Anotador(){
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
             <h3 className="text-center">Hechas</h3>
-            {/* {hechas.length > 0 ? (
+            {hechas.length > 0 ? (
               <ul className="list-group mb-3">
-                {hechas.map((item, index) => (
+                {hechas.map((nota, index) => (
                   <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                    {item}
+                    {nota.nota}
                     <div>
                       <button onClick={() => eliminarNota(index, true)} className="btn btn-danger">Eliminar</button>
                     </div>
@@ -149,7 +168,7 @@ function Anotador(){
               </ul>
             ) : (
               <p className="text-center">No hay notas terminadas.</p>
-            )} */}
+            )}
           </div>
       </div>
     </div>

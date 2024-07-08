@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Redis;
 class AnotadorController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Trae las notas activas.
      */
     public function notasUsuario($id)
     {
-        $notas = Anotador::where('user_id', $id)->get();
+        $notas = Anotador::where('user_id', $id)
+                            ->where('estado', 'activo')
+                            ->get();
 
         if($notas->isEmpty()){
             $data = [
@@ -27,6 +29,27 @@ class AnotadorController extends Controller
 
         return response()->json($notas, 200);
     }
+
+    /**
+     * Trae las notas terminadas.
+     */
+    public function notasTerminadas($id)
+    {
+        $notasTerminadas = Anotador::where('user_id', $id)
+                                    ->where('estado', 'terminado')
+                                    ->get();
+
+        if($notasTerminadas->isEmpty()){
+            $data = [
+            'message' => 'No se encontraron las notas terminadas',
+            'status' => 200
+            ];
+            return response()->json($data);
+        }
+
+        return response()->json($notasTerminadas, 200);
+    }
+
 
     /**
      * Guarda nota
@@ -67,39 +90,10 @@ class AnotadorController extends Controller
         ];
 
         return response()->json($data, 201);
-
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function notaTerminada(){
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Anotador $anotador)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Anotador $anotador)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Anotador $anotador)
-    {
-        //
     }
 
     /**

@@ -43,8 +43,12 @@ Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
 
 //Anotador
 Route::post('/anotador', [AnotadorController::class, 'guardar']);
-//Anotador
+//Mostrar notas activas
 Route::get('/anotador/{id}', [AnotadorController::class, 'notasUsuario']);
+//Mostrar notas terminadas
+Route::get('/anotador/listo/{id}', [AnotadorController::class, 'notasTerminadas']);
+//Marcar notas como terminadas
+Route::put('/anotador/listo/{id}', [AnotadorController::class, 'notaTerminada']);
 //eliminar nota
 Route::delete('/anotador/{id}', [AnotadorController::class, 'eliminar']);
 
