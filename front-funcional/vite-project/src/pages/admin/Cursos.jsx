@@ -41,6 +41,8 @@ function Cursos(){
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Especialidad</th>
                                 <th scope="col">Descripción servicio</th>
+                                <th scope="col">categoria</th>
+                                <th scope="col">precio</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,6 +52,8 @@ function Cursos(){
                                     <td>{consulta.nombre}</td>
                                     <td>{consulta.categoria}</td>
                                     <td>{consulta.descripcion_servicio}</td>
+                                    <td>{consulta.categoria}</td>
+                                    <td>{consulta.precio}</td>
                                 </tr>
                             ))}
                         </tbody>

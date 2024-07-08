@@ -16,6 +16,7 @@ import AdminCursos from './pages/admin/Cursos'
 import './App.css';
 import Consultas from './pages/admin/Consultas'
 import Usuarios from './pages/admin/Usuarios'
+import RegistrosMedicos from './pages/RegistrosMedicos'
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -74,6 +75,10 @@ function App() {
          {
            path: '/anotador',
            element: <Anotador />
+         },
+         {
+           path: '/registrosMedicos',
+           element: <RegistrosMedicos />
          },
          {
            path: '/medicos',

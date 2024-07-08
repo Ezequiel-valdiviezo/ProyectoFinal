@@ -38,10 +38,10 @@ function Usuarios(){
                 <table class="table table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
-                            {/* <th scope="col">#</th> */}
                             <th scope="col">Email</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Rol</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +50,7 @@ function Usuarios(){
                                 <td>{usuario.email}</td>
                                 <td>{usuario.name}</td>
                                 <td>{usuario.role}</td>
+                                <td><button className="btn btn-outline-danger">Eliminar</button></td>
                             </tr>
                         ))}
                     </tbody>

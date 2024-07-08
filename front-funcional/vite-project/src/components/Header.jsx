@@ -67,14 +67,18 @@ function Header() {
                   Funcionalidades
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><Link className="dropdown-item" to="/cursos">Cursos</Link></li>
-                  <li><hr className="dropdown-divider" /></li>
                   <li><Link className="dropdown-item" to="/albumRecuerdos">Álbum de recuerdos</Link></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><Link className="dropdown-item" to="/anotador">Anotador</Link></li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" to="/medicos">Medicos</Link></li>
+                  <li><Link className="dropdown-item" to="/registrosMedicos">Registros médicos</Link></li>
                 </ul>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-white colorNav fw-bold" to="/cursos" activeClassName="active" aria-current="page">Cursos</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-white colorNav fw-bold" to="/medicos" activeClassName="active" aria-current="page">Medicos</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link text-white colorNav fw-bold" to="/foro" activeClassName="active" aria-current="page">Foro</NavLink>
@@ -89,12 +93,28 @@ function Header() {
                 <li className="nav-item">
                   <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/panelAdmin" activeClassName="active" aria-current="page">Panel Admin</NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/cursos" activeClassName="active" aria-current="page">Cursos</NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/medicos" activeClassName="active" aria-current="page">Médicos</NavLink>
-                </li>
+                
+
+                <li className="nav-item dropdown">
+                <NavLink className="nav-link dropdown-toggle text-white colorNav fw-bold" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Cursos
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><Link className="dropdown-item" to="/admin/cursos">Postulaciones</Link></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><Link className="dropdown-item" to="/admin/cursos">Lista</Link></li>
+                </ul>
+              </li>
+                <li className="nav-item dropdown">
+                <NavLink className="nav-link dropdown-toggle text-white colorNav fw-bold" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Médicos
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><Link className="dropdown-item" to="/admin/medicos">Postulaciones</Link></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><Link className="dropdown-item" to="/admin/medicos">Lista</Link></li>
+                </ul>
+              </li>
                 <li className="nav-item">
                   <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/consultas" activeClassName="active" aria-current="page">Consultas</NavLink>
                 </li>
