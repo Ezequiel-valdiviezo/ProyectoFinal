@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumRecuerdosController;
 use App\Http\Controllers\AnotadorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConsultaCursoController;
 use App\Http\Controllers\ConsultaMedicoController;
 use App\Http\Controllers\ContactoConsultaController;
 use Illuminate\Http\Request;
@@ -22,6 +23,11 @@ Route::get('/consulta', [ContactoConsultaController::class, 'index']);
 Route::get('/consulta/medicos', [ConsultaMedicoController::class, 'index']);
 //Enviar postulacion médicos
 Route::post('/consulta/medicos', [ConsultaMedicoController::class, 'guardar']);
+
+//Muestra todas postulaciones médicos
+// Route::get('/consulta/medicos', [ConsultaMedicoController::class, 'index']);
+//Enviar postulacion médicos
+Route::post('/consulta/cursos', [ConsultaCursoController::class, 'guardar']);
 
 
 //Mostrar cursos
