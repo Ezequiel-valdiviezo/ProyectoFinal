@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../../styles/adminCursos.css'
+import '../../styles/adminManejoCursos.css'
 
 function ManejoCursos(){
     const navigate = useNavigate();
@@ -73,49 +73,50 @@ function ManejoCursos(){
     return(
         <>
         <div className="vh-100">
-                <div className="adminMedicos pt-5 text-center">
+                <div className="adminManejoCursos pt-5 text-center">
 
                     <div className="saludo">
-                        <h2>Cursos</h2>
+                        <h2>Crear cursos</h2>
                     </div>
 
-                    <form className="curso-form" onSubmit={handleSubmit}>
-                        <div className="form-group">
+                    <form className="curso-form p-5" onSubmit={handleSubmit}>
+                        {/* <h3>Crear curso</h3> */}
+                        <div className="form-group my-4">
                             <label htmlFor="titulo">Título:</label>
-                            <input type="text" id="titulo" name="titulo" value={formData.titulo} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="titulo" name="titulo" value={formData.titulo} onChange={handleChange} required />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-4">
                         <label htmlFor="imagen">Imagen</label>
-                        <input
+                        <inputd
                             type="file"
-                            className="form-control mt-2"
+                            className="form-control p-1 mt-2"
                             id="imagen"
                             name="imagen"
                             accept="image/*"
                             onChange={handleChange}
                         />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-4">
                             <label htmlFor="descripcion_breve">Descripción breve:</label>
                             <textarea name="descripcion_breve" id="descripcion_breve" value={formData.descripcion_breve} onChange={handleChange} required />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-4">
                             <label htmlFor="categoria">Categoría:</label>
-                            <input type="text" id="categoria" name="categoria" value={formData.categoria} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="categoria" name="categoria" value={formData.categoria} onChange={handleChange} required />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-4">
                             <label htmlFor="descripcion_completa">Descripción completa:</label>
                             <textarea name="descripcion_completa" id="descripcion_completa" value={formData.descripcion_completa} onChange={handleChange} required />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-4">
                             <label htmlFor="precio">Precio:</label>
-                            <input type="text" id="precio" name="precio" value={formData.precio} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="precio" name="precio" value={formData.precio} onChange={handleChange} required />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-4">
                             <label htmlFor="telefono">Teléfono de contacto:</label>
-                            <input type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required />
                         </div>
-                        <button type="submit">Crear Curso</button>
+                        <button type="submit" className="btn btn-outline-primary">Crear Curso</button>
                         </form>
 
                 </div>
