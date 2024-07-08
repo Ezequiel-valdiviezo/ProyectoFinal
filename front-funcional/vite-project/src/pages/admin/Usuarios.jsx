@@ -32,7 +32,7 @@ function Usuarios(){
 
                 <div className="saludo">
                 {/* <img src={img} width="100px" alt="" /> */}
-                <h2>Consultas</h2>
+                <h2>Usuarios</h2>
                 </div>
                 
                 <table class="table table-striped table-hover">
