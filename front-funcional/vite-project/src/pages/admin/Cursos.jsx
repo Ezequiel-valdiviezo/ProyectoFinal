@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../../styles/adminCursos.css'
 
 function Cursos(){
+    const [consultas, setConsultas] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -13,9 +15,48 @@ function Cursos(){
         }
     }, [navigate]);
 
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/consulta/cursos', { 
+            method: 'GET',
+            credentials: "include",
+        })
+        .then(response => response.json())
+        .then(data => setConsultas(data))
+        .catch(error => console.error('Error fetch cursos:', error));
+    }, []);
+
     return(
         <>
-        <h2>Hola soy Cursos</h2>
+        <div className="vh-100">
+                <div className="adminMedicos pt-5 text-center">
+
+                    <div className="saludo">
+                        <h2>Consultas para ofrecer cursos</h2>
+                    </div>
+                
+                    <table className="table table-striped table-hover">
+                        <thead className="table-dark">
+                            <tr>
+                                <th scope="col">Email</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Especialidad</th>
+                                <th scope="col">Descripción servicio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {consultas.map((consulta, index) => (
+                                <tr key={index}>
+                                    <td>{consulta.email}</td>
+                                    <td>{consulta.nombre}</td>
+                                    <td>{consulta.categoria}</td>
+                                    <td>{consulta.descripcion_servicio}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
         </>
     )
 }

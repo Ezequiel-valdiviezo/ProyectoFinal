@@ -10,6 +10,25 @@ use Illuminate\Support\Facades\Validator;
 class ConsultaCursoController extends Controller
 {
     /**
+     * Trae todos los mensajes de consultas
+     */
+    public function index()
+    {
+        $mensajes = ConsultaCurso::all();
+
+        if($mensajes->isEmpty()){
+            $data = [
+                'message' => 'No se encontraron consultas',
+                'status' => 200
+            ];
+            return response()->json($data);
+        }
+
+        return response()->json($mensajes, 200);
+    }
+
+
+    /**
    * Crea una consulta de servicio cursos
    * @param Request $request
    */

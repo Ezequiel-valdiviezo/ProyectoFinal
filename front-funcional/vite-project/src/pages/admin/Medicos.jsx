@@ -31,7 +31,7 @@ function Medicos(){
                 <div className="adminMedicos pt-5 text-center">
 
                     <div className="saludo">
-                        <h2>Consultas</h2>
+                        <h2>Consultas para ofrecer servicios de médico</h2>
                     </div>
                 
                     <table className="table table-striped table-hover">

@@ -25,7 +25,7 @@ Route::get('/consulta/medicos', [ConsultaMedicoController::class, 'index']);
 Route::post('/consulta/medicos', [ConsultaMedicoController::class, 'guardar']);
 
 //Muestra todas postulaciones médicos
-// Route::get('/consulta/medicos', [ConsultaMedicoController::class, 'index']);
+Route::get('/consulta/cursos', [ConsultaCursoController::class, 'index']);
 //Enviar postulacion médicos
 Route::post('/consulta/cursos', [ConsultaCursoController::class, 'guardar']);
 

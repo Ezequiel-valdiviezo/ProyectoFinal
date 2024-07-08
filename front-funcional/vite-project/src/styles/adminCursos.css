@@ -1,0 +1,15 @@
+.adminMedicos{
+    max-width: 1000px;
+    margin: auto;
+}
+.adminMedicos .saludo h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+
+/* Media queries para diseño responsivo */
+@media (max-width: 600px) {
+
+}
