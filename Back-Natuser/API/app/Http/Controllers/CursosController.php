@@ -43,6 +43,8 @@ class CursosController extends Controller
    */
     public function guardar(Request $request)
     {
+        $imagePath = '';
+
         $validator = Validator::make($request->all(), [
             'titulo' => 'required|max:256|unique:cursos',
             'descripcion_breve' => 'required',

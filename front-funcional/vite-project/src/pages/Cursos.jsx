@@ -13,7 +13,7 @@ function Cursos() {
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/auth/cursos', {
+        fetch('http://127.0.0.1:8000/api/cursos', {
             method: 'GET',
             credentials: "include",
         })
@@ -57,7 +57,7 @@ function Cursos() {
                      {Array.isArray(cursos) && cursos.length > 0 ? (
                         cursos.map((curso, index) => (
                             <div className="card curso m-2 text-start" style={{ width: '18rem' }} key={index}>
-                                <img src={'http://127.0.0.1:8000' + curso.imagen} width="100%" className="card-img-top" alt="" />
+                                <img src={'http://127.0.0.1:8000/' + curso.imagen} width="100%" className="card-img-top" alt="" />
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">
                                         <h3 className="card-title">{curso.titulo}</h3>
@@ -87,7 +87,7 @@ function Cursos() {
                     <div className="modal">
                         <div className="modal-content">
                             <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
-                            <img src={'http://127.0.0.1:8000' + cursoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
+                            <img src={'http://127.0.0.1:8000/' + cursoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
                             <h3 className="my-2">Detalles del Curso</h3>
                             <p className="text-start"><span className="fw-bold">Título:</span> {cursoSeleccionado.titulo}</p>
                             <p className="text-start"><span className="fw-bold">Descripción:</span> {cursoSeleccionado.descripcion_completa}</p>
