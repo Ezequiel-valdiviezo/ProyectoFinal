@@ -76,28 +76,36 @@
     <div class="medicosf mt-5">
         <h2 class="text-center">Formulario para ofrecer cursos</h2>
         <form id="formMedicos" class="p-4 my-4">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="especialidad" class="form-label">Especialidad</label>
-                <input type="text" class="form-control" id="especialidad" required>
-            </div>
-            <div class="mb-3">
-                <label for="mensaje" class="form-label">Descripción de tu servicio</label>
-                <textarea class="form-control" id="mensaje" rows="5" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="imagen" class="form-label">Título</label>
-                <input type="file" class="form-control" id="imagen" accept="image/*" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Enviar</button>
-        </form>
+          <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" name="nombre" class="form-control" id="nombre" required>
+          </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" id="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="descripcion_servicio" class="form-label">Descripción de tu servicio</label>
+            <textarea class="form-control" name="descripcion_servicio" id="descripcion_servicio" rows="5" required></textarea>
+        </div>
+          <div class="mb-3">
+              <label for="categoria" class="form-label">Categoría</label>
+              <input type="text" name="categoria" class="form-control" id="categoria" required>
+          </div>
+          <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono</label>
+              <input type="text" name="telefono" class="form-control" id="telefono" required>
+          </div>
+          <div class="mb-3">
+              <label for="precio" class="form-label">Precio</label>
+              <input type="text" name="precio" class="form-control" id="precio" required>
+          </div>
+          <div class="mb-3">
+              <label for="imagen" class="form-label">Imagen</label>
+              <input type="file" name="imagen" class="form-control" id="imagen" accept="image/*">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Enviar</button>
+      </form>
     </div>
         
         
@@ -116,6 +124,29 @@
     </div>
     </div>
 
+    <script>
+      document.getElementById("formMedicos").addEventListener("submit", function(event){
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    const options = {
+        method: "POST",
+        body: formData,
+    };
+
+    console.log("Enviando el formulario...");
+
+    fetch('http://127.0.0.1:8000/api/consulta/cursos', options)
+    .then(response => response.json())
+    .then(data => {
+        console.log("Respuesta del servidor: ", data);
+    })
+    .catch(error => {
+        console.log("Error al enviar el formulario", error);
+    });
+});
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   
 </body>
