@@ -15,6 +15,7 @@ function Register({ onRegister }){
     password_confirmation: ''
   });
 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate()
  
@@ -32,6 +33,7 @@ function Register({ onRegister }){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setError('');
     console.log('Form data submitted:', formData);
     // Aquí puedes añadir la lógica para enviar los datos a un servidor o procesarlos de otra manera
@@ -52,6 +54,7 @@ function Register({ onRegister }){
         const errorData = await response.json();
         console.log('Error data:', errorData);
         setError(errorData);
+        setLoading(false);
         return;
       }
 
@@ -66,6 +69,8 @@ function Register({ onRegister }){
     } catch (error) {
       console.error('Error:', error);
       setError('Hubo un problema con el registro. Intenta de nuevo.');
+    } finally {
+      setLoading(false);
     }
 
   };
@@ -126,6 +131,14 @@ function Register({ onRegister }){
                {error.password && <p style={{ color: 'red' }}>{error.password[0]}</p>}
             </div>
             {error.general && <p style={{ color: 'red' }}>{error.general}</p>}
+            
+            {loading && <div className="loader">
+            {/* <p>Cargando...</p> */}
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+            </div>}
+
             <button className="btn btn-outline-primary anchoBoton" type="submit">Registrarme</button>
             </form>
           <button onClick={onToggle} className="btn btn-outline-primary anchoBoton mt-2">Iniciar sesión</button>

@@ -112,8 +112,11 @@ function Login({ onLogin }){
             />
           </div>
           {loading && <div className="loader">
-        <p>Cargando...</p>
-      </div>}
+            {/* <p>Cargando...</p> */}
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+          </div>}
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <button className="btn btn-outline-primary anchoBoton" type="submit">Iniciar sesión</button>
           </form>
