@@ -124,7 +124,10 @@
       </div>
     </div>
 
-
+    <!-- <button class="btn btn-primary w-100" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      <span role="status">Loading...</span>
+    </button> -->
 
 
     <footer class="py-3 my-4 border-top">
@@ -162,6 +165,11 @@
         if (data) {
                 // Mostrar el mensaje de confirmación
                 document.getElementById("mensajeConfirmacion").innerText = "Mensaje enviado";
+
+                // Resetear los campos del formulario
+                document.getElementById("email").value = "";
+                document.getElementById("nombre").value = "";
+                document.getElementById("mensaje").value = "";
               }
             })
             .catch(error => {

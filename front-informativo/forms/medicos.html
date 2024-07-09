@@ -137,6 +137,13 @@
       if (data) {
                 // Mostrar el mensaje de confirmación
                 document.getElementById("mensajeConfirmacion").innerText = "Mensaje enviado";
+              
+                // Resetear los campos del formulario
+                document.getElementById("nombre").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("especialidad").value = "";
+                document.getElementById("descripcion_servicio").value = "";
+                document.getElementById("imagen").value = "";
               }
     })
     .catch(error => {
