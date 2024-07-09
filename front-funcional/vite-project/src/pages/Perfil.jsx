@@ -75,7 +75,7 @@ const handleSubmit = (e) => {
     .then(response => response.json())
     .then(data => {
       console.log('Datos del usuario:', data);
-      alert("Actualizado correctamente");
+      // alert("Actualizado correctamente");
       window.location.reload();
     })
     .catch(error => console.error('Error fetching recuerdos:', error));

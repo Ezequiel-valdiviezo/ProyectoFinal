@@ -184,7 +184,7 @@ function Anotador(){
 
               {showForm && (
                 
-                <div className="">
+                <div className="my-2">
                   <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                       <label htmlFor="nota" className="form-label">Nota</label>
@@ -192,7 +192,7 @@ function Anotador(){
                     </div>
                     <button type="submit" className="btn btn-primary">Enviar</button>
                   </form>
-                    <button type="submit" onClick={cerrarFormNotas} className="btn btn-primary">Cancelar</button>
+                    <button type="submit" onClick={cerrarFormNotas} className="btn btn-primary mt-3">Cancelar</button>
                 </div>
 
               )}

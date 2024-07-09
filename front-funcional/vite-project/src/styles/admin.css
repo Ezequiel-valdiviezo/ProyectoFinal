@@ -1,27 +1,10 @@
-.fondoPanelAdmin{
-    /* background-color: rgba(224, 232, 234, 0.234); */
-    /* background-image: url(../assets/fondo3.jpg); */
-    
-}
-/* .saludo{
-    height: 125px;
-} */
-/* .saludo div img{
-    width: 150px;
-    margin-bottom: 40px;
-} */
-/* .saludo div h3{
-    margin-left: 25px;
-}
-.saludo div p{
-    margin-left: 25px;
-} */
+
 .panelAdmin{
     max-width: 1000px;
     margin: auto;
 }
 
-.panelAdmin .saludo h2{
+.panelAdmin h2{
     color: #08a2de;
     font-size: 50px;
     font-weight: bold;

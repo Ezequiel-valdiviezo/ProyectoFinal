@@ -51,7 +51,7 @@ function Cursos(){
                                     <td>{consulta.email}</td>
                                     <td>{consulta.nombre}</td>
                                     <td>{consulta.descripcion_servicio}</td>
-                                    <td>{consulta.precio}</td>
+                                    <td>${consulta.precio}</td>
                                     <td><button className="btn btn-outline-primary">Aceptar</button></td>
                                     <td><button className="btn btn-outline-danger">Eliminar</button></td>
                                 </tr>

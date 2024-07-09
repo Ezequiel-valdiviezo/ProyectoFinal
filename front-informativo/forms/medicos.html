@@ -97,7 +97,8 @@
                 <input type="file" name="imagen" class="form-control" id="imagen" accept="image/*">
             </div>
             <button type="submit" class="btn btn-primary w-100">Enviar</button>
-        </form>
+            <div id="mensajeConfirmacion"></div>
+          </form>
     </div>
         
         
@@ -128,11 +129,15 @@
     };
 
     console.log("Enviando el formulario...");
+    document.getElementById("mensajeConfirmacion").innerText = "Enviando";
 
     fetch('http://127.0.0.1:8000/api/consulta/medicos', options)
     .then(response => response.json())
     .then(data => {
-        console.log("Respuesta del servidor: ", data);
+      if (data) {
+                // Mostrar el mensaje de confirmación
+                document.getElementById("mensajeConfirmacion").innerText = "Mensaje enviado";
+              }
     })
     .catch(error => {
         console.log("Error al enviar el formulario", error);

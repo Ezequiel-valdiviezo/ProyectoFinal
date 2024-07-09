@@ -92,7 +92,7 @@
 
         <hr />
         <h3 class="text-start fs-5">¿Sos médico o tenés un curso para nuestros padres?</h3>
-        <p class="text-start">¡Uníte a nuestra comunidad! Completa el formulario haciendo <a href="./forms/index.html">Click acá</a> y te ayudamos a compartir tus servicios con nuestros usuarios. Juntos podemos hacer una diferencia.</p>
+        <p class="text-start">¡Uníte a nuestra comunidad! Completá el formulario haciendo <a href="./forms/index.html">Click acá</a> y te ayudamos a compartir tus servicios con nuestros usuarios. Juntos podemos hacer una diferencia.</p>
   
       </div>
       <div class="col-lg-6 p-4 formulario m-auto">
@@ -119,6 +119,7 @@
         </div>
         <p class="text-start">Si tenés alguna pregunta, no dudes en contactarnos. Estamos acá para ayudarte</p>
           <button type="submit" class="btn btn-primary w-100">Enviar</button>
+          <div id="mensajeConfirmacion"></div>
         </form>
       </div>
     </div>
@@ -153,16 +154,21 @@
       };
 
       console.log("Enviando el formulario...");
+      document.getElementById("mensajeConfirmacion").innerText = "Enviando";
 
       fetch('http://127.0.0.1:8000/api/consulta', options)
       .then(response => response.json())
       .then(data => {
-          console.log("Respuesta del servidor: ", data);
-      })
-      .catch(error => {
-          console.log("Error al enviar el formulario", error);
-      });
-      });
+        if (data) {
+                // Mostrar el mensaje de confirmación
+                document.getElementById("mensajeConfirmacion").innerText = "Mensaje enviado";
+              }
+            })
+            .catch(error => {
+              console.log("Error al enviar el formulario", error);
+            });
+          });
+      // document.getElementById("mensajeConfirmacion").classList.remove("d-none");
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   

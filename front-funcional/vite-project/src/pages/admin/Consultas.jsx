@@ -53,6 +53,7 @@ function Consultas() {
                                 <th scope="col">Email</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Mensaje</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,6 +62,7 @@ function Consultas() {
                                     <td>{consulta.email}</td>
                                     <td>{consulta.nombre}</td>
                                     <td>{consulta.mensaje}</td>
+                                    <td><button className="btn btn-outline-primary">Responder</button></td>
                                 </tr>
                             ))}
                         </tbody>
