@@ -4,6 +4,7 @@ import '../../styles/adminManejoCursos.css'
 
 function ManejoCursos(){
     const [cursos, setCursos] = useState([]);
+    const [estadoForm, setEstadoForm] = useState(false);
 
     const navigate = useNavigate();
 
@@ -98,6 +99,13 @@ function ManejoCursos(){
         }
       };
 
+      const handleAbrirForm = () => {
+        setEstadoForm(true);
+      };
+    
+      const handleCerrarForm = () => {
+        setEstadoForm(false);
+      };
  
 
     return(
@@ -105,10 +113,11 @@ function ManejoCursos(){
         <div className="vh-100">
                 <div className="adminManejoCursos pt-5 pb-5 text-center">
 
-                    <div className="saludo">
-                        <h2>Crear cursos</h2>
-                    </div>
+                        <h2>Cursos</h2>
+                    <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear Curso</button>
 
+
+                    {estadoForm &&
                     <form className="curso-form p-5" onSubmit={handleSubmit}>
                         {/* <h3>Crear curso</h3> */}
                         <div className="form-group my-4">
@@ -146,8 +155,10 @@ function ManejoCursos(){
                             <label htmlFor="telefono">Teléfono de contacto:</label>
                             <input className="p-1" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required />
                         </div>
-                        <button type="submit" className="btn btn-outline-primary">Crear Curso</button>
+                        <button type="submit" className="btn btn-outline-primary m-2">Crear Curso</button>
+                        <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
                         </form>
+                    }
 
                 {Array.isArray(cursos) && cursos.length > 0 ? (
                     <table className="table mt-5 table-striped table-hover">
