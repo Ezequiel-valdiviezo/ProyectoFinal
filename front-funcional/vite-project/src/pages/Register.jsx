@@ -126,9 +126,9 @@ function Register({ onRegister }){
                {error.password && <p style={{ color: 'red' }}>{error.password[0]}</p>}
             </div>
             {error.general && <p style={{ color: 'red' }}>{error.general}</p>}
-            <button className="btn btn-outline-primary" type="submit">Registrarme</button>
+            <button className="btn btn-outline-primary anchoBoton" type="submit">Registrarme</button>
             </form>
-          <button onClick={onToggle} className="btn btn-outline-primary mt-3">Iniciar sesión</button>
+          <button onClick={onToggle} className="btn btn-outline-primary anchoBoton mt-2">Iniciar sesión</button>
           </div> 
     </div>
 

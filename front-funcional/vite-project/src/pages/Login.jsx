@@ -115,9 +115,9 @@ function Login({ onLogin }){
         <p>Cargando...</p>
       </div>}
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          <button className="btn btn-outline-primary" type="submit">Iniciar sesión</button>
+          <button className="btn btn-outline-primary anchoBoton" type="submit">Iniciar sesión</button>
           </form>
-        <button onClick={onToggle} className="btn btn-outline-primary mt-3">Registro</button>
+        <button onClick={onToggle} className="btn btn-outline-primary anchoBoton mt-2">Registro</button>
       </div>
     </div>
   )

@@ -39,8 +39,10 @@ function Medicos(){
                             <tr>
                                 <th scope="col">Email</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Especialidad</th>
+                                {/* <th scope="col">Especialidad</th> */}
                                 <th scope="col">Descripción servicio</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,8 +50,14 @@ function Medicos(){
                                 <tr key={index}>
                                     <td>{consulta.email}</td>
                                     <td>{consulta.nombre}</td>
-                                    <td>{consulta.especialidad}</td>
+                                    {/* <td>{consulta.especialidad}</td> */}
                                     <td>{consulta.descripcion_servicio}</td>
+                                    <td>
+                                        <button className="btn btn-outline-primary">Aceptar</button>
+                                    </td>
+                                    <td>
+                                        <button className="btn btn-outline-danger">Eliminar</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
