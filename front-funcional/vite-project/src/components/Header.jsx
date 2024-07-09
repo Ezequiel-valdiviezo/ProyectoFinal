@@ -47,9 +47,7 @@ function Header() {
 
   return (
     <>
-        {/* <div className="headerLogo text-center py-1">
-          <img src={img} width="65px" alt="" />
-        </div> */}
+    
       <nav className="navbar navbar-expand-sm navbar-light ">
         <div className="container-fluid d-flex justify-content-between align-items-center anchoNav">
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
