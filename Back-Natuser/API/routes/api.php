@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumRecuerdosController;
 use App\Http\Controllers\AnotadorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ConsultaCursoController;
 use App\Http\Controllers\ConsultaMedicoController;
 use App\Http\Controllers\ContactoConsultaController;
@@ -40,6 +41,13 @@ Route::post('/cursos', [CursosController::class, 'guardar']);
 Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
 //Borrar curso
 Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
+
+//Mostrar blog
+Route::get('/blogs', [BlogController::class, 'index']);
+//Guardar una nota de blog
+Route::post('/blogs', [BlogController::class, 'guardar']);
+//Borrar nota de blog
+Route::delete('/blogs/{id}', [BlogController::class, 'eliminarBlogs']);
 
 //Anotador
 Route::post('/anotador', [AnotadorController::class, 'guardar']);
