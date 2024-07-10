@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import '../styles/calculadorDias.css';
+import { useColorContext } from '../context/colorContext';
 
 const CalculadoraDias = () => {
   const [fechaObjetiva, setFechaObjetiva] = useState('');
   const [diasRestantes, setDiasRestantes] = useState(null);
+  const { colors, color } = useColorContext();
+  const estiloTitulo = {
+      color: color,
+    };
 
   const verificaFecha = () => {
     if (!fechaObjetiva) {
@@ -30,7 +35,7 @@ const CalculadoraDias = () => {
     <>
     <div className="contadorDias py-4 mt-5">
       <div className='contenedor'>
-        <label className='my-2'>Ingresa una fecha:</label>
+        <label className='my-2' style={estiloTitulo}>Ingresa una fecha:</label>
         <input
             className='p-1'
             type="date"

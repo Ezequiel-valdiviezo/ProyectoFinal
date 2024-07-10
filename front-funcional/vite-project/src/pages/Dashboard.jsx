@@ -15,6 +15,9 @@ function Dashboard(){
     const estiloTitulo = {
         color: color,
       };
+    const estiloFondo = {
+        background: color,
+      };
 
     useEffect(() => { 
     const usuario = JSON.parse(localStorage.getItem('user'));
@@ -33,7 +36,7 @@ function Dashboard(){
             <p>¡Nos alegra tenerte por acá!</p>
             </div>
             
-            <div className="funcionalidades p-4 mt-2">
+            <div className="funcionalidades p-4 mt-2" style={estiloFondo}>
             <h2>Funcionalidades para Usuarios</h2>
             <p>Como usuario registrado, tenés acceso a una variedad de herramientas diseñadas para facilitarte la vida como padre primerizo:</p>
         
@@ -57,7 +60,7 @@ function Dashboard(){
             </div>
             </div>
 
-            <div className="agradecimiento mt-2">
+            <div className="agradecimiento mt-2" style={estiloFondo}>
                  <p className="p-3">Gracias por ser parte de nuestra comunidad. ¡Estamos acá para apoyarte en cada paso del camino!</p>
              </div>
         </div>

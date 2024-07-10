@@ -140,7 +140,7 @@ const handleSubmit = (e) => {
                     <div className="modal">
                         <div className="modal-content">
                             <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
-                            <h3>Editar Perfil</h3>
+                            <h3 style={estiloTitulo}>Editar Perfil</h3>
                             <form onSubmit={handleSubmit}>
                               {/* <div className="form-group my-4">
                                 <label className="mb-2" htmlFor="fotoPerfil">Foto de Perfil</label>

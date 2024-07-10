@@ -173,7 +173,7 @@ function Anotador(){
     <div className="col-md-6 mt-4">
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
-            <h3 className="text-center">Lista</h3>
+            <h3 className="text-center" style={estiloTitulo}>Lista</h3>
             <ul className="list-group mb-3">
               {lista.map((notas, index) => (
                 <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
@@ -192,7 +192,7 @@ function Anotador(){
                 <div className="my-2">
                   <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                      <label htmlFor="nota" className="form-label">Nota</label>
+                      <label htmlFor="nota" className="form-label" style={estiloTitulo}>Nota</label>
                       <input type="text" className="form-control" id="nota" name="nota" value={formData.nota} onChange={handleInputChange} required />
                     </div>
                     <button type="submit" className="btn btn-primary">Enviar</button>
@@ -209,7 +209,7 @@ function Anotador(){
     <div className="col-md-6 mt-4 notasHechas">
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
-            <h3 className="text-center">Hechas</h3>
+            <h3 className="text-center" style={estiloTitulo}>Hechas</h3>
             {hechas.length > 0 ? (
               <ul className="list-group mb-3">
                 {hechas.map((nota, index) => (
