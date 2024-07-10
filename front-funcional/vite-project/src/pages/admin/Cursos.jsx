@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../styles/adminCursos.css'
+import { useColorContext } from '../../context/colorContext';
 
 function Cursos(){
     const [consultas, setConsultas] = useState([]);
     const navigate = useNavigate();
+    const { colors, color } = useColorContext();
+    const estiloTitulo = {
+        color: color,
+      };
 
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
@@ -31,7 +36,7 @@ function Cursos(){
                 <div className="adminMedicos pt-5 text-center">
 
                     <div className="saludo">
-                        <h2>Consultas para ofrecer cursos</h2>
+                        <h2 style={estiloTitulo}>Consultas para ofrecer cursos</h2>
                     </div>
                 
                     <table className="table table-striped table-hover">

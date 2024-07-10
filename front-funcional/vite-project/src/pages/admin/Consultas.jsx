@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../../styles/adminConsultas.css';
 import { useNavigate } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import { useColorContext } from '../../context/colorContext';
 
 function Consultas() {
     const [consultas, setConsultas] = useState([]);
@@ -10,6 +11,10 @@ function Consultas() {
     //elementos a mostrar por pagina
     const [itemsPerPage] = useState(5);
     const navigate = useNavigate();
+    const { colors, color } = useColorContext();
+    const estiloTitulo = {
+        color: color,
+      };
 
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
@@ -44,7 +49,7 @@ function Consultas() {
             <div className="vh-100">
                 <div className="consultas pt-5 text-center">
                     <div className="saludo">
-                        <h2>Consultas</h2>
+                        <h2 style={estiloTitulo}>Consultas</h2>
                     </div>
                     
                     <table className="table table-striped table-hover">

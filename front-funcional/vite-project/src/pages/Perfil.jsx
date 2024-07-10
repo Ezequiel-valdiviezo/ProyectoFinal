@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../styles/perfil.css'
 import img from '../assets/2.png'
+import { useColorContext } from '../context/colorContext';
 
 
 function Perfil(){
@@ -12,6 +13,10 @@ function Perfil(){
     email: "",
     name: "",
   });
+  const { colors, color } = useColorContext();
+  const estiloTitulo = {
+      color: color,
+    };
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -86,7 +91,7 @@ const handleSubmit = (e) => {
       <div className="fondoPerfil vh-100">
         <div className="perfil">
 
-        <h2 className="text-center pt-5">Mi perfil</h2>
+        <h2 className="text-center pt-5" style={estiloTitulo}>Mi perfil</h2>
 
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">

@@ -6,10 +6,15 @@ import icono3 from '../assets/icono3.png'
 import icono4 from '../assets/icono4.png'
 import saludo from '../assets/ez.png'
 import img from '../assets/logo.png'
+import { useColorContext } from '../context/colorContext';
 
 
 function Dashboard(){
     const [userRole, setUserRole] = useState(null);
+    const { colors, color } = useColorContext();
+    const estiloTitulo = {
+        color: color,
+      };
 
     useEffect(() => { 
     const usuario = JSON.parse(localStorage.getItem('user'));
@@ -24,7 +29,7 @@ function Dashboard(){
 
             <div className="saludo">
             {/* <img src={img} width="100px" alt="" /> */}
-            <h2>¡Bienvenido a <span id="nat">Nat</span><span id="user">User</span>!</h2>
+            <h2 style={estiloTitulo}>¡Bienvenido a <span id="nat">Nat</span><span id="user">User</span>!</h2>
             <p>¡Nos alegra tenerte por acá!</p>
             </div>
             

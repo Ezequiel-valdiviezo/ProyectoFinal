@@ -8,10 +8,10 @@ const ColorCirculo = ({ color, onClick }) => {
     borderRadius: '50%',
     display: 'inline-block',
     cursor: 'pointer',
-    margin: '5px'
+    // margin: '5px',
   };
 
-  return <div style={circleStyle} onClick={() => onClick(color)} />;
+  return <div className='mx-1' style={circleStyle} onClick={() => onClick(color)} />;
 };
 
 export default ColorCirculo;

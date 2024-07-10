@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../styles/adminManejoCursos.css'
+import { useColorContext } from '../../context/colorContext';
 
 function ManejoCursos(){
     const [cursos, setCursos] = useState([]);
     const [estadoForm, setEstadoForm] = useState(false);
 
     const navigate = useNavigate();
+    const { colors, color } = useColorContext();
+    const estiloTitulo = {
+        color: color,
+      };
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/cursos', {
@@ -113,7 +118,7 @@ function ManejoCursos(){
         <div className="vh-100">
                 <div className="adminManejoCursos pt-5 pb-5 text-center">
 
-                        <h2>Cursos</h2>
+                        <h2 style={estiloTitulo}>Cursos</h2>
                     <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear Curso</button>
 
 

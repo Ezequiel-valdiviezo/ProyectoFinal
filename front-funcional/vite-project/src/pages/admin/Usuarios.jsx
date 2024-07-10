@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import '../../styles/adminUsuarios.css'
 import { useNavigate } from "react-router-dom";
+import { useColorContext } from '../../context/colorContext';
 
 function Usuarios(){
     const [usuarios, setUsuarios] = useState([]);
     const navigate = useNavigate();
+    const { colors, color } = useColorContext();
+    const estiloTitulo = {
+        color: color,
+      };
 
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
@@ -32,7 +37,7 @@ function Usuarios(){
 
                 <div className="saludo">
                 {/* <img src={img} width="100px" alt="" /> */}
-                <h2>Usuarios</h2>
+                <h2 style={estiloTitulo}>Usuarios</h2>
                 </div>
                 
                 <table class="table table-striped table-hover">

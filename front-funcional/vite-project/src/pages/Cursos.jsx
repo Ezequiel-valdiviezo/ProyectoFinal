@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import '../styles/cursos.css';
 import img from '../assets/1.png';
+import { useColorContext } from '../context/colorContext';
 
 function Cursos() {
 
     const [cursos, setCursos] = useState([]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
+    const { colors, color } = useColorContext();
+    const estiloTitulo = {
+        color: color,
+      };
 
 
     const phoneNumber = "3410000000"; // Reemplaza con el número de teléfono en formato internacional
@@ -33,7 +38,7 @@ function Cursos() {
     return (
         <div className="fondoCursos">
             <div className="cursos text-center">
-                <h2 className="pt-5">Cursos</h2>
+                <h2 className="pt-5" style={estiloTitulo}>Cursos</h2>
 
                 <div className="d-flex flex-wrap justify-content-center">
                     {/* {cursos.map((curso, index) => (

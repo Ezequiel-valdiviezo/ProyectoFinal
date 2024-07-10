@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import '../styles/foro.css'
 import img from '../assets/fond1.jpeg'
 import img2 from '../assets/2.png'
+import { useColorContext } from '../context/colorContext';
 
 function Foro(){
 
     const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState('');
+  const { colors, color } = useColorContext();
+  const estiloTitulo = {
+      color: color,
+    };
 
   useEffect(() => {
     const storedPosts = JSON.parse(localStorage.getItem('posts'));
@@ -47,7 +52,7 @@ function Foro(){
 
   return (
     <div className="container foro pt-5">
-      <h2 className="text-center">Foro</h2>
+      <h2 className="text-center" style={estiloTitulo}>Foro</h2>
       <p className="fs-3 fw-bold">¡Hola Ezequiel!</p>
       <p>Conectá con otros padres que están o estuvieron en la misma situación.</p>
       <form onSubmit={handlePostSubmit} className="p-4">

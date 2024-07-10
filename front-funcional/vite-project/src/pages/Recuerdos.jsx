@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import '../styles/recuerdo.css';
+import { useColorContext } from '../context/colorContext';
 
 function Recuerdos() {
   const [recuerdos, setRecuerdos] = useState([]);
@@ -13,6 +14,10 @@ function Recuerdos() {
   const [recuerdoSeleccionado, setRecuerdoSeleccionado] = useState(null);
   const modalRef = useRef(null);
   const [modalInstance, setModalInstance] = useState(null);
+  const { colors, color } = useColorContext();
+  const estiloTitulo = {
+      color: color,
+    };
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -133,7 +138,7 @@ function Recuerdos() {
   return (
     <div className="fondoRecuerdos">
       <div className="recuerdos text-center">
-        <h2 className="pt-5">Álbum de recuerdos</h2>
+        <h2 className="pt-5" style={estiloTitulo}>Álbum de recuerdos</h2>
         <p>Desde acá vas a poder cargar, eliminar y ver los recuerdos más significativos para vos.</p>
         <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar recuerdo</button>
 

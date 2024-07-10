@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../styles/anotador.css'
 import CalculadorDias from '../components/CalculadorDias'
+import { useColorContext } from '../context/colorContext';
 
 function Anotador(){
 
@@ -12,6 +13,10 @@ function Anotador(){
       nota: '',
       estado: 'activo',
     });
+    const { colors, color } = useColorContext();
+    const estiloTitulo = {
+        color: color,
+      };
 
     useEffect(() => {
       const user = JSON.parse(localStorage.getItem('user'));
@@ -158,7 +163,7 @@ function Anotador(){
       <div className="fondoAnotador">
       <div className="anotador pb-5">
         <div className="presentacion pt-5 p-4">
-          <h2 className="text-center">Anotador y contador de días</h2>
+          <h2 className="text-center" style={estiloTitulo}>Anotador y contador de días</h2>
           <p className="text-center limite-lineas m-auto">Desde acá vas a poder tener notas para lo que necesites, podés utilizarlo como lista de compras, de comidas, o lo que necesites.
             <br />
             Además, con el contador de días, podés calcular cuantos días faltan para una fecha específica, ya sea para algún turno médico, entrega, etc.</p>

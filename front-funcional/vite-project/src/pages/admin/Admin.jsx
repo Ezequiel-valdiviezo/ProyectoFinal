@@ -2,9 +2,14 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../styles/admin.css'
 import img from '../../assets/logo.png'
+import { useColorContext } from '../../context/colorContext';
 
 function Admin(){
     const navigate = useNavigate();
+    const { colors, color } = useColorContext();
+    const estiloTitulo = {
+        color: color,
+      };
 
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
@@ -20,7 +25,7 @@ function Admin(){
         <div className="panelAdmin pt-5 text-center">
 
             <div className="">
-            <h2>¡Panel administrador de <span id="nat">Nat</span><span id="user">User</span>!</h2>
+            <h2 style={estiloTitulo}>¡Panel administrador de <span id="nat">Nat</span><span id="user">User</span>!</h2>
             <img src={img} width="100px" alt="" />
 
             <p className="mt-5 fs-5">Desde acá vas a poder administrar todas las funcionalidades del sitio. 

@@ -18,6 +18,7 @@ import Consultas from './pages/admin/Consultas'
 import Usuarios from './pages/admin/Usuarios'
 import RegistrosMedicos from './pages/RegistrosMedicos'
 import ManejoCursos from './pages/admin/ManejoCursos'
+import { ColorProvider } from './context/colorContext';
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -119,7 +120,9 @@ function App() {
 
   return (
     <>
+    <ColorProvider>
       <RouterProvider router={route} />
+    </ColorProvider>
     </>
   )
 }
