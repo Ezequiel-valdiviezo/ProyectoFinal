@@ -8,6 +8,7 @@ const ColorCirculo = ({ color, onClick }) => {
     borderRadius: '50%',
     display: 'inline-block',
     cursor: 'pointer',
+    border: 'solid 2px white'
     // margin: '5px',
   };
 

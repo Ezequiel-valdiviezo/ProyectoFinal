@@ -19,6 +19,7 @@ import Usuarios from './pages/admin/Usuarios'
 import RegistrosMedicos from './pages/RegistrosMedicos'
 import ManejoCursos from './pages/admin/ManejoCursos'
 import { ColorProvider } from './context/colorContext';
+import Blog from './pages/admin/Blog'
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -105,6 +106,10 @@ function App() {
          {
            path: '/admin/consultas',
            element: <Consultas />
+         },
+         {
+           path: '/admin/blog',
+           element: <Blog />
          },
          {
            path: '/admin/usuarios',
