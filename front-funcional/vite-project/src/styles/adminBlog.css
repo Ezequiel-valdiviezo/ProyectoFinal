@@ -1,0 +1,29 @@
+.adminBlog{
+    max-width: 1000px;
+    margin: auto;
+}
+.adminBlog h2{
+    color: #08a2de;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.adminBlog form{
+    max-width: 700px;
+    margin: auto;
+    border-radius: 15px;
+    background-color: #d7eaf2;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.485);
+    /* border: solid 2px black; */
+    text-align: start;
+}
+.adminBlog table{
+    max-width: 1000px;
+    margin: auto;
+}
+
+
+/* Media queries para diseño responsivo */
+@media (max-width: 600px) {
+
+}
