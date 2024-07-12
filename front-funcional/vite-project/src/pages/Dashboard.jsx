@@ -51,11 +51,11 @@ function Dashboard(){
                 </div>
                 <div className="col-md-3 col-sm-6 col-12 funcMini pt-2">
                     <img src={icono3} width="50px" alt="" />
-                    <p>Álbum de recuerdos</p>
+                    <p>Foro de padres</p>
                 </div>
                 <div className="col-md-3 col-sm-6 col-12 funcMini pt-2">
                     <img src={icono4} width="50px" alt="" />
-                    <p>Foros de padres</p>
+                    <p>Álbum de recuerdos</p>
                 </div>
             </div>
             </div>

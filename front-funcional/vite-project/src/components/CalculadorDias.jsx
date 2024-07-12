@@ -35,7 +35,7 @@ const CalculadoraDias = () => {
     <>
     <div className="contadorDias py-4 mt-5">
       <div className='contenedor'>
-        <label className='my-2' style={estiloTitulo}>Ingresa una fecha:</label>
+        <label className='my-2' style={estiloTitulo}>Ingresá una fecha:</label>
         <input
             className='p-1'
             type="date"

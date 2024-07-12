@@ -164,7 +164,7 @@ function Anotador(){
       <div className="anotador pb-5">
         <div className="presentacion pt-5 p-4">
           <h2 className="text-center" style={estiloTitulo}>Anotador y contador de días</h2>
-          <p className="text-center limite-lineas m-auto">Desde acá vas a poder tener notas para lo que necesites, podés utilizarlo como lista de compras, de comidas, o lo que necesites.
+          <p className="text-center limite-lineas m-auto">Desde acá vas a poder tener notas para lo que necesites, podés utilizarlo para fechas importantes, lista de compras o lo que necesites.
             <br />
             Además, con el contador de días, podés calcular cuantos días faltan para una fecha específica, ya sea para algún turno médico, entrega, etc.</p>
         </div>
@@ -209,7 +209,7 @@ function Anotador(){
     <div className="col-md-6 mt-4 notasHechas">
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
-            <h3 className="text-center" style={estiloTitulo}>Hechas</h3>
+            <h3 className="text-center" style={estiloTitulo}>Terminadas</h3>
             {hechas.length > 0 ? (
               <ul className="list-group mb-3">
                 {hechas.map((nota, index) => (
