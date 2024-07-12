@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CursosController;
+use App\Http\Controllers\MedicoController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -41,6 +42,17 @@ Route::post('/cursos', [CursosController::class, 'guardar']);
 Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
 //Borrar curso
 Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
+
+//Mostrar Médicos
+Route::get('/medicos', [MedicoController::class, 'index']);
+//Mostrar curso por id
+// Route::get('/cursos/{id}', [CursosController::class, 'mostrarCurso']);
+//Guardar Médico
+Route::post('/medicos', [MedicoController::class, 'guardar']);
+//Actualizar curso
+// Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
+//Borrar curso
+Route::delete('/medicos/{id}', [MedicoController::class, 'eliminarMedico']);
 
 //Mostrar blog
 Route::get('/blogs', [BlogController::class, 'index']);
