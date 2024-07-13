@@ -127,9 +127,7 @@ class MedicoController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     /**
    * Elimina un medico
    * @param int $id

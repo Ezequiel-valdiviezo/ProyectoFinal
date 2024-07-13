@@ -33,11 +33,15 @@ Route::get('/consulta', [ContactoConsultaController::class, 'index']);
 Route::get('/consulta/medicos', [ConsultaMedicoController::class, 'index']);
 //Enviar postulacion médicos
 Route::post('/consulta/medicos', [ConsultaMedicoController::class, 'guardar']);
+//Eliminar postulacion médico
+Route::delete('/consulta/medicos/{id}', [ConsultaMedicoController::class, 'eliminarConsulta']);
 
-//Muestra todas postulaciones médicos
+//Muestra todas postulaciones cursos
 Route::get('/consulta/cursos', [ConsultaCursoController::class, 'index']);
-//Enviar postulacion médicos
+//Enviar postulacion cursos
 Route::post('/consulta/cursos', [ConsultaCursoController::class, 'guardar']);
+//Eliminar postulacion cursos
+Route::delete('/consulta/cursos/{id}', [ConsultaCursoController::class, 'eliminarConsulta']);
 
 
 //Mostrar cursos

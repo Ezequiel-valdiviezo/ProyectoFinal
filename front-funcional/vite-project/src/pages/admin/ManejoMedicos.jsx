@@ -191,7 +191,7 @@ function ManejoMedicos(){
                         </tbody>
                     </table>
                 ) : (
-                    <p>No se encontraron cursos.</p>
+                    <p>No se encontraron médicos.</p>
                 )}
             </div>
             </div>

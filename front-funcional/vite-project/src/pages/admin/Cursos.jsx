@@ -30,6 +30,23 @@ function Cursos(){
         .catch(error => console.error('Error fetch cursos:', error));
     }, []);
 
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/consulta/cursos/${id}`, {
+                method: 'DELETE',
+                credentials: 'include'
+            });
+            if(response.ok){
+                console.log("Postulación curso eliminado correctamente");
+                setConsultas(consultas.filter(consulta => consulta.id !== id));
+            }else {
+                console.error("Error al eliminar la nota")
+            }
+        } catch (error) {
+            console.log("Error en la solicitus de eliminació", error);
+        }
+      }
+
     return(
         <>
         <div className="vh-100">
@@ -58,7 +75,7 @@ function Cursos(){
                                     <td>{consulta.descripcion_servicio}</td>
                                     <td>${consulta.precio}</td>
                                     <td><button className="btn btn-outline-primary">Aceptar</button></td>
-                                    <td><button className="btn btn-outline-danger">Eliminar</button></td>
+                                    <td><button className="btn btn-outline-danger" onClick={() => handleDelete(consulta.id)}>Eliminar</button></td>
                                 </tr>
                             ))}
                         </tbody>
