@@ -64,46 +64,9 @@ class RegistrosMedicosController extends Controller
 
 
 
-        // $validator = Validator::make($request->all(), [
-        //     'user_id' => 'required|exists:users,id',
-        //     'file_path' => 'required|string',
-        //     'descripcion' => 'required|string|max:256',
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'message' => 'Error en la validación de datos',
-        //         'errors' => $validator->errors(),
-        //         'status' => 400,
-        //     ], 400);
-        // }
-
-        // // No muevas archivos aquí, ya que 'file_path' es un campo proporcionado directamente desde RapidAPI
-
-        // $registro = RegistrosMedicos::create([
-        //     'user_id' => $request->user_id,
-        //     'file_path' => $request->file_path,
-        //     'descripcion' => $request->descripcion,
-        // ]);
-
-        // if (!$registro) {
-        //     return response()->json([
-        //         'message' => 'Error al crear el registro',
-        //         'status' => 500,
-        //     ], 500);
-        // }
-
-        // return response()->json([
-        //     'registro' => $registro,
-        //     'status' => 201,
-        // ], 201);
-
-
-
-
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|exists:users,id',
-            'imagen' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', // Ajusta los tipos de archivo según tus necesidades
+            'file_path' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048',
             'descripcion' => 'required|string|max:256',
         ]);
 
@@ -115,20 +78,20 @@ class RegistrosMedicosController extends Controller
             ], 400);
         }
 
-        // Procesamiento de la imagen
-        if ($request->hasFile('imagen')) {
-            $imagen = $request->file('imagen');
-            $imageName = time() . '_' . $imagen->getClientOriginalName(); // Genera un nombre único para el archivo
-            $imagen->move(public_path('images'), $imageName); // Mueve el archivo a la carpeta 'public/images'
-            $imagePath = 'images/' . $imageName; // Guarda la ruta del archivo en la base de datos
+        // Maneja la subida de la imagen
+        if ($request->hasFile('file_path')) {
+            $file = $request->file('file_path');
+            $fileName = time() . '_' . $file->getClientOriginalName(); // Genera un nombre único para el archivo
+            $file->move(public_path('images'), $fileName); // Mueve el archivo a la carpeta 'public/images'
+            $imagePath = 'images/' . $fileName; // Guarda la ruta del archivo en la base de datos
         } else {
             return response()->json([
-                'message' => 'Archivo de imagen no encontrado',
+                'message' => 'Archivo no encontrado en file_path',
                 'status' => 400,
             ], 400);
         }
+        // No muevas archivos aquí, ya que 'file_path' es un campo proporcionado directamente desde RapidAPI
 
-        // Creación del registro médico
         $registro = RegistrosMedicos::create([
             'user_id' => $request->user_id,
             'file_path' => $imagePath,
@@ -136,14 +99,12 @@ class RegistrosMedicosController extends Controller
         ]);
 
         if (!$registro) {
-            // Si hay un error al crear el registro, retorna un mensaje de error
             return response()->json([
                 'message' => 'Error al crear el registro',
                 'status' => 500,
             ], 500);
         }
 
-        // Si se crea correctamente, devuelve la respuesta JSON con el registro creado y el estado 201 (creado)
         return response()->json([
             'registro' => $registro,
             'status' => 201,

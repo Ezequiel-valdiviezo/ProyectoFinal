@@ -9,16 +9,16 @@ function RegistrosMedicos(){
       };
     const [formData, setFormData] = useState({
         user_id: '',
-        file_path: '',
+        file_path: null,
         descripcion: ''
     });
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
-        if (name === 'imagen') {
+        if (name === 'file_path') {
           setFormData({
             ...formData,
-            imagen: files[0]
+            file_path: files[0]
           });
         } else {
           setFormData({
@@ -30,14 +30,15 @@ function RegistrosMedicos(){
 
       const handleSubmit = async (e) => {
         e.preventDefault();
+        const formDataToSend = new FormData(); // Crea un objeto FormData para enviar datos de formulario y archivos
+            formDataToSend.append('user_id', formData.user_id);
+            formDataToSend.append('file_path', formData.file_path);
+            formDataToSend.append('descripcion', formData.descripcion);
 
         try {
             const response = await fetch('http://127.0.0.1:8000/api/registroMedico', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
+                body: formDataToSend
             });
 
             if (!response.ok) {
@@ -76,14 +77,15 @@ function RegistrosMedicos(){
                     />
                 </label>
                 <br />
-                <label htmlFor="imagen">
+                <label htmlFor="file_path">
                     File Path:
                     <input
                         type="file"
-                        name="imagen"
-                        id="imagen"
+                        name="file_path"
+                        id="file_path"
                         // value={formData.file_path}
-                        accept="image/*"
+                        // accept="image/*/pdf"
+                        accept="image/jpeg,image/png,image/jpg,application/pdf" // Ajusta los tipos de archivo según tus necesidades
                         onChange={handleChange}
                         required
                     />
