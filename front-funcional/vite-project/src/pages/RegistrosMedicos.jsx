@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../styles/registrosMedicos.css'
 import { useColorContext } from '../context/colorContext';
 
 function RegistrosMedicos(){
+    const [registro, setRegistro] = useState([]);
+    const [estadoForm, setEstadoForm] = useState(false);
     const { colors, color } = useColorContext();
     const estiloTitulo = {
         color: color,
@@ -12,6 +14,25 @@ function RegistrosMedicos(){
         file_path: null,
         descripcion: ''
     });
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const userId = user.user.id;
+    
+        fetch(`http://127.0.0.1:8000/api/registroMedico/${userId}`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            setRegistro(data);
+          } else {
+            console.error('Unexpected API response:', data);
+          }
+        })
+        .catch(error => console.error('Error fetching registros:', error));
+      }, []);
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -55,15 +76,23 @@ function RegistrosMedicos(){
         }
     };
 
+    const handleAbrirForm = () => {
+        setEstadoForm(true);
+      };
+    
+      const handleCerrarForm = () => {
+        setEstadoForm(false);
+      };
+
     return(
         <>
         <div className="registrosMedicos">
 
             <h2 className="pt-5" style={estiloTitulo}>Registros médicos</h2>
             <p>Desde acá vas a poder cargar, eliminar y ver los registros médicos.</p>
-            <button className="btn btn-outline-primary" >Cargar registro médico</button>
+            <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar registro médico</button>
 
-
+            {estadoForm && 
             <form onSubmit={handleSubmit}>
                 <label htmlFor="user_id">
                     User ID:
@@ -103,8 +132,32 @@ function RegistrosMedicos(){
                     />
                 </label>
                 <br />
-                <button type="submit">Guardar</button>
+                <button className="btn btn-outline-primary" type="submit">Guardar</button>
+                <button className="btn btn-outline-primary" onClick={handleCerrarForm}>Cancelar</button>
             </form>
+            }
+
+
+                    <table className="mt-5 table table-striped table-hover">
+                        <thead className="table-dark">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Archivo</th>
+                                <th scope="col">Descripción</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {registro.map((regis, index) => (
+                                <tr key={index}>
+                                    <td>{regis.id}</td>
+                                    <td>{regis.file_path}</td>
+                                    <td>{regis.descripcion}</td>
+                                    <td><button className="btn btn-outline-primary">Responder</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
 
         </div>
         </>

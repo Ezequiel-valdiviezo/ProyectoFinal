@@ -115,7 +115,7 @@ function ManejoMedicos(){
             <div className="vh-100">
             <div className="adminManejoMedicos pt-5 pb-5 text-center">
 
-            <h2>Manejo Médicos</h2>
+            <h2 style={estiloTitulo}>Manejo Médicos</h2>
 
             <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear Curso</button>
 

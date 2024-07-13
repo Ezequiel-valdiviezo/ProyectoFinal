@@ -111,6 +111,26 @@ class RegistrosMedicosController extends Controller
         ], 201);
 }
 
+    public function mostrarRegistro($user_id)
+    {
+        $registros = RegistrosMedicos::where('user_id', $user_id)->get();
+
+        if($registros->isEmpty()){
+            $data = [
+                'message' => 'No se encontraro el registro',
+                'status' => 200
+            ];
+            return response()->json($data);
+        }
+
+        // Añadir la URL completa de la imagen a cada recuerdo
+        foreach ($registros as $registro) {
+        $registro->imagen_url = url('storage/' . $registro->imagen);
+        }
+
+        return response()->json($registros, 200);
+    }
+
     public function download($id)
     {
         $record = RegistrosMedicos::findOrFail($id);

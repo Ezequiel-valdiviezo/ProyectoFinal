@@ -1,5 +1,7 @@
 .registrosMedicos{
     text-align: center;
+    max-width: 1000px;
+    margin: auto;
 }
 .registrosMedicos h2{
     color: #08a2de;

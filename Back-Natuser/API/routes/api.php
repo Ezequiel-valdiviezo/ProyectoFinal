@@ -18,10 +18,12 @@ use App\Http\Controllers\RegistrosMedicosController;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-// ---------
+// Cargar registro médico
 Route::post('/registroMedico', [RegistrosMedicosController::class, 'guardar']);
+// Trear registros por usuario
+Route::get('/registroMedico/{id}', [RegistrosMedicosController:: class, 'mostrarRegistro']);
 // ---------
-Route::get('/registroMedico/{id}', [RegistrosMedicosController::class, 'download']);
+Route::get('/registroMedico/descargar/{id}', [RegistrosMedicosController::class, 'download']);
 
 //Enviar consulta en seccion contacto de la seccion informativa
 Route::post('/consulta', [ContactoConsultaController::class, 'guardar']);
