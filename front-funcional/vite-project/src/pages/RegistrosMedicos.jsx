@@ -51,8 +51,11 @@ function RegistrosMedicos(){
 
       const handleSubmit = async (e) => {
         e.preventDefault();
+        const user = JSON.parse(localStorage.getItem('user'));
+        const userId = user.user.id;
+        
         const formDataToSend = new FormData(); // Crea un objeto FormData para enviar datos de formulario y archivos
-            formDataToSend.append('user_id', formData.user_id);
+            formDataToSend.append('user_id', userId);
             formDataToSend.append('file_path', formData.file_path);
             formDataToSend.append('descripcion', formData.descripcion);
 
@@ -94,7 +97,7 @@ function RegistrosMedicos(){
 
             {estadoForm && 
             <form onSubmit={handleSubmit}>
-                <label htmlFor="user_id">
+                {/* <label htmlFor="user_id">
                     User ID:
                     <input
                         type="text"
@@ -104,7 +107,7 @@ function RegistrosMedicos(){
                         onChange={handleChange}
                         required
                     />
-                </label>
+                </label> */}
                 <br />
                 <label htmlFor="file_path">
                     File Path:
