@@ -12,10 +12,16 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\RegistrosMedicosController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
+
+// ---------
+Route::post('/registroMedico', [RegistrosMedicosController::class, 'guardar']);
+// ---------
+Route::get('/registroMedico/{id}', [RegistrosMedicosController::class, 'download']);
 
 //Enviar consulta en seccion contacto de la seccion informativa
 Route::post('/consulta', [ContactoConsultaController::class, 'guardar']);
