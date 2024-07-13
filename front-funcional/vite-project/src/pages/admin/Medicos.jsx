@@ -53,9 +53,10 @@ function Medicos(){
                 <div className="adminMedicos pt-5 text-center">
 
                     <div className="saludo">
-                        <h2 style={estiloTitulo}>Consultas para ofrecer servicios de médico</h2>
+                        <h2 style={estiloTitulo}>Postulación para ofrecer servicios de médico</h2>
                     </div>
                 
+                    {Array.isArray(consultas) && consultas.length > 0 ? (
                     <table className="table table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
@@ -84,6 +85,9 @@ function Medicos(){
                             ))}
                         </tbody>
                     </table>
+                    ) : (
+                        <p>No se encontró postulación de médicos.</p>
+                    )}
 
                 </div>
             </div>

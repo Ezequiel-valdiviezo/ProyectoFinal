@@ -147,7 +147,7 @@ function Blog(){
                     }
 
 
-
+          {Array.isArray(blogs) && blogs.length > 0 ? (
             <table className="table mt-5 table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
@@ -171,6 +171,9 @@ function Blog(){
                             ))}
                         </tbody>
             </table>
+            ) : (
+              <p>No se encontraron blogs.</p>
+            )}
             </div>
             </div>
         </>

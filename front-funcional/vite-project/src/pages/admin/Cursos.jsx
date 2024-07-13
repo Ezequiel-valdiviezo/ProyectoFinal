@@ -53,9 +53,10 @@ function Cursos(){
                 <div className="adminMedicos pt-5 text-center">
 
                     <div className="saludo">
-                        <h2 style={estiloTitulo}>Consultas para ofrecer cursos</h2>
+                        <h2 style={estiloTitulo}>Postulación para ofrecer cursos</h2>
                     </div>
                 
+                    {Array.isArray(consultas) && consultas.length > 0 ? (
                     <table className="table table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
@@ -80,6 +81,9 @@ function Cursos(){
                             ))}
                         </tbody>
                     </table>
+                ) : (
+                        <p>No se encontró postulación de cursos.</p>
+                    )}
 
                 </div>
             </div>
