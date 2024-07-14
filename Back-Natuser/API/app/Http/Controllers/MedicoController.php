@@ -37,6 +37,25 @@ class MedicoController extends Controller
      */
     public function guardar(Request $request)
     {
+
+        $messages = [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
+            'nombre.max' => 'El nombre no puede tener más de 256 caracteres.',
+            'especialidad.required' => 'La especialidad es obligatoria.',
+            'especialidad.string' => 'La especialidad debe ser una cadena de caracteres.',
+            'especialidad.max' => 'La especialidad no puede tener más de 256 caracteres.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.string' => 'El correo electrónico debe ser una cadena de caracteres.',
+            'email.max' => 'El correo electrónico no puede tener más de 255 caracteres.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'descripcion.string' => 'La descripción debe ser una cadena de caracteres.',
+            'imagen.required' => 'La imagen es obligatorio.',
+            'precio.required' => 'El precio es obligatorio.',
+            'telefono.required' => 'El teléfono es obligatorio.',
+            'telefono.digits' => 'El teléfono debe tener 10 dígitos.',
+        ];
+
         $imagePath = '';
 
         $validator = Validator::make($request->all(), [
@@ -47,15 +66,16 @@ class MedicoController extends Controller
             'email' => 'required|max:256',
             'precio' => 'required',
             'telefono' => 'required|digits:10',
-        ]);
+        ], $messages);
 
         if($validator->fails()){
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => '404',
-            ];
-            return response()->json($data, 400);
+            // $data = [
+            //     'message' => 'Error en la validación de datos',
+            //     'errors' => $validator->errors(),
+            //     'status' => '404',
+            // ];
+            // return response()->json($data, 400);
+            return response()->json($validator->errors(), 422);
         }
 
         // Maneja la subida de la imagen

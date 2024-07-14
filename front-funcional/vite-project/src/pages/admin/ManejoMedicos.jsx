@@ -7,6 +7,7 @@ function ManejoMedicos(){
     const [medicos, setMedicos] = useState([]);
     const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
     const [estadoForm, setEstadoForm] = useState(false);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
@@ -76,7 +77,7 @@ function ManejoMedicos(){
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setError('');
         const formDataToSend = new FormData();
         formDataToSend.append('nombre', formData.nombre);
         formDataToSend.append('imagen', formData.imagen); // Añade la imagen al FormData
@@ -92,6 +93,14 @@ function ManejoMedicos(){
             credentials: 'include',
             body: formDataToSend
           });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.log('Error data:', errorData);
+            setError(errorData);
+            return;
+          }
+
           if (response.ok) {
             const data = await response.json();
             console.log('Médico creado exitosamente:', data);
@@ -134,7 +143,8 @@ function ManejoMedicos(){
                         {/* <h3>Crear curso</h3> */}
                         <div className="form-group my-4">
                             <label htmlFor="nombre">Nombre:</label>
-                            <input className="p-1" type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} />
+                            {error.nombre && <p style={{ color: 'red' }}>{error.nombre[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                         <label htmlFor="imagen">Imagen</label>
@@ -146,26 +156,32 @@ function ManejoMedicos(){
                             accept="image/*"
                             onChange={handleChange}
                         />
+                        {error.imagen && <p style={{ color: 'red' }}>{error.imagen[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="descripcion">Descripción:</label>
-                            <textarea name="descripcion" id="descripcion" value={formData.descripcion} onChange={handleChange} required />
+                            <textarea name="descripcion" id="descripcion" value={formData.descripcion} onChange={handleChange} />
+                            {error.descripcion && <p style={{ color: 'red' }}>{error.descripcion[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="especialidad">Especialidad:</label>
-                            <input className="p-1" type="text" id="especialidad" name="especialidad" value={formData.especialidad} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="especialidad" name="especialidad" value={formData.especialidad} onChange={handleChange} />
+                            {error.especialidad && <p style={{ color: 'red' }}>{error.especialidad[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="email">Email:</label>
-                            <input className="p-1" type="text" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                            <input className="p-1" type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
+                            {error.email && <p style={{ color: 'red' }}>{error.email[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="precio">Precio:</label>
-                            <input className="p-1" type="text" id="precio" name="precio" value={formData.precio} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="precio" name="precio" value={formData.precio} onChange={handleChange} />
+                            {error.precio && <p style={{ color: 'red' }}>{error.precio[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="telefono">Teléfono de contacto:</label>
-                            <input className="p-1" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} />
+                            {error.telefono && <p style={{ color: 'red' }}>{error.telefono[0]}</p>}
                         </div>
                         <button type="submit" className="btn btn-outline-primary m-2">Crear Curso</button>
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
