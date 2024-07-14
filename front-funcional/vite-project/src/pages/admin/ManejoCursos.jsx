@@ -5,6 +5,7 @@ import { useColorContext } from '../../context/colorContext';
 
 function ManejoCursos(){
     const [cursos, setCursos] = useState([]);
+    const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
     const [estadoForm, setEstadoForm] = useState(false);
 
     const navigate = useNavigate();
@@ -111,6 +112,14 @@ function ManejoCursos(){
       const handleCerrarForm = () => {
         setEstadoForm(false);
       };
+
+      const handleMostrarDetalles = (index) => {
+        setCursoSeleccionado(cursos[index]);
+    };
+
+    const handleCerrarDetalles = () => {
+        setCursoSeleccionado(null);
+    };
  
 
     return(
@@ -184,8 +193,8 @@ function ManejoCursos(){
                                     <td>{curso.telefono}</td>
                                     <td>${curso.precio}</td>
                                     <td>
-                                        <button className="btn btn-outline-primary m-1">Detalles</button>
-                                        <button onClick={() => handleDelete(curso.id)} className="btn btn-outline-danger m-1">Eliminar</button>
+                                    <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                                    <button onClick={() => handleDelete(curso.id)} className="btn btn-outline-danger m-1">Eliminar</button>
                                     </td>
                                 </tr>
                             ))}
@@ -193,6 +202,22 @@ function ManejoCursos(){
                     </table>
                 ) : (
                     <p>No se encontraron cursos.</p>
+                )}
+
+                {cursoSeleccionado && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <img src={'http://127.0.0.1:8000/' + cursoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
+                            <h3 className="my-2">Detalles del Curso</h3>
+                            <p className="text-start"><span className="fw-bold">Título:</span> {cursoSeleccionado.titulo}</p>
+                            <p className="text-start"><span className="fw-bold">Descripción:</span> {cursoSeleccionado.descripcion_completa}</p>
+                            <p className="text-start"><span className="fw-bold">Categoría:</span> {cursoSeleccionado.categoria}</p>
+                            <p className="text-start"><span className="fw-bold">Teléfono:</span> {cursoSeleccionado.telefono}</p>
+                            <p className="text-start"><span className="fw-bold">Precio</span>: ${cursoSeleccionado.precio}</p>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                        </div>
+                    </div>
                 )}
 
                 </div>

@@ -22,3 +22,33 @@
     max-width: 1000px;
     margin: auto;
 }
+
+.adminManejoCursos .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .adminManejoCursos  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    max-height: 600px;
+    overflow-y: auto;
+    border: solid 3px rgb(47, 114, 172);
+    box-shadow: 0 0 10px 1px #6db7d7;
+  }
+  
+  .adminManejoCursos .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
