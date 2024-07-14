@@ -12,6 +12,8 @@
   background-color: rgb(225, 239, 248);
   border-radius: 15px;
   box-shadow: 0 0 10px 1px rgb(78, 77, 77);
+  max-width: 400px;
+
 }
 
 .recuerdos .modal {

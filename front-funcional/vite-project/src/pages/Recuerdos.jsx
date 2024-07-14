@@ -143,7 +143,7 @@ function Recuerdos() {
         <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar recuerdo</button>
 
         {estadoForm && 
-          <form className="w-25 m-auto my-4 p-3" onSubmit={handleForm}>
+          <form className="m-auto my-4 p-3" onSubmit={handleForm}>
             <div className="form-group">
               <label htmlFor="imagen">Imagen</label>
               <input
@@ -166,7 +166,7 @@ function Recuerdos() {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <div className="d-flex ">
+            <div className="d-flex flex-wrap">
               <button type="submit" className="btn btn-primary w-100 m-2">Enviar</button>
               <button type="button" className="btn btn-primary w-100 m-2" onClick={handleCerrarForm}>Cancelar</button>
             </div>

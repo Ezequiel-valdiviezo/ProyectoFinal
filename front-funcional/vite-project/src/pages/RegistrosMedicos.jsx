@@ -131,7 +131,7 @@ function RegistrosMedicos(){
             <button className="btn btn-outline-primary" onClick={handleAbrirForm}>Cargar registro médico</button>
 
             {estadoForm && 
-            <form onSubmit={handleSubmit}>
+            <form className="m-auto my-4 p-3" onSubmit={handleSubmit}>
                 {/* <label htmlFor="user_id">
                     User ID:
                     <input
@@ -144,8 +144,8 @@ function RegistrosMedicos(){
                     />
                 </label> */}
                 <br />
-                <label htmlFor="file_path">
-                    File Path:
+                <div className="form-group">
+                <label htmlFor="file_path">Archivo:</label>
                     <input
                         type="file"
                         name="file_path"
@@ -156,10 +156,10 @@ function RegistrosMedicos(){
                         onChange={handleChange}
                         required
                     />
-                </label>
+                  </div>
                 <br />
-                <label htmlFor="descripcion">
-                    Descripción:
+                <div className="form-group">
+                <label htmlFor="descripcion">Descripción:</label>
                     <textarea
                         name="descripcion"
                         id="descripcion"
@@ -168,10 +168,12 @@ function RegistrosMedicos(){
                         maxLength="256"
                         required
                     />
-                </label>
+                </div>
                 <br />
-                <button className="btn btn-outline-primary" type="submit">Guardar</button>
-                <button className="btn btn-outline-primary" onClick={handleCerrarForm}>Cancelar</button>
+                <div className="d-flex flex-wrap">
+                  <button type="submit" className="btn btn-primary w-100 m-2">Guardar</button>
+                  <button type="button" className="btn btn-primary w-100 m-2" onClick={handleCerrarForm}>Cancelar</button>
+                </div>
             </form>
             }
 
