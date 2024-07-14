@@ -43,6 +43,25 @@ class CursosController extends Controller
    */
     public function guardar(Request $request)
     {
+        $messages = [
+            'titulo.required' => 'El titulo es obligatorio.',
+            'titulo.string' => 'El titulo debe ser una cadena de caracteres.',
+            'titulo.max' => 'El titulo no puede tener más de 256 caracteres.',
+            'titulo.unique' => 'El titulo debe ser único.',
+            'descripcion_breve.required' => 'La descripcion_breve es obligatoria.',
+            'descripcion_breve.string' => 'La descripcion_breve debe ser una cadena de caracteres.',
+            'descripcion_completa.required' => 'La descripcion_completa es obligatoria.',
+            'descripcion_completa.string' => 'La descripcion_completa debe ser una cadena de caracteres.',
+            'categoria.required' => 'La categoria es obligatorio.',
+            'categoria.string' => 'La categoria debe ser una cadena de caracteres.',
+            'categoria.max' => 'La categoria no puede tener más de 255 caracteres.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'descripcion.string' => 'La descripción debe ser una cadena de caracteres.',
+            'precio.required' => 'El precio es obligatorio.',
+            'telefono.required' => 'El teléfono es obligatorio.',
+            'telefono.digits' => 'El teléfono debe tener 10 dígitos.',
+        ];
+
         $imagePath = '';
 
         $validator = Validator::make($request->all(), [
@@ -52,15 +71,16 @@ class CursosController extends Controller
             'descripcion_completa' => 'required',
             'precio' => 'required',
             'telefono' => 'required|digits:10',
-        ]);
+        ], $messages);
 
         if($validator->fails()){
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => '404',
-            ];
-            return response()->json($data, 400);
+            // $data = [
+            //     'message' => 'Error en la validación de datos',
+            //     'errors' => $validator->errors(),
+            //     'status' => '404',
+            // ];
+            // return response()->json($data, 400);
+            return response()->json($validator->errors(), 422);
         }
 
         // Maneja la subida de la imagen

@@ -7,6 +7,7 @@ function ManejoCursos(){
     const [cursos, setCursos] = useState([]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
     const [estadoForm, setEstadoForm] = useState(false);
+    const [error, setError] = useState('');
 
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
@@ -78,6 +79,7 @@ function ManejoCursos(){
     
       const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
 
         const formDataToSend = new FormData();
         formDataToSend.append('titulo', formData.titulo);
@@ -94,6 +96,12 @@ function ManejoCursos(){
             credentials: 'include',
             body: formDataToSend
           });
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.log('Error data:', errorData);
+            setError(errorData);
+            return;
+          }
           if (response.ok) {
             const data = await response.json();
             console.log('Curso creado exitosamente:', data);
@@ -136,7 +144,8 @@ function ManejoCursos(){
                         {/* <h3>Crear curso</h3> */}
                         <div className="form-group my-4">
                             <label htmlFor="titulo">Título:</label>
-                            <input className="p-1" type="text" id="titulo" name="titulo" value={formData.titulo} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="titulo" name="titulo" value={formData.titulo} onChange={handleChange} />
+                            {error.titulo && <p style={{ color: 'red' }}>{error.titulo[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                         <label htmlFor="imagen">Imagen</label>
@@ -151,23 +160,28 @@ function ManejoCursos(){
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="descripcion_breve">Descripción breve:</label>
-                            <textarea name="descripcion_breve" id="descripcion_breve" value={formData.descripcion_breve} onChange={handleChange} required />
+                            <textarea name="descripcion_breve" id="descripcion_breve" value={formData.descripcion_breve} onChange={handleChange} />
+                            {error.descripcion_breve && <p style={{ color: 'red' }}>{error.descripcion_breve[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="categoria">Categoría:</label>
-                            <input className="p-1" type="text" id="categoria" name="categoria" value={formData.categoria} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="categoria" name="categoria" value={formData.categoria} onChange={handleChange} />
+                            {error.categoria && <p style={{ color: 'red' }}>{error.categoria[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="descripcion_completa">Descripción completa:</label>
-                            <textarea name="descripcion_completa" id="descripcion_completa" value={formData.descripcion_completa} onChange={handleChange} required />
+                            <textarea name="descripcion_completa" id="descripcion_completa" value={formData.descripcion_completa} onChange={handleChange} />
+                            {error.descripcion_completa && <p style={{ color: 'red' }}>{error.descripcion_completa[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="precio">Precio:</label>
-                            <input className="p-1" type="text" id="precio" name="precio" value={formData.precio} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="precio" name="precio" value={formData.precio} onChange={handleChange} />
+                            {error.precio && <p style={{ color: 'red' }}>{error.precio[0]}</p>}
                         </div>
                         <div className="form-group my-4">
                             <label htmlFor="telefono">Teléfono de contacto:</label>
-                            <input className="p-1" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required />
+                            <input className="p-1" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} />
+                            {error.telefono && <p style={{ color: 'red' }}>{error.telefono[0]}</p>}
                         </div>
                         <button type="submit" className="btn btn-outline-primary m-2">Crear Curso</button>
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
