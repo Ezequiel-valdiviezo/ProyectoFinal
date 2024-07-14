@@ -5,6 +5,7 @@ import '../../styles/adminManejoMedicos.css'
 
 function ManejoMedicos(){
     const [medicos, setMedicos] = useState([]);
+    const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
     const [estadoForm, setEstadoForm] = useState(false);
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
@@ -110,6 +111,14 @@ function ManejoMedicos(){
         setEstadoForm(false);
       };
 
+      const handleMostrarDetalles = (index) => {
+        setMedicoSeleccionado(medicos[index]);
+    };
+
+    const handleCerrarDetalles = () => {
+        setMedicoSeleccionado(null);
+    };
+
     return(
         <>
             <div className="vh-100">
@@ -183,8 +192,8 @@ function ManejoMedicos(){
                                     <td>{medico.telefono}</td>
                                     <td>${medico.precio}</td>
                                     <td>
-                                        <button className="btn btn-outline-primary m-1">Detalles</button>
-                                        <button onClick={() => handleDelete(medico.id)} className="btn btn-outline-danger m-1">Eliminar</button>
+                                    <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                                    <button onClick={() => handleDelete(medico.id)} className="btn btn-outline-danger m-1">Eliminar</button>
                                     </td>
                                 </tr>
                             ))}
@@ -193,6 +202,24 @@ function ManejoMedicos(){
                 ) : (
                     <p>No se encontraron médicos.</p>
                 )}
+
+                {medicoSeleccionado && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <img src={'http://127.0.0.1:8000/' + medicoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
+                            <h3 className="my-2">Detalles del médico</h3>
+                            <p className="text-start"><span className="fw-bold">Nombre:</span> {medicoSeleccionado.nombre}</p>
+                            <p className="text-start"><span className="fw-bold">Descripción:</span> {medicoSeleccionado.descripcion}</p>
+                            <p className="text-start"><span className="fw-bold">Categoría:</span> {medicoSeleccionado.especialidad}</p>
+                            <p className="text-start"><span className="fw-bold">Teléfono:</span> {medicoSeleccionado.telefono}</p>
+                            <p className="text-start"><span className="fw-bold">Precio</span>: ${medicoSeleccionado.precio}</p>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                        </div>
+                    </div>
+                )}
+
+
             </div>
             </div>
         </>
