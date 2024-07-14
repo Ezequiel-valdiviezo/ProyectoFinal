@@ -237,3 +237,15 @@
 .contactoMC .seccion1f .seccion1 div button a:hover {
     color: white;
 }
+
+/* BLOG ---------------------------------------------------------------------------  */
+#nota{
+    /* background-color: #9fa2a3; */
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+}
+.nota-item{
+    /* background-color: #08a2de; */
+    /* width: 18rem; */
+    /* margin: 15px; */
+}
