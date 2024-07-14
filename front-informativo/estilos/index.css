@@ -249,3 +249,6 @@
     /* width: 18rem; */
     /* margin: 15px; */
 }
+#modalImagen{
+    max-width: 500px;
+}
