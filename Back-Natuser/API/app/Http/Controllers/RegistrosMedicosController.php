@@ -133,13 +133,20 @@ class RegistrosMedicosController extends Controller
 
     public function download($id)
     {
-        $record = RegistrosMedicos::findOrFail($id);
+        $registro = RegistrosMedicos::findOrFail($id);
 
-        if ($record->user_id !== auth()->id()) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+        // if ($registro->user_id !== auth()->id()) {
+        //     return response()->json(['message' => 'Unauthorized'], 403);
+        // }
+
+        $filePath = public_path($registro->file_path); // Asegúrate de que la ruta del archivo sea correcta
+        $fileName = basename($filePath); // Obtener el nombre del archivo
+
+        if (!file_exists($filePath)) {
+        return response()->json(['message' => 'File not found'], 404);
         }
 
-        return Storage::download($record->file_path);
+        return response()->download($filePath, $fileName);
     }
 }
 

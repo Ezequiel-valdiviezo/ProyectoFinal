@@ -49,6 +49,41 @@ function RegistrosMedicos(){
         }
       };
 
+      const handleDescarga = async (id) => {
+        try {
+          const response = await fetch(`http://127.0.0.1:8000/api/registroMedico/descargar/${id}`, {
+              method: 'GET',
+              credentials: "include"
+          });
+          if (!response.ok) {
+            throw new Error('Error al descargar archivo');
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const contentDisposition = response.headers.get('Content-Disposition');
+        let fileName = 'descarga';
+
+        if (contentDisposition) {
+            const matches = /filename="([^"]+)"/.exec(contentDisposition);
+            if (matches && matches[1]) {
+                fileName = matches[1];
+            }
+        }
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', fileName); // Usar el nombre del archivo obtenido del servidor
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url); // Libera el objeto URL después de su uso
+      } catch (error) {
+          console.error('Error:', error);
+          // Aquí podrías manejar el error, por ejemplo, mostrar un mensaje de error
+      }
+      }
+
       const handleSubmit = async (e) => {
         e.preventDefault();
         const user = JSON.parse(localStorage.getItem('user'));
@@ -156,7 +191,7 @@ function RegistrosMedicos(){
                                     <td>{regis.id}</td>
                                     <td>{regis.file_path}</td>
                                     <td>{regis.descripcion}</td>
-                                    <td><button className="btn btn-outline-primary">Responder</button></td>
+                                    <td><button className="btn btn-outline-primary" onClick={() => handleDescarga(regis.id)}>Descargar</button></td>
                                 </tr>
                             ))}
                         </tbody>
