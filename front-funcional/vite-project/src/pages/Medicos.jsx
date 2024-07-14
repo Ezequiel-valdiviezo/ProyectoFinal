@@ -4,6 +4,7 @@ import { useColorContext } from '../context/colorContext';
 
 function Medicos(){
     const [medicos, setMedicos] = useState([]);
+    const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
     const { colors, color } = useColorContext();
     const estiloTitulo = {
         color: color,
@@ -18,6 +19,14 @@ function Medicos(){
         .then(data => setMedicos(data))
         .catch(error => console.error('Error fetch cursos:', error));
     }, []);
+
+    const handleMostrarDetalles = (index) => {
+        setMedicoSeleccionado(medicos[index]);
+    };
+
+    const handleCerrarDetalles = () => {
+        setMedicoSeleccionado(null);
+    };
 
     return(
         <div className="fondoMedicos">
@@ -38,7 +47,7 @@ function Medicos(){
                                     <li className="list-group-item">Teléfono: {medico.telefono}</li>
                                     <li className="list-group-item">Precio: ${medico.precio}</li>
                                     <li className="list-group-item">
-                                        <button className="btn btn-outline-primary m-1">Ver Detalles</button>
+                                        <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Ver Detalles</button>
                                         <button className="btn btn-primary" >Contactar</button>
                                         {/* <button className="btn btn-outline-primary m-1">Continuar</button> */}
                                     </li>
@@ -49,6 +58,22 @@ function Medicos(){
                         <p>No se encontraron médicos.</p>
                     )}
                 </div>
+
+                {medicoSeleccionado && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <img src={'http://127.0.0.1:8000/' + medicoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
+                            <h3 className="my-2">Detalles del médico</h3>
+                            <p className="text-start"><span className="fw-bold">Nombre:</span> {medicoSeleccionado.nombre}</p>
+                            <p className="text-start"><span className="fw-bold">Descripción:</span> {medicoSeleccionado.descripcion}</p>
+                            <p className="text-start"><span className="fw-bold">Categoría:</span> {medicoSeleccionado.especialidad}</p>
+                            <p className="text-start"><span className="fw-bold">Teléfono:</span> {medicoSeleccionado.telefono}</p>
+                            <p className="text-start"><span className="fw-bold">Precio</span>: ${medicoSeleccionado.precio}</p>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )
