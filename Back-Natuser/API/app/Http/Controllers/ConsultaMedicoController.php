@@ -14,7 +14,7 @@ class ConsultaMedicoController extends Controller
 
         if($consultas->isEmpty()){
             $data = [
-                'message' => 'No se encontraron cursos',
+                'message' => 'No se encontraron médicos',
                 'status' => 200
             ];
             return response()->json($data);

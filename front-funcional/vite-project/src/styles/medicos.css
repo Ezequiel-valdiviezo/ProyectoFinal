@@ -6,3 +6,9 @@
     font-size: 50px;
     font-weight: bold;
 }
+
+.medicos .medico{
+    border: solid 2px #250759;
+    border-radius: 10px;
+    /* background-color: aqua; */
+}
