@@ -51,6 +51,7 @@ class AuthController extends Controller
 
         $user = new User;
         $user->name = request()->name;
+        $user->foto_perfil = request()->foto_perfil ?? NULL;
         $user->email = request()->email;
         $user->role = request()->role ?? 'user';
         $user->password = bcrypt(request()->password);
