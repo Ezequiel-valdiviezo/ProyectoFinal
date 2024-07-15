@@ -9,7 +9,7 @@ function Perfil(){
   const [cursoSeleccionado, setCursoSeleccionado] = useState(false);
   const [usuario, setUsuario] = useState({})
   const [formData, setFormData] = useState({
-    fotoPerfil: null,
+    foto_perfil: "",
     email: "",
     name: "",
   });
@@ -31,12 +31,12 @@ function Perfil(){
       console.log('Datos del usuario:', data);
       setUsuario(data[0]);
       setFormData({
-        fotoPerfil: null,
+        foto_perfil: data[0].foto_perfil,
         email: data[0].email,
         name: data[0].name
       });
     })
-    .catch(error => console.error('Error fetching recuerdos:', error));
+    .catch(error => console.error('Error fetching perfil:', error));
   }, []);
 
   const handleMostrarDetalles = () => {
@@ -49,10 +49,10 @@ function Perfil(){
 
 const handleChange = (e) => {
   const { name, value, files } = e.target;
-  if (name === 'fotoPerfil') {
+  if (name === 'foto_perfil') {
     setFormData({
       ...formData,
-      fotoPerfil: files[0]
+      foto_perfil: files[0]
     });
   } else {
     setFormData({
@@ -81,9 +81,9 @@ const handleSubmit = (e) => {
     .then(data => {
       console.log('Datos del usuario:', data);
       // alert("Actualizado correctamente");
-      window.location.reload();
+      // window.location.reload();
     })
-    .catch(error => console.error('Error fetching recuerdos:', error));
+    .catch(error => console.error('Error fetching editar perfil:', error));
   // handleCerrarDetalles();
 };
 
@@ -107,7 +107,7 @@ const handleSubmit = (e) => {
                     }}
                   >
                     <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                      src={'http://127.0.0.1:8000/' + usuario.foto_perfil}
                       alt="Avatar"
                       className="img-fluid my-5"
                       style={{ width: "80px" }}
@@ -142,17 +142,17 @@ const handleSubmit = (e) => {
                             <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
                             <h3 style={estiloTitulo}>Editar Perfil</h3>
                             <form onSubmit={handleSubmit}>
-                              {/* <div className="form-group my-4">
-                                <label className="mb-2" htmlFor="fotoPerfil">Foto de Perfil</label>
+                              <div className="form-group my-4">
+                                <label className="mb-2" htmlFor="foto_perfil">Foto de Perfil</label>
                                 <input
                                   type="file"
                                   className="form-control"
-                                  id="fotoPerfil"
-                                  name="fotoPerfil"
+                                  id="foto_perfil"
+                                  name="foto_perfil"
                                   accept="image/*"
                                   onChange={handleChange}
                                 />
-                              </div> */}
+                              </div>
                               <div className="form-group my-4">
                                 <label className="mb-2" htmlFor="email">Email</label>
                                 <input

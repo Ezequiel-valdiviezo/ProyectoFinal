@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 // use \stdClass;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -51,7 +52,7 @@ class AuthController extends Controller
 
         $user = new User;
         $user->name = request()->name;
-        $user->foto_perfil = request()->foto_perfil ?? NULL;
+        $user->foto_perfil = request()->foto_perfil ?? 'images/1720972789.png';
         $user->email = request()->email;
         $user->role = request()->role ?? 'user';
         $user->password = bcrypt(request()->password);
@@ -198,22 +199,43 @@ class AuthController extends Controller
         }
 
         // Actualizar los campos del usuario
-    if ($request->has('name')) {
-        $usuario->name = $request->name;
-    }
-    if ($request->has('email')) {
-        $usuario->email = $request->email;
-    }
+        if ($request->has('name')) {
+            $usuario->name = $request->name;
+        }
+        if ($request->has('email')) {
+            $usuario->email = $request->email;
+        }
 
-    // Guardar los cambios en la base de datos
-    $usuario->save();
+        // Manejar la imagen
+        if ($request->hasFile('foto_perfil')) {
+            $image = $request->file('foto_perfil');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $usuario->foto_perfil = 'images/' . $imageName;
+        }
 
-    // Devolver la respuesta
-    return response()->json([
-        'message' => 'Usuario actualizado exitosamente',
-        'usuario' => $usuario,
-        'status' => 200
-    ], 200);
+            // $image = $request->file('foto_perfil');
+            // $imageName = time() . '.' . $image->getClientOriginalExtension();
+            // $image->move(public_path('images'), $imageName);
+            // $usuario->foto_perfil = 'images/' . $imageName;
+        }
+
+
+
+        // if ($request->hasFile('foto_perfil')) {
+        //     $usuario->foto_perfil = $request->foto_perfil;
+        // }
+
+
+        // Guardar los cambios en la base de datos
+        $usuario->save();
+
+        // Devolver la respuesta
+        return response()->json([
+            'message' => 'Usuario actualizado exitosamente',
+            'usuario' => $usuario,
+            'status' => 200
+        ], 200);
 
     }
 }
