@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 // use \stdClass;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
@@ -52,7 +53,7 @@ class AuthController extends Controller
 
         $user = new User;
         $user->name = request()->name;
-        $user->foto_perfil = request()->foto_perfil ?? 'images/1720972789.png';
+        $user->imagen = request()->imagen ?? 'avatar1.png';
         $user->email = request()->email;
         $user->role = request()->role ?? 'user';
         $user->password = bcrypt(request()->password);
@@ -116,7 +117,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        // return $this->respondWithToken(auth()->refresh());
     }
 
     /**
@@ -131,7 +132,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            // 'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
 
@@ -174,6 +175,8 @@ class AuthController extends Controller
    */
     public function editarPerfil(Request $request, $id)
     {
+        // dd($request);
+
         $usuario = User::find($id);
 
         if(!$usuario){
@@ -206,26 +209,15 @@ class AuthController extends Controller
             $usuario->email = $request->email;
         }
 
-        // Manejar la imagen
-        if ($request->hasFile('foto_perfil')) {
-            $image = $request->file('foto_perfil');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $usuario->foto_perfil = 'images/' . $imageName;
+        if ($request->has('avatar')) {
+            $usuario->avatar = $request->avatar;
         }
 
-            // $image = $request->file('foto_perfil');
-            // $imageName = time() . '.' . $image->getClientOriginalExtension();
-            // $image->move(public_path('images'), $imageName);
-            // $usuario->foto_perfil = 'images/' . $imageName;
-        }
+        // // Manejar la imagen
+        // if ($request->hasFile('imagen')) {
+        //     $usuario->email = $request->email;
 
-
-
-        // if ($request->hasFile('foto_perfil')) {
-        //     $usuario->foto_perfil = $request->foto_perfil;
         // }
-
 
         // Guardar los cambios en la base de datos
         $usuario->save();
