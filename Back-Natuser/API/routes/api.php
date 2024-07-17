@@ -4,6 +4,7 @@ use App\Http\Controllers\AlbumRecuerdosController;
 use App\Http\Controllers\AnotadorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConsultaCursoController;
 use App\Http\Controllers\ConsultaMedicoController;
 use App\Http\Controllers\ContactoConsultaController;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\RegistrosMedicosController;
 
 // Route::get('/user', function (Request $request) {
@@ -110,7 +112,11 @@ Route::post('/album', [AlbumRecuerdosController::class, 'guardar']);
     Route::put('/user/{id}', [AuthController::class, 'editarPerfil']);
 
 
-
+// FORO
+Route::get('/foro', [PublicationController::class, 'index']);
+Route::post('/foro/{id}', [PublicationController::class, 'guardar']);
+// Guardar comentario
+Route::post('/foro/{id}/comentario', [CommentController::class, 'guardar']);
 
 
 
