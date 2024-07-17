@@ -6,49 +6,131 @@ import { useColorContext } from '../context/colorContext';
 
 function Foro(){
 
-    const [posts, setPosts] = useState([]);
-  const [newPost, setNewPost] = useState('');
+    const [publicaciones, setPublicaciones] = useState([]);
+    const [comentario, setComentario] = useState([]);
+
   const { colors, color } = useColorContext();
   const estiloTitulo = {
       color: color,
     };
 
-  useEffect(() => {
-    const storedPosts = JSON.parse(localStorage.getItem('posts'));
-    if (storedPosts) {
-      setPosts(storedPosts);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('posts', JSON.stringify(posts));
-  }, [posts]);
-
-  const handlePostChange = (e) => {
-    setNewPost(e.target.value);
-  };
-
-  const handlePostSubmit = (e) => {
-    e.preventDefault();
-    if (newPost.trim()) {
-      const updatedPosts = [
-        ...posts,
-        { id: Date.now(), content: newPost, comments: [] },
-      ];
-      setPosts(updatedPosts);
-      setNewPost('');
-    }
-  };
-
-  const handleCommentSubmit = (postId, comment) => {
-    const updatedPosts = posts.map(post => {
-      if (post.id === postId) {
-        return { ...post, comments: [...post.comments, comment] };
-      }
-      return post;
+    const [formData, setFormData] = useState({
+      titulo: '',
+      imagen: null,
+      contenido: ''
     });
-    setPosts(updatedPosts);
+
+    useEffect(() => {
+      fetch(`http://127.0.0.1:8000/api/foro`, {
+        method: 'GET',
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setPublicaciones(data);
+        } else {
+          console.error('Unexpected API response:', data);
+        }
+      })
+      .catch(error => console.error('Error fetching recuerdos:', error));
+    }, []);
+
+    // useEffect(() => {
+    //   fetch(`http://127.0.0.1:8000/api/foro`, {
+    //     method: 'GET',
+    //     credentials: 'include'
+    //   })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (Array.isArray(data)) {
+    //       setPublicaciones(data);
+    //     } else {
+    //       console.error('Unexpected API response:', data);
+    //     }
+    //   })
+    //   .catch(error => console.error('Error fetching recuerdos:', error));
+    // }, []);
+
+  
+
+  
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === 'imagen') {
+      setFormData({
+        ...formData,
+        imagen: files[0]
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
+
+  const handlePostSubmit = async (e) => {
+    e.preventDefault();
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user.user.id;
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('titulo', formData.titulo);
+    formDataToSend.append('imagen', formData.imagen);
+    formDataToSend.append('contenido', formData.contenido);
+
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/foro/${userId}`, {
+        method: 'POST',
+        credentials: 'include',
+        body: formDataToSend
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setPublicaciones([...publicaciones, data]);
+        console.log('Recuerdo guardado exitosamente');
+      } else {
+        console.error('Error al guardar el recuerdo');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud de guardado:', error);
+    }
+    
+  };
+
+  const handleCommentSubmit = async (id, value) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user.user.id;
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('comentario', value);
+    formDataToSend.append('user_id', userId);
+
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/foro/${id}/comentario`, {
+        method: 'POST',
+        credentials: 'include',
+        body: formDataToSend
+      });
+
+      if (response.ok) {
+        const data = response.json();
+        setPublicaciones([...publicaciones, data]);
+        console.log('Recuerdo guardado exitosamente');
+      } else {
+        console.error('Error al guardar el recuerdo');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud de guardado:', error);
+    }
+
+  }
+
+
 
   return (
     <div className="container foro pt-5">
@@ -58,11 +140,26 @@ function Foro(){
       <form onSubmit={handlePostSubmit} className="p-4">
         <p>Crear publicación</p>
         <div className="mb-3">
+        <label htmlFor="titulo">Título</label>
+          <input 
+            className="form-control" 
+              id="titulo"
+              name="titulo"
+              rows="3"
+              value={formData.titulo}
+              onChange={handleChange}
+            placeholder="Escribe tu pregunta o comentario aquí..."
+          ></input>
+        </div>
+        <div className="mb-3">
+        <label htmlFor="contenido">Contenido</label>
           <textarea 
             className="form-control" 
-            rows="3" 
-            value={newPost} 
-            onChange={handlePostChange} 
+            id="contenido"
+              name="contenido"
+              rows="3"
+              value={formData.contenido}
+              onChange={handleChange}
             placeholder="Escribe tu pregunta o comentario aquí..."
           ></textarea>
         </div>
@@ -75,7 +172,7 @@ function Foro(){
               id="imagen"
               name="imagen"
               accept="image/*"
-              // onChange={handleChange}
+              onChange={handleChange}
               />
           </div>
           <button className="btn btn-primary" type="submit">Publicar</button>
@@ -84,32 +181,36 @@ function Foro(){
 
       <div className="comentario mt-5">
 
+        
+
         <ul className="list-group">
-          {posts.map(post => (
+          {publicaciones.map(post => (
             <li className="list-group-item custom-background mb-5" key={post.id}>
               <div className="">
                 <img src={img} className="imgPerfilForo" alt="" />
                 <strong>Ezequiel:</strong>
-                <p className="m-2 p-2">{post.content}</p>
+                <h3 className="m-2 p-2">{post.titulo}</h3>
+                <p className="mx-2 px-2">{post.contenido}</p>
                 <p className="text-end">30/06/2024</p>
+                <img src={'http://127.0.0.1:8000/' + post.imagen} alt={post.imagen} width={"200px"} />
               </div>
 
               <div className="mt-3">
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  placeholder="Añadir un comentario..." 
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && e.target.value.trim()) {
-                      handleCommentSubmit(post.id, e.target.value.trim());
-                      e.target.value = '';
-                    }
-                  }}
-                  />
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    placeholder="Añadir un comentario..." 
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && e.target.value.trim()) {
+                        handleCommentSubmit(post.id, e.target.value.trim());
+                        e.target.value = '';
+                      }
+                    }}
+                    />
               </div>
 
-              <ul className="list-group list-group-flush mt-3">
-                {/* <p className="">Comentarios</p> */}
+
+              {/* <ul className="list-group list-group-flush mt-3">
                 {post.comments.map((comment, index) => (
                   <li className="list-group-item custom-background" key={index}>
                     <img src={img2} className="imgPerfilForo" alt="" />
@@ -118,7 +219,9 @@ function Foro(){
                     <div className="mt-2 text-end">30/06/2024</div> 
                   </li>
                 ))}
-              </ul>
+              </ul> */}
+
+              
             </li>
           ))}
         </ul>

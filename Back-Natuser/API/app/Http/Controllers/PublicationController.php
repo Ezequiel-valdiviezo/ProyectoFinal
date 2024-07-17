@@ -22,9 +22,9 @@ class PublicationController extends Controller
         }
 
         // Añadir la URL completa de la imagen a cada recuerdo
-        foreach ($publicaciones as $recuerdo) {
-            $recuerdo->imagen = url('storage/' . $recuerdo->imagen);
-            }
+        // foreach ($publicaciones as $recuerdo) {
+        //     $recuerdo->imagen = url('image/' . $recuerdo->imagen);
+        //     }
 
             return response()->json($publicaciones, 200);
     }
