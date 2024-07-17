@@ -4,6 +4,10 @@ import img from '../assets/fond1.jpeg'
 import img2 from '../assets/2.png'
 import { useColorContext } from '../context/colorContext';
 
+import imgAvatar1 from '../assets/avatar/avatar1.png'; // Importa las imágenes de los avatares
+import imgAvatar2 from '../assets/avatar/avatar2.png'; // Importa las imágenes de los avatares
+
+
 function Foro(){
 
     const [publicaciones, setPublicaciones] = useState([]);
@@ -100,7 +104,7 @@ function Foro(){
       if (response.ok) {
         const data = response.json();
         setPublicaciones([...publicaciones, data]);
-        console.log('Recuerdo guardado exitosamente');
+        console.log('Comentario guardado exitosamente');
       } else {
         console.error('Error al guardar el recuerdo');
       }
@@ -111,6 +115,17 @@ function Foro(){
   }
 
   const user = JSON.parse(localStorage.getItem('user'));
+
+  const obtenerImagenAvatar = (avatar) => {
+    switch (avatar) {
+      case "avatar1":
+        return imgAvatar1;
+      case "avatar2":
+        return imgAvatar2;
+      default:
+        return img;
+    }
+  };
 
   return (
     <div className="container foro pt-5">
@@ -167,7 +182,11 @@ function Foro(){
           {publicaciones.map(post => (
             <li className="list-group-item custom-background mb-5" key={post.id}>
               <div className="">
-                <img src={img} className="imgPerfilForo" alt="" />
+                <img 
+                src={obtenerImagenAvatar(post.user.avatar)}
+                className="imgPerfilForo" 
+                alt="Avatar" 
+                />
                 <strong>{post.user.name}</strong>
                 <h3 className="m-2 p-2">{post.titulo}</h3>
                 <p className="mx-2 px-2">{post.contenido}</p>
@@ -193,7 +212,11 @@ function Foro(){
               <ul className="list-group list-group-flush mt-3">
                 {post.comments.map((comment, index) => (
                   <li className="list-group-item custom-background" key={index}>
-                    <img src={img2} className="imgPerfilForo" alt="" />
+                    <img 
+                    src={obtenerImagenAvatar(comment.user.avatar)}
+                    className="imgPerfilForo" 
+                    alt="" 
+                    />
                     {comment.user.name}: {comment.comentario}
                     <br />
                     <div className="mt-2 text-end">{comment.created_at}</div> 
