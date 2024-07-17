@@ -36,26 +36,6 @@ function Foro(){
       .catch(error => console.error('Error fetching recuerdos:', error));
     }, []);
 
-    // useEffect(() => {
-    //   fetch(`http://127.0.0.1:8000/api/foro`, {
-    //     method: 'GET',
-    //     credentials: 'include'
-    //   })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (Array.isArray(data)) {
-    //       setPublicaciones(data);
-    //     } else {
-    //       console.error('Unexpected API response:', data);
-    //     }
-    //   })
-    //   .catch(error => console.error('Error fetching recuerdos:', error));
-    // }, []);
-
-  
-
-  
-
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'imagen') {
@@ -130,12 +110,12 @@ function Foro(){
 
   }
 
-
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div className="container foro pt-5">
       <h2 className="text-center" style={estiloTitulo}>Foro</h2>
-      <p className="fs-3 fw-bold">¡Hola Ezequiel!</p>
+      <p className="fs-3 fw-bold">¡Hola {user.user.name}!</p>
       <p>Conectá con otros padres que están o estuvieron en la misma situación.</p>
       <form onSubmit={handlePostSubmit} className="p-4">
         <p>Crear publicación</p>
@@ -188,11 +168,11 @@ function Foro(){
             <li className="list-group-item custom-background mb-5" key={post.id}>
               <div className="">
                 <img src={img} className="imgPerfilForo" alt="" />
-                <strong>Ezequiel:</strong>
+                <strong>{post.user.name}</strong>
                 <h3 className="m-2 p-2">{post.titulo}</h3>
                 <p className="mx-2 px-2">{post.contenido}</p>
-                <p className="text-end">30/06/2024</p>
-                <img src={'http://127.0.0.1:8000/' + post.imagen} alt={post.imagen} width={"200px"} />
+                <img src={'http://127.0.0.1:8000/' + post.imagen} alt={post.imagen} width={"400px"} />
+                <p className="text-end">{post.created_at}</p>
               </div>
 
               <div className="mt-3">
@@ -210,16 +190,16 @@ function Foro(){
               </div>
 
 
-              {/* <ul className="list-group list-group-flush mt-3">
+              <ul className="list-group list-group-flush mt-3">
                 {post.comments.map((comment, index) => (
                   <li className="list-group-item custom-background" key={index}>
                     <img src={img2} className="imgPerfilForo" alt="" />
-                    Ezequiel: {comment}
+                    {comment.user.name}: {comment.comentario}
                     <br />
-                    <div className="mt-2 text-end">30/06/2024</div> 
+                    <div className="mt-2 text-end">{comment.created_at}</div> 
                   </li>
                 ))}
-              </ul> */}
+              </ul>
 
               
             </li>

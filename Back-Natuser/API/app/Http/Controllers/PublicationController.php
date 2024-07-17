@@ -11,7 +11,9 @@ class PublicationController extends Controller
 {
     public function index()
     {
-        $publicaciones = Publication::all();
+
+
+        $publicaciones = Publication::with('comments.user', 'user')->get();
 
         if($publicaciones->isEmpty()){
             $data = [
