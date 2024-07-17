@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
-    public function guardar(Request $request, Publication $publication)
+    public function guardar(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
         'comentario' => 'required|max:256',
@@ -26,9 +26,9 @@ class CommentController extends Controller
         }
 
         $comentario = new Comment();
-        $comentario->body = $request->comentario;
+        $comentario->comentario = $request->comentario;
         $comentario->user_id = $request->user_id;
-        $comentario->publication_id = $publication->id;
+        $comentario->publication_id = $id;
         $comentario->save();
 
         if(!$comentario){
