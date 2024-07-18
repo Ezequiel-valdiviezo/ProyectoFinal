@@ -14,6 +14,8 @@ class AlbumRecuerdos extends Model
     protected $fillable = [
         'user_id',
         'imagen',
+        'imagen2',
+        'imagen3',
         'descripcion'
     ];
 

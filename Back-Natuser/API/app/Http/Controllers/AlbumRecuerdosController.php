@@ -28,6 +28,12 @@ class AlbumRecuerdosController extends Controller
         foreach ($album as $recuerdo) {
         $recuerdo->imagen_url = url('storage/' . $recuerdo->imagen);
         }
+        foreach ($album as $recuerdo) {
+        $recuerdo->imagen_url2 = url('storage/' . $recuerdo->imagen2);
+        }
+        foreach ($album as $recuerdo) {
+        $recuerdo->imagen_url3 = url('storage/' . $recuerdo->imagen3);
+        }
 
         return response()->json($album, 200);
     }
@@ -49,6 +55,12 @@ class AlbumRecuerdosController extends Controller
         // Añadir la URL completa de la imagen a cada recuerdo
         foreach ($album as $recuerdo) {
         $recuerdo->imagen_url = url('storage/' . $recuerdo->imagen);
+        }
+        foreach ($album as $recuerdo) {
+        $recuerdo->imagen_url = url('storage/' . $recuerdo->imagen2);
+        }
+        foreach ($album as $recuerdo) {
+        $recuerdo->imagen_url = url('storage/' . $recuerdo->imagen3);
         }
 
         return response()->json($album, 200);
@@ -87,6 +99,7 @@ class AlbumRecuerdosController extends Controller
     {
         $validator = Validator::make($request->all(), [
            'descripcion' => 'required|max:256',
+           'imagen' => 'required',
         ]);
 
     if($validator->fails()){
@@ -99,6 +112,7 @@ class AlbumRecuerdosController extends Controller
     }
 
     // Maneja la subida de la imagen
+    $imagePath = null;
     if ($request->hasFile('imagen')) {
         $image = $request->file('imagen');
         $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -106,15 +120,33 @@ class AlbumRecuerdosController extends Controller
         $imagePath = 'images/' . $imageName;
     }
 
+    $imagePath2 = null;
+    if ($request->hasFile('imagen2')) {
+        $image = $request->file('imagen2');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+        $imagePath2 = 'images/' . $imageName;
+    }
+
+    $imagePath3 = null;
+    if ($request->hasFile('imagen3')) {
+        $image = $request->file('imagen3');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+        $imagePath3 = 'images/' . $imageName;
+    }
+
     $recuerdos = AlbumRecuerdos::create([
         'user_id' => $request->user_id,
         'imagen' => $imagePath,
+        'imagen2' => $imagePath2,
+        'imagen3' => $imagePath3,
         'descripcion' => $request->descripcion,
     ]);
 
     if(!$recuerdos){
         $data = [
-            'message' => 'Error al crear el curso',
+            'message' => 'Error al crear el recuerdo',
             'status' => 500
             ];
         return response()->json($data, 500, );
@@ -122,6 +154,10 @@ class AlbumRecuerdosController extends Controller
 
     // Añadir la URL completa de la imagen
     $recuerdos->imagen_url = url($recuerdos->imagen);
+    // $recuerdos->imagen_url2 = url($recuerdos->imagen2);
+    // $recuerdos->imagen_url3 = url($recuerdos->imagen3);
+    $recuerdos->imagen_url2 = $recuerdos->imagen2 ? url($recuerdos->imagen2) : null;
+    $recuerdos->imagen_url3 = $recuerdos->imagen3 ? url($recuerdos->imagen3) : null;
 
     $data = [
         'recuerdos' => $recuerdos,

@@ -8,6 +8,8 @@ function Recuerdos() {
   const [formData, setFormData] = useState({
     user_id: '',
     imagen: null,
+    imagen2: null,
+    imagen3: null,
     descripcion: ''
   });
   const [deleteId, setDeleteId] = useState(null);
@@ -51,6 +53,16 @@ function Recuerdos() {
       setFormData({
         ...formData,
         imagen: files[0]
+      });
+    } else if (name === 'imagen2') {
+      setFormData({
+        ...formData,
+        imagen2: files[0]
+      });
+    } else if (name === 'imagen3') {
+      setFormData({
+        ...formData,
+        imagen3: files[0]
       });
     } else {
       setFormData({
@@ -98,6 +110,8 @@ function Recuerdos() {
     const formDataToSend = new FormData();
     formDataToSend.append('user_id', user.user.id);
     formDataToSend.append('imagen', formData.imagen);
+    formDataToSend.append('imagen2', formData.imagen2);
+    formDataToSend.append('imagen3', formData.imagen3);
     formDataToSend.append('descripcion', formData.descripcion);
 
     try {
@@ -151,6 +165,28 @@ function Recuerdos() {
                 className="form-control mt-2"
                 id="imagen"
                 name="imagen"
+                accept="image/*"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="imagen2">Imagen 2</label>
+              <input
+                type="file"
+                className="form-control mt-2"
+                id="imagen2"
+                name="imagen2"
+                accept="image/*"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="imagen3">Imagen 3</label>
+              <input
+                type="file"
+                className="form-control mt-2"
+                id="imagen3"
+                name="imagen3"
                 accept="image/*"
                 onChange={handleChange}
               />
