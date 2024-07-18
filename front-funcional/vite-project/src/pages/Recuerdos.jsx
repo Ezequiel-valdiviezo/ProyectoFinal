@@ -246,13 +246,53 @@ function Recuerdos() {
                   <h5 className="modal-title">{recuerdoSeleccionado.descripcion}</h5>
                   <button type="button" className="btn-close" onClick={handleCerrarRecuerdo}></button>
                 </div>
-                <div className="modal-body">
-                  <img
-                    className="img-fluid"
-                    src={'http://127.0.0.1:8000/' + recuerdoSeleccionado.imagen}
-                    alt="Recuerdo"
-                  />
-                </div>
+                  <div className="modal-body">
+                    {recuerdoSeleccionado.imagen2 || recuerdoSeleccionado.imagen3 ? (
+                      <div id={`carousel${recuerdoSeleccionado.id}`} className="carousel slide" data-bs-ride="carousel">
+                        <div className="carousel-inner">
+                          <div className="carousel-item active">
+                            <img
+                              className="img-fluid"
+                              src={'http://127.0.0.1:8000/' + recuerdoSeleccionado.imagen}
+                              alt="Recuerdo"
+                            />
+                          </div>
+                          {recuerdoSeleccionado.imagen2 && (
+                            <div className="carousel-item">
+                              <img
+                                className="img-fluid"
+                                src={'http://127.0.0.1:8000/' + recuerdoSeleccionado.imagen2}
+                                alt="Recuerdo"
+                              />
+                            </div>
+                          )}
+                          {recuerdoSeleccionado.imagen3 && (
+                            <div className="carousel-item">
+                              <img
+                                className="img-fluid"
+                                src={'http://127.0.0.1:8000/' + recuerdoSeleccionado.imagen3}
+                                alt="Recuerdo"
+                              />
+                            </div>
+                          )}
+                        </div>
+                        <button className="carousel-control-prev custom-carousel-control-prev" type="button" data-bs-target={`#carousel${recuerdoSeleccionado.id}`} data-bs-slide="prev">
+                          <span className="carousel-control-prev-icon custom-carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next custom-carousel-control-next" type="button" data-bs-target={`#carousel${recuerdoSeleccionado.id}`} data-bs-slide="next">
+                          <span className="carousel-control-next-icon custom-carousel-control-next-icon" aria-hidden="true"></span>
+                          <span className="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                    ) : (
+                      <img
+                        className="img-fluid"
+                        src={'http://127.0.0.1:8000/' + recuerdoSeleccionado.imagen}
+                        alt="Recuerdo"
+                      />
+                    )}
+                  </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" onClick={handleCerrarRecuerdo}>Cerrar</button>
                 </div>

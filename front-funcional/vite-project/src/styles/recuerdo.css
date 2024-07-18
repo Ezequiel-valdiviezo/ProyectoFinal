@@ -44,3 +44,20 @@
     cursor: pointer;
   }
    */
+
+   .recuerdos .custom-carousel-control-prev,
+   .custom-carousel-control-next {
+     font-size: 2rem; /* Aumenta el tamaño de la flecha */
+     width: 3rem;
+     height: 3rem;
+     background-color: rgba(0, 0, 0, 0.931); /* Fondo semitransparente */
+     border-radius: 50%; /* Hacer que el fondo sea circular */
+     margin: auto;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.853); /* Sombra */
+   }
+   
+   .recuerdos .custom-carousel-control-prev:hover,
+   .custom-carousel-control-next:hover {
+     background-color: rgba(0, 0, 0, 0.748); /* Fondo más oscuro al pasar el ratón */
+   }
+   
