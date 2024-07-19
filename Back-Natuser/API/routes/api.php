@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CursosController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\RegistrosMedicosController;
@@ -119,8 +120,8 @@ Route::post('/foro/{id}', [PublicationController::class, 'guardar']);
 Route::post('/foro/{id}/comentario', [CommentController::class, 'guardar']);
 
 
-
-
+// Email
+Route::post('/enviar-email', [EmailController::class, 'enviarEmail']);
 
 
 //Registro usuario
