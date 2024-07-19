@@ -43,6 +43,9 @@
     font-size: 50px;
     font-weight: bold;
 }
+.home .tituloh2{
+    color: #212529;
+}
 .home .seccion3 h3{
     color: #08a2de;
 }
@@ -204,6 +207,9 @@
 }
 
 /* HOME FORM ---------------------------------------------------------------------------  */
+.contactoMC .tituloh2{
+    color: #212529;
+}
 /* MEDICOS FORM ---------------------------------------------------------------------------  */
 .medicosf{
     max-width: 1000px;
