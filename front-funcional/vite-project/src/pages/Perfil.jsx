@@ -146,6 +146,12 @@ const obtenerImagenAvatar = () => {
                           <p className="text-muted">{usuario.name}</p>
                         </div>
                       </div>
+                      <div className="row pt-1">
+                        <div className="col-6 mb-3">
+                          <h6>Foro</h6>
+                          <p className="text-muted"><a href="/foro/misPublicaciones">Ver mis publicaciones</a></p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -21,6 +21,7 @@ import ManejoCursos from './pages/admin/ManejoCursos'
 import { ColorProvider } from './context/colorContext';
 import Blog from './pages/admin/Blog'
 import ManejoMedicos from './pages/admin/ManejoMedicos'
+import MisPublicaciones from './pages/MisPublicaciones'
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -87,6 +88,10 @@ function App() {
          {
            path: '/medicos',
            element: <Medicos />
+         },
+         {
+           path: '/foro/misPublicaciones',
+           element: <MisPublicaciones />
          },
          {
            path: '/admin/panelAdmin',

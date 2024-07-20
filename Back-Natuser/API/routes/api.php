@@ -113,8 +113,11 @@ Route::post('/album', [AlbumRecuerdosController::class, 'guardar']);
     Route::put('/user/{id}', [AuthController::class, 'editarPerfil']);
 
 
-// FORO
+// Trae todas las publicaciones y sus comentarios
 Route::get('/foro', [PublicationController::class, 'index']);
+// Trea publicaciones por usuario
+Route::get('/foro/{id}', [PublicationController::class, 'PublicacionUsuario']);
+// Guarda publicacion
 Route::post('/foro/{id}', [PublicationController::class, 'guardar']);
 // Guardar comentario
 Route::post('/foro/{id}/comentario', [CommentController::class, 'guardar']);

@@ -11,8 +11,6 @@ class PublicationController extends Controller
 {
     public function index()
     {
-
-
         $publicaciones = Publication::with('comments.user', 'user')->get();
 
         if($publicaciones->isEmpty()){
@@ -29,6 +27,21 @@ class PublicationController extends Controller
         //     }
 
             return response()->json($publicaciones, 200);
+    }
+
+    public function PublicacionUsuario($id)
+    {
+        $publicacion = Publication::with('comments.user', 'user')->where('user_id', $id)->get();
+
+        if($publicacion->isEmpty()){
+            $data = [
+                'message' => 'No se encontraron las publicaciones',
+                'status' => 200
+            ];
+            return response()->json($data);
+        }
+
+        return response()->json($publicacion, 200);
     }
 
     public function guardar(Request $request, $id)
