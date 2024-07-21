@@ -51,9 +51,9 @@ function MisPublicaciones(){
     return(
         <>
             <div className="container foro pt-5">
-      <h2 className="text-center" style={estiloTitulo}>Foro</h2>
-      <p className="fs-3 fw-bold">¡Hola {user.user.name}!</p>
-      <p>Conectá con otros padres que están o estuvieron en la misma situación.</p>
+      <h2 className="text-center" style={estiloTitulo}>Mis publicaciones</h2>
+      {/* <p className="fs-3 fw-bold">¡Hola {user.user.name}!</p> */}
+      <p className="text-center">Desde acá vas a poder ver tus publicaciones realizadas en nuestro foro, con sus comentarios.</p>
 
       <div className="comentario mt-5">
 
@@ -75,11 +75,12 @@ function MisPublicaciones(){
                 <p className="text-end">{post.created_at}</p>
               </div>
 
-
+              {/* <hr /> */}
 
               <ul className="list-group list-group-flush mt-3">
                 {post.comments.map((comment, index) => (
-                  <li className="list-group-item custom-background" key={index}>
+                    <li className="list-group-item custom-background" key={index}>
+                        <hr />
                     <img 
                     src={obtenerImagenAvatar(comment.user.avatar)}
                     className="imgPerfilForo" 
