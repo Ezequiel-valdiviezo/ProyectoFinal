@@ -7,6 +7,8 @@ function Blog(){
     const [estadoForm, setEstadoForm] = useState(false);
     const navigate = useNavigate();
 
+    const [notaSeleccionada, setNotaSeleccionada] = useState(null);
+
     const [formData, setFormData] = useState({
         titulo: "",
         contenido: "",
@@ -101,6 +103,14 @@ function Blog(){
         setEstadoForm(false);
       };
 
+      const handleMostrarDetalles = (index) => {
+        setNotaSeleccionada(blogs[index]);
+      };
+
+      const handleCerrarDetalles = () => {
+        setNotaSeleccionada(null);
+      };
+
     return(
         <>
         <div className="vh-100">
@@ -151,7 +161,7 @@ function Blog(){
             <table className="table mt-5 table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
-                                <th scope="col">Nombre</th>
+                                <th scope="col">Título</th>
                                 <th scope="col">Contenido</th>
                                 <th scope="col">Autor</th>
                                 <th scope="col"></th>
@@ -164,7 +174,7 @@ function Blog(){
                                     <td>{blog.contenido}</td>
                                     <td>{blog.autor}</td>
                                     <td>
-                                        <button className="btn btn-outline-primary m-1">Detalles</button>
+                                        <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
                                         <button onClick={() => handleDelete(blog.id)} className="btn btn-outline-danger m-1">Eliminar</button>
                                     </td>
                                 </tr>
@@ -174,6 +184,24 @@ function Blog(){
             ) : (
               <p>No se encontraron blogs.</p>
             )}
+
+
+                {notaSeleccionada && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <img src={'http://127.0.0.1:8000/' + notaSeleccionada.imagen} width="100%" className="card-img-top" alt="" />
+                            <h3 className="my-2">Detalles del Curso</h3>
+                            <p className="text-start"><span className="fw-bold">Título:</span> {notaSeleccionada.titulo}</p>
+                            <p className="text-start"><span className="fw-bold">Contenido:</span> {notaSeleccionada.contenido}</p>
+                            <p className="text-start"><span className="fw-bold">Autor:</span> {notaSeleccionada.autor}</p>
+                            <p className="text-start"><span className="fw-bold">Fecha de publicación: </span>{notaSeleccionada.fecha_publicacion}</p>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                        </div>
+                    </div>
+                )}
+
+
             </div>
             </div>
         </>
