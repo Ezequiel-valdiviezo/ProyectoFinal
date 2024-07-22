@@ -57,8 +57,6 @@ function MisPublicaciones(){
 
       <div className="comentario mt-5">
 
-        
-
         <ul className="list-group">
           {publicaciones.map(post => (
             <li className="list-group-item custom-background mb-5" key={post.id}>

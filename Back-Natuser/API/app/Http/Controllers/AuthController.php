@@ -168,6 +168,27 @@ class AuthController extends Controller
         return response()->json($users, 200);
     }
 
+    public function eliminarPerfil($id)
+    {
+        $user = User::find($id);
+
+        if(!$user){
+            $data = [
+                'message' => 'No se encontró el usuario',
+                'status' => 200
+            ];
+            return response()->json($data);
+        }
+
+        $user->delete();
+
+        $data = [
+            'message' => 'Usuario eliminada',
+            'status' => 200
+        ];
+        return response()->json($data, 200);
+    }
+
     /**
    * Edita un usuario
    * @param Request $request

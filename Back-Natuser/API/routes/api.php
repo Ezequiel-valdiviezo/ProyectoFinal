@@ -111,6 +111,7 @@ Route::post('/album', [AlbumRecuerdosController::class, 'guardar']);
     Route::get('/users', [AuthController::class, 'users']);
     Route::get('/user/{id}', [AuthController::class, 'userId']);
     Route::put('/user/{id}', [AuthController::class, 'editarPerfil']);
+    Route::delete('/user/{id}', [AuthController::class, 'eliminarPerfil']);
 
 
 // Trae todas las publicaciones y sus comentarios
