@@ -135,7 +135,7 @@ function ManejoMedicos(){
 
             <h2 style={estiloTitulo}>Manejo Médicos</h2>
 
-            <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear Curso</button>
+            <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear médico</button>
 
 
                     {estadoForm &&
@@ -183,7 +183,7 @@ function ManejoMedicos(){
                             <input className="p-1" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} />
                             {error.telefono && <p style={{ color: 'red' }}>{error.telefono[0]}</p>}
                         </div>
-                        <button type="submit" className="btn btn-outline-primary m-2">Crear Curso</button>
+                        <button type="submit" className="btn btn-outline-primary m-2">Crear médico</button>
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
                         </form>
                     }

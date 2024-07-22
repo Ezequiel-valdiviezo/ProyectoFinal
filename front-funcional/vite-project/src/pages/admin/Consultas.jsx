@@ -39,7 +39,7 @@ function Consultas() {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     // Contiene los elementos de la página actual
-    const currentItems = consultas.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = Array.isArray(consultas) ? consultas.slice(indexOfFirstItem, indexOfLastItem) : [];
 
     // Cambia la pagina al numero seleccionado
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -52,6 +52,8 @@ function Consultas() {
                         <h2 style={estiloTitulo}>Consultas</h2>
                     </div>
                     
+                {Array.isArray(consultas) && consultas.length > 0 ? (
+                    <div>
                     <table className="table table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
@@ -90,6 +92,12 @@ function Consultas() {
                             </li>
                         </ul>
                     </nav>
+                    </div>
+
+                    ) : (
+                        <p>No se encontraron consultas.</p>
+                    )}
+
                 </div>
             </div>
         </>
