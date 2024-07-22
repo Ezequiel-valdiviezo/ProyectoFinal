@@ -8,6 +8,7 @@ function ManejoCursos(){
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
     const [estadoForm, setEstadoForm] = useState(false);
     const [error, setError] = useState('');
+    const [msjCreado, setMsjCreado] = useState('');
 
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
@@ -96,20 +97,25 @@ function ManejoCursos(){
             credentials: 'include',
             body: formDataToSend
           });
+          setMsjCreado('Creando...')
           if (!response.ok) {
             const errorData = await response.json();
             console.log('Error data:', errorData);
             setError(errorData);
+            setMsjCreado('Error al crear curso')
             return;
           }
           if (response.ok) {
             const data = await response.json();
+            setCursos([...cursos, data])
+            setMsjCreado('Curso creado exitosamente')
             console.log('Curso creado exitosamente:', data);
           } else {
             console.error('Error al crear el curso');
           }
         } catch (error) {
           console.error('Error en la solicitud de creación:', error);
+          setMsjCreado('Error al crear curso')
         }
       };
 
@@ -187,6 +193,8 @@ function ManejoCursos(){
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
                         </form>
                     }
+
+                <p className="mt-4">{msjCreado}</p>
 
                 {Array.isArray(cursos) && cursos.length > 0 ? (
                     <table className="table mt-5 table-striped table-hover">

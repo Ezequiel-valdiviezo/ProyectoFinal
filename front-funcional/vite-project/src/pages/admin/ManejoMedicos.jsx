@@ -7,6 +7,7 @@ function ManejoMedicos(){
     const [medicos, setMedicos] = useState([]);
     const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
     const [estadoForm, setEstadoForm] = useState(false);
+    const [msjCreado, setMsjCreado] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
@@ -93,22 +94,26 @@ function ManejoMedicos(){
             credentials: 'include',
             body: formDataToSend
           });
-
+          setMsjCreado('Creando...')
           if (!response.ok) {
             const errorData = await response.json();
             console.log('Error data:', errorData);
             setError(errorData);
+            setMsjCreado('Error al crear médico')
             return;
           }
 
           if (response.ok) {
             const data = await response.json();
+            setMedicos([...medicos, data])
+            setMsjCreado('Médico creado exitosamente')
             console.log('Médico creado exitosamente:', data);
           } else {
             console.error('Error al crear el Médico');
           }
         } catch (error) {
           console.error('Error en la solicitud de creación:', error);
+          setMsjCreado('Error al crear médico')
         }
       };
 
@@ -187,6 +192,8 @@ function ManejoMedicos(){
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
                         </form>
                     }
+
+                    <p className="mt-4">{msjCreado}</p>
 
 
             {Array.isArray(medicos) && medicos.length > 0 ? (
