@@ -7,6 +7,8 @@ function Blog(){
     const [estadoForm, setEstadoForm] = useState(false);
     const navigate = useNavigate();
 
+    const [msjCreado, setMsjCreado] = useState('');
+
     const [notaSeleccionada, setNotaSeleccionada] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -84,14 +86,26 @@ function Blog(){
             credentials: 'include',
             body: formDataToSend
           });
+          setMsjCreado('Creando...')
+
+          if(!response.ok){
+            const errorData = await response.json();
+            console.log('Error data:', errorData);
+            setMsjCreado('Error al crear nota')
+            return;
+          }
+
           if (response.ok) {
             const data = await response.json();
+            setBlogs([...blogs, data])
+            setMsjCreado('Nota creada exitosamente')
             console.log('Nota creado exitosamente:', data);
           } else {
             console.error('Error al crear la nota');
           }
         } catch (error) {
           console.error('Error en la solicitud de creación:', error);
+          setMsjCreado('Error al crear nota')
         }
       };
 
@@ -156,6 +170,7 @@ function Blog(){
                         </form>
                     }
 
+          <p className="mt-4">{msjCreado}</p>
 
           {Array.isArray(blogs) && blogs.length > 0 ? (
             <table className="table mt-5 table-striped table-hover">
