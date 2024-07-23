@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../styles/adminManejoCursos.css'
 import { useColorContext } from '../../context/colorContext';
+import gif from '../../assets/gif/check.gif'
 
 function ManejoCursos(){
     const [cursos, setCursos] = useState([]);
@@ -108,7 +109,17 @@ function ManejoCursos(){
           if (response.ok) {
             const data = await response.json();
             setCursos([...cursos, data])
-            setMsjCreado('Curso creado exitosamente')
+            setMsjCreado(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                  <div>
+                    <img src="${gif}" width="28px" alt="">
+                  </div>
+                  <div>
+                    <p class="mx-2">Curso creado exitosamente</p>
+                  </div>
+                </div> `);
+                // setTimeout(() => {
+                //     setMsjCreado('');
+                // }, 3000);
             console.log('Curso creado exitosamente:', data);
           } else {
             console.error('Error al crear el curso');
@@ -194,7 +205,7 @@ function ManejoCursos(){
                         </form>
                     }
 
-                <p className="mt-4">{msjCreado}</p>
+<p className="mt-4" dangerouslySetInnerHTML={{ __html: msjCreado }}></p>
 
                 {Array.isArray(cursos) && cursos.length > 0 ? (
                     <table className="table mt-5 table-striped table-hover">

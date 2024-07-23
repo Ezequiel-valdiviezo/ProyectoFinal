@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useColorContext } from '../../context/colorContext';
 import '../../styles/adminManejoMedicos.css'
+import gif from '../../assets/gif/check.gif'
 
 function ManejoMedicos(){
     const [medicos, setMedicos] = useState([]);
@@ -106,7 +107,17 @@ function ManejoMedicos(){
           if (response.ok) {
             const data = await response.json();
             setMedicos([...medicos, data])
-            setMsjCreado('Médico creado exitosamente')
+            setMsjCreado(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                  <div>
+                    <img src="${gif}" width="28px" alt="">
+                  </div>
+                  <div>
+                    <p class="mx-2">Médico creado exitosamente</p>
+                  </div>
+                </div> `);
+                // setTimeout(() => {
+                //     setMsjCreado('');
+                // }, 3000); 
             console.log('Médico creado exitosamente:', data);
           } else {
             console.error('Error al crear el Médico');
@@ -193,7 +204,7 @@ function ManejoMedicos(){
                         </form>
                     }
 
-                    <p className="mt-4">{msjCreado}</p>
+<p className="mt-4" dangerouslySetInnerHTML={{ __html: msjCreado }}></p>
 
 
             {Array.isArray(medicos) && medicos.length > 0 ? (
