@@ -7,6 +7,9 @@ import gif from '../../assets/gif/check.gif'
 function ManejoMedicos(){
     const [medicos, setMedicos] = useState([]);
     const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
+
+    const [medicosVencidos, setMedicosVencidos] = useState([]);
+
     const [estadoForm, setEstadoForm] = useState(false);
     const [msjCreado, setMsjCreado] = useState('');
     const [error, setError] = useState('');
@@ -16,13 +19,19 @@ function ManejoMedicos(){
         color: color,
       };
 
+    const fechaActual = new Date();
+
       useEffect(() => {
         fetch('http://127.0.0.1:8000/api/medicos', {
             method: 'GET',
             credentials: "include",
         })
         .then(response => response.json())
-        .then(data => setMedicos(data))
+        .then(data => {
+          setMedicos(data);
+          const vencidos = data.filter(medico => new Date(medico.fecha_vencimiento) <= fechaActual);
+          setMedicosVencidos(vencidos);
+      })
         .catch(error => console.error('Error fetch médicos:', error));
     }, []);
 
@@ -257,6 +266,38 @@ function ManejoMedicos(){
                             <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
                         </div>
                     </div>
+                )}
+
+<h2 className="mt-5" style={estiloTitulo}>Servicios vencidos</h2>
+
+{Array.isArray(medicosVencidos) && medicosVencidos.length > 0 ? (
+                    <table className="table mt-5 table-striped table-hover">
+                        <thead className="table-dark">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Especialidad</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {medicosVencidos.map((medico, index) => (
+                                <tr key={index}>
+                                    <td>{medico.nombre}</td>
+                                    <td>{medico.especialidad}</td>
+                                    <td>{medico.telefono}</td>
+                                    <td>${medico.precio}</td>
+                                    <td>
+                                    <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                                    <button onClick={() => handleDelete(medico.id)} className="btn btn-outline-danger m-1">Eliminar</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p className="mt-5">No se encontraron servicios vencidos.</p>
                 )}
 
 

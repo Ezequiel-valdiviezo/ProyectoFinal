@@ -7,6 +7,9 @@ import gif from '../../assets/gif/check.gif'
 function ManejoCursos(){
     const [cursos, setCursos] = useState([]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
+    
+    const [cursosVencidos, setCursosVencidos] = useState([]);
+
     const [estadoForm, setEstadoForm] = useState(false);
     const [error, setError] = useState('');
     const [msjCreado, setMsjCreado] = useState('');
@@ -16,6 +19,7 @@ function ManejoCursos(){
     const estiloTitulo = {
         color: color,
       };
+    const fechaActual = new Date();
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/cursos', {
@@ -23,7 +27,11 @@ function ManejoCursos(){
             credentials: "include",
         })
         .then(response => response.json())
-        .then(data => setCursos(data))
+        .then(data => {
+          setCursos(data);
+          const vencidos = data.filter(curso => new Date(curso.fecha_vencimiento) <= fechaActual);
+          setCursosVencidos(vencidos);
+      })
         .catch(error => console.error('Error fetch cursos:', error));
     }, []);
 
@@ -154,6 +162,12 @@ function ManejoCursos(){
         <div className="vh-100">
                 <div className="adminManejoCursos pt-5 pb-5 text-center">
 
+                {Array.isArray(cursosVencidos) && cursosVencidos.length > 0 ? (
+                  <p className="mt-5">Algunos servicios pasaron su fecha de vencimiento</p>
+                ) : (
+                  <div></div>
+                )}
+
                         <h2 style={estiloTitulo}>Cursos</h2>
                     <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear curso</button>
 
@@ -259,6 +273,39 @@ function ManejoCursos(){
                         </div>
                     </div>
                 )}
+
+<h2 className="mt-5" style={estiloTitulo}>Servicios vencidos</h2>
+
+{Array.isArray(cursosVencidos) && cursosVencidos.length > 0 ? (
+                    <table className="table mt-5 table-striped table-hover">
+                        <thead className="table-dark">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Especialidad</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {cursosVencidos.map((curso, index) => (
+                                <tr key={index}>
+                                    <td>{curso.titulo}</td>
+                                    <td>{curso.descripcion_breve}</td>
+                                    <td>{curso.telefono}</td>
+                                    <td>${curso.precio}</td>
+                                    <td>
+                                    <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                                    <button onClick={() => handleDelete(curso.id)} className="btn btn-outline-danger m-1">Eliminar</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p className="mt-5">No se encontraron servicios vencidos.</p>
+                )}
+
 
                 </div>
             </div>
