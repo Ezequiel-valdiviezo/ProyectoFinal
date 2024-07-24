@@ -99,6 +99,7 @@ class CursosController extends Controller
             'descripcion_completa' => $request->descripcion_completa,
             'precio' => $request->precio,
             'telefono' => $request->telefono,
+            'fecha_vencimiento' => $request->fecha_vencimiento,
         ]);
 
         if(!$cursos){

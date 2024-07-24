@@ -43,7 +43,8 @@ function ManejoCursos(){
         categoria: "",
         descripcion_completa: "",
         precio: "",
-        telefono: ""
+        telefono: "",
+        fecha_vencimiento: ""
       });
 
 
@@ -91,6 +92,7 @@ function ManejoCursos(){
         formDataToSend.append('descripcion_completa', formData.descripcion_completa);
         formDataToSend.append('precio', formData.precio);
         formDataToSend.append('telefono', formData.telefono);
+        formDataToSend.append('fecha_vencimiento', formData.fecha_vencimiento);
     
         try {
           const response = await fetch('http://127.0.0.1:8000/api/cursos', { 
@@ -200,6 +202,10 @@ function ManejoCursos(){
                             <input className="p-1" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} />
                             {error.telefono && <p style={{ color: 'red' }}>{error.telefono[0]}</p>}
                         </div>
+                        <div className="form-group my-4">
+                            <label htmlFor="fecha_vencimiento">Fecha de vencimiento:</label>
+                            <input className="p-1" type="date" id="fecha_vencimiento" name="fecha_vencimiento" value={formData.fecha_vencimiento} onChange={handleChange} required />
+                        </div>
                         <button type="submit" className="btn btn-outline-primary m-2">Crear curso</button>
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
                         </form>
@@ -248,6 +254,7 @@ function ManejoCursos(){
                             <p className="text-start"><span className="fw-bold">Categoría:</span> {cursoSeleccionado.categoria}</p>
                             <p className="text-start"><span className="fw-bold">Teléfono:</span> {cursoSeleccionado.telefono}</p>
                             <p className="text-start"><span className="fw-bold">Precio</span>: ${cursoSeleccionado.precio}</p>
+                            <p className="text-start"><span className="fw-bold">Vencimiento</span>: {cursoSeleccionado.fecha_vencimiento}</p>
                             <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
                         </div>
                     </div>

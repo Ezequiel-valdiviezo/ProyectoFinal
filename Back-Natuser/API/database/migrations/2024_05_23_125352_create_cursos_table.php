@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('descripcion_completa');
             $table->unsignedInteger('precio');
             $table->string('telefono', 256);
+            $table->date('fecha_vencimiento');
             $table->timestamps();
         });
     }

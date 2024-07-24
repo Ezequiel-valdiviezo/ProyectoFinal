@@ -19,6 +19,7 @@ class Cursos extends Model
         'descripcion_completa',
         'precio',
         'telefono',
+        'fecha_vencimiento',
     ];
 
 
