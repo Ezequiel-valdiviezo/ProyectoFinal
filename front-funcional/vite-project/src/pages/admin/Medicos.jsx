@@ -5,6 +5,7 @@ import { useColorContext } from '../../context/colorContext';
 
 function Medicos(){
     const [consultas, setConsultas] = useState([]);
+    const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
@@ -47,10 +48,18 @@ function Medicos(){
         }
       }
 
+      const handleMostrarDetalles = (index) => {
+        setMedicoSeleccionado(consultas[index]);
+    };
+
+    const handleCerrarDetalles = () => {
+        setMedicoSeleccionado(null);
+    };
+
     return(
         <>
             <div className="vh-100">
-                <div className="adminMedicos pt-5 text-center">
+                <div className="adminMedicosConsultas pt-5 text-center">
 
                     <div className="saludo">
                         <h2 style={estiloTitulo}>Postulación para ofrecer servicios de médico</h2>
@@ -66,6 +75,7 @@ function Medicos(){
                                 <th scope="col">Descripción servicio</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,6 +88,7 @@ function Medicos(){
                                     <td>
                                         <button className="btn btn-outline-primary">Aceptar</button>
                                     </td>
+                                        <button className="btn btn-outline-primary"  onClick={() => handleMostrarDetalles(index)}>Detalles</button>
                                     <td>
                                         <button className="btn btn-outline-danger" onClick={() => handleDelete(consulta.id)}>Eliminar</button>
                                     </td>
@@ -88,6 +99,20 @@ function Medicos(){
                     ) : (
                         <p>No se encontró postulación de médicos.</p>
                     )}
+
+                {medicoSeleccionado && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <img src={'http://127.0.0.1:8000/' + medicoSeleccionado.matricula} width="100%" className="card-img-top" alt="" />
+                            <h3 className="my-2">Detalles del médico</h3>
+                            <p className="text-start"><span className="fw-bold">Nombre:</span> {medicoSeleccionado.nombre}</p>
+                            <p className="text-start"><span className="fw-bold">Especialidad:</span> {medicoSeleccionado.especialidad}</p>
+                            <p className="text-start"><span className="fw-bold">Descripción:</span> {medicoSeleccionado.descripcion_servicio}</p>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                        </div>
+                    </div>
+                )}
 
                 </div>
             </div>

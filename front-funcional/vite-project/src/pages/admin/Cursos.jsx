@@ -5,6 +5,7 @@ import { useColorContext } from '../../context/colorContext';
 
 function Cursos(){
     const [consultas, setConsultas] = useState([]);
+    const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
@@ -47,10 +48,18 @@ function Cursos(){
         }
       }
 
+      const handleMostrarDetalles = (index) => {
+        setCursoSeleccionado(consultas[index]);
+    };
+
+    const handleCerrarDetalles = () => {
+        setCursoSeleccionado(null);
+    };
+
     return(
         <>
         <div className="vh-100">
-                <div className="adminMedicos pt-5 text-center">
+                <div className="adminCursosConsultas pt-5 text-center">
 
                     <div className="saludo">
                         <h2 style={estiloTitulo}>Postulación para ofrecer cursos</h2>
@@ -66,6 +75,7 @@ function Cursos(){
                                 <th scope="col">precio</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,7 +86,12 @@ function Cursos(){
                                     <td>{consulta.descripcion_servicio}</td>
                                     <td>${consulta.precio}</td>
                                     <td><button className="btn btn-outline-primary">Aceptar</button></td>
-                                    <td><button className="btn btn-outline-danger" onClick={() => handleDelete(consulta.id)}>Eliminar</button></td>
+                                    <td>
+                                    <button className="btn btn-outline-primary"  onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                                    </td>
+                                    <td>
+                                        <button className="btn btn-outline-danger" onClick={() => handleDelete(consulta.id)}>Eliminar</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -84,6 +99,23 @@ function Cursos(){
                 ) : (
                         <p>No se encontró postulación de cursos.</p>
                     )}
+
+
+                {cursoSeleccionado && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <img src={'http://127.0.0.1:8000/' + cursoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
+                            <h3 className="my-2">Detalles del curso</h3>
+                            <p className="text-start"><span className="fw-bold">Nombre:</span> {cursoSeleccionado.nombre}</p>
+                            <p className="text-start"><span className="fw-bold">Descripción:</span> {cursoSeleccionado.descripcion_servicio}</p>
+                            <p className="text-start"><span className="fw-bold">Categoría:</span> {cursoSeleccionado.categoria}</p>
+                            <p className="text-start"><span className="fw-bold">Teléfono:</span> {cursoSeleccionado.telefono}</p>
+                            <p className="text-start"><span className="fw-bold">Precio</span>: ${cursoSeleccionado.precio}</p>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                        </div>
+                    </div>
+                )}
 
                 </div>
             </div>
