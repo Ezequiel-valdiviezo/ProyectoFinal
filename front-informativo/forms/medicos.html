@@ -80,24 +80,25 @@
         <h2 class="text-center">Formulario para médicos</h2>
         <form id="formMedicos" class="p-4 my-4">
             <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" name="nombre" class="form-control" id="nombre" required>
+                <label for="nombre" class="form-label">Nombre*</label>
+                <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ej:Ezequiel" required>
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" id="email" required>
+                <label for="email" class="form-label">Email*</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Ej:ezequiel@gmail.com" required>
             </div>
             <div class="mb-3">
-                <label for="especialidad" class="form-label">Especialidad</label>
-                <input type="text" name="especialidad" class="form-control" id="especialidad" required>
+                <label for="especialidad" class="form-label">Especialidad*</label>
+                <input type="text" name="especialidad" class="form-control" id="especialidad" placeholder="Ej:Cardología" required>
             </div>
             <div class="mb-3">
-                <label for="descripcion_servicio" class="form-label">Descripción de tu servicio</label>
-                <textarea class="form-control" name="descripcion_servicio" id="descripcion_servicio" rows="5" required></textarea>
+                <label for="descripcion_servicio" class="form-label">Descripción de tu servicio*</label>
+                <textarea class="form-control" name="descripcion_servicio" id="descripcion_servicio" rows="5" placeholder="Ej:Ofrezco mi servicio especializado en cardiología infantil..." required></textarea>
             </div>
             <div class="mb-3">
-                <label for="imagen" class="form-label">Matrícula</label>
+                <label for="imagen" class="form-label">Matrícula*</label>
                 <input type="file" name="imagen" class="form-control" id="imagen" accept="image/*">
+                <p>Peso máx: 256mb</p>
             </div>
             <button type="submit" class="btn btn-primary w-100">Enviar</button>
             <div id="mensajeConfirmacion"></div>
