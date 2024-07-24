@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../styles/adminBlog.css'
 import gif from '../../assets/gif/check.gif'
+import { useColorContext } from '../../context/colorContext';
 
 function Blog(){
     const [blogs, setBlogs] = useState([]);
@@ -19,6 +20,11 @@ function Blog(){
         imagen: "",
         fecha_publicacion: ""
       });
+
+    const { colors, color } = useColorContext();
+    const estiloTitulo = {
+        color: color,
+      };
 
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
@@ -142,7 +148,7 @@ function Blog(){
         <>
         <div className="vh-100">
                 <div className="adminBlog pt-5 pb-5 text-center">
-            <h2>Blog</h2>
+            <h2 style={estiloTitulo}>Blog</h2>
 
             <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear nota de blog</button>
 

@@ -58,6 +58,34 @@ function Cursos(){
         setCursoSeleccionado(null);
     };
 
+    const [emailUser, setEmailUser] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleSubmitEmail = async (emailUser) => {
+    // e.preventDefault();
+        // setEmail(emailUser);
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/enviar-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: emailUser }),
+        });
+
+        if (response.ok) {
+            setMessage('Email enviado con éxito');
+        } else {
+            const errorData = await response.json();
+            setMessage(`Error: ${errorData.message}`);
+        }
+    } catch (error) {
+        setMessage('Hubo un error al enviar el email');
+    }
+    };
+
+
+
     return(
         <>
         <div className="vh-100">
@@ -87,7 +115,9 @@ function Cursos(){
                                     <td>{consulta.nombre}</td>
                                     <td>{consulta.descripcion_servicio}</td>
                                     <td>${consulta.precio}</td>
-                                    <td><button className="btn btn-outline-primary">Aceptar</button></td>
+                                    <td>
+                                        <button className="btn btn-outline-primary" onClick={() => {handleSubmitEmail(consulta.email)}}>Aceptar</button>
+                                    </td>
                                     <td>
                                     <button className="btn btn-outline-primary"  onClick={() => handleMostrarDetalles(index)}>Detalles</button>
                                     </td>
