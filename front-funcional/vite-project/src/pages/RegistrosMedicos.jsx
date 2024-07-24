@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import '../styles/registrosMedicos.css'
 import { useColorContext } from '../context/colorContext';
+import { useNavigate } from "react-router-dom";
 
 function RegistrosMedicos(){
     const [registro, setRegistro] = useState([]);
     const [estadoForm, setEstadoForm] = useState(false);
+    const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
         color: color,
@@ -14,6 +16,17 @@ function RegistrosMedicos(){
         file_path: null,
         descripcion: ''
     });
+
+    useEffect(() => {
+      const usuario = JSON.parse(localStorage.getItem('user'));
+      if (!usuario) {
+          navigate('/login');
+      } else if (usuario.user.role === "admin") {
+          console.log("Todo bien");
+      } else if (usuario.user.role === "user") {
+          navigate('/home');
+      }
+  }, [navigate]);
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));

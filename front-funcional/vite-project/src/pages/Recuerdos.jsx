@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import '../styles/recuerdo.css';
 import { useColorContext } from '../context/colorContext';
+import { useNavigate } from "react-router-dom";
 
 function Recuerdos() {
   const [recuerdos, setRecuerdos] = useState([]);
   const [estadoForm, setEstadoForm] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     user_id: '',
     imagen: null,
@@ -20,6 +22,17 @@ function Recuerdos() {
   const estiloTitulo = {
       color: color,
     };
+
+    useEffect(() => {
+      const usuario = JSON.parse(localStorage.getItem('user'));
+      if (!usuario) {
+          navigate('/login');
+      } else if (usuario.user.role === "admin") {
+          console.log("Todo bien");
+      } else if (usuario.user.role === "user") {
+          navigate('/home');
+      }
+  }, [navigate]);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));

@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import '../styles/anotador.css'
 import CalculadorDias from '../components/CalculadorDias'
 import { useColorContext } from '../context/colorContext';
+import { useNavigate } from "react-router-dom";
 
 function Anotador(){
 
     const [lista, setLista] = useState([]);
     const [hechas, setHechas] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
       user_id: '',
       nota: '',
@@ -17,6 +19,17 @@ function Anotador(){
     const estiloTitulo = {
         color: color,
       };
+
+      useEffect(() => {
+        const usuario = JSON.parse(localStorage.getItem('user'));
+        if (!usuario) {
+            navigate('/login');
+        } else if (usuario.user.role === "admin") {
+            console.log("Todo bien");
+        } else if (usuario.user.role === "user") {
+            navigate('/home');
+        }
+    }, [navigate]);
 
     useEffect(() => {
       const user = JSON.parse(localStorage.getItem('user'));

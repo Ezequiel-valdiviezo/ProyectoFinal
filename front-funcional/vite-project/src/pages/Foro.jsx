@@ -3,6 +3,7 @@ import '../styles/foro.css'
 import img from '../assets/fond1.jpeg'
 import img2 from '../assets/2.png'
 import { useColorContext } from '../context/colorContext';
+import { useNavigate } from "react-router-dom";
 
 import imgAvatar1 from '../assets/avatar/avatar1.png'; // Importa las imágenes de los avatares
 import imgAvatar2 from '../assets/avatar/avatar2.png'; // Importa las imágenes de los avatares
@@ -12,6 +13,7 @@ function Foro(){
 
     const [publicaciones, setPublicaciones] = useState([]);
     const [comentario, setComentario] = useState([]);
+    const navigate = useNavigate();
 
   const { colors, color } = useColorContext();
   const estiloTitulo = {
@@ -23,6 +25,17 @@ function Foro(){
       imagen: null,
       contenido: ''
     });
+
+    useEffect(() => {
+      const usuario = JSON.parse(localStorage.getItem('user'));
+      if (!usuario) {
+          navigate('/login');
+      } else if (usuario.user.role === "admin") {
+          console.log("Todo bien");
+      } else if (usuario.user.role === "user") {
+          navigate('/home');
+      }
+  }, [navigate]);
 
     useEffect(() => {
       fetch(`http://127.0.0.1:8000/api/foro`, {

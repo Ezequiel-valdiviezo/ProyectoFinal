@@ -3,17 +3,30 @@ import React, { useEffect, useState } from "react";
 import { useColorContext } from "../context/colorContext";
 import imgAvatar1 from '../assets/avatar/avatar1.png'
 import imgAvatar2 from '../assets/avatar/avatar2.png'
+import { useNavigate } from "react-router-dom";
 
 function MisPublicaciones(){
 
 
     const [publicaciones, setPublicaciones] = useState([]);
     const [comentario, setComentario] = useState([]);
+    const navigate = useNavigate();
 
   const { colors, color } = useColorContext();
   const estiloTitulo = {
       color: color,
     };
+
+    useEffect(() => {
+      const usuario = JSON.parse(localStorage.getItem('user'));
+      if (!usuario) {
+          navigate('/login');
+      } else if (usuario.user.role === "admin") {
+          console.log("Todo bien");
+      } else if (usuario.user.role === "user") {
+          navigate('/home');
+      }
+  }, [navigate]);
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));

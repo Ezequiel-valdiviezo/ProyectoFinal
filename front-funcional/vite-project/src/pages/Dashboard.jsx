@@ -7,17 +7,30 @@ import icono4 from '../assets/icono4.png'
 import saludo from '../assets/ez.png'
 import img from '../assets/logo.png'
 import { useColorContext } from '../context/colorContext';
+import { useNavigate } from "react-router-dom";
 
 
 function Dashboard(){
     const [userRole, setUserRole] = useState(null);
     const { colors, color } = useColorContext();
+    const navigate = useNavigate();
     const estiloTitulo = {
         color: color,
       };
     const estiloFondo = {
         background: color,
       };
+
+      useEffect(() => {
+        const usuario = JSON.parse(localStorage.getItem('user'));
+        if (!usuario) {
+            navigate('/login');
+        } else if (usuario.user.role === "admin") {
+            console.log("Todo bien");
+        } else if (usuario.user.role === "user") {
+            navigate('/home');
+        }
+    }, [navigate]);
 
     useEffect(() => { 
     const usuario = JSON.parse(localStorage.getItem('user'));

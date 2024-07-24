@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import '../styles/cursos.css';
 import img from '../assets/1.png';
 import { useColorContext } from '../context/colorContext';
+import { useNavigate } from "react-router-dom";
 
 function Cursos() {
 
     const [cursos, setCursos] = useState([]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
+    const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
         color: color,
@@ -16,6 +18,17 @@ function Cursos() {
     const phoneNumber = "3410000000"; // Reemplaza con el número de teléfono en formato internacional
     const message = "Hola, me gustaría saber más sobre su curso posteado en NatUser.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    useEffect(() => {
+        const usuario = JSON.parse(localStorage.getItem('user'));
+        if (!usuario) {
+            navigate('/login');
+        } else if (usuario.user.role === "admin") {
+            console.log("Todo bien");
+        } else if (usuario.user.role === "user") {
+            navigate('/home');
+        }
+    }, [navigate]);
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/cursos', {

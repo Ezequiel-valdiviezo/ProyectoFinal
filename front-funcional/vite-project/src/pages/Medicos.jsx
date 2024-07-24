@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
 import '../styles/medicos.css'
 import { useColorContext } from '../context/colorContext';
+import { useNavigate } from "react-router-dom";
 
 function Medicos(){
     const [medicos, setMedicos] = useState([]);
     const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
+    const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
         color: color,
       };
+
+
+      useEffect(() => {
+        const usuario = JSON.parse(localStorage.getItem('user'));
+        if (!usuario) {
+            navigate('/login');
+        } else if (usuario.user.role === "admin") {
+            console.log("Todo bien");
+        } else if (usuario.user.role === "user") {
+            navigate('/home');
+        }
+    }, [navigate]);
 
       useEffect(() => {
         fetch('http://127.0.0.1:8000/api/medicos', {
