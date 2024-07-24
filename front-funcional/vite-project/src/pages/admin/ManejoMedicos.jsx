@@ -159,6 +159,23 @@ function ManejoMedicos(){
             <div className="vh-100">
             <div className="adminManejoMedicos pt-5 pb-5 text-center">
 
+            {Array.isArray(medicosVencidos) && medicosVencidos.length > 0 ? (
+                //  <div className="alert alert-danger mt-5" role="alert">
+                //  Algunos servicios pasaron su fecha de vencimiento
+                //   </div>
+                <div className="alert alert-danger d-flex align-items-center mt-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                        Algunos servicios pasaron su fecha de vencimiento
+                    </div>
+                </div>
+                  
+                ) : (
+                  <div></div>
+                )}
+
             <h2 style={estiloTitulo}>Manejo Médicos</h2>
 
             <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear médico</button>

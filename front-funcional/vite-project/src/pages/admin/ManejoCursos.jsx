@@ -163,7 +163,18 @@ function ManejoCursos(){
                 <div className="adminManejoCursos pt-5 pb-5 text-center">
 
                 {Array.isArray(cursosVencidos) && cursosVencidos.length > 0 ? (
-                  <p className="mt-5">Algunos servicios pasaron su fecha de vencimiento</p>
+                //  <div className="alert alert-danger mt-5" role="alert">
+                //  Algunos servicios pasaron su fecha de vencimiento
+                //   </div>
+                <div className="alert alert-danger d-flex align-items-center mt-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                        Algunos servicios pasaron su fecha de vencimiento
+                    </div>
+                </div>
+                  
                 ) : (
                   <div></div>
                 )}
