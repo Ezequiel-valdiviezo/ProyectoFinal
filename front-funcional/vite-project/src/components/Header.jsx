@@ -22,23 +22,17 @@ function Header() {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/auth/logout', {
         method: 'POST',
-        // headers: {
-        //   'Content-Type': 'application/json'
-        // },
         credentials: 'include',
       });
 
-      // if (!response.ok) {
-      //   throw new Error('Error al cerrar sesión');
-      // }
 
       const data = await response.json();
       console.log('Respuesta del servidor:', data);
 
-      // Asume que el cierre de sesión fue exitoso y redirige al inicio
       console.log("Proceso terminado");
-      // Redireccionar al login o home después del cierre de sesión
-      // window.location.href = '/login';
+      localStorage.clear();
+      navigate('/login')
+      
     } catch (error) {
       console.error('Error:', error);
       setError('Hubo un problema con el cierre de sesión. Intenta de nuevo.');
