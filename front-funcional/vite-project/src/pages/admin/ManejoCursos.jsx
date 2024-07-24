@@ -209,9 +209,26 @@ function ManejoCursos(){
                             <textarea name="descripcion_breve" id="descripcion_breve" value={formData.descripcion_breve} onChange={handleChange} />
                             {error.descripcion_breve && <p style={{ color: 'red' }}>{error.descripcion_breve[0]}</p>}
                         </div>
-                        <div className="form-group my-4">
+                        {/* <div className="form-group my-4">
                             <label htmlFor="categoria">Categoría:</label>
                             <input className="p-1" type="text" id="categoria" name="categoria" value={formData.categoria} onChange={handleChange} />
+                            {error.categoria && <p style={{ color: 'red' }}>{error.categoria[0]}</p>}
+                        </div> */}
+                        <div className="form-group my-4">
+
+                        <label htmlFor="categoria">Categoría:</label>
+                        <select
+                            className="form-select"
+                            aria-label="Default select example"
+                            id="categoria"
+                            name="categoria"
+                            value={formData.categoria}
+                            onChange={handleChange}
+                        >
+                            <option value="" disabled>Seleccione una opción</option>
+                            <option value="padres">Padres</option>
+                            <option value="bebés">Bebés</option>
+                        </select>
                             {error.categoria && <p style={{ color: 'red' }}>{error.categoria[0]}</p>}
                         </div>
                         <div className="form-group my-4">
