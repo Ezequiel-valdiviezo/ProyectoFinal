@@ -22,11 +22,13 @@ function Blog(){
 
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
-        if(usuario.user.role == "admin"){
-            console.log("Todo bien");
-        }else{
-            navigate('/home');
-        }
+        if (!usuario) {
+          navigate('/login');
+      } else if (usuario.user.role === "admin") {
+          console.log("Todo bien");
+      } else if (usuario.user.role === "user") {
+          navigate('/home');
+      }
     }, [navigate]);
 
     useEffect(() => {

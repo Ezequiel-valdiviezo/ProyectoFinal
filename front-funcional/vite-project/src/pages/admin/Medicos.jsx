@@ -14,9 +14,11 @@ function Medicos(){
 
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
-        if(usuario.user.role == "admin"){
+        if (!usuario) {
+            navigate('/login');
+        } else if (usuario.user.role === "admin") {
             console.log("Todo bien");
-        }else{
+        } else if (usuario.user.role === "user") {
             navigate('/home');
         }
     }, [navigate]);
