@@ -26,9 +26,9 @@ function Dashboard(){
         if (!usuario) {
             navigate('/login');
         } else if (usuario.user.role === "admin") {
-            console.log("Todo bien");
+            navigate('/panel/admin');
         } else if (usuario.user.role === "user") {
-            navigate('/home');
+            console.log("Todo bien");
         }
     }, [navigate]);
 
