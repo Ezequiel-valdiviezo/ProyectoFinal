@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('album_recuerdos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users'); // clave foránea a la tabla de usuarios
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // clave foránea a la tabla de usuarios
             $table->string('imagen', 256);
             $table->string('imagen2', 256)->nullable();
             $table->string('imagen3', 256)->nullable();
