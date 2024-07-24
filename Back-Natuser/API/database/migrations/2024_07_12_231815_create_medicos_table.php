@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email', 256);
             $table->unsignedInteger('precio');
             $table->string('telefono', 256);
+            $table->date('fecha_vencimiento');
             $table->timestamps();
         });
     }

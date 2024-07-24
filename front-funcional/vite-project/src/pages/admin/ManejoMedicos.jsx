@@ -88,6 +88,7 @@ function ManejoMedicos(){
         formDataToSend.append('email', formData.email);
         formDataToSend.append('precio', formData.precio);
         formDataToSend.append('telefono', formData.telefono);
+        formDataToSend.append('fecha_vencimiento', formData.fecha_vencimiento);
     
         try {
           const response = await fetch('http://127.0.0.1:8000/api/medicos', { 
@@ -199,6 +200,10 @@ function ManejoMedicos(){
                             <input className="p-1" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} />
                             {error.telefono && <p style={{ color: 'red' }}>{error.telefono[0]}</p>}
                         </div>
+                        <div className="form-group my-4">
+                            <label htmlFor="fecha_vencimiento">Fecha de vencimiento:</label>
+                            <input className="p-1" type="date" id="fecha_vencimiento" name="fecha_vencimiento" value={formData.fecha_vencimiento} onChange={handleChange} required />
+                        </div>
                         <button type="submit" className="btn btn-outline-primary m-2">Crear médico</button>
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
                         </form>
@@ -248,6 +253,7 @@ function ManejoMedicos(){
                             <p className="text-start"><span className="fw-bold">Categoría:</span> {medicoSeleccionado.especialidad}</p>
                             <p className="text-start"><span className="fw-bold">Teléfono:</span> {medicoSeleccionado.telefono}</p>
                             <p className="text-start"><span className="fw-bold">Precio</span>: ${medicoSeleccionado.precio}</p>
+                            <p className="text-start"><span className="fw-bold">Fecha de vencimiento</span>: {medicoSeleccionado.fecha_vencimiento}</p>
                             <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
                         </div>
                     </div>

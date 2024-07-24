@@ -19,5 +19,6 @@ class Medico extends Model
         'email',
         'precio',
         'telefono',
+        'fecha_vencimiento',
     ];
 }

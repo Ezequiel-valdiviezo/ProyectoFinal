@@ -94,6 +94,7 @@ class MedicoController extends Controller
             'email' => $request->email,
             'precio' => $request->precio,
             'telefono' => $request->telefono,
+            'fecha_vencimiento' => $request->fecha_vencimiento,
         ]);
 
         if(!$medicos){
