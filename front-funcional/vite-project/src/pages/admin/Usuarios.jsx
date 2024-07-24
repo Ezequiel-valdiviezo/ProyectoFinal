@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useColorContext } from '../../context/colorContext';
+import '../../styles/adminUsuarios.css'
 
 function Usuarios() {
     const [usuarios, setUsuarios] = useState([]);
