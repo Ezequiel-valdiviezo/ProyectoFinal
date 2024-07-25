@@ -47,7 +47,7 @@
             <img src="cid:imagen.jpg" alt="Imagen">
         </div>
         <div class="content">
-            <p>¡Felicitaciones! Fuiste aceptado para ofrecer tus servicios en nuestra web.</p>
+            <p>¡Felicitaciones! Fuiste aceptado para ofrecer tus servicios de cursos en nuestra web.</p>
             <p>Los planes a seguir son:
                 <ul>
                     <li>1: Seleccionar su plan</li>
