@@ -53,7 +53,8 @@
                     <li>1: Seleccionar su plan</li>
                     <li>2: Realizar el pago</li>
                     <li>3: Enviar el comprobante por este medio</li>
-                    <li>4: Esperar hasta 48hs hábiles, en  ese plazo estaremos subiendo su servicio a nuestra web. En caso que pasadas las 48hs no haya sucedido, por favor comunicarse de vuelta. Muchas gracias</li>
+                    <li>Junto con el comprobante enviar los siguientes datos para cargar su servicio: Nombre, imagen de usd, descripción, especialidad, email, precio y teléfono.</li>
+                    <li>5: Esperar hasta 48hs hábiles, en  ese plazo estaremos subiendo su servicio a nuestra web. En caso que pasadas las 48hs no haya sucedido, por favor comunicarse de vuelta. Muchas gracias</li>
                 </ul>
             </p>
         </div>
