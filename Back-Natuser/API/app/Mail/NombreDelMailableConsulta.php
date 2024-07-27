@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NombreDelMailable2 extends Mailable
+class NombreDelMailableConsulta extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,8 +31,8 @@ class NombreDelMailable2 extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.simple_email-consulta')
-                    ->subject('Fuiste aceptado para ofrecer tu servicio - NatUser')
+        return $this->view('emails.simple_email_consulta')
+                    ->subject('Respuesta a su consulta - NatUser')
                     ->with([
                         'respuesta' => $this->respuesta,
                         'email' => $this->email,

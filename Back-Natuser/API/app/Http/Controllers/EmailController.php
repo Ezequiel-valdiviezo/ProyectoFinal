@@ -49,7 +49,7 @@ class EmailController extends Controller
         ]);
 
         $email = $request->input('email');
-        $respuesta  = $request->input('respuesta ');
+        $respuesta = $request->input('respuesta');
 
         $correo = new NombreDelMailableConsulta($email, $respuesta);
 

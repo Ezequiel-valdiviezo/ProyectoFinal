@@ -48,7 +48,6 @@
         </div>
         <div class="content">
             <h1>Respuesta a tu consulta</h1>
-            <p>Hola,</p>
             <p>Hemos recibido tu consulta y aquí tienes nuestra respuesta:</p>
             <p>{{ $respuesta }}</p>
             <p>Saludos,</p>
