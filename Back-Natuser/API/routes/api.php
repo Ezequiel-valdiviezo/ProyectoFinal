@@ -127,6 +127,7 @@ Route::post('/foro/{id}/comentario', [CommentController::class, 'guardar']);
 // Email
 Route::post('/enviar-email', [EmailController::class, 'enviarEmail']);
 Route::post('/enviar-email2', [EmailController::class, 'enviarEmail2']);
+Route::post('/enviar-email-consultas', [EmailController::class, 'enviarEmailConsultas']);
 
 
 //Registro usuario

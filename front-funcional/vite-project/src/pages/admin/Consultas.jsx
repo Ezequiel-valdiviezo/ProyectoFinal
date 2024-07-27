@@ -80,7 +80,7 @@ function Consultas() {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/enviar-email2', {
+            const response = await fetch('http://127.0.0.1:8000/api/enviar-email-consultas', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
