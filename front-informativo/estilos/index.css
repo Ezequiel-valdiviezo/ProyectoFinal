@@ -9,8 +9,10 @@
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.anchoNav{
+nav .logoNatuserNav{
+    max-width: 380px;
 }
+
 .natuser{
     font-family: Tahoma, sans-serif;
     color: #08a2de;
