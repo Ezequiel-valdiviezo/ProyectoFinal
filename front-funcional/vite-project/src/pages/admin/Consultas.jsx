@@ -6,6 +6,7 @@ import { useColorContext } from '../../context/colorContext';
 
 function Consultas() {
     const [consultas, setConsultas] = useState([]);
+    const [modal, setModal] = useState(null)
     //Guarda la pagina actual
     const [currentPage, setCurrentPage] = useState(1);
     //elementos a mostrar por pagina
@@ -46,6 +47,59 @@ function Consultas() {
     // Cambia la pagina al numero seleccionado
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    const handleMostrarDetalles = (index) => {
+        setModal(consultas[index]);
+        setFormData({ email: consultas[index].email, respuesta: '' });
+    };
+
+    const handleCerrarDetalles = () => {
+        setModal(null);
+    };
+
+    const [formData, setFormData] = useState({
+        email: "",
+        respuesta: "",
+      });
+
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+          setFormData({
+            ...formData,
+            [name]: value
+          });
+      };
+
+      const [message, setMessage] = useState('')
+
+      const handleSubmitEmail = async (event) => {
+        event.preventDefault();
+
+        const formDataToSend = {
+            email: formData.email,
+            respuesta: formData.respuesta,
+        };
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/enviar-email2', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formDataToSend),
+            });
+    
+            if (response.ok) {
+                setMessage('Email enviado con éxito');
+                handleCerrarDetalles();
+            } else {
+                const errorData = await response.json();
+                setMessage(`Error: ${errorData.message}`);
+            }
+        } catch (error) {
+            setMessage('Hubo un error al enviar el email');
+        }
+        };
+
     return (
         <>
             <div className="vh-100">
@@ -71,7 +125,7 @@ function Consultas() {
                                     <td>{consulta.email}</td>
                                     <td>{consulta.nombre}</td>
                                     <td>{consulta.mensaje}</td>
-                                    <td><button className="btn btn-outline-primary">Responder</button></td>
+                                    <td><button className="btn btn-outline-primary"  onClick={() => handleMostrarDetalles(index)}>Responder</button></td>
                                 </tr>
                             ))}
                         </tbody>
@@ -99,6 +153,30 @@ function Consultas() {
                     ) : (
                         <p>No se encontraron consultas.</p>
                     )}
+
+                {modal && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <h3 className="my-2">Responder consulta a {modal.nombre}</h3>
+                            {/* <p className="text-start"><span className="fw-bold">Email:</span> {modal.email}</p> */}
+                            <p className="text-start"><span className="fw-bold">Consulta:</span> {modal.mensaje}</p>
+
+                            
+                            <form onSubmit={handleSubmitEmail}>
+                                <div className="form-group my-4">
+                                    <label htmlFor="respuesta">Respuesta:</label>
+                                    <textarea name="respuesta" id="respuesta" value={formData.respuesta} onChange={handleChange} />
+                                </div>
+
+                            <p>{message}</p>
+
+                            <button className="btn btn-outline-primary" type="submit">Enviar</button>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                            </form>
+                        </div>
+                    </div>
+                )}
 
                 </div>
             </div>
