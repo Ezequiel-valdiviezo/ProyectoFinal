@@ -244,6 +244,11 @@
     color: white;
 }
 
+.medicosf .textoFormularioServicios{
+    max-width: 600px;
+    margin: auto;
+}
+
 /* BLOG ---------------------------------------------------------------------------  */
 #nota{
     /* background-color: #9fa2a3; */
