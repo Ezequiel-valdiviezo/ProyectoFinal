@@ -39,56 +39,9 @@ function Dashboard(){
         }
     }, []);
 
-
-    
-
-const [email, setEmail] = useState('');
-const [message, setMessage] = useState('');
-
-const handleSubmitEmail = async (e) => {
-  e.preventDefault();
-
-  try {
-    const response = await fetch('http://127.0.0.1:8000/api/enviar-email', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-    });
-
-    if (response.ok) {
-        setMessage('Email enviado con éxito');
-    } else {
-        const errorData = await response.json();
-        setMessage(`Error: ${errorData.message}`);
-    }
-} catch (error) {
-    setMessage('Hubo un error al enviar el email');
-}
-};
-
-
     return(
         <div className="fondoDashboard vh-100">
         <div className="dashboard pt-5 text-center">
-
-
-
-        <form onSubmit={handleSubmitEmail}>
-            <label>
-                Dirección de Email:
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Enviar Email</button>
-            <p>{message}</p>
-        </form>
-
 
 
             <div className="saludo">
