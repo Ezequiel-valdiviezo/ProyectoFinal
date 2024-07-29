@@ -117,7 +117,9 @@ function Medicos(){
                                     <td>
                                     <button className="btn btn-outline-primary" onClick={() => {handleSubmitEmail(consulta.email)}}>Aceptar</button>
                                     </td>
+                                    <td>
                                         <button className="btn btn-outline-primary"  onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                                    </td>
                                     <td>
                                         <button className="btn btn-outline-danger" onClick={() => handleDelete(consulta.id)}>Eliminar</button>
                                     </td>
