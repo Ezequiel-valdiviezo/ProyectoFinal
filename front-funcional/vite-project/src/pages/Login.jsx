@@ -87,7 +87,7 @@ function Login({ onLogin }){
           {/* <img src={imgg} alt="" width="100px"/> */}
           {/* <p>¡Nos alegra tener aqui!</p> */}
           <p>Iniciá sesión para acceder a contenido exclusivo, participar en foros y conectarte con otros padres que están viviendo la misma experiencia.</p>
-          <h2>Iniciar Sesión</h2>
+          <h2>Iniciar sesión</h2>
           <form onSubmit={handleSubmit}>
           <div className="d-flex flex-column m-3">
             <label htmlFor="email">Email:</label>

@@ -51,7 +51,7 @@ function Dashboard(){
             </div>
             
             <div className="funcionalidades p-4 mt-2" style={estiloFondo}>
-            <h2>Funcionalidades para Usuarios</h2>
+            <h2>Funcionalidades para usuarios</h2>
             <p>Como usuario registrado, tenés acceso a una variedad de herramientas diseñadas para facilitarte la vida como padre primerizo:</p>
         
             <div className="d-flex flex-wrap justify-content-center align-items-center mt-4">

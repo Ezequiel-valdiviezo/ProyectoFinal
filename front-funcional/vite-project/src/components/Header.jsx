@@ -114,7 +114,7 @@ function Header() {
                   <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/blog" activeClassName="active" aria-current="page">Blog</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/usuarios" activeClassName="active" aria-current="page">usuarios</NavLink>
+                  <NavLink className="nav-link text-white colorNav fw-bold" to="/admin/usuarios" activeClassName="active" aria-current="page">Usuarios</NavLink>
                 </li>
                 </>
               )}
