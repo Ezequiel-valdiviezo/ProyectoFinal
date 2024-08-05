@@ -13,6 +13,7 @@ function Perfil(){
   const [cursoSeleccionado, setCursoSeleccionado] = useState(false);
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState({})
+  const [msjEdit, setMsjEdit] = useState('');
   const [formData, setFormData] = useState({
     avatar: "",
     email: "",
@@ -99,7 +100,13 @@ const handleSubmit = (e) => {
     .then(data => {
       console.log('Datos del usuario:', data);
       // alert("Actualizado correctamente");
-      window.location.reload();
+      // window.location.reload();
+      handleCerrarDetalles();
+      setMsjEdit("Perfil editado exitosamente")
+      setTimeout(() => {
+        setMsjEdit('');
+        window.location.reload();
+      }, 3000);
     })
     .catch(error => console.error('Error fetching editar perfil:', error));
   // handleCerrarDetalles();
@@ -124,6 +131,18 @@ const obtenerImagenAvatar = () => {
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             
+          {msjEdit && 
+              // <p className="text-center">{msjEdit}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {msjEdit}
+                    </div>
+                </div>
+            }
+
             <div className="col col-lg-8 mb-4 mb-lg-0">
               <div className="card tarjetaPerfil mb-3" style={{ borderRadius: ".5rem" }}>
                 <div className="row g-0">
