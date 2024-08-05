@@ -115,6 +115,11 @@ function Anotador(){
         });
         console.log('Nota guardado exitosamente');
         setNotaCreada("Nota creada exitosamente");
+        // Establecer un temporizador para vaciar el mensaje después de 5 segundos y recargar la página
+        setTimeout(() => {
+          setNotaCreada(""); // Vacía el mensaje
+          window.location.reload(); // Recarga la página
+        }, 3000); // 5000 milisegundos = 5 segundos
       } else {
         console.error('Error al guardar la Nota');
       }
@@ -146,6 +151,12 @@ function Anotador(){
               // window.location.reload(); 
               console.log('Nota marcada como terminada exitosamentee');
               setNotaTerminada("Nota marcada como terminada");
+
+              // Establecer un temporizador para vaciar el mensaje después de 5 segundos y recargar la página
+              setTimeout(() => {
+                setNotaTerminada(""); // Vacía el mensaje
+                window.location.reload(); // Recarga la página
+              }, 3000); // 5000 milisegundos = 5 segundos
         } else {
           console.error('Error al guardar la nota como terminada');
         }
@@ -165,6 +176,11 @@ function Anotador(){
           // window.location.reload();
           console.log('Nota eliminada exitosamentee');
           setNotaEliminada("Nota eliminada exitosamente");
+          // Establecer un temporizador para vaciar el mensaje después de 5 segundos y recargar la página
+        setTimeout(() => {
+          setNotaEliminada(""); // Vacía el mensaje
+          window.location.reload(); // Recarga la página
+        }, 3000); // 5000 milisegundos = 5 segundos
         } else {
           console.error('Error al eliminar la nota');
         }
