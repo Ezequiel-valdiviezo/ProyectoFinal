@@ -13,6 +13,8 @@ function Foro(){
 
     const [publicaciones, setPublicaciones] = useState([]);
     const [comentario, setComentario] = useState([]);
+    const [msjPublicacion, setMsjPublicacion] = useState('');
+    const [msjComentario, setMsjComentario] = useState('');
     const navigate = useNavigate();
 
   const { colors, color } = useColorContext();
@@ -88,8 +90,13 @@ function Foro(){
 
       if (response.ok) {
         const data = await response.json();
-        setPublicaciones([...publicaciones, data]);
+        // setPublicaciones([...publicaciones, data]);
         console.log('Recuerdo guardado exitosamente');
+        setMsjPublicacion("Publicación guardada exitosamente")
+        setTimeout(() => {
+          setMsjPublicacion('');
+          window.location.reload();
+        }, 3000);
       } else {
         console.error('Error al guardar el recuerdo');
       }
@@ -116,8 +123,13 @@ function Foro(){
 
       if (response.ok) {
         const data = response.json();
-        setPublicaciones([...publicaciones, data]);
+        // setPublicaciones([...publicaciones, data]);
         console.log('Comentario guardado exitosamente');
+        setMsjComentario("Comentario guardado exitosamente")
+        setTimeout(() => {
+          setMsjComentario('');
+          window.location.reload();
+        }, 3000);
       } else {
         console.error('Error al guardar el recuerdo');
       }
@@ -147,6 +159,17 @@ function Foro(){
       <p>Conectá con otros padres que están o estuvieron en la misma situación.</p>
       <form onSubmit={handlePostSubmit} className="p-4">
         <p>Crear publicación</p>
+        {msjPublicacion && 
+              // <p className="text-center">{msjPublicacion}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {msjPublicacion}
+                    </div>
+                </div>
+            }
         <div className="mb-3">
         <label htmlFor="titulo">Título</label>
           <input 
@@ -221,6 +244,17 @@ function Foro(){
                     />
               </div>
 
+              {msjComentario && 
+              // <p className="text-center">{msjComentario}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {msjComentario}
+                    </div>
+                </div>
+            }
 
               <ul className="list-group list-group-flush mt-3">
                 {post.comments.map((comment, index) => (
