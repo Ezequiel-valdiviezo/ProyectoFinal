@@ -9,6 +9,9 @@ function Anotador(){
     const [lista, setLista] = useState([]);
     const [hechas, setHechas] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [notaEliminada, setNotaEliminada] = useState('');
+    const [notaCreada, setNotaCreada] = useState('');
+    const [notaTerminada, setNotaTerminada] = useState('');
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
       user_id: '',
@@ -111,6 +114,7 @@ function Anotador(){
           estado: 'activo',
         });
         console.log('Nota guardado exitosamente');
+        setNotaCreada("Nota creada exitosamente");
       } else {
         console.error('Error al guardar la Nota');
       }
@@ -139,11 +143,9 @@ function Anotador(){
         });
         if (response.ok) {
           const data = await response.json();
-          // console.log(data);
-              // setLista(lista.filter(nota => nota.id !== id));
-              // setHechas([...hechas, data.nota]);
-              window.location.reload(); // Recargar la página
+              // window.location.reload(); 
               console.log('Nota marcada como terminada exitosamentee');
+              setNotaTerminada("Nota marcada como terminada");
         } else {
           console.error('Error al guardar la nota como terminada');
         }
@@ -160,8 +162,9 @@ function Anotador(){
           credentials: 'include',
         });
         if (response.ok) {
-          window.location.reload(); // Recargar la página
+          // window.location.reload();
           console.log('Nota eliminada exitosamentee');
+          setNotaEliminada("Nota eliminada exitosamente");
         } else {
           console.error('Error al eliminar la nota');
         }
@@ -187,6 +190,17 @@ function Anotador(){
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
             <h3 className="text-center" style={estiloTitulo}>Lista</h3>
+            {notaCreada && 
+              // <p className="text-center">{notaCreada}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {notaCreada}
+                    </div>
+                </div>
+            }
             <ul className="list-group mb-3">
               {lista.map((notas, index) => (
                 <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
@@ -223,6 +237,17 @@ function Anotador(){
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
             <h3 className="text-center" style={estiloTitulo}>Terminadas</h3>
+            {notaTerminada && 
+              // <p className="text-center">{notaTerminada}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {notaTerminada}
+                    </div>
+                </div>
+            }
             {hechas.length > 0 ? (
               <ul className="list-group mb-3">
                 {hechas.map((nota, index) => (
@@ -237,6 +262,18 @@ function Anotador(){
             ) : (
               <p className="text-center">No hay notas terminadas.</p>
             )}
+            {notaEliminada && 
+              // <p className="text-center">{notaEliminada}</p>
+
+              <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {notaEliminada}
+                    </div>
+                </div>
+            }
           </div>
       </div>
     </div>
