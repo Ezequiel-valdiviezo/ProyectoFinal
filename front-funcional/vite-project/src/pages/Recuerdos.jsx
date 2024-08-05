@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Recuerdos() {
   const [recuerdos, setRecuerdos] = useState([]);
   const [msjForm, setMsjForm] = useState('');
+  const [msjEliminado, setMsjEliminado] = useState('');
   const [estadoForm, setEstadoForm] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -103,6 +104,12 @@ function Recuerdos() {
       if (response.ok) {
         setRecuerdos(recuerdos.filter(recuerdo => recuerdo.id !== deleteId));
         console.log('Recuerdo eliminado correctamente');
+        setMsjEliminado("Recuerdo eliminado exitosamente");
+              // Establecer un temporizador para vaciar el mensaje después de 5 segundos y recargar la página
+              setTimeout(() => {
+                setMsjEliminado(""); // Vacía el mensaje
+                window.location.reload(); // Recarga la página
+              }, 3000); // 5000 milisegundos = 5 segundos
       } else {
         console.error('Error al eliminar el recuerdo');
       }
@@ -141,10 +148,10 @@ function Recuerdos() {
         console.log('Recuerdo guardado exitosamente');
         setMsjForm("Recuerdo subido exitosamente");
               // Establecer un temporizador para vaciar el mensaje después de 5 segundos y recargar la página
-              // setTimeout(() => {
-              //   setMsjForm(""); // Vacía el mensaje
-              //   window.location.reload(); // Recarga la página
-              // }, 3000); // 5000 milisegundos = 5 segundos
+              setTimeout(() => {
+                setMsjForm(""); // Vacía el mensaje
+                window.location.reload(); // Recarga la página
+              }, 3000); // 5000 milisegundos = 5 segundos
       } else {
         console.error('Error al guardar el recuerdo');
       }
@@ -237,6 +244,17 @@ function Recuerdos() {
                     </svg>
                     <div>
                     {msjForm}
+                    </div>
+                </div>
+            }
+            {msjEliminado && 
+              // <p className="text-center">{msjEliminado}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {msjEliminado}
                     </div>
                 </div>
             }
