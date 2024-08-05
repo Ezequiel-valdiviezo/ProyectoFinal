@@ -191,6 +191,7 @@ function RegistrosMedicos(){
             }
 
 
+                  {registro.length > 0 ? (
                     <table className="mt-5 table table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
@@ -202,7 +203,7 @@ function RegistrosMedicos(){
                         </thead>
                         <tbody>
                             {registro.map((regis, index) => (
-                                <tr key={index}>
+                              <tr key={index}>
                                     <td>{regis.id}</td>
                                     <td>{regis.file_path}</td>
                                     <td>{regis.descripcion}</td>
@@ -210,7 +211,10 @@ function RegistrosMedicos(){
                                 </tr>
                             ))}
                         </tbody>
-                    </table>
+                        </table>
+                    ) : (
+                      <p className="mt-5">No hay registros médicos</p>
+                    )}
 
         </div>
         </>
