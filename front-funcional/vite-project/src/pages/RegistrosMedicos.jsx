@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function RegistrosMedicos(){
     const [registro, setRegistro] = useState([]);
     const [estadoForm, setEstadoForm] = useState(false);
+    const [registoCreado, setRegistroCreado] = useState('');
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
@@ -120,7 +121,12 @@ function RegistrosMedicos(){
             const data = await response.json();
             console.log('Respuesta del servidor:', data);
             // Aquí podrías manejar la respuesta, por ejemplo, mostrar un mensaje de éxito
-
+            setRegistroCreado("Registro creado exitosamente");
+            // Establecer un temporizador para vaciar el mensaje después de 5 segundos y recargar la página
+            setTimeout(() => {
+              setRegistroCreado(""); // Vacía el mensaje
+              window.location.reload(); // Recarga la página
+            }, 3000); // 5000 milisegundos = 5 segundos
         } catch (error) {
             console.error('Error al enviar datos:', error);
             // Aquí podrías manejar el error, por ejemplo, mostrar un mensaje de error
@@ -188,6 +194,18 @@ function RegistrosMedicos(){
                   <button type="button" className="btn btn-primary w-100 m-2" onClick={handleCerrarForm}>Cancelar</button>
                 </div>
             </form>
+            }
+
+            {registoCreado && 
+              // <p className="text-center">{notaCreada}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {registoCreado}
+                    </div>
+                </div>
             }
 
 
