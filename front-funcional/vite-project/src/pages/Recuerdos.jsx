@@ -108,8 +108,8 @@ function Recuerdos() {
               // Establecer un temporizador para vaciar el mensaje después de 5 segundos y recargar la página
               setTimeout(() => {
                 setMsjEliminado(""); // Vacía el mensaje
-                window.location.reload(); // Recarga la página
-              }, 3000); // 5000 milisegundos = 5 segundos
+                // window.location.reload(); 
+              }, 2000); // 5000 milisegundos = 5 segundos
       } else {
         console.error('Error al eliminar el recuerdo');
       }
@@ -151,7 +151,7 @@ function Recuerdos() {
               setTimeout(() => {
                 setMsjForm(""); // Vacía el mensaje
                 window.location.reload(); // Recarga la página
-              }, 3000); // 5000 milisegundos = 5 segundos
+              }, 2000); // 5000 milisegundos = 5 segundos
       } else {
         console.error('Error al guardar el recuerdo');
       }
@@ -185,6 +185,17 @@ function Recuerdos() {
 
         {estadoForm && 
           <form className="m-auto my-4 p-3" onSubmit={handleForm}>
+            {msjForm && 
+              // <p className="text-center">{msjForm}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {msjForm}
+                    </div>
+                </div>
+            }
             <div className="form-group">
               <label htmlFor="imagen">Imagen</label>
               <input
@@ -236,17 +247,7 @@ function Recuerdos() {
           </form>
         }
 
-            {msjForm && 
-              // <p className="text-center">{msjForm}</p>
-              <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
-                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
-                        <use xlinkHref="#exclamation-triangle-fill" />
-                    </svg>
-                    <div>
-                    {msjForm}
-                    </div>
-                </div>
-            }
+            
             {msjEliminado && 
               // <p className="text-center">{msjEliminado}</p>
               <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">

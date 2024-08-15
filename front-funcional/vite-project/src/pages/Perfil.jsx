@@ -106,7 +106,7 @@ const handleSubmit = (e) => {
       setTimeout(() => {
         setMsjEdit('');
         window.location.reload();
-      }, 3000);
+      }, 2000);
     })
     .catch(error => console.error('Error fetching editar perfil:', error));
   // handleCerrarDetalles();

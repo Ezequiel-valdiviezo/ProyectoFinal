@@ -96,7 +96,7 @@ function Foro(){
         setTimeout(() => {
           setMsjPublicacion('');
           window.location.reload();
-        }, 3000);
+        }, 2000);
       } else {
         console.error('Error al guardar el recuerdo');
       }
@@ -129,7 +129,7 @@ function Foro(){
         setTimeout(() => {
           setMsjComentario('');
           window.location.reload();
-        }, 3000);
+        }, 2000);
       } else {
         console.error('Error al guardar el recuerdo');
       }
