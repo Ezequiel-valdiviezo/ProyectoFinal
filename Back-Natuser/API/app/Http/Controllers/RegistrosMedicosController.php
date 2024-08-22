@@ -148,5 +148,26 @@ class RegistrosMedicosController extends Controller
 
         return response()->download($filePath, $fileName);
     }
+
+    public function eliminar($id)
+    {
+        $registro = RegistrosMedicos::find($id);
+
+        if(!$registro){
+            $data = [
+                'message' => 'Registro no encontrada',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $registro->delete();
+
+        $data = [
+            'message' => 'Registro eliminado',
+            'status' => 200
+        ];
+        return response()->json($data, 200);
+    }
 }
 

@@ -133,6 +133,23 @@ function RegistrosMedicos(){
         }
     };
 
+    const handleDelete = async (id) => {
+      try {
+          const response = await fetch(`http://127.0.0.1:8000/api/registroMedico/${id}`, {
+              method: 'DELETE',
+              credentials: 'include'
+          });
+          if(response.ok){
+              console.log("Registro eliminado correctamente");
+              // setMedicos(medicos.filter(medico => medico.id !== id));
+          }else {
+              console.error("Error al eliminar el médico")
+          }
+      } catch (error) {
+          console.log("Error en la solicitus de eliminació", error);
+      }
+    }
+
     const handleAbrirForm = () => {
         setEstadoForm(true);
       };
@@ -225,7 +242,10 @@ function RegistrosMedicos(){
                                     <td>{regis.id}</td>
                                     <td>{regis.file_path}</td>
                                     <td>{regis.descripcion}</td>
-                                    <td><button className="btn btn-outline-primary" onClick={() => handleDescarga(regis.id)}>Descargar</button></td>
+                                    <td>
+                                      <button className="btn btn-outline-primary" onClick={() => handleDescarga(regis.id)}>Descargar</button>
+                                      <button className="btn btn-outline-danger" onClick={() => handleDelete(regis.id)}>Eliminar</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

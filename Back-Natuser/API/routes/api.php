@@ -25,8 +25,10 @@ use App\Http\Controllers\RegistrosMedicosController;
 Route::post('/registroMedico', [RegistrosMedicosController::class, 'guardar']);
 // Trear registros por usuario
 Route::get('/registroMedico/{id}', [RegistrosMedicosController:: class, 'mostrarRegistro']);
-// ---------
+// Descargar registro medico
 Route::get('/registroMedico/descargar/{id}', [RegistrosMedicosController::class, 'download']);
+// Elimina registro medico
+Route::delete('/registroMedico/{id}', [RegistrosMedicosController::class, 'eliminar']);
 
 //Enviar consulta en seccion contacto de la seccion informativa
 Route::post('/consulta', [ContactoConsultaController::class, 'guardar']);
@@ -60,8 +62,6 @@ Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
 
 //Mostrar Médicos
 Route::get('/medicos', [MedicoController::class, 'index']);
-//Mostrar curso por id
-// Route::get('/cursos/{id}', [CursosController::class, 'mostrarCurso']);
 //Guardar Médico
 Route::post('/medicos', [MedicoController::class, 'guardar']);
 //Actualizar curso
