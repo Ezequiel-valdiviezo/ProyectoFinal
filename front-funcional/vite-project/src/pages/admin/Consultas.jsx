@@ -90,7 +90,21 @@ function Consultas() {
     
             if (response.ok) {
                 setMessage('Email enviado con éxito');
-                handleCerrarDetalles();
+                
+                // Aquí se realiza el fetch para eliminar la consulta por ID
+                const deleteResponse = await fetch(`http://127.0.0.1:8000/api/consulta/${modal.id}`, {
+                    method: 'DELETE',
+                    credentials: "include",  // Si necesitas enviar cookies o autenticación
+                });
+    
+                if (deleteResponse.ok) {
+                    // Filtra la consulta eliminada de la lista de consultas
+                    setConsultas(consultas.filter(consulta => consulta.id !== modal.id));
+                    handleCerrarDetalles(); // Cierra el modal después de eliminar
+                } else {
+                    const errorData = await deleteResponse.json();
+                    setMessage(`Error al eliminar la consulta: ${errorData.message}`);
+                }
             } else {
                 const errorData = await response.json();
                 setMessage(`Error: ${errorData.message}`);
@@ -125,7 +139,7 @@ function Consultas() {
                                     <td>{consulta.email}</td>
                                     <td>{consulta.nombre}</td>
                                     <td>{consulta.mensaje}</td>
-                                    <td><button className="btn btn-outline-primary"  onClick={() => handleMostrarDetalles(index)}>Responder</button></td>
+                                    <td><button className="btn btn-outline-primary"  onClick={() => handleMostrarDetalles(index)}>Responder y eliminar</button></td>
                                 </tr>
                             ))}
                         </tbody>
