@@ -64,7 +64,26 @@ class ContactoConsultaController extends Controller
         ];
 
         return response()->json($data, 201);
+    }
 
+    public function eliminar($id)
+    {
+        $consulta = ContactoConsulta::find($id);
 
+        if(!$consulta){
+            $data = [
+                'message' => 'Consulta no encontrada',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $consulta->delete($id);
+
+        $data = [
+            'message' => 'Consulta eliminada',
+            'status' => 200
+        ];
+        return response()->json($data, 200);
     }
 }

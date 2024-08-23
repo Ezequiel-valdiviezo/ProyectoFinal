@@ -33,6 +33,7 @@ Route::delete('/registroMedico/{id}', [RegistrosMedicosController::class, 'elimi
 //Enviar consulta en seccion contacto de la seccion informativa
 Route::post('/consulta', [ContactoConsultaController::class, 'guardar']);
 Route::get('/consulta', [ContactoConsultaController::class, 'index']);
+Route::delete('/consulta/{id}', [ContactoConsultaController::class, 'eliminar']);
 
 //Muestra todas postulaciones médicos
 Route::get('/consulta/medicos', [ConsultaMedicoController::class, 'index']);
