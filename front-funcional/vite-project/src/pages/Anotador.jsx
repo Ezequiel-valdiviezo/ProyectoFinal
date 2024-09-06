@@ -232,15 +232,15 @@ function Anotador(){
 
               {showForm && (
                 
-                <div className="my-2">
+                <div className="my-2 agregarNota">
                   <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                       <label htmlFor="nota" className="form-label" style={estiloTitulo}>Nota</label>
                       <input type="text" className="form-control" id="nota" name="nota" value={formData.nota} onChange={handleInputChange} required />
                     </div>
-                    <button type="submit" className="btn btn-primary">Enviar</button>
+                    <button type="submit" className="btn btn-primary mx-1">Enviar</button>
+                    <button type="submit" onClick={cerrarFormNotas} className="btn btn-primary mx-1">Cancelar</button>
                   </form>
-                    <button type="submit" onClick={cerrarFormNotas} className="btn btn-primary mt-3">Cancelar</button>
                 </div>
 
               )}

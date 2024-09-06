@@ -17,6 +17,12 @@
     /* border-radius: 40px; */
 }
 
+.agregarNota{
+    background-color: rgba(188, 210, 230, 0.646);
+    padding: 15px;
+    border-radius: 15px;
+}
+
 .anotador h3{
     color: #08a2de;
     font-size: 30px;
