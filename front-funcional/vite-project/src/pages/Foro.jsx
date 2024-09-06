@@ -16,6 +16,8 @@ function Foro(){
     const [msjPublicacion, setMsjPublicacion] = useState('');
     const [msjComentario, setMsjComentario] = useState('');
     const navigate = useNavigate();
+    const [mensajesComentario, setMensajesComentario] = useState({});
+
 
   const { colors, color } = useColorContext();
   const estiloTitulo = {
@@ -125,9 +127,17 @@ function Foro(){
         const data = response.json();
         // setPublicaciones([...publicaciones, data]);
         console.log('Comentario guardado exitosamente');
-        setMsjComentario("Comentario guardado exitosamente")
+        // setMsjComentario("Comentario guardado exitosamente")
+        setMensajesComentario(prevState => ({
+          ...prevState,
+          [id]: 'Comentario guardado exitosamente'
+        }));
         setTimeout(() => {
-          setMsjComentario('');
+          // setMensajesComentario('');
+          setMensajesComentario(prevState => ({
+            ...prevState,
+            [id]: ''
+          }));
           window.location.reload();
         }, 2000);
       } else {
@@ -243,14 +253,14 @@ function Foro(){
                     />
               </div>
 
-              {msjComentario && 
+              {mensajesComentario[post.id] && 
               // <p className="text-center">{msjComentario}</p>
-              <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+              <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
                     <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
                         <use xlinkHref="#exclamation-triangle-fill" />
                     </svg>
                     <div>
-                    {msjComentario}
+                    {mensajesComentario[post.id]}
                     </div>
                 </div>
             }
