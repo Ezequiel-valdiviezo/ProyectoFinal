@@ -160,8 +160,7 @@ function Foro(){
       <form onSubmit={handlePostSubmit} className="p-4">
         <p>Crear publicación</p>
         {msjPublicacion && 
-              // <p className="text-center">{msjPublicacion}</p>
-              <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+              <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
                     <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
                         <use xlinkHref="#exclamation-triangle-fill" />
                     </svg>
