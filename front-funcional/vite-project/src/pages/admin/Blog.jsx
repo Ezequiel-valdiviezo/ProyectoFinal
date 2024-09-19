@@ -21,6 +21,12 @@ function Blog(){
         fecha_publicacion: ""
       });
 
+    //Guarda la pagina actual
+    const [currentPage, setCurrentPage] = useState(1);
+    //elementos a mostrar por pagina
+    const [itemsPerPage] = useState(5);
+
+
     const { colors, color } = useColorContext();
     const estiloTitulo = {
         color: color,
@@ -144,6 +150,16 @@ function Blog(){
         setNotaSeleccionada(null);
       };
 
+    // Calculan los indices de los elementos a mostrar en la página actual
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // Contiene los elementos de la página actual
+    const currentItems = Array.isArray(blogs) ? blogs.slice(indexOfFirstItem, indexOfLastItem) : [];
+
+    // Cambia la pagina al numero seleccionado
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+
     return(
         <>
         <div className="vh-100">
@@ -192,6 +208,7 @@ function Blog(){
 <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjCreado }}></p>
 
           {Array.isArray(blogs) && blogs.length > 0 ? (
+            <div>
             <table className="table mt-5 table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
@@ -202,7 +219,7 @@ function Blog(){
                             </tr>
                         </thead>
                         <tbody>
-                            {blogs.map((blog, index) => (
+                            {currentItems.map((blog, index) => (
                                 <tr key={index}>
                                     <td>{blog.titulo}</td>
                                     <td>{blog.contenido}</td>
@@ -215,6 +232,27 @@ function Blog(){
                             ))}
                         </tbody>
             </table>
+
+            <nav aria-label="Page navigation example">
+            <ul className="pagination justify-content-center">
+                <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                    <a className="page-link" href="#" onClick={() => paginate(currentPage - 1)}>Anterior</a>
+                </li>
+                {[...Array(Math.ceil(blogs.length / itemsPerPage)).keys()].map(number => (
+                    <li key={number + 1} className={`page-item ${currentPage === number + 1 ? 'active' : ''}`}>
+                        <a className="page-link" href="#" onClick={() => paginate(number + 1)}>
+                            {number + 1}
+                        </a>
+                    </li>
+                ))}
+                <li className={`page-item ${currentPage === Math.ceil(blogs.length / itemsPerPage) ? 'disabled' : ''}`}>
+                    <a className="page-link" href="#" onClick={() => paginate(currentPage + 1)}>Siguiente</a>
+                </li>
+            </ul>
+            </nav>
+            </div>
+
+            
             ) : (
               <p>No se encontraron blogs.</p>
             )}

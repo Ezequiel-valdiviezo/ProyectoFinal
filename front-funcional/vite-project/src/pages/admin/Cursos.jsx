@@ -12,6 +12,11 @@ function Cursos(){
         color: color,
       };
 
+    //Guarda la pagina actual
+    const [currentPage, setCurrentPage] = useState(1);
+    //elementos a mostrar por pagina
+    const [itemsPerPage] = useState(5);
+
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
         if (!usuario) {
@@ -84,6 +89,15 @@ function Cursos(){
     }
     };
 
+    // Calculan los indices de los elementos a mostrar en la página actual
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // Contiene los elementos de la página actual
+    const currentItems = Array.isArray(consultas) ? consultas.slice(indexOfFirstItem, indexOfLastItem) : [];
+
+    // Cambia la pagina al numero seleccionado
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 
 
     return(
@@ -96,6 +110,7 @@ function Cursos(){
                     </div>
                 
                     {Array.isArray(consultas) && consultas.length > 0 ? (
+                    <div>
                     <table className="table table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
@@ -109,7 +124,7 @@ function Cursos(){
                             </tr>
                         </thead>
                         <tbody>
-                            {consultas.map((consulta, index) => (
+                            {currentItems.map((consulta, index) => (
                                 <tr key={index}>
                                     <td>{consulta.email}</td>
                                     <td>{consulta.nombre}</td>
@@ -128,6 +143,26 @@ function Cursos(){
                             ))}
                         </tbody>
                     </table>
+
+                    <nav aria-label="Page navigation example">
+                                <ul className="pagination justify-content-center">
+                                    <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                        <a className="page-link" href="#" onClick={() => paginate(currentPage - 1)}>Anterior</a>
+                                    </li>
+                                    {[...Array(Math.ceil(consultas.length / itemsPerPage)).keys()].map(number => (
+                                        <li key={number + 1} className={`page-item ${currentPage === number + 1 ? 'active' : ''}`}>
+                                            <a className="page-link" href="#" onClick={() => paginate(number + 1)}>
+                                                {number + 1}
+                                            </a>
+                                        </li>
+                                    ))}
+                                    <li className={`page-item ${currentPage === Math.ceil(consultas.length / itemsPerPage) ? 'disabled' : ''}`}>
+                                        <a className="page-link" href="#" onClick={() => paginate(currentPage + 1)}>Siguiente</a>
+                                    </li>
+                                </ul>
+                                </nav>
+                                </div>
+                    
                 ) : (
                         <p>No se encontró postulación de cursos.</p>
                     )}

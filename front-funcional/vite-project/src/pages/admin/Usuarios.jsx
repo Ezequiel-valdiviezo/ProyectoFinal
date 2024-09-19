@@ -16,6 +16,11 @@ function Usuarios() {
         color: color,
     };
 
+    //Guarda la pagina actual
+    const [currentPage, setCurrentPage] = useState(1);
+    //elementos a mostrar por pagina
+    const [itemsPerPage] = useState(5);
+
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
         if (!usuario) {
@@ -74,6 +79,15 @@ function Usuarios() {
         }
     };
 
+    // Calculan los indices de los elementos a mostrar en la página actual
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // Contiene los elementos de la página actual
+    const currentItems = Array.isArray(usuarios) ? usuarios.slice(indexOfFirstItem, indexOfLastItem) : [];
+
+    // Cambia la pagina al numero seleccionado
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <>
             <div className="vh-100">
@@ -93,7 +107,7 @@ function Usuarios() {
                             </tr>
                         </thead>
                         <tbody>
-                            {usuarios.map((usuario) => (
+                            {currentItems.map((usuario) => (
                                 <tr key={usuario.id}>
                                     <td>{usuario.email}</td>
                                     <td>{usuario.name}</td>
@@ -105,6 +119,24 @@ function Usuarios() {
                             ))}
                         </tbody>
                     </table>
+
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination justify-content-center">
+                            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                <a className="page-link" href="#" onClick={() => paginate(currentPage - 1)}>Anterior</a>
+                            </li>
+                            {[...Array(Math.ceil(usuarios.length / itemsPerPage)).keys()].map(number => (
+                                <li key={number + 1} className={`page-item ${currentPage === number + 1 ? 'active' : ''}`}>
+                                    <a className="page-link" href="#" onClick={() => paginate(number + 1)}>
+                                        {number + 1}
+                                    </a>
+                                </li>
+                            ))}
+                            <li className={`page-item ${currentPage === Math.ceil(usuarios.length / itemsPerPage) ? 'disabled' : ''}`}>
+                                <a className="page-link" href="#" onClick={() => paginate(currentPage + 1)}>Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
 
                     {/* Modal para confirmar eliminación */}
                     <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" ref={modalRef}>
