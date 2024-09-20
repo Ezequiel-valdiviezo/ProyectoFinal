@@ -168,6 +168,17 @@ function RegistrosMedicos(){
 
             {estadoForm && 
             <form className="m-auto my-4 p-3" onSubmit={handleSubmit}>
+              {registoCreado && 
+              // <p className="text-center">{notaCreada}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {registoCreado}
+                    </div>
+                </div>
+            }
                 {/* <label htmlFor="user_id">
                     User ID:
                     <input
@@ -213,7 +224,7 @@ function RegistrosMedicos(){
             </form>
             }
 
-            {registoCreado && 
+            {/* {registoCreado && 
               // <p className="text-center">{notaCreada}</p>
               <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
                     <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
@@ -223,7 +234,7 @@ function RegistrosMedicos(){
                     {registoCreado}
                     </div>
                 </div>
-            }
+            } */}
 
 
                   {registro.length > 0 ? (
