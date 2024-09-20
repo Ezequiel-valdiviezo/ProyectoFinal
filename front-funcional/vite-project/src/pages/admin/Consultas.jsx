@@ -7,6 +7,9 @@ import { useColorContext } from '../../context/colorContext';
 function Consultas() {
     const [consultas, setConsultas] = useState([]);
     const [modal, setModal] = useState(null)
+    
+    const [loader, setLoader] = useState('')
+    
     //Guarda la pagina actual
     const [currentPage, setCurrentPage] = useState(1);
     //elementos a mostrar por pagina
@@ -80,6 +83,7 @@ function Consultas() {
         };
 
         try {
+            setLoader("Enviando respuesta")
             const response = await fetch('http://127.0.0.1:8000/api/enviar-email-consultas', {
                 method: 'POST',
                 headers: {
@@ -89,6 +93,7 @@ function Consultas() {
             });
     
             if (response.ok) {
+                setLoader("")
                 setMessage('Email enviado con éxito');
                 
                 // Aquí se realiza el fetch para eliminar la consulta por ID
@@ -184,6 +189,17 @@ function Consultas() {
                                 </div>
 
                             <p>{message}</p>
+
+                            {loader && (
+                                <div class="mt-3 d-flex justify-content-center">
+                                <div class="spinner-border text-primary mx-2" role="status">
+                                  <span class="visually-hidden">Cargando...</span>
+                                </div> 
+                                <div>
+                                  {loader}
+                                </div>
+                              </div>
+                            )}
 
                             <button className="btn btn-outline-primary" type="submit">Enviar</button>
                             <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>

@@ -186,7 +186,7 @@ function ManejoCursos(){
 
 
                     {estadoForm &&
-                    <form className="curso-form p-5" onSubmit={handleSubmit}>
+                    <form className="curso-form p-4" onSubmit={handleSubmit}>
                         {/* <h3>Crear curso</h3> */}
                         <div className="form-group my-4">
                             <label htmlFor="titulo">Título:</label>
@@ -252,10 +252,10 @@ function ManejoCursos(){
                         </div>
                         <button type="submit" className="btn btn-outline-primary m-2">Crear curso</button>
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
+<p className="mt-4" dangerouslySetInnerHTML={{ __html: msjCreado }}></p>
                         </form>
                     }
 
-<p className="mt-4" dangerouslySetInnerHTML={{ __html: msjCreado }}></p>
 
                 {Array.isArray(cursos) && cursos.length > 0 ? (
                     <table className="table mt-5 table-striped table-hover">

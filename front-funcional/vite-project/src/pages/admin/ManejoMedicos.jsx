@@ -184,7 +184,7 @@ function ManejoMedicos(){
 
 
                     {estadoForm &&
-                    <form className="curso-form p-5" onSubmit={handleSubmit}>
+                    <form className="curso-form p-4" onSubmit={handleSubmit}>
                         {/* <h3>Crear curso</h3> */}
                         <div className="form-group my-4">
                             <label htmlFor="nombre">Nombre:</label>
@@ -234,10 +234,10 @@ function ManejoMedicos(){
                         </div>
                         <button type="submit" className="btn btn-outline-primary m-2">Crear médico</button>
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
+<p className="mt-4" dangerouslySetInnerHTML={{ __html: msjCreado }}></p>
                         </form>
                     }
 
-<p className="mt-4" dangerouslySetInnerHTML={{ __html: msjCreado }}></p>
 
 
             {Array.isArray(medicos) && medicos.length > 0 ? (

@@ -170,7 +170,7 @@ function Blog(){
 
 
             {estadoForm &&
-                    <form className="curso-form p-5" 
+                    <form className="curso-form p-4" 
                     onSubmit={handleSubmit}>
                         {/* <h3>Crear nota</h3> */}
                         <div className="form-group my-4">
@@ -200,12 +200,12 @@ function Blog(){
                             <label htmlFor="fecha_publicacion">Fecha de publicación:</label>
                             <input className="p-1" type="date" id="fecha_publicacion" name="fecha_publicacion" value={formData.fecha_publicacion} onChange={handleChange} required />
                         </div>
-                        <button type="submit" className="btn btn-outline-primary m-2">Crear Curso</button>
+                        <button type="submit" className="btn btn-outline-primary m-2">Crear nota</button>
                         <button type="button" className="btn btn-primary m-2" onClick={handleCerrarForm}>Cancelar</button>
+                        <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjCreado }}></p>
                         </form>
                     }
 
-<p className="mt-4" dangerouslySetInnerHTML={{ __html: msjCreado }}></p>
 
           {Array.isArray(blogs) && blogs.length > 0 ? (
             <div>
