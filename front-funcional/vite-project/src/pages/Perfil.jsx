@@ -14,6 +14,7 @@ function Perfil(){
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState({})
   const [msjEdit, setMsjEdit] = useState('');
+  const [loader, setLoader] = useState('');
   const [formData, setFormData] = useState({
     avatar: "",
     email: "",
@@ -99,12 +100,10 @@ const handleSubmit = (e) => {
     .then(response => response.json())
     .then(data => {
       console.log('Datos del usuario:', data);
-      // alert("Actualizado correctamente");
-      // window.location.reload();
+      setLoader("Actualizando perfil")
       handleCerrarDetalles();
       setMsjEdit("Perfil editado exitosamente")
       setTimeout(() => {
-        setMsjEdit('');
         window.location.reload();
       }, 2000);
     })
@@ -132,7 +131,6 @@ const obtenerImagenAvatar = () => {
           <div className="row d-flex justify-content-center align-items-center h-100">
             
           {msjEdit && 
-              // <p className="text-center">{msjEdit}</p>
               <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
                     <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
                         <use xlinkHref="#exclamation-triangle-fill" />
@@ -274,6 +272,19 @@ const obtenerImagenAvatar = () => {
                                   onChange={handleChange}
                                 />
                               </div>
+
+
+                              {loader && 
+                                <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+                                      <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Cargando...</span>
+                                      </div>
+                                      <div>
+                                      {loader}
+                                      </div>
+                                  </div>
+                              }
+
                               <button type="submit" className="btn btn-primary mt-3">Guardar</button>
                               <button onClick={handleCerrarDetalles} className="btn btn-secondary mt-3 mx-1">Cerrar</button>
                             </form>
