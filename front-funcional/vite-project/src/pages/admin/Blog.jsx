@@ -11,6 +11,8 @@ function Blog(){
 
     const [msjCreado, setMsjCreado] = useState('');
 
+    const [msjEliminar, setMensajeEliminar] = useState('');
+
     const [notaSeleccionada, setNotaSeleccionada] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -59,14 +61,40 @@ function Blog(){
                 method: 'DELETE',
                 credentials: 'include'
             });
+
+            setMensajeEliminar(` <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <div>
+               <p>Eliminando...</p>
+              </div>
+          </div>`);
+
             if(response.ok){
                 console.log("Nota eliminado correctamente");
                 setBlogs(blogs.filter(blog => blog.id !== id));
+                setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                  <div>
+                    <img src="${gif}" width="28px" alt="">
+                  </div>
+                  <div>
+                    <p class="mx-2">Nota eliminada correctamente</p>
+                  </div>
+                </div> `);
             }else {
                 console.error("Error al eliminar la nota")
             }
         } catch (error) {
             console.log("Error en la solicitus de eliminació", error);
+            setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+              <div>
+                <img src="${gif}" width="28px" alt="">
+              </div>
+              <div>
+                <p class="mx-2">Error al eliminar nota</p>
+              </div>
+            </div> `);
         }
       }
 
@@ -168,6 +196,7 @@ function Blog(){
 
             <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear nota de blog</button>
 
+            <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjEliminar }}></p>
 
             {estadoForm &&
                     <form className="curso-form p-4" 

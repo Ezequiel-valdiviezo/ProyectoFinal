@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../styles/adminCursos.css'
 import { useColorContext } from '../../context/colorContext';
+import gif from '../../assets/gif/check.gif'
 
 function Cursos(){
     const [consultas, setConsultas] = useState([]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
+    const [msjEliminar, setMensajeEliminar] = useState('');
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
@@ -44,14 +46,46 @@ function Cursos(){
                 method: 'DELETE',
                 credentials: 'include'
             });
+            setMensajeEliminar(` <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Cargando...</span>
+                </div>
+                <div>
+                 <p>Eliminando...</p>
+                </div>
+            </div>`);
             if(response.ok){
                 console.log("Postulación curso eliminado correctamente");
                 setConsultas(consultas.filter(consulta => consulta.id !== id));
+                setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                    <div>
+                      <img src="${gif}" width="28px" alt="">
+                    </div>
+                    <div>
+                      <p class="mx-2">Postulación eliminada correctamente</p>
+                    </div>
+                  </div> `);
             }else {
                 console.error("Error al eliminar la nota")
+                setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                    <div>
+                      <img src="${gif}" width="28px" alt="">
+                    </div>
+                    <div>
+                      <p class="mx-2">Error al eliminar postulación</p>
+                    </div>
+                  </div> `);
             }
         } catch (error) {
             console.log("Error en la solicitus de eliminació", error);
+            setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                <div>
+                  <img src="${gif}" width="28px" alt="">
+                </div>
+                <div>
+                  <p class="mx-2">Error al eliminar postulación</p>
+                </div>
+              </div> `);
         }
       }
 
@@ -108,6 +142,9 @@ function Cursos(){
                     <div className="saludo">
                         <h2 style={estiloTitulo}>Postulación para ofrecer cursos</h2>
                     </div>
+
+                    <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjEliminar }}></p>
+
                 
                     {Array.isArray(consultas) && consultas.length > 0 ? (
                     <div>

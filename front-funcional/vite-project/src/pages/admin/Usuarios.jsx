@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useColorContext } from '../../context/colorContext';
 import '../../styles/adminUsuarios.css'
+import gif from '../../assets/gif/check.gif'
+
 
 function Usuarios() {
     const [usuarios, setUsuarios] = useState([]);
@@ -10,6 +12,8 @@ function Usuarios() {
     const [deleteId, setDeleteId] = useState(null);
     const modalRef = useRef(null);
     const [modalInstance, setModalInstance] = useState(null);
+
+    const [msjEliminar, setMensajeEliminar] = useState('');
 
     const { colors, color } = useColorContext();
     const estiloTitulo = {
@@ -62,12 +66,36 @@ function Usuarios() {
                 method: 'DELETE',
                 credentials: 'include'
             });
+            setMensajeEliminar(` <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+                                      <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Cargando...</span>
+                                      </div>
+                                      <div>
+                                       <p>Eliminando...</p>
+                                      </div>
+                                  </div>`);
 
             if (response.ok) {
                 setUsuarios(prevUsuarios => prevUsuarios.filter(usuario => usuario.id !== deleteId));
                 console.log('Usuario eliminado correctamente');
+                setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                    <div>
+                      <img src="${gif}" width="28px" alt="">
+                    </div>
+                    <div>
+                      <p class="mx-2">Usuario eliminado correctamente</p>
+                    </div>
+                  </div> `);
             } else {
                 console.error('Error al eliminar el usuario');
+                setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                    <div>
+                      <img src="${gif}" width="28px" alt="">
+                    </div>
+                    <div>
+                      <p class="mx-2">Error al eliminar usuario</p>
+                    </div>
+                  </div> `);
             }
         } catch (error) {
             console.error('Error en la solicitud de eliminación:', error);
@@ -96,6 +124,8 @@ function Usuarios() {
                         {/* <img src={img} width="100px" alt="" /> */}
                         <h2 style={estiloTitulo}>Usuarios</h2>
                     </div>
+
+                    <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjEliminar }}></p>
 
                     <table className="table table-striped table-hover">
                         <thead className="table-dark">

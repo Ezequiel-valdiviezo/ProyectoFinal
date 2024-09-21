@@ -12,6 +12,7 @@ function ManejoMedicos(){
 
     const [estadoForm, setEstadoForm] = useState(false);
     const [msjCreado, setMsjCreado] = useState('');
+    const [msjEliminar, setMensajeEliminar] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
@@ -77,14 +78,46 @@ function ManejoMedicos(){
                 method: 'DELETE',
                 credentials: 'include'
             });
+            setMensajeEliminar(` <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Cargando...</span>
+                </div>
+                <div>
+                 <p>Eliminando...</p>
+                </div>
+            </div>`);
             if(response.ok){
                 console.log("Medico eliminado correctamente");
                 setMedicos(medicos.filter(medico => medico.id !== id));
+                setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                    <div>
+                      <img src="${gif}" width="28px" alt="">
+                    </div>
+                    <div>
+                      <p class="mx-2">Médico eliminado correctamente</p>
+                    </div>
+                  </div> `);
             }else {
                 console.error("Error al eliminar el médico")
+                setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                    <div>
+                      <img src="${gif}" width="28px" alt="">
+                    </div>
+                    <div>
+                      <p class="mx-2">Error al eliminar médico</p>
+                    </div>
+                  </div> `);
             }
         } catch (error) {
             console.log("Error en la solicitus de eliminació", error);
+            setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
+                <div>
+                  <img src="${gif}" width="28px" alt="">
+                </div>
+                <div>
+                  <p class="mx-2">Error al eliminar médico</p>
+                </div>
+              </div> `);
         }
       }
 
@@ -182,6 +215,7 @@ function ManejoMedicos(){
 
             <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear médico</button>
 
+            <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjEliminar }}></p>
 
                     {estadoForm &&
                     <form className="curso-form p-4" onSubmit={handleSubmit}>
