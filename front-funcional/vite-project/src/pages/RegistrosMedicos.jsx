@@ -17,6 +17,8 @@ function RegistrosMedicos(){
         file_path: null,
         descripcion: ''
     });
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
       const usuario = JSON.parse(localStorage.getItem('user'));
@@ -30,6 +32,7 @@ function RegistrosMedicos(){
   }, [navigate]);
 
     useEffect(() => {
+      setLoading(true);
         const user = JSON.parse(localStorage.getItem('user'));
         const userId = user.user.id;
     
@@ -41,11 +44,15 @@ function RegistrosMedicos(){
         .then(data => {
           if (Array.isArray(data)) {
             setRegistro(data);
+            setLoading(false);
           } else {
             console.error('Unexpected API response:', data);
+            setLoading(false);
           }
         })
-        .catch(error => console.error('Error fetching registros:', error));
+        .catch(error => {console.error('Error fetching registros:', error);
+          setLoading(false);
+        });
       }, []);
 
     const handleChange = (e) => {
@@ -224,19 +231,14 @@ function RegistrosMedicos(){
             </form>
             }
 
-            {/* {registoCreado && 
-              // <p className="text-center">{notaCreada}</p>
-              <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
-                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
-                        <use xlinkHref="#exclamation-triangle-fill" />
-                    </svg>
-                    <div>
-                    {registoCreado}
-                    </div>
-                </div>
-            } */}
-
-
+{loading ? ( 
+                            <div className="alert d-flex justify-content-center mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+                  <div>
                   {registro.length > 0 ? (
                     <table className="mt-5 table table-striped table-hover">
                         <thead className="table-dark">
@@ -263,6 +265,8 @@ function RegistrosMedicos(){
                         </table>
                     ) : (
                       <p className="mt-5">No hay registros médicos</p>
+                    )}
+                    </div>
                     )}
 
         </div>

@@ -24,6 +24,8 @@ function Recuerdos() {
   const estiloTitulo = {
       color: color,
     };
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
       const usuario = JSON.parse(localStorage.getItem('user'));
@@ -37,6 +39,7 @@ function Recuerdos() {
   }, [navigate]);
 
   useEffect(() => {
+    setLoading(true);
     const user = JSON.parse(localStorage.getItem('user'));
     const userId = user.user.id;
 
@@ -48,11 +51,15 @@ function Recuerdos() {
     .then(data => {
       if (Array.isArray(data)) {
         setRecuerdos(data);
+        setLoading(false);
       } else {
         console.error('Unexpected API response:', data);
+        setLoading(false);
       }
     })
-    .catch(error => console.error('Error fetching recuerdos:', error));
+    .catch(error => {console.error('Error fetching recuerdos:', error);
+      setLoading(false);
+    });
   }, []);
 
   useEffect(() => {
@@ -260,6 +267,14 @@ function Recuerdos() {
                 </div>
             }
 
+{loading ? ( 
+                            <div className="alert d-flex justify-content-center mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+
         <div className="album py-5 bg-light">
           <div className="container">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -287,6 +302,8 @@ function Recuerdos() {
             </div>
           </div>
         </div>
+
+)}
 
         {/* Modal para ver el recuerdo */}
         {recuerdoSeleccionado && (

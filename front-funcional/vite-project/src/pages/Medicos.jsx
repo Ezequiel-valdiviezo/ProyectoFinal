@@ -11,6 +11,7 @@ function Medicos(){
     const estiloTitulo = {
         color: color,
       };
+      const [loading, setLoading] = useState(false);
 
 
       useEffect(() => {
@@ -25,13 +26,18 @@ function Medicos(){
     }, [navigate]);
 
       useEffect(() => {
+        setLoading(true);
         fetch('http://127.0.0.1:8000/api/medicos', {
             method: 'GET',
             credentials: "include",
         })
         .then(response => response.json())
-        .then(data => setMedicos(data))
-        .catch(error => console.error('Error fetch cursos:', error));
+        .then(data => {setMedicos(data);
+            setLoading(false);
+        })
+        .catch(error => {console.error('Error fetch cursos:', error);
+            setLoading(false);
+        });
     }, []);
 
     const handleMostrarDetalles = (index) => {
@@ -46,6 +52,14 @@ function Medicos(){
         <div className="fondoMedicos">
             <div className="medicos text-center">
                 <h2 className="pt-5" style={estiloTitulo}>Médicos</h2>
+
+                {loading ? ( 
+                            <div className="alert d-flex justify-content-center mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
 
                 <div className="d-flex flex-wrap justify-content-center">
                 {Array.isArray(medicos) && medicos.length > 0 ? (
@@ -72,6 +86,8 @@ function Medicos(){
                         <p>No se encontraron médicos.</p>
                     )}
                 </div>
+
+                    )}
 
                 {medicoSeleccionado && (
                     <div className="modal">

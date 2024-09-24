@@ -17,6 +17,7 @@ function Foro(){
     const [msjComentario, setMsjComentario] = useState('');
     const navigate = useNavigate();
     const [mensajesComentario, setMensajesComentario] = useState({});
+    const [loading, setLoading] = useState(false);
 
 
   const { colors, color } = useColorContext();
@@ -42,6 +43,7 @@ function Foro(){
   }, [navigate]);
 
     useEffect(() => {
+      setLoading(true);
       fetch(`http://127.0.0.1:8000/api/foro`, {
         method: 'GET',
         credentials: 'include'
@@ -50,11 +52,15 @@ function Foro(){
       .then(data => {
         if (Array.isArray(data)) {
           setPublicaciones(data);
+          setLoading(false);
         } else {
           console.error('Unexpected API response:', data);
+          setLoading(false);
         }
       })
-      .catch(error => console.error('Error fetching recuerdos:', error));
+      .catch(error => {console.error('Error fetching recuerdos:', error);
+        setLoading(false);
+      });
     }, []);
 
   const handleChange = (e) => {
@@ -219,6 +225,14 @@ function Foro(){
         </div>
       </form>
 
+      {loading ? ( 
+                            <div className="alert d-flex justify-content-center mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+
       <div className="comentario mt-5">
 
         
@@ -286,6 +300,7 @@ function Foro(){
         </ul>
         
       </div>
+      )}
     </div>
   );
 };

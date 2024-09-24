@@ -15,6 +15,8 @@ function Perfil(){
   const [usuario, setUsuario] = useState({})
   const [msjEdit, setMsjEdit] = useState('');
   const [loader, setLoader] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     avatar: "",
     email: "",
@@ -37,9 +39,9 @@ function Perfil(){
   }, [navigate]);
 
   useEffect(() => {
+    setLoading(true);
     const user = JSON.parse(localStorage.getItem('user'));
     const userId = user.user.id;
-
     fetch(`http://127.0.0.1:8000/api/user/${userId}`, {
       method: 'GET',
       credentials: 'include'
@@ -53,8 +55,12 @@ function Perfil(){
         email: data[0].email,
         name: data[0].name
       });
+      setLoading(false); // Mover aquí
     })
-    .catch(error => console.error('Error fetching perfil:', error));
+    .catch(error => {console.error('Error fetching perfil:', error);
+      setLoading(false); // Mover aquí
+
+    });
   }, []);
 
   const handleMostrarDetalles = () => {
@@ -141,6 +147,14 @@ const obtenerImagenAvatar = () => {
                 </div>
             }
 
+{loading ? ( 
+                            <div className="alert d-flex justify-content-center mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+
             <div className="col col-lg-8 mb-4 mb-lg-0">
               <div className="card tarjetaPerfil mb-3" style={{ borderRadius: ".5rem" }}>
                 <div className="row g-0">
@@ -187,6 +201,8 @@ const obtenerImagenAvatar = () => {
                 </div>
               </div>
             </div>
+
+)}
 
             {cursoSeleccionado && (
                     <div className="modal">
