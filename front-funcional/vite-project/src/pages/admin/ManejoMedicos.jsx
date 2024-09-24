@@ -7,6 +7,7 @@ import gif from '../../assets/gif/check.gif'
 function ManejoMedicos(){
     const [medicos, setMedicos] = useState([]);
     const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
+    const [loading, setLoading] = useState(false)
 
     const [medicosVencidos, setMedicosVencidos] = useState([]);
 
@@ -23,6 +24,7 @@ function ManejoMedicos(){
     const fechaActual = new Date();
 
       useEffect(() => {
+        setLoading(true)
         fetch('http://127.0.0.1:8000/api/medicos', {
             method: 'GET',
             credentials: "include",
@@ -32,8 +34,9 @@ function ManejoMedicos(){
           setMedicos(data);
           const vencidos = data.filter(medico => new Date(medico.fecha_vencimiento) <= fechaActual);
           setMedicosVencidos(vencidos);
+          setLoading(false);
       })
-        .catch(error => console.error('Error fetch médicos:', error));
+        .catch(error => {console.error('Error fetch médicos:', error); setLoading(false)});
     }, []);
 
     useEffect(() => {
@@ -194,10 +197,13 @@ function ManejoMedicos(){
             <div className="vh-100">
             <div className="adminManejoMedicos pt-5 pb-5 text-center">
 
+
+            <h2 style={estiloTitulo}>Manejo Médicos</h2>
+
+            <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear médico</button>
+            
+            
             {Array.isArray(medicosVencidos) && medicosVencidos.length > 0 ? (
-                //  <div className="alert alert-danger mt-5" role="alert">
-                //  Algunos servicios pasaron su fecha de vencimiento
-                //   </div>
                 <div className="alert alert-danger d-flex align-items-center mt-5" role="alert">
                     <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
                         <use xlinkHref="#exclamation-triangle-fill" />
@@ -210,10 +216,6 @@ function ManejoMedicos(){
                 ) : (
                   <div></div>
                 )}
-
-            <h2 style={estiloTitulo}>Manejo Médicos</h2>
-
-            <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear médico</button>
 
             <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjEliminar }}></p>
 
@@ -273,6 +275,15 @@ function ManejoMedicos(){
                     }
 
 
+{loading ? ( 
+                            <div className="alert mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+                      <div>
+
 
             {Array.isArray(medicos) && medicos.length > 0 ? (
                     <table className="table mt-5 table-striped table-hover">
@@ -304,22 +315,6 @@ function ManejoMedicos(){
                     <p>No se encontraron médicos.</p>
                 )}
 
-                {medicoSeleccionado && (
-                    <div className="modal">
-                        <div className="modal-content">
-                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
-                            <img src={'http://127.0.0.1:8000/' + medicoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
-                            <h3 className="my-2">Detalles del médico</h3>
-                            <p className="text-start"><span className="fw-bold">Nombre:</span> {medicoSeleccionado.nombre}</p>
-                            <p className="text-start"><span className="fw-bold">Descripción:</span> {medicoSeleccionado.descripcion}</p>
-                            <p className="text-start"><span className="fw-bold">Categoría:</span> {medicoSeleccionado.especialidad}</p>
-                            <p className="text-start"><span className="fw-bold">Teléfono:</span> {medicoSeleccionado.telefono}</p>
-                            <p className="text-start"><span className="fw-bold">Precio</span>: ${medicoSeleccionado.precio}</p>
-                            <p className="text-start"><span className="fw-bold">Fecha de vencimiento</span>: {medicoSeleccionado.fecha_vencimiento}</p>
-                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
-                        </div>
-                    </div>
-                )}
 
 <h2 className="mt-5" style={estiloTitulo}>Servicios vencidos</h2>
 
@@ -350,9 +345,28 @@ function ManejoMedicos(){
                         </tbody>
                     </table>
                 ) : (
-                    <p className="mt-5">No se encontraron servicios vencidos.</p>
+                  <p className="mt-5">No se encontraron servicios vencidos.</p>
                 )}
 
+</div>
+          )}
+
+                {medicoSeleccionado && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <img src={'http://127.0.0.1:8000/' + medicoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
+                            <h3 className="my-2">Detalles del médico</h3>
+                            <p className="text-start"><span className="fw-bold">Nombre:</span> {medicoSeleccionado.nombre}</p>
+                            <p className="text-start"><span className="fw-bold">Descripción:</span> {medicoSeleccionado.descripcion}</p>
+                            <p className="text-start"><span className="fw-bold">Categoría:</span> {medicoSeleccionado.especialidad}</p>
+                            <p className="text-start"><span className="fw-bold">Teléfono:</span> {medicoSeleccionado.telefono}</p>
+                            <p className="text-start"><span className="fw-bold">Precio</span>: ${medicoSeleccionado.precio}</p>
+                            <p className="text-start"><span className="fw-bold">Fecha de vencimiento</span>: {medicoSeleccionado.fecha_vencimiento}</p>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                        </div>
+                    </div>
+                )}
 
             </div>
             </div>

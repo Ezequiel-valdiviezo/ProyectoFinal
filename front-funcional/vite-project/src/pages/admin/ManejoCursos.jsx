@@ -7,7 +7,8 @@ import gif from '../../assets/gif/check.gif'
 function ManejoCursos(){
     const [cursos, setCursos] = useState([]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
-    
+    const [loading, setLoading] = useState(false)
+
     const [cursosVencidos, setCursosVencidos] = useState([]);
 
     const [estadoForm, setEstadoForm] = useState(false);
@@ -22,6 +23,7 @@ function ManejoCursos(){
     const fechaActual = new Date();
 
     useEffect(() => {
+      setLoading(true)
         fetch('http://127.0.0.1:8000/api/cursos', {
             method: 'GET',
             credentials: "include",
@@ -31,8 +33,12 @@ function ManejoCursos(){
           setCursos(data);
           const vencidos = data.filter(curso => new Date(curso.fecha_vencimiento) <= fechaActual);
           setCursosVencidos(vencidos);
+          setLoading(false);
+
       })
-        .catch(error => console.error('Error fetch cursos:', error));
+        .catch(error => {console.error('Error fetch cursos:', error);
+          setLoading(false);
+        });
     }, []);
 
     useEffect(() => {
@@ -196,10 +202,11 @@ function ManejoCursos(){
         <div className="vh-100">
                 <div className="adminManejoCursos pt-5 pb-5 text-center">
 
+
+                        <h2 style={estiloTitulo}>Cursos</h2>
+                    <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear curso</button>
+
                 {Array.isArray(cursosVencidos) && cursosVencidos.length > 0 ? (
-                //  <div className="alert alert-danger mt-5" role="alert">
-                //  Algunos servicios pasaron su fecha de vencimiento
-                //   </div>
                 <div className="alert alert-danger d-flex align-items-center mt-5" role="alert">
                     <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
                         <use xlinkHref="#exclamation-triangle-fill" />
@@ -212,10 +219,6 @@ function ManejoCursos(){
                 ) : (
                   <div></div>
                 )}
-
-                        <h2 style={estiloTitulo}>Cursos</h2>
-                    <button className="btn btn-outline-primary mb-4" onClick={handleAbrirForm}>Crear curso</button>
-
                     <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjEliminar }}></p>
 
                     {estadoForm &&
@@ -290,6 +293,15 @@ function ManejoCursos(){
                     }
 
 
+{loading ? ( 
+                            <div className="alert mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+                      <div>
+
                 {Array.isArray(cursos) && cursos.length > 0 ? (
                     <table className="table mt-5 table-striped table-hover">
                         <thead className="table-dark">
@@ -320,22 +332,6 @@ function ManejoCursos(){
                     <p>No se encontraron cursos.</p>
                 )}
 
-                {cursoSeleccionado && (
-                    <div className="modal">
-                        <div className="modal-content">
-                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
-                            <img src={'http://127.0.0.1:8000/' + cursoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
-                            <h3 className="my-2">Detalles del Curso</h3>
-                            <p className="text-start"><span className="fw-bold">Título:</span> {cursoSeleccionado.titulo}</p>
-                            <p className="text-start"><span className="fw-bold">Descripción:</span> {cursoSeleccionado.descripcion_completa}</p>
-                            <p className="text-start"><span className="fw-bold">Categoría:</span> {cursoSeleccionado.categoria}</p>
-                            <p className="text-start"><span className="fw-bold">Teléfono:</span> {cursoSeleccionado.telefono}</p>
-                            <p className="text-start"><span className="fw-bold">Precio</span>: ${cursoSeleccionado.precio}</p>
-                            <p className="text-start"><span className="fw-bold">Vencimiento</span>: {cursoSeleccionado.fecha_vencimiento}</p>
-                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
-                        </div>
-                    </div>
-                )}
 
 <h2 className="mt-5" style={estiloTitulo}>Servicios vencidos</h2>
 
@@ -366,9 +362,28 @@ function ManejoCursos(){
                         </tbody>
                     </table>
                 ) : (
-                    <p className="mt-5">No se encontraron servicios vencidos.</p>
+                  <p className="mt-5">No se encontraron servicios vencidos.</p>
                 )}
 
+</div>
+          )}
+
+                {cursoSeleccionado && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
+                            <img src={'http://127.0.0.1:8000/' + cursoSeleccionado.imagen} width="100%" className="card-img-top" alt="" />
+                            <h3 className="my-2">Detalles del Curso</h3>
+                            <p className="text-start"><span className="fw-bold">Título:</span> {cursoSeleccionado.titulo}</p>
+                            <p className="text-start"><span className="fw-bold">Descripción:</span> {cursoSeleccionado.descripcion_completa}</p>
+                            <p className="text-start"><span className="fw-bold">Categoría:</span> {cursoSeleccionado.categoria}</p>
+                            <p className="text-start"><span className="fw-bold">Teléfono:</span> {cursoSeleccionado.telefono}</p>
+                            <p className="text-start"><span className="fw-bold">Precio</span>: ${cursoSeleccionado.precio}</p>
+                            <p className="text-start"><span className="fw-bold">Vencimiento</span>: {cursoSeleccionado.fecha_vencimiento}</p>
+                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                        </div>
+                    </div>
+                )}
 
                 </div>
             </div>

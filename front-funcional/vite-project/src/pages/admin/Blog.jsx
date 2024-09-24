@@ -12,6 +12,7 @@ function Blog(){
     const [msjCreado, setMsjCreado] = useState('');
 
     const [msjEliminar, setMensajeEliminar] = useState('');
+    const [loading, setLoading] = useState(false)
 
     const [notaSeleccionada, setNotaSeleccionada] = useState(null);
 
@@ -46,13 +47,20 @@ function Blog(){
     }, [navigate]);
 
     useEffect(() => {
+      setLoading(true)
         fetch('http://127.0.0.1:8000/api/blogs', {
             method: 'GET',
             credentials: "include",
         })
         .then(response => response.json())
-        .then(data => setBlogs(data))
-        .catch(error => console.error('Error fetch cursos:', error));
+        .then(data =>{ 
+          setBlogs(data)
+          setLoading(false)
+        })
+        .catch(error => {
+          console.error('Error fetch cursos:', error)
+          setLoading(false)
+        });
     }, []);
 
     const handleDelete = async (id) => {
@@ -236,6 +244,14 @@ function Blog(){
                     }
 
 
+{loading ? ( 
+                            <div className="alert mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+                      <div>
           {Array.isArray(blogs) && blogs.length > 0 ? (
             <div>
             <table className="table mt-5 table-striped table-hover">
@@ -281,11 +297,12 @@ function Blog(){
             </nav>
             </div>
 
-            
-            ) : (
-              <p>No se encontraron blogs.</p>
-            )}
 
+              ) : (
+                <p>No se encontraron blogs.</p>
+              )}
+              </div>
+          )}
 
                 {notaSeleccionada && (
                     <div className="modal">

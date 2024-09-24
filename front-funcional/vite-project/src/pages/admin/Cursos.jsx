@@ -8,6 +8,8 @@ function Cursos(){
     const [consultas, setConsultas] = useState([]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
     const [msjEliminar, setMensajeEliminar] = useState('');
+    const [loading, setLoading] = useState(false)
+
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
@@ -31,13 +33,14 @@ function Cursos(){
     }, [navigate]);
 
     useEffect(() => {
+        setLoading(true)
         fetch('http://127.0.0.1:8000/api/consulta/cursos', { 
             method: 'GET',
             credentials: "include",
         })
         .then(response => response.json())
-        .then(data => setConsultas(data))
-        .catch(error => console.error('Error fetch cursos:', error));
+        .then(data => {setConsultas(data); setLoading(false)})
+        .catch(error => {console.error('Error fetch cursos:', error); setLoading(false)});
     }, []);
 
     const handleDelete = async (id) => {
@@ -146,6 +149,16 @@ function Cursos(){
                     <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjEliminar }}></p>
 
                 
+                    {loading ? ( 
+                            <div className="alert mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+                      <div>
+
+
                     {Array.isArray(consultas) && consultas.length > 0 ? (
                     <div>
                     <table className="table table-striped table-hover">
@@ -203,7 +216,8 @@ function Cursos(){
                 ) : (
                         <p>No se encontró postulación de cursos.</p>
                     )}
-
+</div>
+)}
 
                 {cursoSeleccionado && (
                     <div className="modal">

@@ -15,6 +15,8 @@ function Usuarios() {
 
     const [msjEliminar, setMensajeEliminar] = useState('');
 
+    const [loading, setLoading] = useState(false);
+
     const { colors, color } = useColorContext();
     const estiloTitulo = {
         color: color,
@@ -37,13 +39,20 @@ function Usuarios() {
     }, [navigate]);
 
     useEffect(() => {
+        setLoading(true);
         fetch('http://127.0.0.1:8000/api/users', {
             method: 'GET',
             credentials: "include",
         })
             .then(response => response.json())
-            .then(data => setUsuarios(data))
-            .catch(error => console.error('Error fetch cursos:', error));
+            .then(data => {
+                setUsuarios(data);
+                setLoading(false); // Mover aquí
+            })
+            .catch(error => {
+                console.error('Error fetch cursos:', error);
+                setLoading(false); // Asegúrate de que se setee el loading en false en caso de error
+            });
     }, []);
 
     useEffect(() => {
@@ -127,6 +136,14 @@ function Usuarios() {
 
                     <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjEliminar }}></p>
 
+                    {loading ? ( 
+                            <div className="alert mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+                    <div>
                     <table className="table table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
@@ -167,6 +184,8 @@ function Usuarios() {
                             </li>
                         </ul>
                     </nav>
+                    </div>
+                    )}
 
                     {/* Modal para confirmar eliminación */}
                     <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" ref={modalRef}>

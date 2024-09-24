@@ -9,6 +9,8 @@ function Consultas() {
     const [modal, setModal] = useState(null)
     
     const [loader, setLoader] = useState('')
+    const [loading, setLoading] = useState(false)
+
     
     //Guarda la pagina actual
     const [currentPage, setCurrentPage] = useState(1);
@@ -32,13 +34,20 @@ function Consultas() {
     }, [navigate]);
 
     useEffect(() => {
+        setLoading(true)
         fetch('http://127.0.0.1:8000/api/consulta', { 
             method: 'GET',
             credentials: "include",
         })
         .then(response => response.json())
-        .then(data => setConsultas(data))
-        .catch(error => console.error('Error fetch cursos:', error));
+        .then(data => { 
+            setConsultas(data)
+            setLoading(false)
+          })
+        .catch(error => {
+            console.error('Error fetch cursos:', error)
+            setLoading(false)
+          });
     }, []);
 
     // Calculan los indices de los elementos a mostrar en la página actual
@@ -127,6 +136,16 @@ function Consultas() {
                         <h2 style={estiloTitulo}>Consultas</h2>
                     </div>
                     
+
+                    {loading ? ( 
+                            <div className="alert mt-5 mx-5" role="alert">
+                                <div class="spinner-border text-primary m-auto" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                    ) : (
+
+                <div>
                 {Array.isArray(consultas) && consultas.length > 0 ? (
                     <div>
                     <table className="table table-striped table-hover">
@@ -168,10 +187,12 @@ function Consultas() {
                         </ul>
                     </nav>
                     </div>
-
-                    ) : (
-                        <p>No se encontraron consultas.</p>
-                    )}
+                    
+                ) : (
+                    <p>No se encontraron consultas.</p>
+                )}
+                </div>
+                )}
 
                 {modal && (
                     <div className="modal">
