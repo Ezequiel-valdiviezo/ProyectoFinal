@@ -4,8 +4,12 @@ import img from '../assets/2.png'
 import { useColorContext } from '../context/colorContext';
 import { useNavigate } from "react-router-dom";
 
-import imgAvatar1 from '../assets/avatar/avatar1.png'; // Importa las imágenes de los avatares
-import imgAvatar2 from '../assets/avatar/avatar2.png'; // Importa las imágenes de los avatares
+import imgAvatar1 from '../assets/avatar/1.jpg'; // Importa las imágenes de los avatares
+import imgAvatar2 from '../assets/avatar/2.jpg'; // Importa las imágenes de los avatares
+import imgAvatar3 from '../assets/avatar/3.jpg'; // Importa las imágenes de los avatares
+import imgAvatar4 from '../assets/avatar/4.jpg'; // Importa las imágenes de los avatares
+import imgAvatar5 from '../assets/avatar/5.jpg'; // Importa las imágenes de los avatares
+import imgAvatar6 from '../assets/avatar/6.jpg'; // Importa las imágenes de los avatares
 
 
 function Perfil(){
@@ -122,7 +126,15 @@ const obtenerImagenAvatar = () => {
     return imgAvatar1; // Devuelve la imagen del avatar 1
   } else if (usuario.avatar === "avatar2") {
     return imgAvatar2; // Devuelve la imagen del avatar 2
-  } else {
+  } else if (usuario.avatar === "avatar3") {
+    return imgAvatar3; // Devuelve la imagen del avatar 2
+  } else if (usuario.avatar === "avatar4") {
+    return imgAvatar4; // Devuelve la imagen del avatar 2
+  }else if (usuario.avatar === "avatar5") {
+    return imgAvatar5; // Devuelve la imagen del avatar 2
+  }else if (usuario.avatar === "avatar6") {
+    return imgAvatar6; // Devuelve la imagen del avatar 2
+  }else {
     return img; // Devuelve una imagen por defecto o la que estás utilizando actualmente
   }
 };
@@ -228,6 +240,7 @@ const obtenerImagenAvatar = () => {
                           src={imgAvatar1} // Imagen del avatar 1
                           alt="Avatar 1"
                           className="img-fluid avatar-preview mx-2"
+                          width={50}
                         />
                         <div className="form-check">
                           <input
@@ -244,11 +257,12 @@ const obtenerImagenAvatar = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center">
+                      <div className="d-flex align-items-center mb-3">
                         <img
                           src={imgAvatar2} // Imagen del avatar 2
                           alt="Avatar 2"
                           className="img-fluid avatar-preview mx-2"
+                          width={50}
                         />
                         <div className="form-check">
                           <input
@@ -262,6 +276,94 @@ const obtenerImagenAvatar = () => {
                           />
                           <label className="form-check-label" htmlFor="avatar2">
                             Avatar 2
+                          </label>
+                        </div>
+                      </div>
+                      <div className="d-flex align-items-center mb-3">
+                        <img
+                          src={imgAvatar3} // Imagen del avatar 2
+                          alt="Avatar 3"
+                          className="img-fluid avatar-preview mx-2"
+                          width={50}
+                        />
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="avatar"
+                            id="avatar3"
+                            value="avatar3"
+                            checked={formData.avatar === "avatar3"}
+                            onChange={handleChange}
+                          />
+                          <label className="form-check-label" htmlFor="avatar3">
+                            Avatar 3
+                          </label>
+                        </div>
+                      </div>
+                      <div className="d-flex align-items-center mb-3">
+                        <img
+                          src={imgAvatar4} // Imagen del avatar 2
+                          alt="Avatar 4"
+                          className="img-fluid avatar-preview mx-2"
+                          width={50}
+                        />
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="avatar"
+                            id="avatar4"
+                            value="avatar4"
+                            checked={formData.avatar === "avatar4"}
+                            onChange={handleChange}
+                          />
+                          <label className="form-check-label" htmlFor="avatar4">
+                            Avatar 4
+                          </label>
+                        </div>
+                      </div>
+                      <div className="d-flex align-items-center mb-3">
+                        <img
+                          src={imgAvatar5} // Imagen del avatar 2
+                          alt="Avatar 5"
+                          className="img-fluid avatar-preview mx-2"
+                          width={50}
+                        />
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="avatar"
+                            id="avatar5"
+                            value="avatar5"
+                            checked={formData.avatar === "avatar5"}
+                            onChange={handleChange}
+                          />
+                          <label className="form-check-label" htmlFor="avatar2">
+                            Avatar 5
+                          </label>
+                        </div>
+                      </div>
+                      <div className="d-flex align-items-center mb-3">
+                        <img
+                          src={imgAvatar6} // Imagen del avatar 2
+                          alt="Avatar 6"
+                          className="img-fluid avatar-preview mx-2"
+                          width={50}
+                        />
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="avatar"
+                            id="avatar6"
+                            value="avatar6"
+                            checked={formData.avatar === "avatar6"}
+                            onChange={handleChange}
+                          />
+                          <label className="form-check-label" htmlFor="avatar6">
+                            Avatar 6
                           </label>
                         </div>
                       </div>
