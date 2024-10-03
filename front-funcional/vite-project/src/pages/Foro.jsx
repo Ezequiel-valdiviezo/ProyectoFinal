@@ -173,7 +173,7 @@ function Foro(){
       <h2 className="text-center" style={estiloTitulo}>Foro</h2>
       <p className="fs-3 fw-bold">¡Hola {user.user.name}!</p>
       <p>Conectá con otros padres que están o estuvieron en la misma situación.</p>
-      <form onSubmit={handlePostSubmit} className="p-4">
+      <form onSubmit={handlePostSubmit} className="p-4" style={{ borderRadius: "0.5rem" }}>
         <p>Crear publicación</p>
         {msjPublicacion && 
               <div className="alert alert-success d-flex align-items-center mt-5" role="alert">

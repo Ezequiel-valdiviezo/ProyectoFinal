@@ -15,14 +15,12 @@
 }
 
 .dashboard .funcionalidades{
-    /* background-color: rgb(20, 144, 226); */
-    /* background-color: #0b83af; */
-    border-radius: 40px;
+    border-radius: 0.5rem;
     color: white;
 }
 
 .dashboard .funcionalidades .funcMini{
-    border-radius: 10px;
+    border-radius: 0.5rem;
     text-align: center;
     height: 120px;
     margin: auto;
@@ -51,7 +49,7 @@
 
 .dashboard .agradecimiento{
     background-color: #0b83af;
-    border-radius: 40px;
+    border-radius: 0.5rem;
     color: white;
 }
 

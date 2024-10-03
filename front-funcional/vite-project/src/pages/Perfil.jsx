@@ -168,7 +168,7 @@ const obtenerImagenAvatar = () => {
                     ) : (
 
             <div className="col col-lg-8 mb-4 mb-lg-0">
-              <div className="card tarjetaPerfil mb-3" style={{ borderRadius: ".5rem" }}>
+              <div className="card tarjetaPerfil mb-3" style={{ borderRadius: "0.5rem" }}>
                 <div className="row g-0">
                   <div
                     className="col-md-4 gradient-custom text-center"
