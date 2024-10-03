@@ -266,6 +266,20 @@ nav .logoNatuserNav{
     max-width: 500px;
 }
 
+@media (max-width:991px){
+    .contenedorFormInfo{
+        margin-right: 30px;
+        margin-left: 30px;
+    }
+    
+}
+@media (max-width:610px){
+    .medicosf #formMedicos{
+        margin-right: 30px;
+        margin-left: 30px;
+    }
+    
+}
 @media (max-width:411px){
     nav .logoNatuserNav{
         max-width: 250px;
@@ -275,10 +289,5 @@ nav .logoNatuserNav{
         color: #08a2de;
         font-size: 70px;
     }
-
-
-
-
-
     
 }

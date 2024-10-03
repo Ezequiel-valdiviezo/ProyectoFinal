@@ -84,10 +84,8 @@ function Login({ onLogin }){
     <div className="login d-flex flex-column justify-content-center align-items-center text-center vh-100">
       <div className="cardContenido p-5">
           <h1>¡Bienvenido a <span id="nat">Nat</span><span id="user">User</span>!</h1>
-          {/* <img src={imgg} alt="" width="100px"/> */}
-          {/* <p>¡Nos alegra tener aqui!</p> */}
           <p>Iniciá sesión para acceder a contenido exclusivo, participar en foros y conectarte con otros padres que están viviendo la misma experiencia.</p>
-          <h2>Iniciar sesión</h2>
+          <h2 className="fs-2">Iniciar sesión</h2>
           <form onSubmit={handleSubmit}>
           <div className="d-flex flex-column m-3">
             <label htmlFor="email">Email:</label>
@@ -98,6 +96,7 @@ function Login({ onLogin }){
               name="email"
               value={formData.email}
               onChange={handleChange}
+              placeholder="nombre@gmail.com"
             />
           </div>
           <div className="d-flex flex-column m-3">
