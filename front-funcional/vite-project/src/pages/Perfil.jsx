@@ -222,20 +222,10 @@ const obtenerImagenAvatar = () => {
                             <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
                             <h3 style={estiloTitulo}>Editar Perfil</h3>
                             <form onSubmit={handleSubmit}>
-                              {/* <div className="form-group my-4">
-                                <label className="mb-2" htmlFor="imagen">Foto de Perfil</label>
-                                <input
-                                  type="file"
-                                  className="form-control"
-                                  id="imagen"
-                                  name="imagen"
-                                  accept="image/*"
-                                  onChange={handleChange}
-                                />
-                              </div> */}
                               <div className="form-group my-4">
                       <label className="mb-2">Elegir Avatar</label>
-                      <div className="d-flex align-items-center mb-3">
+                      <div className="d-flex flex-wrap">
+                      <div className="d-flex align-items-center mb-3 mx-2">
                         <img
                           src={imgAvatar1} // Imagen del avatar 1
                           alt="Avatar 1"
@@ -257,7 +247,7 @@ const obtenerImagenAvatar = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center mb-3">
+                      <div className="d-flex align-items-center mb-3 mx-2">
                         <img
                           src={imgAvatar2} // Imagen del avatar 2
                           alt="Avatar 2"
@@ -279,7 +269,7 @@ const obtenerImagenAvatar = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center mb-3">
+                      <div className="d-flex align-items-center mb-3 mx-2">
                         <img
                           src={imgAvatar3} // Imagen del avatar 2
                           alt="Avatar 3"
@@ -301,7 +291,7 @@ const obtenerImagenAvatar = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center mb-3">
+                      <div className="d-flex align-items-center mb-3 mx-2">
                         <img
                           src={imgAvatar4} // Imagen del avatar 2
                           alt="Avatar 4"
@@ -323,7 +313,7 @@ const obtenerImagenAvatar = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center mb-3">
+                      <div className="d-flex align-items-center mb-3 mx-2">
                         <img
                           src={imgAvatar5} // Imagen del avatar 2
                           alt="Avatar 5"
@@ -345,7 +335,7 @@ const obtenerImagenAvatar = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center mb-3">
+                      <div className="d-flex align-items-center mb-3 mx-2">
                         <img
                           src={imgAvatar6} // Imagen del avatar 2
                           alt="Avatar 6"
@@ -366,6 +356,7 @@ const obtenerImagenAvatar = () => {
                             Avatar 6
                           </label>
                         </div>
+                      </div>
                       </div>
                     </div>
                               <div className="form-group my-4">

@@ -112,7 +112,16 @@ function Cursos() {
                             <p className="text-start"><span className="fw-bold">Categoría:</span> {cursoSeleccionado.categoria}</p>
                             <p className="text-start"><span className="fw-bold">Teléfono:</span> {cursoSeleccionado.telefono}</p>
                             <p className="text-start"><span className="fw-bold">Precio</span>: ${cursoSeleccionado.precio}</p>
-                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                            <div className="">
+                            <button className="btn btn-outline-primary mx-1" onClick={handleCerrarDetalles}>Cerrar</button>
+                            <button className="btn btn-primary mx-1" onClick={() => {
+                                            const phoneNumber = curso.telefono;
+                                            const message = `Hola, me gustaría saber más sobre su curso: ${curso.titulo}.`;
+                                            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                                            window.open(url, "_blank");
+                                        }}>Contactar</button>
+                            </div>
+                            
                         </div>
                     </div>
                 )}

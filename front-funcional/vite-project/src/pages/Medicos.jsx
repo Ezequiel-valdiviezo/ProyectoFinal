@@ -100,7 +100,11 @@ function Medicos(){
                             <p className="text-start"><span className="fw-bold">Categoría:</span> {medicoSeleccionado.especialidad}</p>
                             <p className="text-start"><span className="fw-bold">Teléfono:</span> {medicoSeleccionado.telefono}</p>
                             <p className="text-start"><span className="fw-bold">Precio</span>: ${medicoSeleccionado.precio}</p>
-                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                            <div>
+
+                            <button className="btn btn-outline-primary mx-1" onClick={handleCerrarDetalles}>Cerrar</button>
+                            <button className="btn btn-primary mx-1" >Contactar</button>
+                            </div>
                         </div>
                     </div>
                 )}
