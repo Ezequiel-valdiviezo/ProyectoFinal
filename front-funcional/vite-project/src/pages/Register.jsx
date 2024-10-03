@@ -81,10 +81,10 @@ function Register({ onRegister }){
       <div className="cardContenido px-5 py-4">
         <h2>¡Bienvenido a <span id="nat">Nat</span><span id="user">User</span>!</h2>
             <p>Registrate y accedé a todas las funcionalidad.<br /> ¡Te deseamos lo mejor en esta increíble aventura!</p>
-            <h2>Registrarme</h2>
-            <form onSubmit={handleSubmit}>
+            <h2 className="fs-2">Registrarme</h2>
+            <form className="mb-2" onSubmit={handleSubmit}>
             <div className="d-flex flex-column m-3">
-              <label htmlFor="name">Nombre de usuario:</label>
+              <label className="text-start" htmlFor="name">Nombre de usuario</label>
               <input
                 className="p-1"
                 type="name"
@@ -92,11 +92,12 @@ function Register({ onRegister }){
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
+                placeholder="natuser"
               />
               {error.name && <p style={{ color: 'red' }}>{error.name[0]}</p>}
             </div>
             <div className="d-flex flex-column m-3">
-              <label htmlFor="email">Email:</label>
+              <label className="text-start" htmlFor="email">Email</label>
               <input
                 className="p-1"
                 type="email"
@@ -104,11 +105,12 @@ function Register({ onRegister }){
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                placeholder="natuser@gmail.com"
               />
               {error.email && <p style={{ color: 'red' }}>{error.email[0]}</p>}
             </div>
             <div className="d-flex flex-column m-3">
-              <label htmlFor="password">Contraseña:</label>
+              <label className="text-start" htmlFor="password">Contraseña</label>
               <input
                 className="p-1"
                 type="password"
@@ -119,7 +121,7 @@ function Register({ onRegister }){
               />
             </div>
             <div className="d-flex flex-column m-3">
-              <label htmlFor="password">Confirmar contraseña:</label>
+              <label className="text-start" htmlFor="password">Confirmar contraseña</label>
               <input
                 className="p-1"
                 type="password"
@@ -141,7 +143,9 @@ function Register({ onRegister }){
 
             <button className="btn btn-outline-primary anchoBoton" type="submit">Registrarme</button>
             </form>
-          <button onClick={onToggle} className="btn btn-outline-primary anchoBoton mt-2">Iniciar sesión</button>
+          {/* <button onClick={onToggle} className="btn btn-outline-primary anchoBoton mt-2">Iniciar sesión</button> */}
+          <a href="./login">Iniciar sesión</a>
+
           </div> 
     </div>
 

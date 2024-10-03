@@ -19,6 +19,11 @@
     font-weight: bold;
 }
 
+.register .cardContenido form{
+  max-width: 300px;
+  margin: auto;
+}
+
 .register .anchoBoton{
     width: 125px;
   }

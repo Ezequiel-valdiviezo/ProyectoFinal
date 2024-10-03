@@ -86,9 +86,9 @@ function Login({ onLogin }){
           <h1>¡Bienvenido a <span id="nat">Nat</span><span id="user">User</span>!</h1>
           <p>Iniciá sesión para acceder a contenido exclusivo, participar en foros y conectarte con otros padres que están viviendo la misma experiencia.</p>
           <h2 className="fs-2">Iniciar sesión</h2>
-          <form onSubmit={handleSubmit}>
+          <form className="mb-2" onSubmit={handleSubmit}>
           <div className="d-flex flex-column m-3">
-            <label htmlFor="email">Email:</label>
+            <label className="text-start" htmlFor="email">Email</label>
             <input
               className="p-1"
               type="email"
@@ -100,7 +100,7 @@ function Login({ onLogin }){
             />
           </div>
           <div className="d-flex flex-column m-3">
-            <label htmlFor="password">Contraseña:</label>
+            <label className="text-start" htmlFor="password">Contraseña</label>
             <input
               className="p-1"
               type="password"
@@ -119,7 +119,8 @@ function Login({ onLogin }){
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <button className="btn btn-outline-primary anchoBoton" type="submit">Iniciar sesión</button>
           </form>
-        <button onClick={onToggle} className="btn btn-outline-primary anchoBoton mt-2">Registro</button>
+        {/* <button onClick={onToggle} className="btn btn-outline-primary anchoBoton mt-2">Registro</button> */}
+        <a href="./register">Registro</a>
       </div>
     </div>
   )

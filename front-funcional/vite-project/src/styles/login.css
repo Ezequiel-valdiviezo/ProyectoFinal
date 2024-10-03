@@ -23,6 +23,10 @@
     font-size: 45px;
     font-weight: bold;
 }
+.login .cardContenido form{
+  max-width: 300px;
+  margin: auto;
+}
 
 .login .loader {
     position: fixed;
