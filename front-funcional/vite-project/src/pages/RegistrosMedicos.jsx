@@ -217,6 +217,7 @@ function RegistrosMedicos(){
                     <textarea
                         name="descripcion"
                         id="descripcion"
+                        className="p-1"
                         value={formData.descripcion}
                         onChange={handleChange}
                         maxLength="256"
@@ -243,18 +244,16 @@ function RegistrosMedicos(){
                     <table className="mt-5 table table-striped table-hover">
                         <thead className="table-dark">
                             <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Archivo</th>
                                 <th scope="col">Descripción</th>
+                                <th scope="col">Fecha</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {registro.map((regis, index) => (
                               <tr key={index}>
-                                    <td>{regis.id}</td>
-                                    <td>{regis.file_path}</td>
                                     <td>{regis.descripcion}</td>
+                                    <td>{regis.created_at}</td>
                                     <td>
                                       <button className="btn btn-outline-primary" onClick={() => handleDescarga(regis.id)}>Descargar</button>
                                       <button className="btn btn-outline-danger" onClick={() => handleDelete(regis.id)}>Eliminar</button>
