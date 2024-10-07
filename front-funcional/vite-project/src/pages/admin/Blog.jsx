@@ -279,7 +279,7 @@ function Blog(){
             </table>
 
             <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-center">
+            <ul className="pagination justify-content-center mt-3">
                 <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
                     <a className="page-link" href="#" onClick={() => paginate(currentPage - 1)}>Anterior</a>
                 </li>

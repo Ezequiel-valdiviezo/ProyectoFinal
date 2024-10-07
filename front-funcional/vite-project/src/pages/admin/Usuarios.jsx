@@ -98,10 +98,6 @@ function Usuarios() {
             } else {
                 console.error('Error al eliminar el usuario');
                 setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
-                    <div>
-                      <img src="${gif}" width="28px" alt="">
-                    </div>
-                    <div>
                       <p class="mx-2">Error al eliminar usuario</p>
                     </div>
                   </div> `);
@@ -198,9 +194,9 @@ function Usuarios() {
                                 <div className="modal-body">
                                     ¿Estás seguro de eliminar este usuario?
                                 </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" className="btn btn-danger" onClick={handleConfirmDelete}>Eliminar</button>
+                                <div className="mb-4">
+                                    <button type="button" className="mx-2 btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" className="mx-2 btn btn-danger" onClick={handleConfirmDelete}>Eliminar</button>
                                 </div>
                             </div>
                         </div>
