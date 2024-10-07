@@ -198,9 +198,9 @@ function Consultas() {
                     <div className="modal">
                         <div className="modal-content">
                             <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
-                            <h3 className="my-2">Responder consulta a {modal.nombre}</h3>
+                            <h3 className="my-2">Responder consulta</h3>
                             {/* <p className="text-start"><span className="fw-bold">Email:</span> {modal.email}</p> */}
-                            <p className="text-start"><span className="fw-bold">Consulta:</span> {modal.mensaje}</p>
+                            <p className="text-start"><span className="fw-bold">{modal.nombre}:</span> {modal.mensaje}</p>
 
                             
                             <form onSubmit={handleSubmitEmail}>
@@ -222,8 +222,8 @@ function Consultas() {
                               </div>
                             )}
 
-                            <button className="btn btn-outline-primary" type="submit">Enviar</button>
-                            <button className="btn btn-outline-primary" onClick={handleCerrarDetalles}>Cerrar</button>
+                            <button className="btn btn-outline-primary mx-2" type="submit">Enviar</button>
+                            <button className="btn btn-outline-primary mx-2" onClick={handleCerrarDetalles}>Cerrar</button>
                             </form>
                         </div>
                     </div>

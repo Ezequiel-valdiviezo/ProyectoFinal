@@ -13,6 +13,10 @@
     font-size: 50px;
     font-weight: bold;
 }
+.consultas .modal h3{
+    color: #08a2de;
+    font-weight: bold;
+}
 .consultas table{
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.59);
 }
