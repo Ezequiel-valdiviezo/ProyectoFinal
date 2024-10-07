@@ -286,7 +286,7 @@ function ManejoMedicos(){
 
 
             {Array.isArray(medicos) && medicos.length > 0 ? (
-                    <table className="table mt-5 table-striped table-hover">
+                    <table className="table mt-5 table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
                                 <th scope="col">Nombre</th>
@@ -319,7 +319,7 @@ function ManejoMedicos(){
 <h2 className="mt-5" style={estiloTitulo}>Servicios vencidos</h2>
 
 {Array.isArray(medicosVencidos) && medicosVencidos.length > 0 ? (
-                    <table className="table mt-5 table-striped table-hover">
+                    <table className="table mt-5 table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
                                 <th scope="col">Nombre</th>

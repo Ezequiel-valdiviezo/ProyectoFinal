@@ -160,7 +160,7 @@ function Medicos(){
 
                     {Array.isArray(consultas) && consultas.length > 0 ? (
                     <div>
-                    <table className="table table-striped table-hover">
+                    <table className="table table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
                                 <th scope="col">Email</th>

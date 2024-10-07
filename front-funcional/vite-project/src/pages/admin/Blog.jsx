@@ -254,7 +254,7 @@ function Blog(){
                       <div>
           {Array.isArray(blogs) && blogs.length > 0 ? (
             <div>
-            <table className="table mt-5 table-striped table-hover">
+            <table className="table mt-5 table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
                                 <th scope="col">Título</th>

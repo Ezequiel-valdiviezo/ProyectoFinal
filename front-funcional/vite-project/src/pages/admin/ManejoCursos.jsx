@@ -303,7 +303,7 @@ function ManejoCursos(){
                       <div>
 
                 {Array.isArray(cursos) && cursos.length > 0 ? (
-                    <table className="table mt-5 table-striped table-hover">
+                    <table className="table mt-5 table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
                                 <th scope="col">Nombre</th>
@@ -336,7 +336,7 @@ function ManejoCursos(){
 <h2 className="mt-5" style={estiloTitulo}>Servicios vencidos</h2>
 
 {Array.isArray(cursosVencidos) && cursosVencidos.length > 0 ? (
-                    <table className="table mt-5 table-striped table-hover">
+                    <table className="table mt-5 table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
                                 <th scope="col">Nombre</th>

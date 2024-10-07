@@ -140,7 +140,7 @@ function Usuarios() {
                             </div>
                     ) : (
                     <div>
-                    <table className="table table-striped table-hover">
+                    <table className="table table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
                                 <th scope="col">Email</th>
