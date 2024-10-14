@@ -5,8 +5,16 @@ import img2 from '../assets/2.png'
 import { useColorContext } from '../context/colorContext';
 import { useNavigate } from "react-router-dom";
 
-import imgAvatar1 from '../assets/avatar/avatar1.png'; // Importa las imágenes de los avatares
-import imgAvatar2 from '../assets/avatar/avatar2.png'; // Importa las imágenes de los avatares
+// import imgAvatar1 from '../assets/avatar/avatar1.png'; // Importa las imágenes de los avatares
+// import imgAvatar2 from '../assets/avatar/avatar2.png'; // Importa las imágenes de los avatares
+
+import imgAvatar1 from '../assets/avatar/1.jpg'; // Importa las imágenes de los avatares
+import imgAvatar2 from '../assets/avatar/2.jpg'; // Importa las imágenes de los avatares
+import imgAvatar3 from '../assets/avatar/3.jpg'; // Importa las imágenes de los avatares
+import imgAvatar4 from '../assets/avatar/4.jpg'; // Importa las imágenes de los avatares
+import imgAvatar5 from '../assets/avatar/5.jpg'; // Importa las imágenes de los avatares
+import imgAvatar6 from '../assets/avatar/6.jpg'; // Importa las imágenes de los avatares
+
 
 
 function Foro(){
@@ -157,14 +165,31 @@ function Foro(){
 
   const user = JSON.parse(localStorage.getItem('user'));
 
+  // const obtenerImagenAvatar = (avatar) => {
+  //   switch (avatar) {
+  //     case "avatar1":
+  //       return imgAvatar1;
+  //     case "avatar2":
+  //       return imgAvatar2;
+  //     default:
+  //       return img;
+  //   }
+  // };
   const obtenerImagenAvatar = (avatar) => {
-    switch (avatar) {
-      case "avatar1":
-        return imgAvatar1;
-      case "avatar2":
-        return imgAvatar2;
-      default:
-        return img;
+    if (avatar === "avatar1") {
+      return imgAvatar1; // Devuelve la imagen del avatar 1
+    } else if (avatar === "avatar2") {
+      return imgAvatar2; // Devuelve la imagen del avatar 2
+    } else if (avatar === "avatar3") {
+      return imgAvatar3; // Devuelve la imagen del avatar 2
+    } else if (avatar === "avatar4") {
+      return imgAvatar4; // Devuelve la imagen del avatar 2
+    }else if (avatar === "avatar5") {
+      return imgAvatar5; // Devuelve la imagen del avatar 2
+    }else if (avatar === "avatar6") {
+      return imgAvatar6; // Devuelve la imagen del avatar 2
+    }else {
+      return img; // Devuelve una imagen por defecto o la que estás utilizando actualmente
     }
   };
 
