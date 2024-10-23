@@ -193,6 +193,13 @@ function Foro(){
     }
   };
 
+  const obtenerDia = (fechaCompleta) => {
+    // Extraer solo la parte de la fecha, ignorando la hora
+    const [fecha] = fechaCompleta.split(' ');
+    const [dia, mes, año] = fecha.split('-'); // Dividir la fecha en día, mes, año
+    return dia + '-' + mes + '-' + año; // Retornar solo el día
+  };
+
   return (
     <div className="container foro pt-5">
       <h2 className="text-center" style={estiloTitulo}>Foro</h2>
@@ -275,7 +282,8 @@ function Foro(){
                 <h3 className="m-2 p-2">{post.titulo}</h3>
                 <p className="mx-2 px-2">{post.contenido}</p>
                 <img src={'http://127.0.0.1:8000/' + post.imagen} alt={post.imagen} width={"400px"} />
-                <p className="text-end">{post.created_at}</p>
+                {/* <p className="text-end">{post.created_at}</p> */}
+                <p className="text-end">{obtenerDia(post.created_at)}</p>
               </div>
 
               <div className="mt-3">
@@ -314,7 +322,7 @@ function Foro(){
                     />
                     {comment.user.name}: {comment.comentario}
                     <br />
-                    <div className="mt-2 text-end">{comment.created_at}</div> 
+                    <div className="mt-2 text-end">{obtenerDia(comment.created_at)}</div> 
                   </li>
                 ))}
               </ul>
