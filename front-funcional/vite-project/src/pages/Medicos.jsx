@@ -64,20 +64,23 @@ function Medicos(){
                 <div className="d-flex flex-wrap justify-content-center">
                 {Array.isArray(medicos) && medicos.length > 0 ? (
                         medicos.map((medico, index) => (
-                            <div className="card medico m-2 text-start" style={{ width: '18rem' }} key={index}>
+                            <div className="card medico m-2 d-flex flex-column text-start" style={{ width: '18rem' }} key={index}>
                                 <img src={'http://127.0.0.1:8000/' + medico.imagen} width="100%" className="card-img-top" alt="" />
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">
-                                        <h3 className="card-title">{medico.titulo}</h3>
+                                        <h3 className="card-title">{medico.nombre}</h3>
                                     </li>
-                                    <li className="list-group-item">Nombre: {medico.nombre}</li>
                                     <li className="list-group-item">Especialidad: {medico.especialidad}</li>
                                     <li className="list-group-item">Teléfono: {medico.telefono}</li>
                                     <li className="list-group-item">Precio: ${medico.precio}</li>
-                                    <li className="list-group-item">
+                                    <li className="list-group-item  mt-auto">
                                         <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Ver Detalles</button>
-                                        <button className="btn btn-primary" >Contactar</button>
-                                        {/* <button className="btn btn-outline-primary m-1">Continuar</button> */}
+                                        <button className="btn btn-primary" onClick={() => {
+                                            const phoneNumber = medico.telefono;
+                                            const message = `Hola, me gustaría saber más sobre su servicio médico: ${medico.nombre}.`;
+                                            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                                            window.open(url, "_blank");
+                                        }}>Contactar</button>
                                     </li>
                                 </ul>
                             </div>
