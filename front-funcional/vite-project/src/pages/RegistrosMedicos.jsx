@@ -165,6 +165,10 @@ function RegistrosMedicos(){
         setEstadoForm(false);
       };
 
+      const obtenerDia = (fechaCompleta) => {
+        return fechaCompleta.slice(0, 10);
+      };
+
     return(
         <>
         <div className="registrosMedicos">
@@ -253,10 +257,13 @@ function RegistrosMedicos(){
                             {registro.map((regis, index) => (
                               <tr key={index}>
                                     <td>{regis.descripcion}</td>
-                                    <td>{regis.created_at}</td>
+                                    {/* <td>{regis.created_at}</td> */}
+                                    <td>{obtenerDia(regis.created_at)}</td>
+                                    {/* <p className="text-end">{obtenerDia(post.created_at)}</p> */}
+
                                     <td>
-                                      <button className="btn btn-outline-primary" onClick={() => handleDescarga(regis.id)}>Descargar</button>
-                                      <button className="btn btn-outline-danger" onClick={() => handleDelete(regis.id)}>Eliminar</button>
+                                      <button className="btn btn-outline-primary mx-2" onClick={() => handleDescarga(regis.id)}>Descargar</button>
+                                      <button className="btn btn-outline-danger mx-2" onClick={() => handleDelete(regis.id)}>Eliminar</button>
                                     </td>
                                 </tr>
                             ))}
