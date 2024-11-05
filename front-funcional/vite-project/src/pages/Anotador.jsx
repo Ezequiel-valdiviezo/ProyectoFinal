@@ -202,7 +202,7 @@ function Anotador(){
         </div>
 
   <div className="row anchoTodo">
-    <div className="col-md-6 mt-4">
+    {/* <div className="col-md-6 mt-4">
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
             <h3 className="text-center" style={estiloTitulo}>Lista</h3>
@@ -248,8 +248,8 @@ function Anotador(){
             </div>
           </div>
       </div>
-    </div>
-    <div className="col-md-6 mt-4 notasHechas">
+    </div> */}
+    {/* <div className="col-md-6 mt-4 notasHechas">
       <div className="anchoAnotador">
           <div className="m-auto" style={{ maxWidth: '900px', width: '100%' }}>
             <h3 className="text-center" style={estiloTitulo}>Terminadas</h3>
@@ -292,7 +292,93 @@ function Anotador(){
             }
           </div>
       </div>
+    </div> */}
+
+
+
+
+    <div className=" mt-4">
+      <div className="anchoAnotador">
+          <div className="m-auto" 
+          // style={{ maxWidth: '900px', width: '100%' }}
+          >
+            <h3 className="text-center" style={estiloTitulo}>Lista</h3>
+            {notaCreada && 
+              // <p className="text-center">{notaCreada}</p>
+              <div className="alert alert-success d-flex align-items-center mt-5" role="alert">
+                    <svg className="bi flex-shrink-0 me-2" width="0" height="24" role="img" aria-label="success:">
+                        <use xlinkHref="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                    {notaCreada}
+                    </div>
+                </div>
+            }
+            <ul className="list-group mb-3">
+              {lista.map((notas, index) => (
+                <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+          
+                  <span style={{ color: 'red', fontWeight: 'bold' }}>
+                  {notas.estado}
+                  </span>
+
+                 <span>
+                  {notas.nota}
+                 </span>
+                  <div>
+                      <button onClick={() => handleSubmitTerminado(notas.id)}  className="me-2 btn btn-primary">Terminado</button>
+                  </div>
+                </li>
+              ))}
+              {hechas.map((notas, index) => (
+                <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+          
+                  <span style={{ color: 'green', fontWeight: 'bold' }}>
+                  {notas.estado}
+                  </span>
+
+        
+
+                 <span>
+                  {notas.nota}
+                 </span>
+                  <div>
+                    <button onClick={() => eliminarNota(notas.id)}  className="me-2 btn btn-danger">Eliminar</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+
+
+
+            <div className="text-center">
+              <button onClick={abrirFormNotas} className="btn btn-outline-primary">Agregar Nota</button>
+
+              {showForm && (
+                
+                <div className="my-2 agregarNota">
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                      <label htmlFor="nota" className="form-label" style={estiloTitulo}>Nota</label>
+                      <input type="text" className="form-control" id="nota" name="nota" value={formData.nota} onChange={handleInputChange} required />
+                    </div>
+                    <button type="submit" className="btn btn-primary mx-1">Enviar</button>
+                    <button type="submit" onClick={cerrarFormNotas} className="btn btn-primary mx-1">Cancelar</button>
+                  </form>
+                </div>
+
+              )}
+
+            </div>
+          </div>
+      </div>
     </div>
+
+
+
+
+
   </div>
   <div className="row mt-4">
     <div className="col-md-12">

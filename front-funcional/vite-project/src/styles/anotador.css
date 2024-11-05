@@ -1,21 +1,16 @@
-.fondoAnotador{
-    /* background-color: rgba(224, 232, 234, 0.234); */
-}
-
-.anchoAnotador{
-    /* max-width: 900px; */
-    /* margin: auto; */
-}
 .anotador .presentacion h2{
     color: #08a2de;
     font-size: 50px;
     font-weight: bold;
 }
 
-.anotador .contenedorLista{
-    /* background-color: #e1eef5; */
-    /* border-radius: 40px; */
+.anotador table{
+    background-color: rgb(255, 255, 255);
+    border: solid 2px #08a2de;
+    padding: 10px;
+    /* border-radius: 15px; */
 }
+
 
 .agregarNota{
     background-color: rgba(188, 210, 230, 0.646);
