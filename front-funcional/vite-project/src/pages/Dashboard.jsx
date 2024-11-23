@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 function Dashboard(){
     const [userRole, setUserRole] = useState(null);
     const { colors, color } = useColorContext();
+    const [lista, setLista] = useState([]);
     const navigate = useNavigate();
     const estiloTitulo = {
         color: color,
@@ -39,6 +40,45 @@ function Dashboard(){
         }
     }, []);
 
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const id = user.user.id;
+
+        fetch(`http://127.0.0.1:8000/api/anotador/${id}`, {
+            method: 'GET',
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(Array.isArray(data)){
+                // setLista(data);
+
+                // Obtener la fecha de hoy
+                const today = new Date();
+
+                // Filtrar fechas dentro de los próximos 5 días
+                const filteredData = data.filter(item => {
+                    const itemDate = new Date(item.fecha); // Convertir a objeto Date
+                    const diffInDays = (itemDate - today) / (1000 * 60 * 60 * 24); // Diferencia en días
+                    return diffInDays > 0 && diffInDays <= 5; // Entre hoy y 5 días adelante
+                });
+
+                // Mostrar el nuevo array en consola
+                // console.log('Fechas dentro de los próximos 5 días:', filteredData);
+                setLista(filteredData);
+
+            } else {
+                console.error('Unexpected API response:', data);
+            }
+        })
+        .catch(error => console.error('Error fetching recuerdos:', error));
+        }, []);
+        useEffect(() => {
+            console.log('Lista actualizada:', lista);
+        }, [lista]);
+
+        
+
     return(
         <div className="fondoDashboard vh-100">
         <div className="dashboard pt-5 text-center">
@@ -48,6 +88,16 @@ function Dashboard(){
             {/* <img src={img} width="100px" alt="" /> */}
             <h2 style={estiloTitulo}>¡Bienvenido a <span id="nat">Nat</span><span id="user">User</span>!</h2>
             <p>¡Nos alegra tenerte por acá!</p>
+            </div>
+
+            <div class="alert alert-warning alert-dismissible fade show mx-1" role="alert">
+            <strong>Falta menos de 5 dias para tus notas!</strong> 
+            {lista.map((item, index) => (
+                <li key={index}>{item.nota}</li>
+            ))}
+            
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             
             <div className="funcionalidades p-4 mt-2 mx-1" style={estiloFondo}>

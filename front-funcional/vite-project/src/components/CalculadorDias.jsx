@@ -43,7 +43,7 @@ const CalculadoraDias = () => {
             value={fechaObjetiva}
             onChange={(e) => setFechaObjetiva(e.target.value)}
         />
-        <button className='btn btn-outline-primary m-auto mt-3' onClick={verificaFecha}>Calcular</button>
+        <button className='btn btn-outline-primary m-auto mt-3 mb-2' onClick={verificaFecha}>Calcular</button>
         {diasRestantes !== null && (
             <p>Faltan {diasRestantes} días hasta la fecha.</p>
         )}
