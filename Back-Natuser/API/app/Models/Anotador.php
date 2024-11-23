@@ -14,6 +14,7 @@ class Anotador extends Model
     protected $fillable = [
         'user_id',
         'nota',
+        'fecha',
         'estado',
     ];
 

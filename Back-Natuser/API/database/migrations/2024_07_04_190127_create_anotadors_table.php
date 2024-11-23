@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users'); // clave foránea a la tabla de usuarios
             $table->string('nota', 256);
+            $table->date('fecha');
             $table->string('estado', 256);
             $table->timestamps();
         });

@@ -95,6 +95,7 @@ function Anotador(){
     const formDataToSend = new FormData();
     formDataToSend.append('user_id', user.user.id);
     formDataToSend.append('nota', formData.nota);
+    formDataToSend.append('fecha', formData.fecha);
     formDataToSend.append('estado', formData.estado);
 
     try {
@@ -111,6 +112,7 @@ function Anotador(){
         setFormData({
           user_id: '',
           nota: '',
+          fecha: '',
           estado: 'activo',
         });
         console.log('Nota guardado exitosamente');
@@ -317,12 +319,17 @@ function Anotador(){
             <ul className="list-group mb-3">
               {lista.map((notas, index) => (
                 <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-          
-                  <span style={{ color: 'red', fontWeight: 'bold' }}>
-                  {notas.estado}
-                  </span>
+                  
+                  <div className="">
+                    <span style={{ color: '', fontWeight: 'bold' }}>
+                      {notas.fecha}
+                    </span> <br/>
+                    <span style={{ color: 'red', fontWeight: 'bold' }}>
+                      {notas.estado}
+                    </span>
+                  </div>
 
-                 <span>
+                 <span className="px-3" style={{width:'50%', }}>
                   {notas.nota}
                  </span>
                   <div>
@@ -333,15 +340,20 @@ function Anotador(){
               {hechas.map((notas, index) => (
                 <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
           
-                  <span style={{ color: 'green', fontWeight: 'bold' }}>
-                  {notas.estado}
-                  </span>
+                  <div>
+                    <span style={{ color: '', fontWeight: 'bold' }}>
+                      {notas.fecha}
+                    </span> <br/>
+                    <span style={{ color: 'green', fontWeight: 'bold' }}>
+                      {notas.estado}
+                    </span>
+                  </div>
 
         
-
                  <span>
                   {notas.nota}
                  </span>
+
                   <div>
                     <button onClick={() => eliminarNota(notas.id)}  className="me-2 btn btn-danger">Eliminar</button>
                   </div>
@@ -362,6 +374,10 @@ function Anotador(){
                     <div className="mb-3">
                       <label htmlFor="nota" className="form-label" style={estiloTitulo}>Nota</label>
                       <input type="text" className="form-control" id="nota" name="nota" value={formData.nota} onChange={handleInputChange} required />
+                    </div>
+                    <div>
+                      <label htmlFor="fecha"></label>
+                      <input type="date" className="form-control" id="fecha" name="fecha" value={formData.fecha} onChange={handleInputChange} required/>
                     </div>
                     <button type="submit" className="btn btn-primary mx-1">Enviar</button>
                     <button type="submit" onClick={cerrarFormNotas} className="btn btn-primary mx-1">Cancelar</button>

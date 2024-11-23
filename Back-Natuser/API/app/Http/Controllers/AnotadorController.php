@@ -59,6 +59,7 @@ class AnotadorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nota' => 'required|max:256',
+            'fecha' => 'required',
         ]);
 
         if($validator->fails()){
@@ -73,6 +74,7 @@ class AnotadorController extends Controller
         $nota = Anotador::create([
             'user_id' => $request->user_id,
             'nota' => $request->nota,
+            'fecha' => $request->fecha,
             'estado' => $request->estado,
         ]);
 
