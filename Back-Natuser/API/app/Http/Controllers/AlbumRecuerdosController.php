@@ -99,6 +99,8 @@ class AlbumRecuerdosController extends Controller
     {
         $validator = Validator::make($request->all(), [
            'descripcion' => 'required|max:256',
+           'descripcion2' => 'max:256',
+           'descripcion3' => 'max:256',
            'imagen' => 'required',
         ]);
 
@@ -142,6 +144,8 @@ class AlbumRecuerdosController extends Controller
         'imagen2' => $imagePath2,
         'imagen3' => $imagePath3,
         'descripcion' => $request->descripcion,
+        'descripcion2' => $request->descripcion2,
+        'descripcion3' => $request->descripcion3,
     ]);
 
     if(!$recuerdos){

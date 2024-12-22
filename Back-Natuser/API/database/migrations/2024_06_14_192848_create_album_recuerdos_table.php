@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('imagen2', 256)->nullable();
             $table->string('imagen3', 256)->nullable();
             $table->string('descripcion', 256);
+            $table->string('descripcion2', 256)->nullable();;
+            $table->string('descripcion3', 256)->nullable();;
             $table->timestamps();
         });
     }

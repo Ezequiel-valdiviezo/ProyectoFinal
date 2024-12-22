@@ -14,7 +14,9 @@ function Recuerdos() {
     imagen: null,
     imagen2: null,
     imagen3: null,
-    descripcion: ''
+    descripcion: '',
+    descripcion2: '',
+    descripcion3: ''
   });
   const [deleteId, setDeleteId] = useState(null);
   const [recuerdoSeleccionado, setRecuerdoSeleccionado] = useState(null);
@@ -141,6 +143,8 @@ function Recuerdos() {
     formDataToSend.append('imagen2', formData.imagen2);
     formDataToSend.append('imagen3', formData.imagen3);
     formDataToSend.append('descripcion', formData.descripcion);
+    formDataToSend.append('descripcion2', formData.descripcion2);
+    formDataToSend.append('descripcion3', formData.descripcion3);
 
     try {
       const response = await fetch('http://127.0.0.1:8000/api/album', {
@@ -214,6 +218,17 @@ function Recuerdos() {
                 onChange={handleChange}
               />
             </div>
+            <div className="form-group mt-3">
+              <label htmlFor="descripcion">Descripción</label>
+              <textarea
+                className="form-control mt-2"
+                id="descripcion"
+                name="descripcion"
+                rows="3"
+                value={formData.descripcion}
+                onChange={handleChange}
+              ></textarea>
+            </div>
             <div className="form-group">
               <label htmlFor="imagen2">Imagen 2</label>
               <input
@@ -224,6 +239,17 @@ function Recuerdos() {
                 accept="image/*"
                 onChange={handleChange}
               />
+            </div>
+            <div className="form-group mt-3">
+              <label htmlFor="descripcion2">Descripción</label>
+              <textarea
+                className="form-control mt-2"
+                id="descripcion2"
+                name="descripcion2"
+                rows="3"
+                value={formData.descripcion2}
+                onChange={handleChange}
+              ></textarea>
             </div>
             <div className="form-group">
               <label htmlFor="imagen3">Imagen 3</label>
@@ -237,16 +263,17 @@ function Recuerdos() {
               />
             </div>
             <div className="form-group mt-3">
-              <label htmlFor="descripcion">Descripción</label>
+              <label htmlFor="descripcion3">Descripción</label>
               <textarea
                 className="form-control mt-2"
-                id="descripcion"
-                name="descripcion"
+                id="descripcion3"
+                name="descripcion3"
                 rows="3"
-                value={formData.descripcion}
+                value={formData.descripcion3}
                 onChange={handleChange}
               ></textarea>
             </div>
+            
             <div className="d-flex flex-wrap">
               <button type="submit" className="btn btn-primary w-100 m-2">Enviar</button>
               <button type="button" className="btn btn-primary w-100 m-2" onClick={handleCerrarForm}>Cancelar</button>

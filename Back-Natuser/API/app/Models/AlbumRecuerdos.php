@@ -16,7 +16,9 @@ class AlbumRecuerdos extends Model
         'imagen',
         'imagen2',
         'imagen3',
-        'descripcion'
+        'descripcion',
+        'descripcion2',
+        'descripcion3'
     ];
 
     public function user()
