@@ -350,7 +350,7 @@ function Anotador(){
                   </div>
 
         
-                 <span>
+                 <span className="px-3" style={{width:'50%', }}>
                   {notas.nota}
                  </span>
 
@@ -379,8 +379,8 @@ function Anotador(){
                       <label htmlFor="fecha"></label>
                       <input type="date" className="form-control" id="fecha" name="fecha" value={formData.fecha} onChange={handleInputChange} required/>
                     </div>
-                    <button type="submit" className="btn btn-primary mx-1">Enviar</button>
-                    <button type="submit" onClick={cerrarFormNotas} className="btn btn-primary mx-1">Cancelar</button>
+                    <button type="submit" className="btn btn-primary mx-1 my-3">Enviar</button>
+                    <button type="submit" onClick={cerrarFormNotas} className="btn btn-primary mx-1 my-3">Cancelar</button>
                   </form>
                 </div>
 
