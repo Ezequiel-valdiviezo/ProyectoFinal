@@ -1,211 +1,206 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useColorContext } from '../../context/colorContext';
-import '../../styles/adminUsuarios.css'
-import gif from '../../assets/gif/check.gif'
-
+import { useColorContext } from "../../context/colorContext";
+import "../../styles/adminUsuarios.css";
+import gif from "../../assets/gif/check.gif";
 
 function Usuarios() {
-    const [usuarios, setUsuarios] = useState([]);
-    const navigate = useNavigate();
+  const [usuarios, setUsuarios] = useState([]);
+  const navigate = useNavigate();
+  const [deleteId, setDeleteId] = useState(null);
+  const modalRef = useRef(null);
+  const [modalInstance, setModalInstance] = useState(null);
+  const [msjEliminar, setMensajeEliminar] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { colors, color } = useColorContext();
+  const estiloTitulo = {
+    color: color,
+  };
 
-    const [deleteId, setDeleteId] = useState(null);
-    const modalRef = useRef(null);
-    const [modalInstance, setModalInstance] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
 
-    const [msjEliminar, setMensajeEliminar] = useState('');
+  // DataTables setup
+  useEffect(() => {
+    const $ = window.jQuery;
+    if (usuarios.length > 0) {
+      $(document).ready(function () {
+        $("#usuariosTable").DataTable({
+            language: {
+              processing: "Procesando...",
+              search: "Buscar:",
+              lengthMenu: "Mostrar _MENU_ registros",
+              info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+              infoEmpty: "Mostrando 0 a 0 de 0 registros",
+              infoFiltered: "(filtrado de _MAX_ registros totales)",
+              infoPostFix: "",
+              loadingRecords: "Cargando...",
+              zeroRecords: "No se encontraron registros coincidentes",
+              emptyTable: "No hay datos disponibles en la tabla",
+              paginate: {
+                first: "Primero",
+                previous: "Anterior",
+                next: "Siguiente",
+                last: "Último",
+              },
+              aria: {
+                sortAscending: ": activar para ordenar la columna de manera ascendente",
+                sortDescending: ": activar para ordenar la columna de manera descendente",
+              },
+            },
+          });
+      });
 
-    const [loading, setLoading] = useState(false);
-
-    const { colors, color } = useColorContext();
-    const estiloTitulo = {
-        color: color,
-    };
-
-    //Guarda la pagina actual
-    const [currentPage, setCurrentPage] = useState(1);
-    //elementos a mostrar por pagina
-    const [itemsPerPage] = useState(5);
-
-    useEffect(() => {
-        const usuario = JSON.parse(localStorage.getItem('user'));
-        if (!usuario) {
-            navigate('/login');
-        } else if (usuario.user.role === "admin") {
-            console.log("Todo bien");
-        } else if (usuario.user.role === "user") {
-            navigate('/home');
+      // Cleanup: Destruir DataTables para evitar duplicados
+      return () => {
+        if ($.fn.DataTable.isDataTable("#usuariosTable")) {
+          $("#usuariosTable").DataTable().destroy();
         }
-    }, [navigate]);
+      };
+    }
+  }, [usuarios]);
 
-    useEffect(() => {
-        setLoading(true);
-        fetch('http://127.0.0.1:8000/api/users', {
-            method: 'GET',
-            credentials: "include",
-        })
-            .then(response => response.json())
-            .then(data => {
-                setUsuarios(data);
-                setLoading(false); // Mover aquí
-            })
-            .catch(error => {
-                console.error('Error fetch cursos:', error);
-                setLoading(false); // Asegúrate de que se setee el loading en false en caso de error
-            });
-    }, []);
+  useEffect(() => {
+    const usuario = JSON.parse(localStorage.getItem("user"));
+    if (!usuario) {
+      navigate("/login");
+    } else if (usuario.user.role === "admin") {
+      console.log("Todo bien");
+    } else if (usuario.user.role === "user") {
+      navigate("/home");
+    }
+  }, [navigate]);
 
-    useEffect(() => {
-        if (modalRef.current) {
-            const modal = new bootstrap.Modal(modalRef.current);
-            setModalInstance(modal);
+  useEffect(() => {
+    setLoading(true);
+    fetch("http://127.0.0.1:8000/api/users", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUsuarios(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetch usuarios:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (modalRef.current) {
+      const modal = new bootstrap.Modal(modalRef.current);
+      setModalInstance(modal);
+    }
+  }, [modalRef]);
+
+  const handleDelete = (id) => {
+    setDeleteId(id);
+    if (modalInstance) {
+      modalInstance.show();
+    }
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/user/${deleteId}`,
+        {
+          method: "DELETE",
+          credentials: "include",
         }
-    }, [modalRef]);
+      );
+      setMensajeEliminar(
+        `<div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+          <div>
+            <p>Eliminando...</p>
+          </div>
+        </div>`
+      );
 
-    const handleDelete = (id) => {
-        setDeleteId(id);
-        if (modalInstance) {
-            modalInstance.show();
-        }
-    };
+      if (response.ok) {
+        setUsuarios((prevUsuarios) =>
+          prevUsuarios.filter((usuario) => usuario.id !== deleteId)
+        );
+        setMensajeEliminar(
+          `<div class="mt-3 d-flex justify-content-center">
+            <img src="${gif}" width="28px" alt="">
+            <p class="mx-2">Usuario eliminado correctamente</p>
+          </div>`
+        );
+      } else {
+        setMensajeEliminar(
+          `<div class="mt-3 d-flex justify-content-center">
+            <p class="mx-2">Error al eliminar usuario</p>
+          </div>`
+        );
+      }
+    } catch (error) {
+      console.error("Error en la solicitud de eliminación:", error);
+    } finally {
+      if (modalInstance) {
+        modalInstance.hide();
+      }
+      setDeleteId(null);
+    }
+  };
 
-    const handleConfirmDelete = async () => {
-        try {
-            const response = await fetch(`http://127.0.0.1:8000/api/user/${deleteId}`, {
-                method: 'DELETE',
-                credentials: 'include'
-            });
-            setMensajeEliminar(` <div className="alert alert-success d-flex align-items-center mt-5 mx-5" role="alert">
-                                      <div class="spinner-border text-primary" role="status">
-                                        <span class="visually-hidden">Cargando...</span>
-                                      </div>
-                                      <div>
-                                       <p>Eliminando...</p>
-                                      </div>
-                                  </div>`);
+  return (
+    <div className="vh-100">
+      <div className="usuarios pt-5 text-center">
+        <h2 style={estiloTitulo}>Usuarios</h2>
+        <p
+          className="mt-4"
+          dangerouslySetInnerHTML={{ __html: msjEliminar }}
+        ></p>
 
-            if (response.ok) {
-                setUsuarios(prevUsuarios => prevUsuarios.filter(usuario => usuario.id !== deleteId));
-                console.log('Usuario eliminado correctamente');
-                setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
-                    <div>
-                      <img src="${gif}" width="28px" alt="">
-                    </div>
-                    <div>
-                      <p class="mx-2">Usuario eliminado correctamente</p>
-                    </div>
-                  </div> `);
-            } else {
-                console.error('Error al eliminar el usuario');
-                setMensajeEliminar(`<div class="mt-3 d-flex justify-content-center justify-content-center">
-                      <p class="mx-2">Error al eliminar usuario</p>
-                    </div>
-                  </div> `);
-            }
-        } catch (error) {
-            console.error('Error en la solicitud de eliminación:', error);
-        } finally {
-            if (modalInstance) {
-                modalInstance.hide();
-            }
-            setDeleteId(null);
-        }
-    };
-
-    // Calculan los indices de los elementos a mostrar en la página actual
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    // Contiene los elementos de la página actual
-    const currentItems = Array.isArray(usuarios) ? usuarios.slice(indexOfFirstItem, indexOfLastItem) : [];
-
-    // Cambia la pagina al numero seleccionado
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-    return (
-        <>
-            <div className="vh-100">
-                <div className="usuarios pt-5 text-center">
-                    <div className="saludo">
-                        {/* <img src={img} width="100px" alt="" /> */}
-                        <h2 style={estiloTitulo}>Usuarios</h2>
-                    </div>
-
-                    <p className="mt-4" dangerouslySetInnerHTML={{ __html: msjEliminar }}></p>
-
-                    {loading ? ( 
-                            <div className="alert mt-5 mx-5" role="alert">
-                                <div class="spinner-border text-primary m-auto" role="status">
-                                <span class="visually-hidden">Cargando...</span>
-                                </div>
-                            </div>
-                    ) : (
-                    <div>
-                    <table className="table table-striped table-hover text-start">
-                        <thead className="table-dark">
-                            <tr>
-                                <th scope="col">Email</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Rol</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {currentItems.map((usuario) => (
-                                <tr key={usuario.id}>
-                                    <td>{usuario.email}</td>
-                                    <td>{usuario.name}</td>
-                                    <td>{usuario.role}</td>
-                                    <td>
-                                        <button onClick={() => handleDelete(usuario.id)} className="btn btn-outline-danger">Eliminar</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-
-                    <nav aria-label="Page navigation example">
-                        <ul className="pagination justify-content-center">
-                            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                <a className="page-link" href="#" onClick={() => paginate(currentPage - 1)}>Anterior</a>
-                            </li>
-                            {[...Array(Math.ceil(usuarios.length / itemsPerPage)).keys()].map(number => (
-                                <li key={number + 1} className={`page-item ${currentPage === number + 1 ? 'active' : ''}`}>
-                                    <a className="page-link" href="#" onClick={() => paginate(number + 1)}>
-                                        {number + 1}
-                                    </a>
-                                </li>
-                            ))}
-                            <li className={`page-item ${currentPage === Math.ceil(usuarios.length / itemsPerPage) ? 'disabled' : ''}`}>
-                                <a className="page-link" href="#" onClick={() => paginate(currentPage + 1)}>Siguiente</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    </div>
-                    )}
-
-                    {/* Modal para confirmar eliminación */}
-                    <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" ref={modalRef}>
-                        <div className="modal-dialog">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title" id="staticBackdropLabel">Confirmar eliminación</h5>
-                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div className="modal-body">
-                                    ¿Estás seguro de eliminar este usuario?
-                                </div>
-                                <div className="mb-4">
-                                    <button type="button" className="mx-2 btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" className="mx-2 btn btn-danger" onClick={handleConfirmDelete}>Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+        {loading ? (
+          <div className="alert mt-5 mx-5" role="alert">
+            <div className="spinner-border text-primary m-auto" role="status">
+              <span className="visually-hidden">Cargando...</span>
             </div>
-        </>
-    );
+          </div>
+        ) : (
+          <div className="table-responsive">
+            <table
+              id="usuariosTable"
+              className="table table-striped table-hover text-start"
+            >
+              <thead className="table-dark">
+                <tr>
+                  <th scope="col">Email</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Rol</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {usuarios.map((usuario) => (
+                  <tr key={usuario.id}>
+                    <td>{usuario.email}</td>
+                    <td>{usuario.name}</td>
+                    <td>{usuario.role}</td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(usuario.id)}
+                        className="btn btn-outline-danger"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Usuarios;
