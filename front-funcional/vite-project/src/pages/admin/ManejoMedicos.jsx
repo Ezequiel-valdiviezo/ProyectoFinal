@@ -192,6 +192,45 @@ function ManejoMedicos(){
         setMedicoSeleccionado(null);
     };
 
+      // DataTables setup
+      useEffect(() => {
+        const $ = window.jQuery;
+        if (medicos.length > 0) {
+          $(document).ready(function () {
+            $("#usuariosTable").DataTable({
+                language: {
+                  processing: "Procesando...",
+                  search: "Buscar:",
+                  lengthMenu: "Mostrar _MENU_ registros",
+                  info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                  infoEmpty: "Mostrando 0 a 0 de 0 registros",
+                  infoFiltered: "(filtrado de _MAX_ registros totales)",
+                  infoPostFix: "",
+                  loadingRecords: "Cargando...",
+                  zeroRecords: "No se encontraron registros coincidentes",
+                  emptyTable: "No hay datos disponibles en la tabla",
+                  paginate: {
+                    first: "Primero",
+                    previous: "Anterior",
+                    next: "Siguiente",
+                    last: "Último",
+                  },
+                  aria: {
+                    sortAscending: ": activar para ordenar la columna de manera ascendente",
+                    sortDescending: ": activar para ordenar la columna de manera descendente",
+                  },
+                },
+              });
+          });
+    
+          // Cleanup: Destruir DataTables para evitar duplicados
+          return () => {
+            if ($.fn.DataTable.isDataTable("#usuariosTable")) {
+              $("#usuariosTable").DataTable().destroy();
+            }
+          };
+        }
+      }, [medicos]);
     return(
         <>
             <div className="vh-100">
@@ -285,69 +324,46 @@ function ManejoMedicos(){
                       <div>
 
 
-            {Array.isArray(medicos) && medicos.length > 0 ? (
-                    <table className="table mt-5 table-striped table-hover text-start">
-                        <thead className="table-dark">
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Especialidad</th>
-                                <th scope="col">Teléfono</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {medicos.map((medico, index) => (
-                                <tr key={index}>
-                                    <td>{medico.nombre}</td>
-                                    <td>{medico.especialidad}</td>
-                                    <td>{medico.telefono}</td>
-                                    <td>${medico.precio}</td>
-                                    <td>
-                                    <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
-                                    <button onClick={() => handleDelete(medico.id)} className="btn btn-outline-danger m-1">Eliminar</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                ) : (
-                    <p>No se encontraron médicos.</p>
-                )}
 
 
-<h2 className="mt-5" style={estiloTitulo}>Servicios vencidos</h2>
-
-{Array.isArray(medicosVencidos) && medicosVencidos.length > 0 ? (
-                    <table className="table mt-5 table-striped table-hover text-start">
-                        <thead className="table-dark">
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Especialidad</th>
-                                <th scope="col">Teléfono</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {medicosVencidos.map((medico, index) => (
-                                <tr key={index}>
-                                    <td>{medico.nombre}</td>
-                                    <td>{medico.especialidad}</td>
-                                    <td>{medico.telefono}</td>
-                                    <td>${medico.precio}</td>
-                                    <td>
-                                    <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
-                                    <button onClick={() => handleDelete(medico.id)} className="btn btn-outline-danger m-1">Eliminar</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                ) : (
-                  <p className="mt-5">No se encontraron servicios vencidos.</p>
-                )}
-
+<div className="table-responsive w-75 m-auto">
+            <table
+              id="usuariosTable"
+              className="table table-striped table-hover text-start"
+            >
+              <thead className="table-dark">
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Fecha Vencimiento</th>
+                <th scope="col">Estado</th>
+                <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {medicos.map((usuario, index) => (
+                  <tr key={usuario.id}>
+                    <td>{usuario.nombre}</td>
+                    <td>{usuario.especialidad}</td>
+                    <td>{usuario.telefono}</td>
+                    <td>{usuario.fecha_vencimiento}</td>
+                    <td>
+                      {new Date(usuario.fecha_vencimiento) <= fechaActual ? (
+                        <span>Vencido</span> 
+                      ) : (
+                        <span>Activo</span> 
+                      )}
+                    </td>
+                    <td className="text-end">
+                    <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                    <button onClick={() => handleDelete(usuario.id)} className="btn btn-outline-danger m-1">Eliminar</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 </div>
           )}
 

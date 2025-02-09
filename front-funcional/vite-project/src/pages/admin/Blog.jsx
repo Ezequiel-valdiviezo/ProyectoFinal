@@ -309,7 +309,7 @@ function Blog(){
                         <div className="modal-content">
                             <span className="modal-close" onClick={handleCerrarDetalles}>&times;</span>
                             <img src={'http://127.0.0.1:8000/' + notaSeleccionada.imagen} width="100%" className="card-img-top" alt="" />
-                            <h3 className="my-2">Detalles del Curso</h3>
+                            <h3 className="my-2">Detalles nota</h3>
                             <p className="text-start"><span className="fw-bold">Título:</span> {notaSeleccionada.titulo}</p>
                             <p className="text-start"><span className="fw-bold">Contenido:</span> {notaSeleccionada.contenido}</p>
                             <p className="text-start"><span className="fw-bold">Autor:</span> {notaSeleccionada.autor}</p>

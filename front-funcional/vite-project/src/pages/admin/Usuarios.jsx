@@ -184,7 +184,7 @@ function Usuarios() {
                     <td>{usuario.email}</td>
                     <td>{usuario.name}</td>
                     <td>{usuario.role}</td>
-                    <td>
+                    <td className="text-end">
                       <button
                         onClick={() => handleDelete(usuario.id)}
                         className="btn btn-outline-danger"

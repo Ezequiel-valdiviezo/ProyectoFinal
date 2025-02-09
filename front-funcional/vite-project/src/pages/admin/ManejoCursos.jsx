@@ -195,6 +195,46 @@ function ManejoCursos(){
     const handleCerrarDetalles = () => {
         setCursoSeleccionado(null);
     };
+
+    // DataTables setup
+          useEffect(() => {
+            const $ = window.jQuery;
+            if (cursos.length > 0) {
+              $(document).ready(function () {
+                $("#usuariosTable").DataTable({
+                    language: {
+                      processing: "Procesando...",
+                      search: "Buscar:",
+                      lengthMenu: "Mostrar _MENU_ registros",
+                      info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                      infoEmpty: "Mostrando 0 a 0 de 0 registros",
+                      infoFiltered: "(filtrado de _MAX_ registros totales)",
+                      infoPostFix: "",
+                      loadingRecords: "Cargando...",
+                      zeroRecords: "No se encontraron registros coincidentes",
+                      emptyTable: "No hay datos disponibles en la tabla",
+                      paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Último",
+                      },
+                      aria: {
+                        sortAscending: ": activar para ordenar la columna de manera ascendente",
+                        sortDescending: ": activar para ordenar la columna de manera descendente",
+                      },
+                    },
+                  });
+              });
+        
+              // Cleanup: Destruir DataTables para evitar duplicados
+              return () => {
+                if ($.fn.DataTable.isDataTable("#usuariosTable")) {
+                  $("#usuariosTable").DataTable().destroy();
+                }
+              };
+            }
+          }, [cursos]);
  
 
     return(
@@ -302,7 +342,47 @@ function ManejoCursos(){
                     ) : (
                       <div>
 
-                {Array.isArray(cursos) && cursos.length > 0 ? (
+                
+<div className="table-responsive w-75 m-auto">
+            <table
+              id="usuariosTable"
+              className="table table-striped table-hover text-start"
+            >
+              <thead className="table-dark">
+                <tr>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Fecha Vencimiento</th>
+                <th scope="col">Estado</th>
+                <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {cursos.map((usuario, index) => (
+                  <tr key={usuario.id}>
+                    <td>{usuario.titulo}</td>
+                    <td>{usuario.descripcion_breve}</td>
+                    <td>{usuario.telefono}</td>
+                    <td>{usuario.fecha_vencimiento}</td>
+                    <td>
+                      {new Date(usuario.fecha_vencimiento) <= fechaActual ? (
+                        <span>Vencido</span> 
+                      ) : (
+                        <span>Activo</span> 
+                      )}
+                    </td>
+                    <td className="text-end">
+                    <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                    <button onClick={() => handleDelete(curso.id)} className="btn btn-outline-danger m-1">Eliminar</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+                {/* {Array.isArray(cursos) && cursos.length > 0 ? (
                     <table className="table mt-5 table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
@@ -330,12 +410,12 @@ function ManejoCursos(){
                     </table>
                 ) : (
                     <p>No se encontraron cursos.</p>
-                )}
+                )} */}
 
 
-<h2 className="mt-5" style={estiloTitulo}>Servicios vencidos</h2>
+{/* <h2 className="mt-5" style={estiloTitulo}>Servicios vencidos</h2> */}
 
-{Array.isArray(cursosVencidos) && cursosVencidos.length > 0 ? (
+{/* {Array.isArray(cursosVencidos) && cursosVencidos.length > 0 ? (
                     <table className="table mt-5 table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
@@ -363,7 +443,7 @@ function ManejoCursos(){
                     </table>
                 ) : (
                   <p className="mt-5">No se encontraron servicios vencidos.</p>
-                )}
+                )} */}
 
 </div>
           )}
