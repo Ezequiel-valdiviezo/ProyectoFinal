@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import '../styles/login.css'
 import imgg from '../assets/logo.png'
+import ojoCerrado from '../assets/ojocerrado.png'
+import ojoAbierto from '../assets/ojoabierto.png'
 import { useNavigate } from "react-router-dom";
 
 function Login({ onLogin }){
@@ -12,7 +14,12 @@ function Login({ onLogin }){
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -99,16 +106,28 @@ function Login({ onLogin }){
               placeholder="nombre@gmail.com"
             />
           </div>
-          <div className="d-flex flex-column m-3">
+          <div className="d-flex flex-column m-3 position-relative">
             <label className="text-start" htmlFor="password">Contraseña</label>
-            <input
-              className="p-1"
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
+            <div className="position-relative">
+              <input
+                className="p-1 w-100 pe-5"
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <span 
+                className="position-absolute end-0 top-50 translate-middle-y me-3 text-dark"
+                style={{ cursor: "pointer", fontSize: "1.2rem" }}
+                onClick={togglePasswordVisibility}
+              ><img 
+                  src={showPassword ? ojoAbierto : ojoCerrado} 
+                  alt="visibilidad de contraseña" 
+                  style={{ width: "20px"}}
+                />
+              </span>
+            </div>
           </div>
           {loading && <div className="loader">
             {/* <p>Cargando...</p> */}
