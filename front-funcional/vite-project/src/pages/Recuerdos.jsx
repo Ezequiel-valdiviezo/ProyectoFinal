@@ -338,7 +338,7 @@ function Recuerdos() {
             <div className="modal-dialog modal-lg">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">{recuerdoSeleccionado.descripcion}</h5>
+                  <h5 className="modal-title">Recuerdo</h5>
                   <button type="button" className="btn-close" onClick={handleCerrarRecuerdo}></button>
                 </div>
                   <div className="modal-body">
@@ -346,6 +346,7 @@ function Recuerdos() {
                       <div id={`carousel${recuerdoSeleccionado.id}`} className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
                           <div className="carousel-item active">
+                          <p>{recuerdoSeleccionado.descripcion}</p>
                             <img
                               className="img-fluid"
                               src={'http://127.0.0.1:8000/' + recuerdoSeleccionado.imagen}
@@ -354,6 +355,7 @@ function Recuerdos() {
                           </div>
                           {recuerdoSeleccionado.imagen2 && (
                             <div className="carousel-item">
+                              <p>{recuerdoSeleccionado.descripcion2}</p>
                               <img
                                 className="img-fluid"
                                 src={'http://127.0.0.1:8000/' + recuerdoSeleccionado.imagen2}
@@ -363,6 +365,7 @@ function Recuerdos() {
                           )}
                           {recuerdoSeleccionado.imagen3 && (
                             <div className="carousel-item">
+                              <p>{recuerdoSeleccionado.descripcion3}</p>
                               <img
                                 className="img-fluid"
                                 src={'http://127.0.0.1:8000/' + recuerdoSeleccionado.imagen3}
