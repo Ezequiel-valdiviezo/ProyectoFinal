@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../../styles/adminConsultas.css';
 import { useNavigate } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import check from '../../assets/gif/check.gif';
 import { useColorContext } from '../../context/colorContext';
 
 function Consultas() {
@@ -10,7 +11,7 @@ function Consultas() {
     
     const [loader, setLoader] = useState('')
     const [loading, setLoading] = useState(false)
-
+    const [stateCheck, setStateCheck] = useState(false);
     
     //Guarda la pagina actual
     const [currentPage, setCurrentPage] = useState(1);
@@ -104,6 +105,7 @@ function Consultas() {
             if (response.ok) {
                 setLoader("")
                 setMessage('Email enviado con éxito');
+                setStateCheck(true);
                 
                 // Aquí se realiza el fetch para eliminar la consulta por ID
                 const deleteResponse = await fetch(`http://127.0.0.1:8000/api/consulta/${modal.id}`, {
@@ -115,6 +117,8 @@ function Consultas() {
                     // Filtra la consulta eliminada de la lista de consultas
                     setConsultas(consultas.filter(consulta => consulta.id !== modal.id));
                     handleCerrarDetalles(); // Cierra el modal después de eliminar
+                    setMessage('');
+                    setStateCheck(false);
                 } else {
                     const errorData = await deleteResponse.json();
                     setMessage(`Error al eliminar la consulta: ${errorData.message}`);
@@ -135,8 +139,6 @@ function Consultas() {
                     <div className="saludo">
                         <h2 style={estiloTitulo}>Consultas</h2>
                     </div>
-                    
-
                     {loading ? ( 
                             <div className="alert mt-5 mx-5" role="alert">
                                 <div class="spinner-border text-primary m-auto" role="status">
@@ -209,7 +211,16 @@ function Consultas() {
                                     <textarea name="respuesta" id="respuesta" value={formData.respuesta} onChange={handleChange} />
                                 </div>
 
-                            <p>{message}</p>
+                            
+                            <div className="d-flex justify-content-center vertical-items-center">
+                                <div>
+
+                                { stateCheck ? ( <img src={check} alt="check verde" width={30} height={30}/> ) : ( <div></div> )}
+                                </div>
+                                <div>
+                                    <p className="mx-2">{message}</p>
+                                </div>
+                            </div>
 
                             {loader && (
                                 <div class="mt-3 d-flex justify-content-center">
@@ -222,8 +233,8 @@ function Consultas() {
                               </div>
                             )}
 
-                            <button className="btn btn-outline-primary mx-2" type="submit">Enviar</button>
-                            <button className="btn btn-outline-primary mx-2" onClick={handleCerrarDetalles}>Cerrar</button>
+                            <button className="btn btn-outline-primary mx-2 mt-3" type="submit">Enviar</button>
+                            <button className="btn btn-outline-primary mx-2 mt-3" onClick={handleCerrarDetalles}>Cerrar</button>
                             </form>
                         </div>
                     </div>
