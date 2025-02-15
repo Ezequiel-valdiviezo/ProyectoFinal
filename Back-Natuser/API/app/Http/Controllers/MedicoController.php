@@ -173,4 +173,62 @@ class MedicoController extends Controller
         ];
         return response()->json($data, 200);
     }
+
+    public function put(Request $request, $id)
+    {
+        $medico = Medico::find($id);
+
+        if (!$medico) {
+            return response()->json([
+                'message' => 'Médico no encontrado',
+                'status' => 404
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'fecha_vencimiento' => 'nullable|date_format:Y-m-d' // Asegurar formato correcto
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Error en la validación de datos',
+                'errors' => $validator->errors(),
+                'status' => 400
+            ], 400);
+        }
+
+        // Manejar la actualización de la imagen
+        if ($request->hasFile('imagen')) {
+            if ($medico->imagen && file_exists(public_path($medico->imagen))) {
+                unlink(public_path($medico->imagen));
+            }
+
+            $image = $request->file('imagen');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $medico->imagen = 'images/' . $imageName;
+        }
+
+        // Actualizar otros datos
+        $medico->nombre = $request->nombre;
+        $medico->descripcion = $request->descripcion;
+        $medico->especialidad = $request->especialidad;
+        $medico->email = $request->email;
+        $medico->precio = $request->precio;
+        $medico->telefono = $request->telefono;
+
+        // Verificar si se envió la fecha y actualizarla
+        if ($request->filled('fecha_vencimiento')) {
+            $medico->fecha_vencimiento = $request->fecha_vencimiento;
+        }
+
+        $medico->save();
+
+        return response()->json([
+            'message' => 'Médico actualizado correctamente',
+            'medico' => $medico,
+            'status' => 200
+        ], 200);
+    }
+
 }

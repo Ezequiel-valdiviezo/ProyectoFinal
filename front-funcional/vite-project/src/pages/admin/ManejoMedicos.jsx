@@ -23,6 +23,7 @@ function ManejoMedicos(){
 
     const fechaActual = new Date();
 
+      // FETCH DE GET PARA TRAER MEDICOS
       useEffect(() => {
         setLoading(true)
         fetch('http://127.0.0.1:8000/api/medicos', {
@@ -39,6 +40,7 @@ function ManejoMedicos(){
         .catch(error => {console.error('Error fetch médicos:', error); setLoading(false)});
     }, []);
 
+    // MANEJO DE ROLES DE USUARIO
     useEffect(() => {
         const usuario = JSON.parse(localStorage.getItem('user'));
         if (!usuario) {
@@ -75,6 +77,7 @@ function ManejoMedicos(){
         }
       };
 
+      // FETCH Y MANEJO PARA BORRAR MEDICO
       const handleDelete = async (id) => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/medicos/${id}`, {
@@ -124,6 +127,7 @@ function ManejoMedicos(){
         }
       }
 
+      // FETCH Y MANEJO PARA CREAR MEDICO
       const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -192,7 +196,7 @@ function ManejoMedicos(){
         setMedicoSeleccionado(null);
     };
 
-      // DataTables setup
+      // DataTables
       useEffect(() => {
         const $ = window.jQuery;
         if (medicos.length > 0) {
@@ -231,6 +235,60 @@ function ManejoMedicos(){
           };
         }
       }, [medicos]);
+
+      const [medicoEditar, setMedicoEditar] = useState(null);
+      const [nuevaFecha, setNuevaFecha] = useState("");
+
+      const handleRenovar = (medico) => {
+        setMedicoEditar(medico);
+        setNuevaFecha(medico.fecha_vencimiento);
+      };
+    
+      const handleFechaChange = (e) => {
+        setNuevaFecha(e.target.value);
+      };
+    
+      const handleActualizarMedico = async (e) => {
+        e.preventDefault();
+        if (!medicoEditar) return;
+    
+        const formDataToSend = new FormData();
+        formDataToSend.append('nombre', medicoEditar.nombre);
+        formDataToSend.append('imagen', medicoEditar.imagen); // Si la imagen no cambia, no necesitas enviarla
+        formDataToSend.append('descripcion', medicoEditar.descripcion);
+        formDataToSend.append('especialidad', medicoEditar.especialidad);
+        formDataToSend.append('email', medicoEditar.email);
+        formDataToSend.append('precio', medicoEditar.precio);
+        formDataToSend.append('telefono', medicoEditar.telefono);
+        formDataToSend.append('fecha_vencimiento', nuevaFecha); // Usar la nueva fecha
+    
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/medicos/${medicoEditar.id}`, {
+                method: "POST", // Laravel usa POST con `_method: 'PUT'` en FormData
+                credentials: "include",
+                body: formDataToSend
+            });
+    
+            if (response.ok) {
+                const updatedMedico = await response.json();
+                setMedicos(medicos.map(m => m.id === updatedMedico.id ? updatedMedico : m));
+                setMedicoEditar(null);
+                alert("Fecha de renovación actualizada con éxito");
+                setTimeout(() => {
+                  window.location.reload();
+                }, 2000); // 5000 milisegundos = 5 segundos
+            } else {
+                const errorData = await response.json();
+                console.error("Error en la respuesta del servidor:", errorData);
+                alert("Error al actualizar la fecha de renovación");
+            }
+        } catch (error) {
+            console.error("Error en la actualización:", error);
+            alert("Hubo un problema al actualizar la fecha");
+        }
+    };
+    
+    
     return(
         <>
             <div className="vh-100">
@@ -251,7 +309,6 @@ function ManejoMedicos(){
                         Algunos servicios pasaron su fecha de vencimiento
                     </div>
                 </div>
-                  
                 ) : (
                   <div></div>
                 )}
@@ -314,58 +371,60 @@ function ManejoMedicos(){
                     }
 
 
-{loading ? ( 
-                            <div className="alert mt-5 mx-5" role="alert">
-                                <div class="spinner-border text-primary m-auto" role="status">
-                                <span class="visually-hidden">Cargando...</span>
-                                </div>
-                            </div>
+                    {loading ? ( 
+                      <div className="alert mt-5 mx-5" role="alert">
+                        <div class="spinner-border text-primary m-auto" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                        </div>
+                      </div>
                     ) : (
-                      <div>
+                    <div>
+                      <div className="table-responsive w-75 m-auto">
+                                  <table
+                                    id="usuariosTable"
+                                    className="table table-striped table-hover text-start"
+                                  >
+                                    <thead className="table-dark">
+                                      <tr>
+                                      <th scope="col">Nombre</th>
+                                      <th scope="col">Especialidad</th>
+                                      <th scope="col">Teléfono</th>
+                                      <th scope="col">Fecha Vencimiento</th>
+                                      <th scope="col">Estado</th>
+                                      <th scope="col"></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {medicos.map((usuario, index) => (
+                                        <tr key={usuario.id}>
+                                          <td>{usuario.nombre}</td>
+                                          <td>{usuario.especialidad}</td>
+                                          <td>{usuario.telefono}</td>
+                                          <td>{usuario.fecha_vencimiento}</td>
+                                          <td>
+                                            {new Date(usuario.fecha_vencimiento) <= fechaActual ? (
+                                              <span>Vencido</span> 
+                                            ) : (
+                                              <span>Activo</span> 
+                                            )}
+                                          </td>
+                                          <td className="text-end">
+                                          <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                                          <button onClick={() => handleDelete(usuario.id)} className="btn btn-outline-danger m-1">Eliminar</button>
+                                          {new Date(usuario.fecha_vencimiento) <= fechaActual ? (
+                                              <button className="btn btn-outline-primary m-1" onClick={() => handleRenovar(usuario)}>Renovar plan</button>
 
-
-
-
-<div className="table-responsive w-75 m-auto">
-            <table
-              id="usuariosTable"
-              className="table table-striped table-hover text-start"
-            >
-              <thead className="table-dark">
-                <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Especialidad</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Fecha Vencimiento</th>
-                <th scope="col">Estado</th>
-                <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {medicos.map((usuario, index) => (
-                  <tr key={usuario.id}>
-                    <td>{usuario.nombre}</td>
-                    <td>{usuario.especialidad}</td>
-                    <td>{usuario.telefono}</td>
-                    <td>{usuario.fecha_vencimiento}</td>
-                    <td>
-                      {new Date(usuario.fecha_vencimiento) <= fechaActual ? (
-                        <span>Vencido</span> 
-                      ) : (
-                        <span>Activo</span> 
-                      )}
-                    </td>
-                    <td className="text-end">
-                    <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
-                    <button onClick={() => handleDelete(usuario.id)} className="btn btn-outline-danger m-1">Eliminar</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-</div>
-          )}
+                                            ) : (
+                                              <div></div> 
+                                            )}
+                                          </td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                      </div>
+                    )}
 
                 {medicoSeleccionado && (
                     <div className="modal">
@@ -383,6 +442,32 @@ function ManejoMedicos(){
                         </div>
                     </div>
                 )}
+
+                {medicoEditar && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <h3>Renovar Plan</h3>
+                            <form className="p-3" onSubmit={handleActualizarMedico}>
+                              <div className="text-center">
+                                <div className="mt-3">
+                                <label>Selecciona nueva fecha de vencimiento:</label>
+                                <input 
+                                    type="date" 
+                                    value={nuevaFecha} 
+                                    onChange={handleFechaChange} 
+                                    required 
+                                    />
+                                </div>
+                                <div className="mt-3">
+                                <button class="btn btn-outline-primary mx-2" type="submit">Actualizar</button>
+                                <button class="btn btn-primary mx-2" type="button" onClick={() => setMedicoEditar(null)}>Cancelar</button>
+                                </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                )}
+
 
             </div>
             </div>

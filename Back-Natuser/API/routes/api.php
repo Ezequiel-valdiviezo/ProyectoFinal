@@ -65,10 +65,12 @@ Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
 Route::get('/medicos', [MedicoController::class, 'index']);
 //Guardar Médico
 Route::post('/medicos', [MedicoController::class, 'guardar']);
-//Actualizar curso
+//Actualizar Médico
 // Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
-//Borrar curso
+//Borrar Médico
 Route::delete('/medicos/{id}', [MedicoController::class, 'eliminarMedico']);
+// Editar médico
+Route::post('/medicos/{id}', [MedicoController::class, 'put']);
 
 //Mostrar blog
 Route::get('/blogs', [BlogController::class, 'index']);
