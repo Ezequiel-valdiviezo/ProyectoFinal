@@ -187,12 +187,7 @@ class CursosController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'titulo' => 'required|max:256|unique:cursos',
-            'descripcion_breve' => 'required',
-            'categoria' => 'required',
-            'descripcion_completa' => 'required',
-            'precio' => 'required',
-            'telefono' => 'required|digits:10',
+            'fecha_vencimiento' => 'nullable|date_format:Y-m-d' // Asegurar formato correcto
         ]);
 
         if($validator->fails()){
@@ -210,6 +205,11 @@ class CursosController extends Controller
         $cursos->descripcion_completa = $request->descripcion_completa;
         $cursos->precio = $request->precio;
         $cursos->telefono = $request->telefono;
+
+        // Verificar si se envió la fecha y actualizarla
+        if ($request->filled('fecha_vencimiento')) {
+            $cursos->fecha_vencimiento = $request->fecha_vencimiento;
+        }
 
         $cursos->save();
 

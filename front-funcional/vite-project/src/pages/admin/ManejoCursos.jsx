@@ -235,6 +235,58 @@ function ManejoCursos(){
               };
             }
           }, [cursos]);
+
+    const [cursoEditar, setCursoEditar] = useState(null);
+    const [nuevaFecha, setNuevaFecha] = useState("");
+
+    const handleRenovar = (curso) => {
+      setCursoEditar(curso);
+      setNuevaFecha(curso.fecha_vencimiento);
+    };
+  
+    const handleFechaChange = (e) => {
+      setNuevaFecha(e.target.value);
+    };
+
+    const handleActualizarCurso = async (e) => {
+      e.preventDefault();
+      if (!cursoEditar) return;
+  
+      const formDataToSend = new FormData();
+        formDataToSend.append('titulo', cursoEditar.titulo);
+        formDataToSend.append('imagen', cursoEditar.imagen); // Añade la imagen al FormData
+        formDataToSend.append('descripcion_breve', cursoEditar.descripcion_breve);
+        formDataToSend.append('categoria', cursoEditar.categoria);
+        formDataToSend.append('descripcion_completa', cursoEditar.descripcion_completa);
+        formDataToSend.append('precio', cursoEditar.precio);
+        formDataToSend.append('telefono', cursoEditar.telefono);
+        formDataToSend.append('fecha_vencimiento', nuevaFecha);
+  
+      try {
+          const response = await fetch(`http://127.0.0.1:8000/api/cursos/${cursoEditar.id}`, {
+              method: "POST", // Laravel usa POST con `_method: 'PUT'` en FormData
+              credentials: "include",
+              body: formDataToSend
+          });
+  
+          if (response.ok) {
+              const updatedCurso = await response.json();
+              setCursos(cursos.map(m => m.id === updatedCurso.id ? updatedCurso : m));
+              setCursoEditar(null);
+              alert("Fecha de renovación actualizada con éxito");
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000); // 5000 milisegundos = 5 segundos
+          } else {
+              const errorData = await response.json();
+              console.error("Error en la respuesta del servidor:", errorData);
+              alert("Error al actualizar la fecha de renovación");
+          }
+      } catch (error) {
+          console.error("Error en la actualización:", error);
+          alert("Hubo un problema al actualizar la fecha");
+      }
+  };
  
 
     return(
@@ -374,7 +426,12 @@ function ManejoCursos(){
                     </td>
                     <td className="text-end">
                     <button className="btn btn-outline-primary m-1" onClick={() => handleMostrarDetalles(index)}>Detalles</button>
-                    <button onClick={() => handleDelete(curso.id)} className="btn btn-outline-danger m-1">Eliminar</button>
+                    <button onClick={() => handleDelete(usuario.id)} className="btn btn-outline-danger m-1">Eliminar</button>
+                    {new Date(usuario.fecha_vencimiento) <= fechaActual ? (
+                      <button className="btn btn-outline-primary m-1" onClick={() => handleRenovar(usuario)}>Renovar plan</button>
+                      ) : (
+                      <div></div> 
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -447,6 +504,31 @@ function ManejoCursos(){
 
 </div>
           )}
+
+{cursoEditar && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <h3>Renovar Plan</h3>
+                            <form className="p-3" onSubmit={handleActualizarCurso}>
+                              <div className="text-center">
+                                <div className="mt-3">
+                                <label>Selecciona nueva fecha de vencimiento:</label>
+                                <input 
+                                    type="date" 
+                                    value={nuevaFecha} 
+                                    onChange={handleFechaChange} 
+                                    required 
+                                    />
+                                </div>
+                                <div className="mt-3">
+                                <button class="btn btn-outline-primary mx-2" type="submit">Actualizar</button>
+                                <button class="btn btn-primary mx-2" type="button" onClick={() => setCursoEditar(null)}>Cancelar</button>
+                                </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                )}
 
                 {cursoSeleccionado && (
                     <div className="modal">

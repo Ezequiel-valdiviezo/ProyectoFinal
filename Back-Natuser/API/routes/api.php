@@ -57,7 +57,7 @@ Route::get('/cursos/{id}', [CursosController::class, 'mostrarCurso']);
 //Guardar curso
 Route::post('/cursos', [CursosController::class, 'guardar']);
 //Actualizar curso
-Route::put('/cursos/{id}', [CursosController::class, 'editarCurso']);
+Route::post('/cursos/{id}', [CursosController::class, 'editarCurso']);
 //Borrar curso
 Route::delete('/cursos/{id}', [CursosController::class, 'eliminarCurso']);
 
