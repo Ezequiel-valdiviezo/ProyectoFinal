@@ -50,7 +50,7 @@
             <p>¡Felicitaciones! Fuiste aceptado para ofrecer tus servicios de médico en nuestra web.</p>
             <p>Los planes a seguir son:
                 <ul>
-                    <li>1: Seleccionar su plan</li>
+                    <li>1: Seleccionar su plan. <a href="http://127.0.0.1:5500/front-informativo/forms/index.html">Ver planes</a></li>
                     <li>2: Realizar el pago</li>
                     <li>3: Enviar el comprobante por este medio</li>
                     <li>Junto con el comprobante enviar los siguientes datos para cargar su servicio: Nombre, imagen de usd, descripción, especialidad, email, precio y teléfono.</li>
