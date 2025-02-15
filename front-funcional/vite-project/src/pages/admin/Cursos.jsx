@@ -10,6 +10,8 @@ function Cursos(){
     const [msjEliminar, setMensajeEliminar] = useState('');
     const [loading, setLoading] = useState(false)
 
+        const [msjResult, setMsjResult] = useState(false);
+
     const navigate = useNavigate();
     const { colors, color } = useColorContext();
     const estiloTitulo = {
@@ -117,6 +119,7 @@ function Cursos(){
 
         if (response.ok) {
             setMessage('Email enviado con éxito');
+            setMsjResult(true);
         } else {
             const errorData = await response.json();
             setMessage(`Error: ${errorData.message}`);
@@ -161,6 +164,18 @@ function Cursos(){
 
                     {Array.isArray(consultas) && consultas.length > 0 ? (
                     <div>
+                        {msjResult ? (
+                                                    <div className="d-flex justify-content-center vertical-items-center">
+                                                        <div>
+                                                        <img src={gif} alt="Check" width={30}/>
+                                                        </div>
+                                                        <div>
+                                                        <p className="mx-2">{message}</p>
+                                                        </div>
+                                                    </div>
+                                                ): (
+                                                    <div></div>
+                                                )}
                     <table className="table table-striped table-hover text-start">
                         <thead className="table-dark">
                             <tr>
@@ -168,8 +183,6 @@ function Cursos(){
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Descripción servicio</th>
                                 <th scope="col">precio</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -180,14 +193,10 @@ function Cursos(){
                                     <td>{consulta.nombre}</td>
                                     <td>{consulta.descripcion_servicio}</td>
                                     <td>${consulta.precio}</td>
-                                    <td>
-                                        <button className="btn btn-outline-primary" onClick={() => {handleSubmitEmail(consulta.email)}}>Aceptar</button>
-                                    </td>
-                                    <td>
-                                    <button className="btn btn-outline-primary"  onClick={() => handleMostrarDetalles(index)}>Detalles</button>
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-outline-danger" onClick={() => handleDelete(consulta.id)}>Eliminar</button>
+                                    <td className="text-end">
+                                        <button className="btn btn-outline-primary mx-2" onClick={() => {handleSubmitEmail(consulta.email)}}>Aceptar</button>
+                                    <button className="btn btn-outline-primary mx-2"  onClick={() => handleMostrarDetalles(index)}>Detalles</button>
+                                        <button className="btn btn-outline-danger mx-2" onClick={() => handleDelete(consulta.id)}>Eliminar</button>
                                     </td>
                                 </tr>
                             ))}

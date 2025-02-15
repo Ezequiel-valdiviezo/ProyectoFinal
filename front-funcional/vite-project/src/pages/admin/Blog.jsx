@@ -145,7 +145,6 @@ function Blog(){
             setMsjCreado('Error al crear nota')
             return;
           }
-
           if (response.ok) {
             const data = await response.json();
             setBlogs([...blogs, data])
@@ -223,6 +222,7 @@ function Blog(){
                             name="imagen"
                             accept="image/*"
                             onChange={handleChange}
+                            required
                         />
                         </div>
                         <div className="form-group my-4">
