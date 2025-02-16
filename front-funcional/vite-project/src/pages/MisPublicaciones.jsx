@@ -9,6 +9,7 @@ function MisPublicaciones(){
 
 
     const [publicaciones, setPublicaciones] = useState([]);
+    const [hayPublicaciones, setHayPublicaciones] = useState(false)
     const [comentario, setComentario] = useState([]);
     const navigate = useNavigate();
 
@@ -61,6 +62,34 @@ function MisPublicaciones(){
     }
   };
 
+  const borrarPublicacion = async (id) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/foro/${id}`, {
+        method: 'DELETE',
+        credentials: 'include'
+      });
+
+      if (response.ok) {
+        // setRecuerdos(recuerdos.filter(recuerdo => recuerdo.id !== deleteId));
+        console.log('Publicación eliminado correctamente');
+        // setMsjEliminado("Publicación eliminado exitosamente");
+              // Establecer un temporizador para vaciar el mensaje después de 5 segundos y recargar la página
+              setTimeout(() => {
+                // setMsjEliminado("");
+                // window.location.reload(); 
+              }, 2000);
+      } else {
+        console.error('Error al eliminar el Publicación');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud de eliminación:', error);
+    }
+  };
+
+  useEffect(() => {
+    setHayPublicaciones(publicaciones.length === 0);
+}, [publicaciones]);
+
     return(
         <>
             <div className="container foro pt-5">
@@ -69,6 +98,8 @@ function MisPublicaciones(){
       <p className="text-center">Desde acá vas a poder ver tus publicaciones realizadas en nuestro foro, con sus comentarios.</p>
 
       <div className="comentario mt-5">
+
+        {hayPublicaciones ? ( <div className="text-center">No hay publicaciones</div> ): ( <div></div> )}
 
         <ul className="list-group">
           {publicaciones.map(post => (
@@ -84,6 +115,9 @@ function MisPublicaciones(){
                 <p className="mx-2 px-2">{post.contenido}</p>
                 <img src={'http://127.0.0.1:8000/' + post.imagen} alt={post.imagen} width={"400px"} />
                 <p className="text-end">{post.created_at}</p>
+                <div className="text-end">
+                  <button className="btn btn-danger" onClick={() => borrarPublicacion(post.id)}>Eliminar</button>
+                </div>
               </div>
 
               {/* <hr /> */}

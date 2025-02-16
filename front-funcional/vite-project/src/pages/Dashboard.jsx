@@ -14,6 +14,8 @@ function Dashboard(){
     const [userRole, setUserRole] = useState(null);
     const { colors, color } = useColorContext();
     const [lista, setLista] = useState([]);
+    const [listaa, setListaa] = useState(false);
+
     const navigate = useNavigate();
     const estiloTitulo = {
         color: color,
@@ -66,6 +68,9 @@ function Dashboard(){
                 // Mostrar el nuevo array en consola
                 // console.log('Fechas dentro de los próximos 5 días:', filteredData);
                 setLista(filteredData);
+                // if(isEmpty(lista)){
+                //     setListaa(true);
+                // }
 
             } else {
                 console.error('Unexpected API response:', data);
@@ -90,15 +95,17 @@ function Dashboard(){
             <p>¡Nos alegra tenerte por acá!</p>
             </div>
 
-            <div class="alert alert-warning alert-dismissible fade show mx-1" role="alert">
-            <strong>Falta menos de 5 dias para tus notas!</strong> 
-            {lista.map((item, index) => (
-                <li key={index}>{item.nota}</li>
-            ))}
-            
-
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            {/* {lista ? (
+                <div class="alert alert-warning alert-dismissible fade show mx-1" role="alert">
+                <strong>Falta menos de 5 dias para tus notas!</strong> 
+                {lista.map((item, index) => (
+                    <li key={index}>{item.nota}</li>
+                ))}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+             ): (
+                <div></div>
+            )} */}
             
             <div className="funcionalidades p-4 mt-2 mx-1" style={estiloFondo}>
             <h2>Funcionalidades para usuarios</h2>

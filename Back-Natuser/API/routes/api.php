@@ -125,6 +125,8 @@ Route::get('/foro/{id}', [PublicationController::class, 'PublicacionUsuario']);
 Route::post('/foro/{id}', [PublicationController::class, 'guardar']);
 // Guardar comentario
 Route::post('/foro/{id}/comentario', [CommentController::class, 'guardar']);
+// Borrar comentario
+Route::delete('/foro/{id}', [PublicationController::class, 'delete']);
 
 
 // Email

@@ -98,4 +98,24 @@ class PublicationController extends Controller
 
     }
 
+    public function delete($id){
+        $publicacion = Publication::find($id);
+
+        if(!$publicacion){
+            $data = [
+                'message' => 'Publicación no encontrado',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $publicacion->delete();
+
+        $data = [
+            'message' => 'Publicación eliminado',
+            'status' => 200
+        ];
+        return response()->json($data, 200);
+    }
+
 }
