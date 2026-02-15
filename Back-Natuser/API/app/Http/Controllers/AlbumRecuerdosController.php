@@ -117,7 +117,7 @@ class AlbumRecuerdosController extends Controller
     $imagePath = null;
     if ($request->hasFile('imagen')) {
         $image = $request->file('imagen');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $imageName = time() . '.1' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);
         $imagePath = 'images/' . $imageName;
     }
@@ -125,7 +125,7 @@ class AlbumRecuerdosController extends Controller
     $imagePath2 = null;
     if ($request->hasFile('imagen2')) {
         $image = $request->file('imagen2');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $imageName = time() . '.2' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);
         $imagePath2 = 'images/' . $imageName;
     }
@@ -133,7 +133,7 @@ class AlbumRecuerdosController extends Controller
     $imagePath3 = null;
     if ($request->hasFile('imagen3')) {
         $image = $request->file('imagen3');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $imageName = time() . '.3' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);
         $imagePath3 = 'images/' . $imageName;
     }

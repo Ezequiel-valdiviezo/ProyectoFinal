@@ -261,7 +261,7 @@ function RegistrosMedicos(){
                                     <td>{obtenerDia(regis.created_at)}</td>
                                     {/* <p className="text-end">{obtenerDia(post.created_at)}</p> */}
 
-                                    <td>
+                                    <td className="text-end">
                                       <button className="btn btn-outline-primary mx-2" onClick={() => handleDescarga(regis.id)}>Descargar</button>
                                       <button className="btn btn-outline-danger mx-2" onClick={() => handleDelete(regis.id)}>Eliminar</button>
                                     </td>

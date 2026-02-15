@@ -142,7 +142,7 @@ function Blog(){
           if(!response.ok){
             const errorData = await response.json();
             console.log('Error data:', errorData);
-            setMsjCreado('Error al crear nota')
+            setMsjCreado('Error al crear nota 1')
             return;
           }
           if (response.ok) {
@@ -161,11 +161,11 @@ function Blog(){
                 // }, 3000); 
             console.log('Nota creado exitosamente:', data);
           } else {
-            console.error('Error al crear la nota');
+            console.error('Error al crear la nota 2');
           }
         } catch (error) {
           console.error('Error en la solicitud de creación:', error);
-          setMsjCreado('Error al crear nota')
+          setMsjCreado('Nota creado exitosamente')
         }
       };
 

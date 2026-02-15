@@ -82,11 +82,63 @@ function Dashboard(){
             console.log('Lista actualizada:', lista);
         }, [lista]);
 
+        // Función para eliminar de la vista con un click
+const eliminarRecordatorio = (id) => {
+    // Filtramos la lista para quitar el elemento con ese ID
+    const nuevaLista = lista.filter(item => item.id !== id);
+    setLista(nuevaLista);
+    
+    // Opcional: Aquí podrías hacer un fetch a tu API con el método DELETE 
+    // si quisieras borrarlo permanentemente de la base de datos.
+};
         
 
     return(
         <div className="fondoDashboard vh-100">
         <div className="dashboard pt-5 text-center">
+
+<div 
+    className="position-fixed bottom-0 end-0 m-4 mb-5" 
+    style={{ zIndex: 1050, maxWidth: '400px', width: '100%' }}
+>
+    <div className="container-fluid">
+        <div 
+            className="row row-cols-1 g-3" 
+            style={{ maxHeight: '70vh', overflowY: 'auto', paddingRight: '5px' }}
+        >
+            {lista.length > 0 ? (
+                lista.map((item) => (
+                    <div className="col" key={item.id}>
+                        {/* Agregamos border-dark y un estilo para el grosor de 2px */}
+                        <div 
+                            className="card shadow-lg position-relative border-dark" 
+                            style={{ borderStyle: 'solid', borderWidth: '1px' }}
+                        >
+                            <button 
+                                type="button" 
+                                className="btn-close position-absolute top-0 end-0 m-2" 
+                                style={{ fontSize: '0.7rem' }}
+                                aria-label="Close"
+                                onClick={() => eliminarRecordatorio(item.id)}
+                            ></button>
+
+                            <div className="card-body">
+                                <p className="card-text text-muted small mb-2">
+                                    {item.nota}
+                                </p>
+                                <div className="d-flex align-items-center">
+                                    <span className="badge rounded-pill bg-light text-primary border border-primary small">
+                                        📅 {new Date(item.fecha).toLocaleDateString()}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            ) : null}
+        </div>
+    </div>
+</div>
 
 
             <div className="saludo">
