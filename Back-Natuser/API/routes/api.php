@@ -17,6 +17,8 @@ use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\RegistrosMedicosController;
 
+use App\Http\Controllers\Auth\PasswordResetController;
+
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
@@ -134,6 +136,9 @@ Route::post('/enviar-email', [EmailController::class, 'enviarEmail']);
 Route::post('/enviar-email2', [EmailController::class, 'enviarEmail2']);
 Route::post('/enviar-email-consultas', [EmailController::class, 'enviarEmailConsultas']);
 
+// Recuperar contraseña
+Route::post('password/email', [PasswordResetController::class, 'sendResetLink']);
+Route::post('password/reset', [PasswordResetController::class, 'resetPassword']);
 
 //Registro usuario
 // Route::post('/registro', [AuthController::class, 'registro']);

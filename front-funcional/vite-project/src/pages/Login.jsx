@@ -139,7 +139,8 @@ function Login({ onLogin }){
           <button className="btn btn-outline-primary anchoBoton" type="submit">Iniciar sesión</button>
           </form>
         {/* <button onClick={onToggle} className="btn btn-outline-primary anchoBoton mt-2">Registro</button> */}
-        <a href="./register">Registro</a>
+        <a href="/forgot-password" style={{fontSize: '0.9rem'}}>¿Olvidaste tu contraseña?</a> <br />
+        <a href="./register">Registrarse</a>
       </div>
     </div>
   )

@@ -22,6 +22,8 @@ import { ColorProvider } from './context/colorContext';
 import Blog from './pages/admin/Blog'
 import ManejoMedicos from './pages/admin/ManejoMedicos'
 import MisPublicaciones from './pages/MisPublicaciones'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -52,6 +54,14 @@ function App() {
     {
       path: '/register',
       element: <Register onRegister={handleAuthSuccess}/>
+     },
+    {
+      path: '/forgot-password',
+      element: <ForgotPassword element={<ForgotPassword />}/>
+     },
+    {
+      path: '/reset-password',
+      element: <ResetPassword element={<ResetPassword />}/>
      },
      {
        path: '/',
